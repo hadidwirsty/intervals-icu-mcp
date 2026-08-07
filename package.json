@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/intervals-icu-mcp"
+    "url": "https://github.com/hadidwirsty/intervals-icu-mcp"
   },
   "type": "module",
   "main": "dist/index.js",
