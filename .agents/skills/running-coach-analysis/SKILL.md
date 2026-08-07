@@ -28,7 +28,7 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
 
 - **Nama Atlet**: `[Nama Anda]`
 - **Usia**: `[Usia] tahun`
-- **Berat Badan**: `[BB] kg` ← *Otomatis dari `icu_weight` di Intervals.icu*
+- **Berat Badan**: Dibaca dinamis via MCP (`icu_weight` dari detail aktivitas, atau `weight` dari `get_wellness_data`). Fallback: `[BB Anda] kg`
 - **Perangkat**: `[Nama Perangkat, contoh: Garmin Forerunner 165 (Garmin Running Power)]`
 - **Platform Analisis**: `Intervals.icu`
 - **Status Kompetisi**: `[Jelaskan status kompetisi/target race Anda]`
@@ -39,14 +39,14 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
 ## 3. Parameter Fisiologis & Zona Intensitas
 
 > [!TIP]
-> **Dinamis via MCP**: Parameter fisiologis utama (CP, W', LTHR, Max HR, RHR, BB) secara otomatis diekstrak langsung dari objek aktivitas MCP (`icu_ftp`, `icu_w_prime`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight`) serta tool `get_wellness_data`. Nilai di bawah ini berfungsi sebagai baseline & fallback jika data dari Intervals.icu `null`.
+> **Dinamis via MCP**: Parameter fisiologis utama (CP, W', LTHR, Max HR, RHR, Berat Badan) secara otomatis diekstrak langsung dari objek aktivitas MCP (`icu_ftp`, `icu_w_prime`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight`) serta tool `get_wellness_data` (`weight`, `restingHR`). Nilai di bawah ini berfungsi sebagai baseline & fallback jika data dari Intervals.icu `null`.
 
 ### Baseline Power & HR (Tersinkronisasi dari Intervals.icu)
 - **CP (Critical Power / FTP)**: `icu_ftp` (Baseline: `[CP Anda] Watt`)
 - **W'**: `icu_w_prime` (Baseline: `[W' Anda] J`) | **Pmax**: `p_max` (Baseline: `[Pmax Anda] Watt`)
 - **LTHR**: `lthr` (Baseline: `[LTHR Anda] bpm`) | **Max HR**: `athlete_max_hr` (Baseline: `[Max HR Anda] bpm`)
 - **RHR (Resting HR)**: `icu_resting_hr` / `get_wellness_data.restingHR` (Baseline: `[RHR Anda] bpm`)
-- **Berat Badan**: `icu_weight` (Baseline: `[BB Anda] kg`)
+- **Berat Badan**: `icu_weight` / `get_wellness_data.weight` (Baseline: `[BB Anda] kg`)
 - **Threshold Pace**: `threshold_pace` (Baseline: `[Threshold Pace Anda, contoh: 6:00/km]`)
 
 ### Power Zones
@@ -110,12 +110,13 @@ Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
 
 2. **`get_activity_details`**:
    - Parameter: `activity_id`.
-   - **Ekstrak Profil Fisiologis Aktif**: `icu_ftp`, `icu_w_prime`, `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight`.
+   - **Ekstrak Profil Fisiologis & Berat Badan Aktif**: `icu_ftp`, `icu_w_prime`, `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight` (Berat Badan kg).
    - **Ambil Metrik Eksekusi**: `icu_average_watts`, `icu_weighted_avg_watts`, `average_heartrate`, `max_heartrate`, `moving_time`, `elapsed_time`, `icu_training_load`, `icu_intensity`, `average_cadence`, `decoupling`.
 
-3. **`get_wellness_data`** (Fatigue Check):
+3. **`get_wellness_data`** (Fatigue & Wellness Check):
    - Parameter: `startDate` = `endDate` = tanggal sesi.
-   - Ambil: `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue).
+   - Ambil: `weight` (Berat Badan harian terkini), `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue).
+   - Prioritaskan nilai `weight` dari sini jika tersedia; gunakan `icu_weight` dari detail aktivitas sebagai fallback.
 
 4. **`get_activity_intervals`**:
    - Parameter: `activity_id`.

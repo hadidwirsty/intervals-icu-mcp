@@ -46,11 +46,12 @@ Panggil alat MCP `intervals-icu` secara berurutan:
 2. **`get_activity_details`**:
    - `activity_id`: `id` dari langkah 1.
    - Ambil metrik eksekusi: `icu_average_watts`, `icu_weighted_avg_watts`, `average_heartrate`, `max_heartrate`, `moving_time`, `elapsed_time`, `icu_training_load`, `icu_intensity`, `average_cadence`, `decoupling`.
-   - **Ekstrak Profil Fisiologis Aktif**: `icu_ftp` (CP/FTP), `icu_w_prime` (W'), `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight`.
+   - **Ekstrak Profil Fisiologis & Berat Badan Aktif**: `icu_ftp` (CP/FTP), `icu_w_prime` (W'), `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight` (Berat Badan kg).
 
-3. **`get_wellness_data`** (Fatigue Check):
+3. **`get_wellness_data`** (Fatigue & Wellness Check):
    - Parameter: `startDate` dan `endDate` pada tanggal sesi.
-   - Ambil data harian: `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue) untuk pengecekan *Fatigue Flags*.
+   - Ambil data harian: `weight` (Berat Badan harian terkini), `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue) untuk pengecekan *Fatigue Flags*.
+   - Prioritaskan nilai `weight` dari sini jika tersedia; gunakan `icu_weight` dari detail aktivitas sebagai fallback.
 
 4. **`get_activity_intervals`**:
    - `activity_id`: `id` dari langkah 1.
