@@ -1,5 +1,5 @@
 ---
-description: Otomasi analisis status beban latihan harian atlet Muhammad Hadid Wiransetyo. Membaca CTL, ATL, TSB, Ramp Rate, dan eFTP langsung dari Intervals.icu via MCP untuk menghasilkan laporan kesiapan latihan.
+description: Otomasi analisis status beban latihan atlet. Membaca CTL, ATL, TSB, Ramp Rate, dan eFTP langsung dari Intervals.icu via MCP untuk menghasilkan laporan kesiapan latihan.
 ---
 
 # Workflow: `/fitness-status`
@@ -49,9 +49,9 @@ Atau dengan tanggal spesifik:
 ### Step 3: Muat Skill Training Load Analysis
 
 Terapkan aturan dari skill `.agents/skills/training-load-analysis/SKILL.md`:
-- Interpretasikan nilai CTL, ATL, TSB, Ramp Rate, dan eFTP terhadap zona target Hadid (CTL 45–65, TSB > -20).
-- Triangulasi dengan data wellness (RHR, HRV, tidur) untuk validasi kondisi aktual.
-- Identifikasi Fatigue Flags dan rekomendasikan deload jika diperlukan.
+- Interpretasikan nilai CTL, ATL, TSB, Ramp Rate, dan eFTP.
+- Bandingkan dengan zona target yang dikonfigurasi di SKILL.md.
+- Identifikasi Fatigue Flags dari kombinasi data wellness dan TSB.
 
 ---
 
@@ -60,5 +60,5 @@ Terapkan aturan dari skill `.agents/skills/training-load-analysis/SKILL.md`:
 Hasilkan laporan sesuai **Format Respons Wajib** di `training-load-analysis/SKILL.md` Section 4:
 - Tabel status metrik terkini (CTL, ATL, TSB, Ramp Rate, eFTP).
 - Tren 4 minggu terakhir.
-- Rekomendasi loading untuk minggu berjalan berdasarkan siklus Coach Faris Salman (3 build : 1 deload).
+- Rekomendasi loading untuk minggu berjalan.
 - Peringatan deload jika Fatigue Flags terdeteksi.

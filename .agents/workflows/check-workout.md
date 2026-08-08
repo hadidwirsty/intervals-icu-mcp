@@ -1,5 +1,5 @@
 ---
-description: Cek jadwal planned workout mendatang dari kalender Intervals.icu atlet Muhammad Hadid Wiransetyo. Menampilkan daftar sesi yang sudah dijadwalkan berikut target power/HR/pace yang sudah di-resolve berdasarkan profil terkini.
+description: Cek jadwal planned workout mendatang dari kalender Intervals.icu. Menampilkan daftar sesi yang sudah dijadwalkan berikut target power/HR/pace yang sudah di-resolve berdasarkan profil terkini.
 ---
 
 # Workflow: `/check-workout`
@@ -43,12 +43,11 @@ Workflow ini digunakan untuk melihat **jadwal planned workout mendatang** dari k
 1. **`get_workout_library`**:
    - `startDate`: Tanggal mulai.
    - `endDate`: Tanggal akhir.
-   - `sport`: `Run`.
-   - `resolve`: `true` (hitung target Watt/BPM/Pace berdasarkan profil Hadid terkini).
+   - `sport`: `Run` (filter hanya lari, sesuaikan dengan sport Anda).
+   - `resolve`: `true` (hitung target Watt/BPM/Pace berdasarkan profil aktif).
 
 2. **`get_athlete_profile`** (Verifikasi profil aktif):
-   - Ambil `ftp` (CP aktif), `lthr`, `thresholdPace` terkini untuk konfirmasi konteks kalkulasi.
-   - Bandingkan `ftp` dari profil dengan baseline CP 305W — jika berbeda, gunakan nilai aktif dari profil.
+   - Ambil `ftp`, `lthr`, `thresholdPace` terkini untuk konfirmasi konteks kalkulasi.
 
 **Mode Detail Satu Workout:**
 1. **`get_workout_by_id`**:
@@ -67,11 +66,10 @@ Workflow ini digunakan untuk melihat **jadwal planned workout mendatang** dari k
 
 | Tanggal | Hari | Nama Sesi | Durasi Target | Target Power | Target HR | Keterangan |
 |---|---|---|---|---|---|---|
-| YYYY-MM-DD | Senin | REST | — | — | — | Total rest mutlak |
-| YYYY-MM-DD | Selasa | [Nama] | [X] menit | [X–X] W | < [X] bpm | [Blueprint Coach Faris] |
+| YYYY-MM-DD | [Hari] | [Nama Sesi] | [X] menit | [X–X] W | < [X] bpm | [Blueprint] |
 | ... | | | | | | |
 
 **Catatan Coach**:
-- [Apakah jadwal sudah sesuai blueprint Coach Faris Salman (3 build : 1 deload)?]
-- [Ada workout yang targetnya perlu disesuaikan dengan kondisi terkini berdasarkan TSB/CTL?]
+- [Apakah jadwal sudah sesuai dengan blueprint program latihan Anda?]
+- [Ada workout yang targetnya perlu disesuaikan dengan kondisi terkini?]
 ```
