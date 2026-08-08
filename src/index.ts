@@ -18,6 +18,7 @@ import { registerCalculatorTools } from "./tools/calculator.js";
 import { registerCustomItemTools } from "./tools/customItems.js";
 import { registerEventTools } from "./tools/events.js";
 import { registerGearTools } from "./tools/gear.js";
+import { registerLoadTools } from "./tools/load.js";
 import { registerPowerCurveTools } from "./tools/powerCurves.js";
 import { registerWellnessTools } from "./tools/wellness.js";
 
@@ -32,6 +33,7 @@ registerCalculatorTools(server);
 registerWellnessTools(server);
 registerEventTools(server);
 registerGearTools(server);
+registerLoadTools(server);
 registerPowerCurveTools(server);
 registerCustomItemTools(server);
 
