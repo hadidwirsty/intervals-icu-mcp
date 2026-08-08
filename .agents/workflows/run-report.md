@@ -1,5 +1,5 @@
 ---
-description: Otomasi analisis laporan sesi lari harian menggunakan data langsung dari Intervals.icu via MCP dan menghasilkan coaching report presisi berbasis sains.
+description: Otomasi analisis laporan sesi lari harian atlet Muhammad Hadid Wiransetyo dengan mengambil data langsung dari Intervals.icu via MCP dan menghasilkan coaching report presisi berbasis sains.
 ---
 
 # Workflow: `/run-report`
@@ -50,7 +50,7 @@ Panggil alat MCP `intervals-icu` secara berurutan:
 
 3. **`get_wellness_data`** (Fatigue & Wellness Check):
    - Parameter: `startDate` dan `endDate` pada tanggal sesi.
-   - Ambil data harian: `weight` (Berat Badan harian terkini), `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue) untuk pengecekan *Fatigue Flags*.
+   - Ambil data harian: `weight` (Berat Badan harian terkini — prioritas utama), `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue) untuk pengecekan *Fatigue Flags*.
    - Prioritaskan nilai `weight` dari sini jika tersedia; gunakan `icu_weight` dari detail aktivitas sebagai fallback.
 
 4. **`get_activity_intervals`**:
@@ -67,8 +67,8 @@ Panggil alat MCP `intervals-icu` secara berurutan:
 ### Step 3: Muat Skill Running Coach Analysis
 
 Terapkan pengetahuan dan aturan dari skill `.agents/skills/running-coach-analysis/SKILL.md`:
-- Gunakan profil fisiologis atlet yang diekstrak langsung dari data MCP Intervals.icu.
-- Cocokkan realisasi latihan dengan **Blueprint Workout Spesifik** yang telah dikonfigurasi.
+- Gunakan profil fisiologis atlet (Muhammad Hadid Wiransetyo, CP 305W, W' 8.89 kJ, LTHR 188 bpm, Max HR 207 bpm) yang diekstrak secara dinamis dari MCP.
+- Cocokkan realisasi latihan dengan **Blueprint Workout Spesifik Coach Faris Salman**.
 - Hitung Efficiency Factor (EF = Watts / HR).
 
 ---

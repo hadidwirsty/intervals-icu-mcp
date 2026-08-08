@@ -18,17 +18,18 @@ Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) unt
 ---
 
 ### 2. `training-load-analysis`
-**Tujuan**: Interpretasi beban latihan harian — CTL, ATL, TSB, Ramp Rate, dan eFTP.  
+**Tujuan**: Interpretasi beban latihan harian — CTL, ATL, TSB, ACWR (Acute:Chronic Workload Ratio), Ramp Rate, eFTP, dan Weekly Load Budgeting.  
 **File**: [`skills/training-load-analysis/SKILL.md`](skills/training-load-analysis/SKILL.md)
 
 **Yang perlu dikonfigurasi:**
-- **Bagian 2 — Konteks Program Latihan**: Fase aktif, target CTL, loading model (rasio build:recovery), dan threshold Fatigue Flags.
+- **Bagian 2 — Weekly Load Budgeting Rules**: Proporsi batas maksimum Long Run (30-35%), Quality Intervals (15-20%), dan Easy Run (45-55%).
+- **Bagian 3 — Konteks Program Latihan**: Fase aktif, target CTL, loading model (rasio build:recovery), dan threshold Fatigue Flags / ACWR.
 
 ---
 
 ## Workflows yang Tersedia
 
-### `/run-report` — Laporan Pasca-Sesi Lari
+### 1. `/run-report` — Laporan Pasca-Sesi Lari
 **Tujuan**: Generate coaching report setelah setiap sesi lari.
 
 ```text
@@ -48,8 +49,8 @@ Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) unt
 
 ---
 
-### `/fitness-status` — Status Beban Latihan (CTL/ATL/TSB)
-**Tujuan**: Cek kondisi training load & kesiapan atlet saat ini.
+### 2. `/fitness-status` — Status Beban Latihan & ACWR
+**Tujuan**: Cek kondisi training load, evaluasi ACWR (Acute:Chronic Workload Ratio), TSB Zone, dan kesiapan atlet saat ini.
 
 ```text
 /fitness-status
@@ -61,13 +62,35 @@ Atau dengan tanggal spesifik:
 ```
 
 **Yang dihasilkan:**
-- Tabel metrik CTL, ATL, TSB, Ramp Rate, eFTP terkini.
+- Tabel metrik CTL, ATL, TSB, ACWR, ACWR Category, Ramp Rate, eFTP terkini.
+- Evaluasi Fisiologis & Advice pencegahan cedera dari MCP tool `analyze_training_load`.
 - Tren 4 minggu terakhir.
 - Rekomendasi loading untuk minggu berjalan + peringatan deload jika diperlukan.
 
 ---
 
-### `/calc-vdot` — Kalkulator VDOT & Zona Pace
+### 3. `/weekly-budget` — Kalkulator Budget Latihan Mingguan *(Baru)*
+**Tujuan**: Hitung budget beban latihan mingguan dan alokasi proporsi sesi aman berdasarkan 42d avg load (CTL).
+
+```text
+/weekly-budget
+```
+
+Atau dengan target ramp rate kustom (misal +3%):
+```text
+/weekly-budget 3
+```
+
+**Yang dihasilkan:**
+- Base Weekly Load & Total Weekly Budget (+5% default ramp rate).
+- Batas Long Run Cap (30–35% budget).
+- Batas Quality Interval Cap (15–20% budget).
+- Alokasi Easy/Recovery Run (45–55% budget).
+- Panduan eksekusi alokasi per sesi lari.
+
+---
+
+### 4. `/calc-vdot` — Kalkulator VDOT & Zona Pace
 **Tujuan**: Hitung VDOT dan 5 zona pace latihan dari hasil race atau threshold pace.
 
 **Dari hasil race:**
@@ -91,7 +114,7 @@ Atau dengan tanggal spesifik:
 
 ---
 
-### `/check-workout` — Jadwal Planned Workout
+### 5. `/check-workout` — Jadwal Planned Workout
 **Tujuan**: Cek daftar planned workout mendatang dari kalender Intervals.icu.
 
 ```text
@@ -124,7 +147,7 @@ Buka setiap file SKILL.md dan isi placeholder dengan data Anda (ikuti petunjuk `
 
 Pastikan Anda membuka percakapan Antigravity dengan **workspace** yang mengarah ke folder project ini. Dengan begitu:
 - Semua skills (`running-coach-analysis`, `training-load-analysis`) akan otomatis terbaca.
-- Slash-commands (`/run-report`, `/fitness-status`, `/calc-vdot`, `/check-workout`) akan tersedia di chat.
+- Slash-commands (`/run-report`, `/fitness-status`, `/weekly-budget`, `/calc-vdot`, `/check-workout`) akan tersedia di chat.
 
 ### 3. Pastikan MCP Intervals.icu Aktif
 

@@ -57,8 +57,10 @@ intervals-icu-mcp/
 - `src/tools/athlete.ts` — Tool `get_athlete_profile` & `get_training_zones`.
 - `src/tools/calculator.ts` — Tool offline `calculate_vdot` & `calculate_pace_zones`.
 - `src/tools/events.ts` — Tool events, calendar, planned workouts, `get_workout_library`, `get_workout_by_id`.
+- `src/tools/load.ts` — Tool offline `analyze_training_load` & `calculate_weekly_budget`.
 - `src/tools/wellness.ts` — Tool `get_wellness_data` & `get_fitness_chart`.
 - `src/utils/date.ts` — Helper pure function `getDefaultDateRange()`.
+- `src/utils/load.ts` — Kalkulator fisiologis ACWR, TSB Zones, Ramp Rate & Weekly Budget (`analyzeTrainingLoad`, `calculateWeeklyBudget`).
 - `src/utils/retry.ts` — Kalkulasi retry delay & jitter.
 - `src/utils/cache.ts` — Class InMemoryCache (TTL-based) zero-dependency.
 - `src/utils/vdot.ts` — Kalkulator fisiologis lari Jack Daniels (`calculateVdot`, `calculatePaceZones`).
@@ -69,7 +71,7 @@ intervals-icu-mcp/
 - **Rate-limit Handling & Caching:** HTTP client kini menangani error 429 otomatis dengan retry exponential backoff (max 3x retry) dan header `Retry-After`. InMemoryCache (TTL-based) diterapkan pada gear (30m) dan power curves (60m).
 - Beberapa tool (misalnya `get_athlete_power_curves`) me-return respon API yang raw sehingga perlu disesuaikan atau dimengerti oleh pengguna.
 - Eksekusi murni berbasis read/write data dari Intervals tanpa adanya _database_ lokal (stateless).
-- Test framework **Vitest** telah dipasang dan dikonfigurasi (`pnpm test`). Total 34 unit tests.
+- Test framework **Vitest** telah dipasang dan dikonfigurasi (`pnpm test`). Total 43 unit tests.
 
 ## Planned Features (Implementation Plans Tersedia)
 | # | Feature | Plan File | Status |
@@ -79,6 +81,8 @@ intervals-icu-mcp/
 | 3 | Workout Library (`get_workout_library`, `get_workout_by_id`) | `docs/plans/2026-08-08-workout-library-3.md` | **Completed** |
 | 4 | Rate-limit Retry + In-memory Cache | `docs/plans/2026-08-08-rate-limit-caching-4.md` | **Completed** |
 | 5 | Pace Zone & VDOT Calculator (`calculate_vdot`, `calculate_pace_zones`) | `docs/plans/2026-08-08-pace-zone-vdot-5.md` | **Completed** |
+| 6 | Training Load, ACWR & Weekly Budget Calculator (`analyze_training_load`, `calculate_weekly_budget`) | `docs/plans/2026-08-08-training-load-budget-6.md` | **Completed** |
+| 7 | Agent Skills & Workflows Integration for ACWR & Weekly Budgeting (`/weekly-budget`, `/fitness-status` update, `training-load-analysis`) | `docs/plans/2026-08-08-agent-skills-workflows-7.md` | **Ready for Execution** |
 
 ## Planned Directory Additions
 ```text
