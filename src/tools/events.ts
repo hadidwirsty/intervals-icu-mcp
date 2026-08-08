@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { intervalsRequest, resolveAthleteId } from "../client.js";
 import { errorResult, toToolResult } from "../types.js";
+import { validateWorkoutDsl } from "../utils/dsl.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
@@ -258,6 +259,61 @@ export function registerEventTools(server: McpServer): void {
         apiKey,
       });
       return toToolResult(result);
+    },
+  );
+
+  server.registerTool(
+    "create_running_workout",
+    {
+      title: "Create Structured Running Workout",
+      description:
+        "Jadwalkan planned workout berstruktur di kalender Intervals.icu atlet menggunakan format Teks DSL Intervals.icu (contoh template Coach Faris: '- 12m 70-80% power, 70-80% pace'). System akan otomatis menghitung durasi, jarak, dan load.",
+      inputSchema: {
+        name: z.string().describe("Judul workout, contoh: 'Mixed Intervals' atau 'Threshold Tempo Run'."),
+        description: z
+          .string()
+          .describe(
+            "Teks DSL Workout Intervals.icu. Setiap baris langkah diawali '- ' diikuti durasi dan target power/pace/HR.",
+          ),
+        startDate: z.string().describe("Tanggal pelaksanaan, format YYYY-MM-DD. Contoh: '2026-08-04'."),
+        startTime: z
+          .string()
+          .optional()
+          .describe("Waktu pelaksanaan, format HH:MM. Default '06:00'. Contoh: '05:00'."),
+        workoutType: z
+          .string()
+          .optional()
+          .describe("Tipe olahraga, contoh: 'Run', 'Ride', 'Swim'. Default 'Run'."),
+        athleteId: z.string().optional().describe("Athlete ID Intervals.icu. Default dari INTERVALS_ATHLETE_ID."),
+        apiKey: z.string().optional().describe("Override API key untuk request ini saja."),
+      },
+    },
+    async ({ name, description, startDate, startTime, workoutType, athleteId, apiKey }) => {
+      const { id, error } = resolveAthleteId(athleteId);
+      if (error) return errorResult(error);
+
+      try {
+        const validatedDsl = validateWorkoutDsl(description);
+        const timeStr = startTime ?? "06:00";
+        const start_date_local = `${startDate}T${timeStr}:00`;
+
+        const body = {
+          category: "WORKOUT",
+          name,
+          type: workoutType ?? "Run",
+          description: validatedDsl,
+          start_date_local,
+        };
+
+        const result = await intervalsRequest(`/athlete/${id}/events`, {
+          method: "POST",
+          body,
+          apiKey,
+        });
+        return toToolResult(result);
+      } catch (err) {
+        return errorResult(err instanceof Error ? err.message : String(err));
+      }
     },
   );
 }

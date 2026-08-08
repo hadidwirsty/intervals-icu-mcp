@@ -21,3 +21,19 @@ describe("get_workout_by_id schema validation", () => {
     expect(eventIdSchema.parse("12345")).toBe("12345");
   });
 });
+
+describe("create_running_workout payload formatting", () => {
+  it("formats start_date_local correctly with custom startTime", () => {
+    const startDate = "2026-08-04";
+    const startTime = "05:00";
+    const start_date_local = `${startDate}T${startTime}:00`;
+    expect(start_date_local).toBe("2026-08-04T05:00:00");
+  });
+
+  it("formats start_date_local correctly with default startTime", () => {
+    const startDate = "2026-08-04";
+    const startTime = undefined;
+    const start_date_local = `${startDate}T${startTime ?? "06:00"}:00`;
+    expect(start_date_local).toBe("2026-08-04T06:00:00");
+  });
+});

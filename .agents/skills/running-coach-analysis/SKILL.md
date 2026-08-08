@@ -100,7 +100,30 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
 
 ---
 
-## 5. Workflow Pengambilan Data dari MCP Intervals.icu
+## 5. Aturan Format Teks DSL Workout Builder (`create_running_workout`)
+
+Ketika membuat atau merekomendasikan planned workout berstruktur ke kalender Intervals.icu, susun deskripsi dalam **Teks DSL Intervals.icu**:
+
+```text
+Warmup
+- 12m 70-80% power, 70-80% pace
+
+Main Set 6x
+- 3m 95-98% power, 95-98% pace
+- 1m 60-75% power, 60-75% pace
+
+Cooldown
+- 6m 70-80% power, 70-80% pace
+```
+
+- **Setiap baris langkah wajib diawali `- `** (hyphen spasi).
+- Gunakan durasi `Xm` (menit) atau `Xs` (detik).
+- Tentukan target persen power (`% power`) atau pace (`% pace`).
+- Selalu tawarkan opsi penjadwalan otomatis via `/create-workout` atau panggil MCP tool `create_running_workout` jika atlet meminta.
+
+---
+
+## 6. Workflow Pengambilan Data dari MCP Intervals.icu
 
 Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
 
@@ -178,4 +201,5 @@ Halo [Nama Atlet]. Coach di sini.
   - **Target Power**: [Watt range] W (Zone X)
   - **Target HR Ceiling**: < [HR Limit] bpm
   - **Instruksi Ego Management**: [Petunjuk taktis eksekusi]
+  - **Opsi Kalender**: Ingin Coach buatkan jadwal otomatis ke kalender Intervals.icu Anda via `/create-workout`?
 ```

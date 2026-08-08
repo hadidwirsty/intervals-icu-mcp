@@ -7,13 +7,14 @@ Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) unt
 ## Skills yang Tersedia
 
 ### 1. `running-coach-analysis`
-**Tujuan**: Analisis pasca-sesi lari — evaluasi eksekusi, fisiologis, dan rekomendasi sesi berikutnya.  
+**Tujuan**: Analisis pasca-sesi lari — evaluasi eksekusi, fisiologis, dan rekomendasi sesi berikutnya (termasuk format Teks DSL Workout Builder).  
 **File**: [`skills/running-coach-analysis/SKILL.md`](skills/running-coach-analysis/SKILL.md)
 
 **Yang perlu dikonfigurasi:**
 - **Bagian 2 — Profil Atlet**: Nama, usia, perangkat, status kompetisi, filosofi latihan.
 - **Bagian 3 — Power Zones & HR Zones**: Sesuaikan rentang zona dengan CP dan LTHR Anda (parameter utama dibaca otomatis dari Intervals.icu).
 - **Bagian 4 — Blueprint Workout**: Semua tipe sesi latihan berikut target power, HR, dan durasi spesifik.
+- **Bagian 5 — Format Teks DSL**: Aturan penulisan `- 12m 70-80% power, 70-80% pace` untuk pembuat workout berstruktur.
 
 ---
 
@@ -45,7 +46,7 @@ Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) unt
 1. Ringkasan Eksekusi — kepatuhan target watt & durasi.
 2. Analisis Detail Fisiologis — Aerobic Decoupling, Cardiac Drift, breakdown interval.
 3. Key Findings — korelasi RPE & sensasi fisik dengan data numerik.
-4. Rekomendasi Sesi Berikutnya — target watt, HR ceiling, durasi spesifik.
+4. Rekomendasi Sesi Berikutnya — target watt, HR ceiling, durasi spesifik, & opsi penjadwalan otomatis.
 
 ---
 
@@ -69,7 +70,7 @@ Atau dengan tanggal spesifik:
 
 ---
 
-### 3. `/weekly-budget` — Kalkulator Budget Latihan Mingguan *(Baru)*
+### 3. `/weekly-budget` — Kalkulator Budget Latihan Mingguan
 **Tujuan**: Hitung budget beban latihan mingguan dan alokasi proporsi sesi aman berdasarkan 42d avg load (CTL).
 
 ```text
@@ -90,7 +91,33 @@ Atau dengan target ramp rate kustom (misal +3%):
 
 ---
 
-### 4. `/calc-vdot` — Kalkulator VDOT & Zona Pace
+### 4. `/create-workout` — Structured Running Workout Builder *(Baru)*
+**Tujuan**: Jadwalkan planned workout berstruktur di kalender Intervals.icu atlet menggunakan Teks DSL.
+
+```text
+/create-workout
+
+- Judul: Subthreshold I
+- Tanggal: 2026-08-11
+- Teks DSL:
+Warmup
+- 12m 70-80% power, 70-80% pace
+
+Main Set 6x
+- 3m 95-98% power, 95-98% pace
+- 1m 60-75% power, 60-75% pace
+
+Cooldown
+- 6m 70-80% power, 70-80% pace
+```
+
+**Yang dihasilkan:**
+- Event planned workout berstruktur langsung terkirim ke kalender Intervals.icu (otomatis sync ke jam tangan Garmin).
+- Komputasi otomatis durasi total, estimasi jarak, dan Training Load (TSS).
+
+---
+
+### 5. `/calc-vdot` — Kalkulator VDOT & Zona Pace
 **Tujuan**: Hitung VDOT dan 5 zona pace latihan dari hasil race atau threshold pace.
 
 **Dari hasil race:**
@@ -114,7 +141,7 @@ Atau dengan target ramp rate kustom (misal +3%):
 
 ---
 
-### 5. `/check-workout` — Jadwal Planned Workout
+### 6. `/check-workout` — Jadwal Planned Workout
 **Tujuan**: Cek daftar planned workout mendatang dari kalender Intervals.icu.
 
 ```text
@@ -147,7 +174,7 @@ Buka setiap file SKILL.md dan isi placeholder dengan data Anda (ikuti petunjuk `
 
 Pastikan Anda membuka percakapan Antigravity dengan **workspace** yang mengarah ke folder project ini. Dengan begitu:
 - Semua skills (`running-coach-analysis`, `training-load-analysis`) akan otomatis terbaca.
-- Slash-commands (`/run-report`, `/fitness-status`, `/weekly-budget`, `/calc-vdot`, `/check-workout`) akan tersedia di chat.
+- Slash-commands (`/run-report`, `/fitness-status`, `/weekly-budget`, `/create-workout`, `/calc-vdot`, `/check-workout`) akan tersedia di chat.
 
 ### 3. Pastikan MCP Intervals.icu Aktif
 
