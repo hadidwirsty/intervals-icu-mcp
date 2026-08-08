@@ -267,7 +267,7 @@ export function registerEventTools(server: McpServer): void {
     {
       title: "Create Structured Running Workout",
       description:
-        "Jadwalkan planned workout berstruktur di kalender Intervals.icu atlet menggunakan format Teks DSL Intervals.icu (contoh template Coach Faris: '- 12m 70-80% power, 70-80% pace'). System akan otomatis menghitung durasi, jarak, dan load.",
+        "Jadwalkan planned workout berstruktur di kalender Intervals.icu atlet menggunakan format Teks DSL Intervals.icu (contoh: '- 12m 70-80% power, 70-80% pace'). System akan otomatis menghitung durasi, jarak, dan load.",
       inputSchema: {
         name: z.string().describe("Judul workout, contoh: 'Mixed Intervals' atau 'Threshold Tempo Run'."),
         description: z

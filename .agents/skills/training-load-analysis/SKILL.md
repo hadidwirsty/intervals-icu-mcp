@@ -3,9 +3,9 @@ name: training-load-analysis
 description: Skill interpretasi beban latihan berbasis sains (CTL, ATL, TSB, ACWR, Ramp Rate, eFTP, Weekly Budget) dari Intervals.icu. Menghubungkan data fitness chart dengan konteks periodisasi dan kondisi kesiapan atlet untuk menghasilkan analisis training load yang akurat.
 ---
 
-# Training Load Analysis Skill — Personal Profile (Muhammad Hadid Wiransetyo)
+# Training Load Analysis Skill
 
-Skill ini digunakan untuk menganalisis kondisi beban latihan harian atlet **Muhammad Hadid Wiransetyo** berdasarkan data fitness chart (CTL/ATL/TSB/ACWR) dan kalkulasi budget mingguan dari **Intervals.icu MCP**.
+Skill ini digunakan untuk menganalisis kondisi beban latihan harian atlet berdasarkan data fitness chart (CTL/ATL/TSB/ACWR) dan kalkulasi budget mingguan dari **Intervals.icu MCP**.
 
 ---
 
@@ -13,24 +13,27 @@ Skill ini digunakan untuk menganalisis kondisi beban latihan harian atlet **Muha
 
 ### Chronic Training Load (CTL) — "Fitness"
 - **Definisi**: Rata-rata beban latihan 42 hari terakhir (eksponensial moving average). Representasi kebugaran kardiovaskular jangka panjang.
-- **Interpretasi Hadid**:
+- **Interpretasi Umum**:
   - **CTL < 40**: Base building — fondasi aerobik sedang dibangun.
-  - **CTL 40–60**: Aerobic development fase aktif — zone produktif untuk Continuous Aerobic Development.
-  - **CTL 60–80**: High fitness — performa tinggi, tapi pengawasan ekstra diperlukan.
-  - **CTL > 80**: Elite zone — di luar target saat ini (comeback 2028).
+  - **CTL 40–60**: Aerobic development fase aktif — zona produktif untuk sebagian besar pelari.
+  - **CTL 60–80**: High fitness — monitoring ekstra diperlukan.
+  - **CTL > 80**: Elite zone — biasanya dicapai pelari semi-profesional atau profesional.
+
+> [!IMPORTANT]
+> **Sesuaikan rentang CTL ini dengan program dan level atlet Anda.** Target CTL berbeda antara pelari pemula, recreational, dan competitive.
 
 ### Acute Training Load (ATL) — "Fatigue"
 - **Definisi**: Rata-rata beban latihan 7 hari terakhir. Representasi akumulasi kelelahan jangka pendek.
-- **ATL > CTL + 20**: Kelelahan akut berlebih — risiko overtraining atau injury.
-- **ATL < CTL - 10**: Deload / undertraining — tubuh sudah sangat pulih, siap load naik.
+- **ATL > CTL + 20**: Kelelahan akut berlebih — risiko overtraining atau cedera.
+- **ATL < CTL - 10**: Deload / undertraining — tubuh sangat pulih, siap menerima load lebih tinggi.
 
 ### Training Stress Balance (TSB) — "Form / Freshness"
 - **Formula**: `TSB = CTL - ATL`
 - **Interpretasi**:
   - `TSB > +25`: Transition / Recovery Panjang.
-  - `TSB +5 – +25`: Fresh & Race Ready — ideal untuk race / testing (20' Test / 3|12 CP Test).
+  - `TSB +5 – +25`: Fresh & Race Ready — ideal untuk race / testing.
   - `TSB -10 – +5`: Grey Zone — transisi atau pemeliharaan.
-  - `TSB -30 – -10`: Optimal Training Zone — zona latihan produktif, adaptasi aerobik terjadi.
+  - `TSB -30 – -10`: Optimal Training Zone — zona latihan produktif, adaptasi terjadi.
   - `TSB < -30`: High Risk / Overstressed — wajib deload/istirahat segera.
 
 ### Acute:Chronic Workload Ratio (ACWR) — "Injury Risk Indicator"
@@ -52,32 +55,35 @@ Skill ini digunakan untuk menganalisis kondisi beban latihan harian atlet **Muha
 
 ### eFTP (Estimated FTP)
 - **Definisi**: Estimasi FTP terkini berdasarkan data kinerja aktual dari aktivitas terbaru.
-- Gunakan sebagai validasi terhadap baseline CP 305W.
+- Gunakan sebagai validasi terhadap FTP baseline.
 
 ---
 
-## 2. Weekly Load Budgeting & Alokasi Sesi (Coach Faris Salman Blueprint)
+## 2. Weekly Load Budgeting & Alokasi Sesi
 
 Berdasarkan data CTL (42-day average daily load), hitung budget latihan mingguan menggunakan MCP tool `calculate_weekly_budget`:
 
 - **Base Weekly Load**: `CTL × 7`
-- **Target Ramp Pct**: Default +5% per minggu (Batas aman Continuous Aerobic Development).
-- **Total Weekly Budget**: `Base Weekly Load × 1.05`
+- **Target Ramp Pct**: Default +5% per minggu (Batas aman pembangunan beban).
+- **Total Weekly Budget**: `Base Weekly Load × (1 + targetRampPct%)`
 
 ### Aturan Proporsi Beban Sesi Mingguan (Strict Caps)
-1. **Long Run Cap**: **30–35%** dari Total Weekly Budget. (Contoh: Total budget 350 TSS → Long Run max 105–122 TSS).
-2. **Quality Interval Cap**: **15–20%** dari Total Weekly Budget. (Total sesi Subthreshold / Mixed Intervals hari Selasa & Kamis).
-3. **Easy & Recovery Allocation**: **45–55%** dari Total Weekly Budget. (Sesi Rabu EZ+Strides, Jumat Recovery, Minggu Recovery).
+1. **Long Run Cap**: **30–35%** dari Total Weekly Budget.
+2. **Quality Interval Cap**: **15–20%** dari Total Weekly Budget.
+3. **Easy & Recovery Allocation**: **45–55%** dari Total Weekly Budget.
 
 ---
 
-## 3. Konteks Program Latihan Hadid (Coach Faris Salman)
+## 3. Konteks Program Latihan Atlet
 
-- **Fase Aktif**: Continuous Aerobic Development (CAD) — tidak ada tapering, tidak ada peaking.
-- **Target CTL Ideal**: 45–65 (zona produktif untuk HM Plan P^3 Level 3).
-- **Loading Model**: 3 minggu build → 1 minggu deload/easy (siklus 4 mingguan).
+> [!IMPORTANT]
+> **Sesuaikan bagian ini dengan program latihan dan fase periodisasi Anda.** Tentukan target CTL, TSB alert threshold, dan loading model (misal: 3:1, 4:1, atau 2:1 build:recovery ratio).
+
+- **Fase Aktif**: `[Nama Fase, contoh: Base Building / Aerobic Development / Race Prep]`
+- **Target CTL Ideal**: `[X – Y]` (zona produktif untuk program Anda)
+- **Loading Model**: `[Contoh: 3 minggu build → 1 minggu deload]`
 - **Fatigue Flags**:
-  - ACWR > 1.5 ATAU TSB < -30 selama 2+ hari berturut-turut → Aktifkan Protokol Deload.
+  - ACWR > 1.5 ATAU TSB < threshold kritis → Aktifkan Protokol Deload.
   - Ramp Rate > +5.0/minggu → Kurangi intensitas workout.
 
 ---
@@ -116,7 +122,7 @@ Berdasarkan data CTL (42-day average daily load), hitung budget latihan mingguan
 | TSB (Form)    | [X] | [Zone: Transition/Fresh/Grey/Optimal/High Risk] |
 | ACWR (Workload Ratio) | [X.XX] | **[Under-training/Sweet Spot/Warning/Danger]** |
 | Ramp Rate     | [X]/minggu | [Taper/Minimal/Sweetspot/High Build/High Risk] |
-| eFTP          | [X] W | [vs. CP 305W baseline] |
+| eFTP          | [X] W | [vs. FTP baseline] |
 
 **Evaluasi Fisiologis**: [Catatan dari advice analyze_training_load]
 
@@ -129,14 +135,14 @@ Berdasarkan data CTL (42-day average daily load), hitung budget latihan mingguan
 
 **Rekomendasi Eksekusi**:
 - [Apakah beban aman untuk lanjut build / perlu adjustment]
-- [Kesesuaian jadwal Selasa/Kamis dengan Quality Cap]
+- [Kesesuaian jadwal dengan Quality Cap]
 ```
 
 ---
 
 ## 6. Panduan Deload (Jika Diperlukan)
 
-Jika ACWR > 1.5 atau TSB < -30:
-1. Ganti semua Workout hari Selasa & Kamis → Easy Aerobic 35m (198–228W, HR < 159 bpm).
-2. Pertahankan Recovery Run Jumat & Minggu seperti biasa.
+Jika ACWR > 1.5 atau TSB < threshold kritis:
+1. Kurangi intensitas sesi workout → ganti ke easy aerobic.
+2. Pertahankan frekuensi lari (jangan stop total).
 3. Evaluasi ulang setelah 5–7 hari recovery.
