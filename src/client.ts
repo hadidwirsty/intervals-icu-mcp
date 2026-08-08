@@ -6,6 +6,7 @@
  */
 
 import { config } from "./config.js";
+import { calculateRetryDelay } from "./utils/retry.js";
 
 export interface ApiError {
   error: true;
@@ -36,6 +37,7 @@ interface RequestOptions {
   params?: Record<string, ParamValue | ParamValue[]>;
   body?: unknown;
   apiKey?: string;
+  maxRetries?: number;
 }
 
 function buildUrl(path: string, params?: RequestOptions["params"]): string {
@@ -59,7 +61,7 @@ export async function intervalsRequest<T = unknown>(
   path: string,
   options: RequestOptions = {},
 ): Promise<ApiResult<T>> {
-  const { method = "GET", params, body, apiKey } = options;
+  const { method = "GET", params, body, apiKey, maxRetries = 3 } = options;
 
   const keyToUse = apiKey ?? config.apiKey;
   if (!keyToUse) {
@@ -80,31 +82,64 @@ export async function intervalsRequest<T = unknown>(
     headers["Content-Type"] = "application/json";
   }
 
-  try {
-    const response = await fetch(url, {
-      method,
-      headers,
-      body: body !== undefined ? JSON.stringify(body) : undefined,
-    });
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method,
+        headers,
+        body: body !== undefined ? JSON.stringify(body) : undefined,
+      });
 
-    const text = await response.text();
-    const data = text ? JSON.parse(text) : {};
+      if (response.status === 429 && attempt < maxRetries) {
+        const retryAfterHeader = response.headers.get("Retry-After");
+        const retryAfterSeconds = retryAfterHeader ? parseInt(retryAfterHeader, 10) : undefined;
+        const delay = calculateRetryDelay(attempt, retryAfterSeconds);
 
-    if (!response.ok) {
+        console.error(
+          `[intervals-icu-mcp] Rate limited (429). Retry ${attempt + 1}/${maxRetries} dalam ${delay}ms...`,
+        );
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        continue;
+      }
+
+      const text = await response.text();
+
+      if (!response.ok) {
+        return {
+          error: true,
+          statusCode: response.status,
+          message: ERROR_MESSAGES[response.status] ?? `HTTP ${response.status}: ${text}`,
+        };
+      }
+
+      let data: unknown = {};
+      if (text) {
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = text;
+        }
+      }
+
+      return data as T;
+    } catch (err) {
+      if (attempt < maxRetries) {
+        const delay = calculateRetryDelay(attempt);
+        console.error(`[intervals-icu-mcp] Request error, retry ${attempt + 1}/${maxRetries}: ${err}`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        continue;
+      }
       return {
         error: true,
-        statusCode: response.status,
-        message: ERROR_MESSAGES[response.status] ?? `HTTP ${response.status}: ${text}`,
+        message: `Request error: ${err instanceof Error ? err.message : String(err)}`,
       };
     }
-
-    return data as T;
-  } catch (err) {
-    return {
-      error: true,
-      message: `Request error: ${err instanceof Error ? err.message : String(err)}`,
-    };
   }
+
+  return {
+    error: true,
+    message: "429 Too Many Requests: Semua retry habis. Coba lagi nanti.",
+  };
 }
 
 /** Resolve athleteId dari argumen tool, fallback ke INTERVALS_ATHLETE_ID env. Prefix "i" ditambahkan otomatis kalau belum ada. */

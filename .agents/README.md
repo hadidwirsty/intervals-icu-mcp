@@ -1,54 +1,149 @@
 # Running Coach AI — Panduan Konfigurasi
 
-Folder `.agents/` berisi template **Antigravity Agent** (skill & workflow) untuk membangun Running Coach AI personal yang mengambil data langsung dari Intervals.icu via MCP.
+Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) untuk membangun Running Coach AI personal yang mengambil data langsung dari Intervals.icu via MCP.
 
 ---
 
-## Cara Menggunakannya
+## Skills yang Tersedia
 
-### 1. Konfigurasi SKILL.md
+### 1. `running-coach-analysis`
+**Tujuan**: Analisis pasca-sesi lari — evaluasi eksekusi, fisiologis, dan rekomendasi sesi berikutnya.  
+**File**: [`skills/running-coach-analysis/SKILL.md`](skills/running-coach-analysis/SKILL.md)
 
-Buka file [`skills/running-coach-analysis/SKILL.md`](skills/running-coach-analysis/SKILL.md) dan isi placeholder berikut dengan data Anda:
+**Yang perlu dikonfigurasi:**
+- **Bagian 2 — Profil Atlet**: Nama, usia, perangkat, status kompetisi, filosofi latihan.
+- **Bagian 3 — Power Zones & HR Zones**: Sesuaikan rentang zona dengan CP dan LTHR Anda (parameter utama dibaca otomatis dari Intervals.icu).
+- **Bagian 4 — Blueprint Workout**: Semua tipe sesi latihan berikut target power, HR, dan durasi spesifik.
 
-**Bagian 2 — Profil Atlet:**
-```
-- Nama Atlet: [Nama Anda]
-- Usia: [Usia]
-- Perangkat: [Nama perangkat GPS + power meter Anda]
-- Status Kompetisi: [Target race atau status Anda]
-- Filosofi Latihan: [Deskripsi pendekatan latihan Anda]
-```
+---
 
-**Bagian 3 — Power Zones & HR Zones:**
-Sesuaikan rentang zona dengan setting Intervals.icu Anda. Parameter utama (CP, W', LTHR, Max HR, dll) akan dibaca **otomatis dari data Intervals.icu** saat workflow berjalan.
+### 2. `training-load-analysis`
+**Tujuan**: Interpretasi beban latihan harian — CTL, ATL, TSB, Ramp Rate, dan eFTP.  
+**File**: [`skills/training-load-analysis/SKILL.md`](skills/training-load-analysis/SKILL.md)
 
-**Bagian 4 — Blueprint Workout:**
-Masukkan semua tipe sesi yang ada dalam program latihan Anda (nama sesi, target power, target HR, durasi).
+**Yang perlu dikonfigurasi:**
+- **Bagian 2 — Konteks Program Latihan**: Fase aktif, target CTL, loading model (rasio build:recovery), dan threshold Fatigue Flags.
 
-### 2. Sambungkan ke Project Antigravity
+---
 
-Pastikan Anda membuka percakapan Antigravity dengan **workspace** yang mengarah ke folder project ini. Dengan begitu:
-- Skill `running-coach-analysis` akan otomatis terbaca.
-- Slash-command `/run-report` akan tersedia di chat.
+## Workflows yang Tersedia
 
-### 3. Jalankan Laporan Pasca-Sesi
+### `/run-report` — Laporan Pasca-Sesi Lari
+**Tujuan**: Generate coaching report setelah setiap sesi lari.
 
-Ketik di chat Antigravity:
-
-```
+```text
 /run-report
 
-- Hari/Tanggal: Kamis, 6 Agustus 2026
+- Hari/Tanggal: Kamis, 7 Agustus 2026
 - Sesi Eksekusi: [Nama Sesi] - [Durasi] menit
 - RPE (Rating of Perceived Exertion): [X]/10
 - Catatan Fisik: [Catatan subjektif Anda]
 ```
 
-Antigravity akan otomatis:
-1. Ambil data aktivitas dari Intervals.icu via MCP
-2. Ekstrak profil fisiologis terkini Anda
-3. Analisis decoupling, cardiac drift, efisiensi per interval
-4. Hasilkan coaching report 4-bagian + rekomendasi sesi berikutnya
+**Yang dihasilkan:**
+1. Ringkasan Eksekusi — kepatuhan target watt & durasi.
+2. Analisis Detail Fisiologis — Aerobic Decoupling, Cardiac Drift, breakdown interval.
+3. Key Findings — korelasi RPE & sensasi fisik dengan data numerik.
+4. Rekomendasi Sesi Berikutnya — target watt, HR ceiling, durasi spesifik.
+
+---
+
+### `/fitness-status` — Status Beban Latihan (CTL/ATL/TSB)
+**Tujuan**: Cek kondisi training load & kesiapan atlet saat ini.
+
+```text
+/fitness-status
+```
+
+Atau dengan tanggal spesifik:
+```text
+/fitness-status 2026-08-08
+```
+
+**Yang dihasilkan:**
+- Tabel metrik CTL, ATL, TSB, Ramp Rate, eFTP terkini.
+- Tren 4 minggu terakhir.
+- Rekomendasi loading untuk minggu berjalan + peringatan deload jika diperlukan.
+
+---
+
+### `/calc-vdot` — Kalkulator VDOT & Zona Pace
+**Tujuan**: Hitung VDOT dan 5 zona pace latihan dari hasil race atau threshold pace.
+
+**Dari hasil race:**
+```text
+/calc-vdot
+
+- Hasil Race: 45:30 — 10K
+```
+
+**Dari threshold pace:**
+```text
+/calc-vdot threshold 5:30/km
+```
+
+**Yang dihasilkan:**
+- Skor VDOT + kategori level.
+- Tabel 5 zona pace (Easy, Marathon, Threshold, Interval, Repetition) dalam format MM:SS/km.
+- Catatan kontekstualisasi dengan program latihan Anda.
+
+> **Catatan**: Berjalan 100% offline — tidak memerlukan koneksi ke Intervals.icu.
+
+---
+
+### `/check-workout` — Jadwal Planned Workout
+**Tujuan**: Cek daftar planned workout mendatang dari kalender Intervals.icu.
+
+```text
+/check-workout
+```
+
+Atau dengan rentang tanggal:
+```text
+/check-workout 2026-08-08 2026-08-15
+```
+
+Atau untuk detail satu workout:
+```text
+/check-workout id [event_id]
+```
+
+**Yang dihasilkan:**
+- Tabel jadwal workout beserta target power/HR/pace yang sudah di-resolve berdasarkan profil aktif.
+- Verifikasi kesesuaian jadwal dengan blueprint program latihan.
+
+---
+
+## Cara Menggunakannya
+
+### 1. Konfigurasi Skills
+
+Buka setiap file SKILL.md dan isi placeholder dengan data Anda (ikuti petunjuk `[!IMPORTANT]` di masing-masing file).
+
+### 2. Sambungkan ke Antigravity
+
+Pastikan Anda membuka percakapan Antigravity dengan **workspace** yang mengarah ke folder project ini. Dengan begitu:
+- Semua skills (`running-coach-analysis`, `training-load-analysis`) akan otomatis terbaca.
+- Slash-commands (`/run-report`, `/fitness-status`, `/calc-vdot`, `/check-workout`) akan tersedia di chat.
+
+### 3. Pastikan MCP Intervals.icu Aktif
+
+Konfigurasi MCP server `intervals-icu` di file `antigravity.json` Anda:
+
+```json
+{
+  "mcpServers": {
+    "intervals-icu": {
+      "command": "node",
+      "args": ["./dist/index.js"],
+      "env": {
+        "INTERVALS_API_KEY": "your_api_key",
+        "INTERVALS_ATHLETE_ID": "your_athlete_id"
+      }
+    }
+  }
+}
+```
 
 ---
 

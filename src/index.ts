@@ -13,6 +13,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 import { registerActivityTools } from "./tools/activities.js";
+import { registerAthleteTools } from "./tools/athlete.js";
+import { registerCalculatorTools } from "./tools/calculator.js";
 import { registerCustomItemTools } from "./tools/customItems.js";
 import { registerEventTools } from "./tools/events.js";
 import { registerGearTools } from "./tools/gear.js";
@@ -25,6 +27,8 @@ const server = new McpServer({
 });
 
 registerActivityTools(server);
+registerAthleteTools(server);
+registerCalculatorTools(server);
 registerWellnessTools(server);
 registerEventTools(server);
 registerGearTools(server);

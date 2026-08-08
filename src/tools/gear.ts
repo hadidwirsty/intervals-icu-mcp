@@ -4,10 +4,14 @@
 
 import { z } from "zod";
 
-import { intervalsRequest, resolveAthleteId } from "../client.js";
+import { intervalsRequest, isApiError, resolveAthleteId } from "../client.js";
 import { errorResult, toToolResult } from "../types.js";
+import { InMemoryCache } from "../utils/cache.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+
+const GEAR_CACHE_TTL_MS = 30 * 60 * 1000; // 30 menit
+const gearCache = new InMemoryCache<unknown>();
 
 export function registerGearTools(server: McpServer): void {
   server.registerTool(
@@ -24,7 +28,16 @@ export function registerGearTools(server: McpServer): void {
       const { id, error } = resolveAthleteId(athleteId);
       if (error) return errorResult(error);
 
+      const cacheKey = `get_gear_list:${id}`;
+      const cached = gearCache.get(cacheKey);
+      if (cached !== undefined) {
+        return toToolResult(cached);
+      }
+
       const result = await intervalsRequest(`/athlete/${id}/gear`, { apiKey });
+      if (!isApiError(result)) {
+        gearCache.set(cacheKey, result, GEAR_CACHE_TTL_MS);
+      }
       return toToolResult(result);
     },
   );

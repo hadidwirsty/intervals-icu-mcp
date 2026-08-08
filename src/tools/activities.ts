@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { intervalsRequest, resolveAthleteId } from "../client.js";
 import { errorResult, toToolResult } from "../types.js";
+import { getDefaultDateRange } from "../utils/date.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
@@ -31,9 +32,9 @@ export function registerActivityTools(server: McpServer): void {
       const { id, error } = resolveAthleteId(athleteId);
       if (error) return errorResult(error);
 
-      const today = new Date().toISOString().slice(0, 10);
-      const oldest = startDate ?? new Date(Date.now() - 30 * 86400_000).toISOString().slice(0, 10);
-      const newest = endDate ?? today;
+      const defaultRange = getDefaultDateRange(30);
+      const oldest = startDate ?? defaultRange.oldest;
+      const newest = endDate ?? defaultRange.newest;
 
       const result = await intervalsRequest(`/athlete/${id}/activities`, {
         params: { oldest, newest, limit: limit ?? 10 },

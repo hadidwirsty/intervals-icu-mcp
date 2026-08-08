@@ -6,10 +6,13 @@ import { z } from "zod";
 
 import { intervalsRequest, isApiError, resolveAthleteId } from "../client.js";
 import { errorResult, toToolResult } from "../types.js";
+import { InMemoryCache } from "../utils/cache.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
 const DEFAULT_DURATIONS = [5, 15, 30, 60, 120, 300, 600, 1200, 3600];
+const POWER_CURVE_CACHE_TTL_MS = 60 * 60 * 1000; // 60 menit
+const powerCurveCache = new InMemoryCache<unknown>();
 
 export function registerPowerCurveTools(server: McpServer): void {
   server.registerTool(
@@ -60,6 +63,16 @@ export function registerPowerCurveTools(server: McpServer): void {
         return errorResult("Minimal satu curve harus dipilih (thisSeason, lastSeason, atau date range).");
       }
 
+      const cacheKey = `power_curve:${id}:${activityType ?? "Ride"}:${curves.join(",")}:${indoorOutdoor ?? "all"}`;
+      const cached = powerCurveCache.get(cacheKey);
+      if (cached !== undefined) {
+        const payload = cached as unknown;
+        if (durations && durations.length > 0) {
+          return toToolResult({ requestedDurations: durations, curves: payload });
+        }
+        return toToolResult(payload);
+      }
+
       const params: Record<string, string | number | boolean | string[]> = {
         curves,
         type: activityType ?? "Ride",
@@ -70,6 +83,10 @@ export function registerPowerCurveTools(server: McpServer): void {
       }
 
       const result = await intervalsRequest(`/athlete/${id}/power-curves`, { params, apiKey });
+
+      if (!isApiError(result)) {
+        powerCurveCache.set(cacheKey, result, POWER_CURVE_CACHE_TTL_MS);
+      }
 
       // durations dipakai klien pemanggil untuk menyaring hasil; sertakan sebagai info di response mentah.
       if (durations && durations.length > 0 && !isApiError(result)) {

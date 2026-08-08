@@ -1,4 +1,17 @@
+# Dependencies
 node_modules/
+
+# Build Output
 dist/
+
+# Environment Variables & Secrets
 .env
+.env.*
+!.env.example
+
+# Logs
 *.log
+
+# Internal Agent & Planning Artifacts
+docs/plans/
+

@@ -170,4 +170,94 @@ export function registerEventTools(server: McpServer): void {
       return toToolResult(result);
     },
   );
+
+  server.registerTool(
+    "get_workout_library",
+    {
+      title: "Get Workout Library",
+      description:
+        "Ambil daftar planned workout (template latihan) dari kalender Intervals.icu. Gunakan untuk melihat workout yang tersedia sebelum menjadwalkannya.",
+      inputSchema: {
+        athleteId: z
+          .string()
+          .optional()
+          .describe("Athlete ID Intervals.icu. Default dari INTERVALS_ATHLETE_ID."),
+        startDate: z
+          .string()
+          .optional()
+          .describe("Tanggal mulai pencarian, format YYYY-MM-DD. Default 1 tahun lalu."),
+        endDate: z
+          .string()
+          .optional()
+          .describe("Tanggal akhir pencarian, format YYYY-MM-DD. Default 1 tahun ke depan."),
+        sport: z
+          .string()
+          .optional()
+          .describe("Filter berdasarkan sport, contoh: 'Run', 'Ride', 'Swim'."),
+        resolve: z
+          .boolean()
+          .optional()
+          .describe(
+            "Jika true, hitung target spesifik (Watt/BPM/Pace) berdasarkan setting atlet saat ini. Default false.",
+          ),
+        apiKey: z.string().optional().describe("Override API key untuk request ini saja."),
+      },
+    },
+    async ({ athleteId, startDate, endDate, sport, resolve, apiKey }) => {
+      const { id, error } = resolveAthleteId(athleteId);
+      if (error) return errorResult(error);
+
+      const today = new Date();
+      const oneYearAgo = new Date(today);
+      oneYearAgo.setFullYear(today.getFullYear() - 1);
+      const oneYearAhead = new Date(today);
+      oneYearAhead.setFullYear(today.getFullYear() + 1);
+
+      const oldest = startDate ?? oneYearAgo.toISOString().slice(0, 10);
+      const newest = endDate ?? oneYearAhead.toISOString().slice(0, 10);
+
+      const result = await intervalsRequest(`/athlete/${id}/events`, {
+        params: {
+          oldest,
+          newest,
+          category: "WORKOUT",
+          ...(sport ? { type: sport } : {}),
+          ...(resolve ? { resolve: true } : {}),
+        },
+        apiKey,
+      });
+      return toToolResult(result);
+    },
+  );
+
+  server.registerTool(
+    "get_workout_by_id",
+    {
+      title: "Get Workout by ID",
+      description:
+        "Ambil detail satu planned workout berdasarkan event ID. Mendukung resolve=true untuk mendapatkan target spesifik (Watt/BPM/Pace) sesuai profil atlet.",
+      inputSchema: {
+        athleteId: z
+          .string()
+          .optional()
+          .describe("Athlete ID Intervals.icu. Default dari INTERVALS_ATHLETE_ID."),
+        eventId: z.string().min(1).describe("ID event/workout di kalender Intervals.icu."),
+        resolve: z
+          .boolean()
+          .optional()
+          .describe("Jika true, hitung target spesifik berdasarkan setting atlet. Default false."),
+        apiKey: z.string().optional().describe("Override API key untuk request ini saja."),
+      },
+    },
+    async ({ athleteId, eventId, resolve, apiKey }) => {
+      const { id, error } = resolveAthleteId(athleteId);
+      if (error) return errorResult(error);
+
+      const result = await intervalsRequest(`/athlete/${id}/events/${eventId}`, {
+        params: resolve ? { resolve: true } : undefined,
+        apiKey,
+      });
+      return toToolResult(result);
+    },
+  );
 }

@@ -1,0 +1,96 @@
+# Context Memory — intervals-icu-mcp
+_Last updated: 2026-08-08_
+
+## Project Overview
+Proyek ini adalah sebuah server Model Context Protocol (MCP) untuk Intervals.icu API. Server ini memungkinkan AI agent untuk berinteraksi langsung dan mengambil data training atlet (activities, wellness, events, gear, power curves, dan custom items) dari Intervals.icu.
+
+## Tech Stack
+| Category | Library / Tool | Version |
+|----------|---------------|---------|
+| Runtime | Node.js | >=18 |
+| Language | TypeScript | ^5.7.2 |
+| Protocol SDK | @modelcontextprotocol/sdk | ^1.30.0 |
+| Validation / Types | zod | ^4.4.3 |
+| Package Manager | pnpm | (via lockfile) |
+
+## Architecture
+Arsitektur sederhana yang bersifat fungsional, berfokus pada pendaftaran command MCP. Logika pemanggilan HTTP ke API (Intervals.icu) dipisah ke `src/client.ts`, pengaturan konfigurasi ke `src/config.ts`, sedangkan handler dari masing-masing perintah MCP dipecah ke dalam file berbeda menurut domain datanya di dalam subfolder `src/tools/`.
+
+## Directory Structure
+```text
+intervals-icu-mcp/
+├── .agents/       # Template konfigurasi Antigravity Agent (skills, workflows)
+├── dist/          # Direktori hasil build dari kompilasi TypeScript
+├── src/           # Direktori root untuk kode sumber TypeScript
+│   └── tools/     # Kumpulan file handler untuk domain tool MCP (activities, events, wellness, dll)
+```
+
+## Code Conventions
+- File naming: `camelCase` (misalnya `powerCurves.ts`, `customItems.ts`).
+- Entry point utama ada di `src/index.ts` yang menginisialisasi server MCP dan me-register seluruh tool.
+- Tidak ditemukan konfigurasi alat linter atau formatter (misalnya `.eslintrc` atau `.prettierrc`) pada level root proyek.
+
+## External Integrations
+| Service | Purpose | Integration Method |
+|---------|---------|-------------------|
+| Intervals.icu API | Sumber data training dan kesehatan pengguna | REST API (menggunakan Basic Auth: user `API_KEY` dan pass key) |
+
+## Environment Variables
+| Key | Purpose |
+|-----|---------|
+| INTERVALS_API_KEY | API Key dari Intervals.icu untuk autentikasi (Wajib) |
+| INTERVALS_ATHLETE_ID | Default Athlete ID bila tidak di-supply pada command call (Opsional) |
+| INTERVALS_API_BASE_URL | Base URL Intervals.icu untuk override default `https://intervals.icu/api/v1` (Opsional) |
+
+## Development Commands
+| Action | Command |
+|--------|---------|
+| Start dev | `pnpm run dev` (alias untuk `tsc --watch`) |
+| Build | `pnpm run build` (alias untuk `tsc`) |
+| Start | `pnpm run start` (menjalankan `node dist/index.js`) |
+| Inspector | `pnpm run inspector` (menggunakan `@modelcontextprotocol/inspector` untuk debug tool lokal) |
+| Test / Lint | `pnpm test` (Vitest unit testing) |
+
+## Key Files
+- `src/index.ts` — Entry point utama, registrasi MCP Server dan tools list.
+- `src/client.ts` — Modul HTTP client pusat (mendukung auto-retry exponential backoff pada 429).
+- `src/tools/athlete.ts` — Tool `get_athlete_profile` & `get_training_zones`.
+- `src/tools/calculator.ts` — Tool offline `calculate_vdot` & `calculate_pace_zones`.
+- `src/tools/events.ts` — Tool events, calendar, planned workouts, `get_workout_library`, `get_workout_by_id`.
+- `src/tools/wellness.ts` — Tool `get_wellness_data` & `get_fitness_chart`.
+- `src/utils/date.ts` — Helper pure function `getDefaultDateRange()`.
+- `src/utils/retry.ts` — Kalkulasi retry delay & jitter.
+- `src/utils/cache.ts` — Class InMemoryCache (TTL-based) zero-dependency.
+- `src/utils/vdot.ts` — Kalkulator fisiologis lari Jack Daniels (`calculateVdot`, `calculatePaceZones`).
+- `src/config.ts` — Membaca dan menvalidasi nilai dari Environment Variables.
+- `.env.example` — Templat referensi untuk konfigurasi environment variabel yang diperlukan server.
+
+## Known Decisions & Constraints
+- **Rate-limit Handling & Caching:** HTTP client kini menangani error 429 otomatis dengan retry exponential backoff (max 3x retry) dan header `Retry-After`. InMemoryCache (TTL-based) diterapkan pada gear (30m) dan power curves (60m).
+- Beberapa tool (misalnya `get_athlete_power_curves`) me-return respon API yang raw sehingga perlu disesuaikan atau dimengerti oleh pengguna.
+- Eksekusi murni berbasis read/write data dari Intervals tanpa adanya _database_ lokal (stateless).
+- Test framework **Vitest** telah dipasang dan dikonfigurasi (`pnpm test`). Total 34 unit tests.
+
+## Planned Features (Implementation Plans Tersedia)
+| # | Feature | Plan File | Status |
+|---|---------|----------|--------|
+| 1 | Athlete Profile & Training Zones (`get_athlete_profile`, `get_training_zones`) | `docs/plans/2026-08-08-athlete-profile-zones-1.md` | **Completed** |
+| 2 | Fitness & Form Chart CTL/ATL/TSB (`get_fitness_chart`) | `docs/plans/2026-08-08-fitness-form-chart-2.md` | **Completed** |
+| 3 | Workout Library (`get_workout_library`, `get_workout_by_id`) | `docs/plans/2026-08-08-workout-library-3.md` | **Completed** |
+| 4 | Rate-limit Retry + In-memory Cache | `docs/plans/2026-08-08-rate-limit-caching-4.md` | **Completed** |
+| 5 | Pace Zone & VDOT Calculator (`calculate_vdot`, `calculate_pace_zones`) | `docs/plans/2026-08-08-pace-zone-vdot-5.md` | **Completed** |
+
+## Planned Directory Additions
+```text
+src/
+  tools/
+    athlete.ts       # [Planned] Athlete profile & training zones tools
+    calculator.ts    # [Planned] VDOT & pace zone calculator tools
+  utils/
+    cache.ts         # [Planned] InMemoryCache class (TTL-based)
+    date.ts          # [Planned] getDefaultDateRange() pure helper
+    retry.ts         # [Planned] calculateRetryDelay() pure helper
+    vdot.ts          # [Planned] calculateVdot() & calculatePaceZones() pure functions
+docs/
+  plans/             # Implementation plans (5 files)
+```
