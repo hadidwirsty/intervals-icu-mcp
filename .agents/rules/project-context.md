@@ -84,6 +84,7 @@ intervals-icu-mcp/
 | 5 | Pace Zone & VDOT Calculator (`calculate_vdot`, `calculate_pace_zones`) | `docs/plans/2026-08-08-pace-zone-vdot-5.md` | **Completed** |
 | 6 | Training Load, ACWR & Weekly Budget Calculator (`analyze_training_load`, `calculate_weekly_budget`) | `docs/plans/2026-08-08-training-load-budget-6.md` | **Completed** |
 | 7 | Structured Running Workout Builder to Intervals.icu Calendar (`create_running_workout`) | `docs/plans/2026-08-08-structured-workout-builder-7.md` | **Completed** |
+| 8 | Public Open-Source Repository Cleanup & Readme (`README.md`, `.example` files) | `docs/plans/2026-08-08-public-repo-cleanup-readme-8.md` | **Completed** |
 | 8 | Agent Skills & Workflows Integration for Structured Workout Builder (`/create-workout`, `create_running_workout`) | `docs/plans/2026-08-08-workout-builder-skills-workflows-8.md` | **Ready for Execution** |
 
 ## Planned Directory Additions

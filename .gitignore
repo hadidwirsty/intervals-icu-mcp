@@ -14,4 +14,7 @@ dist/
 
 # Internal Agent & Planning Artifacts
 docs/plans/
+.agents/**/*.md
+!.agents/**/*.md.example
+!.agents/rules/project-context.md
 
