@@ -1,5 +1,5 @@
 ---
-description: Kalkulator VDOT dan zona pace lari berbasis Jack Daniels Running Formula untuk atlet Muhammad Hadid Wiransetyo. Hitung estimasi VO₂max dan 5 zona pace latihan dari hasil race atau sesi tempo tanpa memerlukan koneksi ke Intervals.icu.
+description: Kalkulator VDOT dan zona pace lari berbasis Jack Daniels Running Formula. Hitung estimasi VO₂max dan 5 zona pace latihan dari hasil race atau sesi tempo tanpa memerlukan koneksi ke Intervals.icu.
 ---
 
 # Workflow: `/calc-vdot`
@@ -21,7 +21,7 @@ Workflow ini digunakan untuk menghitung **VDOT** (estimasi VO₂max) dan **5 Zon
 **Dari threshold pace:**
 ```text
 /calc-vdot threshold [MM:SS]/km
-- Contoh: /calc-vdot threshold 6:00/km
+- Contoh: /calc-vdot threshold 5:30/km
 ```
 
 ---
@@ -70,14 +70,15 @@ Ekstrak dari input user:
 | Threshold | Tempo Run | [X:XX – X:XX] | Comfortably hard, 20–60 menit |
 | Interval | VO₂max Reps | [X:XX – X:XX] | Repetisi 3–5 menit |
 | Repetition | Speed Reps | [X:XX – X:XX] | Sprint 200–400m |
+
+**Catatan**: [Bandingkan dengan threshold pace dan FTP yang terkonfigurasi di profil atlet]
 ```
 
 ---
 
-### Step 4: Kontekstualisasi ke Program Latihan Hadid
+### Step 4: Kontekstualisasi ke Program Latihan Atlet
 
-Setelah kalkulasi, berikan catatan:
-- Bandingkan VDOT dengan estimasi berdasarkan CP 305W Hadid (referensi: CP 305W ≈ VDOT 50–55).
-- Apakah Threshold Pace dari VDOT konsisten dengan Threshold Pace baseline 6:00/km?
-- Jika ada gap signifikan: rekomendasikan apakah CP/FTP di Intervals.icu perlu diperbarui.
-- Konteks: Saat ini Hadid dalam fase Continuous Aerobic Development (tidak ada race target 2026–2027), sehingga VDOT lebih berfungsi sebagai referensi zona, bukan target race spesifik.
+Setelah kalkulasi, berikan catatan singkat:
+- Bandingkan Threshold Pace dari VDOT dengan nilai `threshold_pace` di profil atlet.
+- Apakah nilai FTP/CP di Intervals.icu sudah sesuai dengan performa race terkini?
+- Rekomendasi: apakah CP/FTP perlu diupdate di Intervals.icu jika ada gap signifikan.
