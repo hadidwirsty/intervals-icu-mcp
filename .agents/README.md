@@ -164,6 +164,37 @@ Atau untuk detail satu workout:
 
 ---
 
+### 7. `/backcast-plan` — Backward Planning Macrocycle
+**Tujuan**: Menyusun jadwal makrosiklus latihan secara terbalik dari tanggal Race Day (HM/FM).
+
+```text
+/backcast-plan 2026-10-18 HM
+```
+
+**Yang dihasilkan:**
+- Tanggal wajib mulai (Week 1 Start Date).
+- Pembagian 4 Blok Latihan (General Base, Specific Build, Peak Volume, Tapering).
+- Alokasi volume dan jenis Long Run per blok.
+
+---
+
+### 8. `/mesocycle-block` — 4-Week Build:Deload Mesocycle Planner
+**Tujuan**: Merencanakan alokasi 4 minggu berturut-turut dengan rasio 3:1 (Build-Deload).
+
+```text
+/mesocycle-block load
+```
+atau berbasis jarak:
+```text
+/mesocycle-block distance
+```
+
+**Yang dihasilkan:**
+- Matriks alokasi Week 1 (+5%), Week 2 (+5%), Week 3 (+5%), dan Week 4 Deload (-25%).
+- Breakdown alokasi Long Run (30-35%), Quality (15-20%), dan Easy (45-55%).
+
+---
+
 ## Cara Menggunakannya
 
 ### 1. Konfigurasi Skills

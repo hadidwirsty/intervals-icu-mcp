@@ -61,7 +61,7 @@ intervals-icu-mcp/
 - `src/tools/wellness.ts` — Tool `get_wellness_data` & `get_fitness_chart`.
 - `src/utils/date.ts` — Helper pure function `getDefaultDateRange()`.
 - `src/utils/dsl.ts` — Utility validasi & sanitasi Teks DSL Workout Builder (`validateWorkoutDsl`).
-- `src/utils/load.ts` — Kalkulator fisiologis ACWR, TSB Zones, Ramp Rate & Weekly Budget (`analyzeTrainingLoad`, `calculateWeeklyBudget`).
+- `src/utils/load.ts` — Kalkulator fisiologis ACWR, TSB Zones, Ramp Rate, Weekly Budget & Distance Budget (`analyzeTrainingLoad`, `calculateWeeklyBudget`, `calculateDistanceBudget`).
 - `src/utils/retry.ts` — Kalkulasi retry delay & jitter.
 - `src/utils/cache.ts` — Class InMemoryCache (TTL-based) zero-dependency.
 - `src/utils/vdot.ts` — Kalkulator fisiologis lari Jack Daniels (`calculateVdot`, `calculatePaceZones`).
@@ -70,9 +70,8 @@ intervals-icu-mcp/
 
 ## Known Decisions & Constraints
 - **Rate-limit Handling & Caching:** HTTP client kini menangani error 429 otomatis dengan retry exponential backoff (max 3x retry) dan header `Retry-After`. InMemoryCache (TTL-based) diterapkan pada gear (30m) dan power curves (60m).
-- Beberapa tool (misalnya `get_athlete_power_curves`) me-return respon API yang raw sehingga perlu disesuaikan atau dimengerti oleh pengguna.
 - Eksekusi murni berbasis read/write data dari Intervals tanpa adanya _database_ lokal (stateless).
-- Test framework **Vitest** telah dipasang dan dikonfigurasi (`pnpm test`). Total 48 unit tests.
+- Test framework **Vitest** telah dipasang dan dikonfigurasi (`pnpm test`). Total 52 unit tests.
 
 ## Planned Features (Implementation Plans Tersedia)
 | # | Feature | Plan File | Status |
@@ -84,8 +83,8 @@ intervals-icu-mcp/
 | 5 | Pace Zone & VDOT Calculator (`calculate_vdot`, `calculate_pace_zones`) | `docs/plans/2026-08-08-pace-zone-vdot-5.md` | **Completed** |
 | 6 | Training Load, ACWR & Weekly Budget Calculator (`analyze_training_load`, `calculate_weekly_budget`) | `docs/plans/2026-08-08-training-load-budget-6.md` | **Completed** |
 | 7 | Structured Running Workout Builder to Intervals.icu Calendar (`create_running_workout`) | `docs/plans/2026-08-08-structured-workout-builder-7.md` | **Completed** |
-| 8 | Public Open-Source Repository Cleanup & Readme (`README.md`, `.example` files) | `docs/plans/2026-08-08-public-repo-cleanup-readme-8.md` | **Completed** |
-| 8 | Agent Skills & Workflows Integration for Structured Workout Builder (`/create-workout`, `create_running_workout`) | `docs/plans/2026-08-08-workout-builder-skills-workflows-8.md` | **Ready for Execution** |
+| 8 | Agent Skills & Workflows Integration for Structured Workout Builder (`/create-workout`, `create_running_workout`) | `docs/plans/2026-08-08-workout-builder-skills-workflows-8.md` | **Completed** |
+| 9 | Training Plan Intelligence & Distance Budgeting (`/backcast-plan`, `/mesocycle-block`, dual-mode budget) | `docs/plans/2026-08-10-training-plan-intelligence-9.md` | **Completed** |
 
 ## Planned Directory Additions
 ```text

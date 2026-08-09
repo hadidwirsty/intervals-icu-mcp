@@ -177,7 +177,23 @@ Cooldown
 
 ---
 
-## 6. Protokol Kedaruratan Fatigue Flags
+## 6. Workflows & Perencanaan Makrosiklus / Mesosiklus
+
+1. **`/backcast-plan [YYYY-MM-DD] [HM|FM]`** (Backward Planning Macrocycle):
+   - Menghitung mundur dari Race Day (13 Minggu untuk HM, 18 Minggu untuk FM).
+   - Membagi ke dalam 4 Blok: General Base (W1-4), Specific Build (W5-8), Peak Volume (W9-11), Tapering (W12-13).
+
+2. **`/mesocycle-block [load|distance]`** (4-Week 3:1 Build-Deload Planner):
+   - Merencanakan 4 minggu mesosiklus: Week 1 (+5%), Week 2 (+5%), Week 3 (+5%), Week 4 Deload (-25%).
+   - Membagi ke dalam 3 alokasi: Long Run (30-35%), Quality (15-20%), Easy (45-55%).
+
+3. **`/weekly-budget [load|distance]`** (Dual-Mode Weekly Budgeting):
+   - `load`: Berbasis TSS/Time.
+   - `distance`: Berbasis Kilometer (km) dari 42d avg daily mileage.
+
+---
+
+## 7. Protokol Kedaruratan Fatigue Flags
 
 Turunkan intensitas ke fase deload/maintenance jika terjadi minimal 2 kondisi ini:
 1. RHR pagi naik >5 bpm dari baseline (RHR >52 bpm).
@@ -187,7 +203,7 @@ Turunkan intensitas ke fase deload/maintenance jika terjadi minimal 2 kondisi in
 
 ---
 
-## 7. Workflow Pengambilan Data dari MCP Intervals.icu
+## 8. Workflow Pengambilan Data dari MCP Intervals.icu
 
 1. **`get_activities`**: Filter `startDate` dan `endDate` sesuai tanggal sesi.
 2. **`get_activity_details`**: Ekstrak `icu_ftp`, `icu_w_prime`, `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight` (Berat Badan kg).
@@ -197,7 +213,7 @@ Turunkan intensitas ke fase deload/maintenance jika terjadi minimal 2 kondisi in
 
 ---
 
-## 8. Formula & Kalkulasi Fisiologis
+## 9. Formula & Kalkulasi Fisiologis
 
 - **Efficiency Factor (EF)**:
   $$\text{EF} = \frac{\text{Average Watts (atau Normalized Watts)}}{\text{Average Heart Rate}}$$
@@ -211,7 +227,7 @@ Turunkan intensitas ke fase deload/maintenance jika terjadi minimal 2 kondisi in
 
 ---
 
-## 9. Format Respons Wajib Coaching Report
+## 10. Format Respons Wajib Coaching Report
 
 Format laporan evaluasi **WAJIB** mengikuti struktur 4 bagian berikut:
 

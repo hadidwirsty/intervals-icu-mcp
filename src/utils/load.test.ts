@@ -1,6 +1,6 @@
 // src/utils/load.test.ts
 import { describe, expect, it } from "vitest";
-import { analyzeTrainingLoad, calculateWeeklyBudget } from "./load.js";
+import { analyzeTrainingLoad, calculateDistanceBudget, calculateWeeklyBudget } from "./load.js";
 
 describe("analyzeTrainingLoad", () => {
   it("calculates ACWR correctly and returns Sweet Spot for CTL 50, ATL 50", () => {
@@ -42,5 +42,20 @@ describe("calculateWeeklyBudget", () => {
 
   it("throws RangeError for negative daily load", () => {
     expect(() => calculateWeeklyBudget({ avgDailyLoad: -10 })).toThrow(RangeError);
+  });
+});
+
+describe("calculateDistanceBudget", () => {
+  it("calculates weekly distance budget correctly for 6km avg daily mileage with 5% ramp", () => {
+    const budget = calculateDistanceBudget({ avgDailyKm: 6, targetRampPct: 5 });
+    expect(budget.totalWeeklyBudgetKm).toBe(44.1);
+    expect(budget.longRunMaxKm).toBe(15.4);
+    expect(budget.qualityIntervalMaxKm).toBe(8.8);
+    expect(budget.easyRunMinKm).toBe(19.8);
+    expect(budget.unit).toBe("km");
+  });
+
+  it("throws RangeError for negative or zero daily distance", () => {
+    expect(() => calculateDistanceBudget({ avgDailyKm: 0 })).toThrow(RangeError);
   });
 });

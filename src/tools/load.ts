@@ -5,7 +5,7 @@
 import { z } from "zod";
 
 import { errorResult } from "../types.js";
-import { analyzeTrainingLoad, calculateWeeklyBudget } from "../utils/load.js";
+import { analyzeTrainingLoad, calculateDistanceBudget, calculateWeeklyBudget } from "../utils/load.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
@@ -48,7 +48,12 @@ export function registerLoadTools(server: McpServer): void {
         avgDailyLoad: z
           .number()
           .positive()
-          .describe("Rata-rata load atau jarak harian 42 hari terakhir (CTL)."),
+          .describe("Rata-rata load (TSS) atau jarak (km) harian 42 hari terakhir (CTL)."),
+        mode: z
+          .enum(["load", "distance"])
+          .optional()
+          .default("load")
+          .describe("Mode budget: 'load' (default, TSS) atau 'distance' (km)."),
         targetRampPct: z
           .number()
           .min(-50)
@@ -57,8 +62,12 @@ export function registerLoadTools(server: McpServer): void {
           .describe("Persentase target kenaikan beban mingguan (default: 5%). Contoh: 5 untuk +5%."),
       },
     },
-    async ({ avgDailyLoad, targetRampPct }) => {
+    async ({ avgDailyLoad, mode, targetRampPct }) => {
       try {
+        if (mode === "distance") {
+          const result = calculateDistanceBudget({ avgDailyKm: avgDailyLoad, targetRampPct });
+          return jsonResult(result);
+        }
         const result = calculateWeeklyBudget({ avgDailyLoad, targetRampPct });
         return jsonResult(result);
       } catch (err) {

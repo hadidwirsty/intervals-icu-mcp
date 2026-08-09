@@ -111,6 +111,67 @@ export interface WeeklyBudgetResult {
   };
 }
 
+export interface DistanceBudgetInput {
+  avgDailyKm: number;     // 42d avg daily distance (km)
+  targetRampPct?: number; // Target persentase kenaikan (default: 5%)
+}
+
+export interface DistanceBudgetResult {
+  baseWeeklyKm: number;
+  totalWeeklyBudgetKm: number;
+  rampPct: number;
+  longRunMinKm: number;       // ~30%
+  longRunMaxKm: number;       // ~35%
+  qualityIntervalMinKm: number;// ~15%
+  qualityIntervalMaxKm: number;// ~20%
+  easyRunMinKm: number;       // ~45%
+  easyRunMaxKm: number;       // ~55%
+  unit: "km";
+  guidelines: {
+    longRun: string;
+    qualityInterval: string;
+    easyRun: string;
+  };
+}
+
+export function calculateDistanceBudget(input: DistanceBudgetInput): DistanceBudgetResult {
+  const { avgDailyKm, targetRampPct = 5 } = input;
+  if (avgDailyKm <= 0) {
+    throw new RangeError("avgDailyKm harus bilangan positif > 0.");
+  }
+  if (targetRampPct < -50 || targetRampPct > 30) {
+    throw new RangeError("targetRampPct di luar jangkauan wajar (-50% s/d +30%).");
+  }
+
+  const baseWeeklyKm = avgDailyKm * 7;
+  const totalWeeklyBudgetKm = Math.round(baseWeeklyKm * (1 + targetRampPct / 100) * 10) / 10;
+
+  const longRunMinKm = Math.round(totalWeeklyBudgetKm * 0.30 * 10) / 10;
+  const longRunMaxKm = Math.round(totalWeeklyBudgetKm * 0.35 * 10) / 10;
+  const qualityIntervalMinKm = Math.round(totalWeeklyBudgetKm * 0.15 * 10) / 10;
+  const qualityIntervalMaxKm = Math.round(totalWeeklyBudgetKm * 0.20 * 10) / 10;
+  const easyRunMinKm = Math.round(totalWeeklyBudgetKm * 0.45 * 10) / 10;
+  const easyRunMaxKm = Math.round(totalWeeklyBudgetKm * 0.55 * 10) / 10;
+
+  return {
+    baseWeeklyKm: Math.round(baseWeeklyKm * 10) / 10,
+    totalWeeklyBudgetKm,
+    rampPct: targetRampPct,
+    longRunMinKm,
+    longRunMaxKm,
+    qualityIntervalMinKm,
+    qualityIntervalMaxKm,
+    easyRunMinKm,
+    easyRunMaxKm,
+    unit: "km",
+    guidelines: {
+      longRun: `Maksimal 30–35% dari total budget minggu ini (${longRunMinKm}–${longRunMaxKm} km).`,
+      qualityInterval: `Maksimal 15–20% dari total budget minggu ini (${qualityIntervalMinKm}–${qualityIntervalMaxKm} km).`,
+      easyRun: `Alokasikan 45–55% dari total budget untuk lari easy/recovery (${easyRunMinKm}–${easyRunMaxKm} km).`,
+    },
+  };
+}
+
 export function calculateWeeklyBudget(input: WeeklyBudgetInput): WeeklyBudgetResult {
   const { avgDailyLoad, targetRampPct = 5 } = input;
   if (avgDailyLoad <= 0) {
