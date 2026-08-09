@@ -5,7 +5,7 @@ description: Skill analisis coaching lari profesional berbasis sains (evidence-b
 
 # Running Coach Analysis Skill — Personal Profile (Muhammad Hadid Wiransetyo)
 
-Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari atlet **Muhammad Hadid Wiransetyo** dengan mengombinasikan data langsung dari **Intervals.icu MCP** dan profil fisiologis atlet yang sudah dikonfigurasi.
+Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari atlet **Muhammad Hadid Wiransetyo** dengan mengombinasikan data langsung dari **Intervals.icu MCP** dan profil fisiologis atlet yang sudah dikonfigurasi berdasarkan **Coach Faris Salman Blueprint: P^3 | NSA 'Lv 3' | LR Sat | 6 runs/wk | HM 13 Week**.
 
 ---
 
@@ -17,13 +17,13 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari atlet 
   - Gunakan bahasa yang taktis dan presisi numerik (sesuaikan dengan bahasa yang dipakai atlet).
   - Kaitkan analisis dengan metafora lari (*ego management*, *aerobic engine*, *supercompensation*, *glycogen economy*).
   - Verifikasi perhitungan matematika persentase daya (Watt) secara internal terhadap nilai CP aktif dari Intervals.icu.
-  - Berikan target terukur: target power (Watt), target HR, target pace, dan durasi spesifik (waktu dalam menit, bukan jarak).
+  - Berikan target terukur: target power (% CP & Watt), target HR, target pace, dan durasi spesifik (waktu dalam menit, bukan jarak).
 
 ---
 
 ## 2. Profil Atlet Lengkap — Muhammad Hadid Wiransetyo
 
-- **Identitas**: Muhammad Hadid Wiransetyo (Usia 24 tahun) | **Berat Badan**: Dibaca dinamis via MCP (`icu_weight` dari detail aktivitas, atau `weight` dari `get_wellness_data`). Fallback: 79.7 kg
+- **Identitas**: Muhammad Hadid Wiransetyo (Usia 24 tahun) | **Berat Badan**: Dibaca dinamis via MCP (`icu_weight` dari detail aktivitas, atau `weight` dari `get_wellness_data`). Fallback: 80 kg
 - **Perangkat**: Garmin Forerunner 165 (Garmin Running Power) | **Platform Analisis**: Intervals.icu + Aturpace PPE
 - **Status Kompetisi**: Agenda race 2026 & 2027 DIBATALKAN TOTAL (Prioritas persiapan pernikahan). Rencana comeback kompetitif di tahun 2028.
 - **Filosofi Latihan**: *Continuous Aerobic Development* — Membangun kapasitas fondasi kardiovaskular secara berkelanjutan melalui akumulasi waktu lari yang aman tanpa tekanan tapering.
@@ -40,17 +40,20 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari atlet 
 - **W'**: `icu_w_prime` (Baseline: 8.89 kJ / 8900 J) | **Pmax**: `p_max` (Baseline: 568 Watt)
 - **LTHR**: `lthr` (Baseline: 188 bpm) | **Max HR**: `athlete_max_hr` (Baseline: 207 bpm)
 - **RHR (Resting HR)**: `icu_resting_hr` / `get_wellness_data.restingHR` (Baseline: 47–50 bpm)
-- **Berat Badan**: `icu_weight` / `get_wellness_data.weight` (Baseline: 79.7 kg)
+- **Berat Badan**: `icu_weight` / `get_wellness_data.weight` (Baseline: 80 kg)
 - **Threshold Pace**: `threshold_pace` (Baseline: 6:00/km)
 
 ### Power Zones (Basis CP 305W)
-- **Z1 Active Recovery**: 0–244 W (Z1A: 152–198 W | Z1B: 198–229 W | Z1C: 229–244 W)
-- **Z2 Aerobic Efficiency**: 245–265 W
-- **Z3 Extensive Threshold (Sweet Spot)**: 266–302 W (Sweet Spot: 265–284 W)
-- **Z4 Intensive Threshold**: 303–308 W
-- **Z5 VO2Max**: 309–336 W
-- **Z6 Anaerobic Capacity**: 339–406 W
-- **Z7 Neuromuscular**: 407 W+
+- **Z1 Active Recovery**: 0–244 W (65–75% CP: 198–228 W)
+- **Z2 Aerobic Efficiency / Base**: 245–265 W (75–82% CP: 229–250 W)
+- **Z3 Extensive Threshold (Subthreshold / Sweet Spot)**: 266–302 W
+  - SubIII (Capacity): 88–91% CP (268–277 W)
+  - SubII (HM Specific): 91–94% CP (277–286 W)
+  - SubI (Density): 95–98% CP (289–298 W)
+- **Z4 Intensive Threshold**: 303–308 W (98–101% CP: 298–308 W)
+- **Z5 VO2Max / Above-CP**: 309–336 W (101–110% CP: 308–336 W)
+- **Z6 Anaerobic Capacity**: 339–406 W (110–135% CP: 336–411 W)
+- **Z7 Neuromuscular / Sprints**: 407 W+ (190–200% CP: 580–610 W)
 
 ### Heart Rate Zones (Basis LTHR 188 BPM & Max HR 207 BPM)
 - **Z1**: < 159 bpm
@@ -63,51 +66,91 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari atlet 
 
 ---
 
-## 4. Struktur Latihan Mingguan & Blueprint Workout (Coach Faris Salman)
+## 4. Program Latihan: P^3 | NSA 'Lv 3' | LR Sat | 6 runs/wk | HM 13 Week
 
-### Struktur Mingguan (Time-Based Loading)
-- **Manajemen Beban**: Time-Based Loading (Durasi Menit). Sistem kilometer diabaikan.
-- **Frekuensi**: 6 hari lari seminggu (6 runs/wk) model pemulihan kontinu (HM Plan P^3 Level 3 - Coach Faris Salman).
-- **Pembagian Hari**:
+### Struktur & Progresi Mingguan (Time-Based Loading)
+- **Starting Point (Week 1)**: Easy runs 35m, Long run 1h30m (90m), Total mingguan 4h55m.
+- **Peak Building (Week 10-11)**: Easy runs 45m, Long run 2h40m (160m), Total mingguan 6h50m.
+- **Pembagian Hari (6 runs/wk)**:
   - **Senin**: TOTAL REST MUTLAK
-  - **Selasa**: Workout 1 (Selang-seling: Subthreshold III / Mixed Intervals. Minggu ke-4: 20' Test / 3|12 CP Test)
-  - **Rabu**: Mid-Week Volume (Easy Aerobic + Strides)
+  - **Selasa**: Workout 1 (Selang-seling: Subthreshold III / Mixed Intervals / CP Testing)
+  - **Rabu**: Mid-Week Volume (EZ Aerobic + Strides)
   - **Kamis**: Workout 2 (Selang-seling: Subthreshold I / Subthreshold II)
-  - **Jumat**: Recovery Run Tambahan
-  - **Sabtu**: Long Run Slot (HMP Tempo/Fartlek)
+  - **Jumat**: Recovery Run
+  - **Sabtu**: Long Run Slot (HMP Tempo / MP Tempo / Fartlek / Pure Aerobic)
   - **Minggu**: Recovery Run Penutup Siklus
 
-### Blueprint Workout Spesifik
+---
 
-1. **EASY & RECOVERY RUNS**:
-   - **EZ Aerobic / Recovery Murni** (Jumat/Minggu): Durasi ketat 35–40m konstan di 65–75% CP (198–228W). HR < 159 bpm.
-   - **EZ Aerobic + Strides** (Rabu): Total durasi 35–60m. Template: `[Waktu Sisa @ 198–228W]` + `[4x (15s @ 305–610W, Rec 1m45s @ 198–259W)]` + `[5m CD @ 198–228W]`. Durasi lari pembuka dikurangi proporsional agar total durasi sesi pas dengan target mingguan.
+### Blueprint Sesi Latihan Spesifik (Presisi Persentase CP & Teks DSL)
 
-> *Semua sesi Workout 2 s.d. 5 diawali Warmup 12m (213–244W), Primer 2x (1m ledakan, 2m Rec), dan CD 6m (213–244W).*
+#### 1. EASY & RECOVERY RUNS
+- **Recovery Run** (Jumat/Minggu): `30–40m @ 65–75% CP` (198–228W, HR < 159 bpm).
+- **EZ Aerobic** (Rabu/Kamis): `40–70m @ 65–75% CP atau 70–80% CP` (213–244W).
+- **EZ Aerobic + Strides** (Rabu): 
+  - `EZ Aerobic [30–57m] @ 65–75% CP`
+  - `Strides 4x (15s @ 100–200% CP, Rec 1m45s @ 65–85% CP)`
+  - `CD 5m @ 65–75% CP`
 
-2. **SUBTHRESHOLD I** (Density - Interval 3m @ 289–298W, Rec 1m @ 183–228W):
-   - Durasi 50m: Main Set 6x (3m)
-   - Durasi 54m: Main Set 7x (3m)
-   - Durasi 58m: Main Set 8x (3m)
-   - Durasi 62m: Main Set 8x (3m 30s)
+---
 
-3. **SUBTHRESHOLD II** (HM Specific - Interval 6–7m @ 277–286W, Rec 1m @ 183–228W):
-   - Durasi 47m: Main Set 3x (6m)
-   - Durasi 58m: Main Set 4x (7m)
+#### 2. SUBTHRESHOLD INTERVALS (Norwegian Singles Adaptation)
 
-4. **SUBTHRESHOLD III** (Capacity - Interval 9m @ 268–277W, Rec 1m @ 183–228W):
-   - Durasi 46m: Main Set 2x (9m)
-   - Durasi 56m: Main Set 3x (9m)
+> *Semua sesi Subthreshold diawali Warmup 12-14m (65-75% atau 70-80% CP), Primer 2x (1m ledakan, 2m Rec @ 70-80%), dan Cooldown 6m (70-80% CP).*
 
-5. **MIXED INTERVALS** (Kombinasi Spektrum):
-   - Main Set: 2x (9m @ 268–277W, Rec 1m) + 2x (2m @ 298–308W, Rec 1m) + 2x (1m @ 308–317W, Rec 1m).
+- **SUBTHRESHOLD I (Density — Repetisi 3m / 3m30s @ 95–98% CP)**:
+  - Primer: 2x (1m @ 98–103% CP, 2m Rec @ 70–80% CP) + 2m @ 70–80% CP.
+  - Main Set: `6x s.d. 8x (3m s.d. 3m30s @ 95–98% CP, Rec 1m @ 60–75% CP)`
+  - Target Watt: 289–298W.
 
-6. **PENGUJIAN KAPASITAS** (Testing - Jadwal Spesifik Minggu Ke-4, Ke-8, & Ke-13 pada Hari Selasa):
-   - Week 4: 20' Test (All-out konstan 20 menit pengeruk glikogen pengukur baseline 95% CP).
-   - Week 8 & 13: 3/12 CP Test (WU 12m -> Primer -> 30s burst -> 3m ALL OUT -> Pemulihan 33m -> 12m ALL OUT -> CD).
+- **SUBTHRESHOLD II (HM Specific — Repetisi 6m / 7m @ 91–94% CP)**:
+  - Primer: 2x (1m @ 93–98% CP, 2m Rec @ 70–80% CP) + 2m @ 70–80% CP.
+  - Main Set: `3x (6m) s.d. 4x (7m @ 91–94% CP, Rec 1m @ 60–75% CP)`
+  - Target Watt: 277–286W.
 
-7. **LONG RUNS** (Sabtu):
-   - Long Run HMP Tempo/Fartlek: Integrasi lari Z2 konstan diselingi ledakan Fartlek 1m (Z5) atau HMP Tempo (Z3 Upper 277–286W) di pertengahan/akhir durasi.
+- **SUBTHRESHOLD III (Capacity — Repetisi 9m @ 88–91% CP)**:
+  - Primer: 2x (1m @ 93–98% CP, 2m Rec @ 70–80% CP) + 2m @ 70–80% CP.
+  - Main Set: `2x s.d. 3x (9m @ 88–91% CP, Rec 1m @ 60–75% CP)`
+  - Target Watt: 268–277W.
+
+---
+
+#### 3. MIXED INTERVALS (Kombinasi Spektrum Bi-Weekly)
+- WU 12m (70–80% CP) + Primer 2x (1m @ 93–98% CP, 2m Rec).
+- Main Set Spektrum:
+  - `3x (9m @ 88–91% CP, Rec 1m @ 60–75% CP)`
+  - `3x (2m @ 98–101% CP, Rec 1m @ 60–75% CP)`
+  - `4x (1m @ 101–104% CP, Rec 1m @ 60–75% CP)`
+- CD 6m (70–80% CP).
+
+---
+
+#### 4. PENGUJIAN KAPASITAS (CP Testing Protocols)
+- **20' Test Protocol** (Pengukur Baseline 95% CP):
+  - WU 12m (70–80% CP) + Primer 2x (1m @ 97–103% CP, 2m Rec) + 30s @ 103–107% CP (Rec 1m30s) + 2m Rest.
+  - **Main Effort**: `20m ALL OUT @ 103–110% CP` (314–335W konstan).
+  - CD 5m.
+
+- **3/12 CP Test Protocol** (Multi-Parameter Power-Duration Curve Optimization):
+  - WU 12m (70–80% CP) + Primer 2x (1m @ 97–103% CP, 2m Rec) + 30s @ 103–107% CP (Rec 1m30s) + 2m Rest.
+  - **First All-Out**: `3m ALL OUT @ 121–135% CP` (369–411W).
+  - Extended Recovery: 10m Easy -> 3m Z1 -> 2m Easy -> 3m Z1 -> 2m Easy -> 3m Z1 -> 2m Easy -> 3m Z1 -> 2m Rest.
+  - **Second All-Out**: `12m ALL OUT @ 103–112% CP` (314–341W).
+  - CD 5m.
+
+- **Testing 10" & 3' Protocol**:
+  - WU 12m (65–80% CP) + 2x (15s @ 100–200% CP, 1m45s Rec) + 2m Z1 + 3m Rest.
+  - **Sprint Effort**: `10s ALL OUT @ 190–200% CP` (580–610W) -> Rec 8m.
+  - **3' Effort**: `3m ALL OUT @ 110–120% CP` (335–366W) -> Rec 5m -> CD 12m.
+
+---
+
+#### 5. LONG RUN SLOTS (Sabtu — 90m s.d. 160m)
+- **Long Run (Pure Aerobic)**: `10m WU (65–80%)` + `65–145m Z2 Base (75–82% CP)`.
+- **Long Run + Fartlek**: `10m WU (65–80%)` + `80–95m Z2 Base (75–82% CP)` + `5x (1m @ 101–104% CP, Rec 2m @ 65–85% CP)` + `CD 5m`.
+- **Long Run (MP Tempo)**: `12m WU (70–80%)` + `40m MP (78–82% CP)` + `18m Upper MP (83–88% CP)` + `CD 6m`.
+- **Long Run (HMP Tempo)**: `10m WU (65–80%)` + `35m Z2 (81–87% CP)` + `20m HMP Tempo (87–94% CP)` + `CD 10m`.
+- **Long Run (HMP Tempo Separation)**: `10m WU (70–80%)` + `15m (80–83%)` + `8m HMP (94–96%)` + `35m (80–83%)` + `8m HMP (94–96%)` + `CD 10m`.
 
 ---
 
@@ -129,7 +172,7 @@ Cooldown
 
 - **Setiap baris langkah wajib diawali `- `** (hyphen spasi).
 - Gunakan durasi `Xm` (menit) atau `Xs` (detik).
-- Tentukan target persen power (`% power`) atau pace (`% pace`).
+- Tentukan target persen power (`% power`) dan pace (`% pace`).
 - Selalu tawarkan opsi penjadwalan otomatis via `/create-workout` atau panggil MCP tool `create_running_workout` jika atlet meminta.
 
 ---
@@ -146,29 +189,11 @@ Turunkan intensitas ke fase deload/maintenance jika terjadi minimal 2 kondisi in
 
 ## 7. Workflow Pengambilan Data dari MCP Intervals.icu
 
-Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
-
-1. **`get_activities`**:
-   - Filter `startDate` dan `endDate` sesuai tanggal sesi yang disubmit atlet.
-   - Dapatkan `id` aktivitas yang sesuai (`type == "Run"`).
-
-2. **`get_activity_details`**:
-   - Parameter: `activity_id`.
-   - **Ekstrak Profil Fisiologis & Berat Badan Aktif**: `icu_ftp`, `icu_w_prime`, `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight` (Berat Badan kg).
-   - **Ambil Metrik Eksekusi**: `icu_average_watts`, `icu_weighted_avg_watts`, `average_heartrate`, `max_heartrate`, `moving_time`, `elapsed_time`, `icu_training_load`, `icu_intensity`, `average_cadence`, `decoupling`.
-
-3. **`get_wellness_data`** (Fatigue & Wellness Check):
-   - Parameter: `startDate` = `endDate` = tanggal sesi.
-   - Ambil: `weight` (Berat Badan harian terkini), `restingHR`, `hrv`, `sleepScore`, `ctl` (Fitness), `atl` (Fatigue).
-   - Prioritaskan nilai `weight` dari sini jika tersedia; gunakan `icu_weight` dari detail aktivitas sebagai fallback.
-
-4. **`get_activity_intervals`**:
-   - Parameter: `activity_id`.
-   - Analisis performa per interval: watts, HR, pace, durasi per rep.
-
-5. **`get_activity_streams`**:
-   - Parameter: `activity_id`, `keys: ["watts", "heartrate", "cadence", "velocity_smooth"]`.
-   - Gunakan data time-series ini untuk menghitung **Aerobic Decoupling** dan **Cardiac Drift**.
+1. **`get_activities`**: Filter `startDate` dan `endDate` sesuai tanggal sesi.
+2. **`get_activity_details`**: Ekstrak `icu_ftp`, `icu_w_prime`, `p_max`, `lthr`, `athlete_max_hr`, `icu_resting_hr`, `icu_weight` (Berat Badan kg).
+3. **`get_wellness_data`**: Ambil `weight` (Berat Badan harian terkini), `restingHR`, `hrv`, `sleepScore`, `ctl`, `atl`.
+4. **`get_activity_intervals`**: Analisis performa per interval (watts, HR, pace, durasi per rep).
+5. **`get_activity_streams`**: Time-series `watts`, `heartrate`, `cadence`, `velocity_smooth` untuk kalkulasi **Aerobic Decoupling** dan **Cardiac Drift**.
 
 ---
 
