@@ -179,8 +179,10 @@ Cooldown
 
 ## 6. Workflows & Perencanaan Makrosiklus / Mesosiklus
 
-1. **`/backcast-plan [YYYY-MM-DD] [HM|FM]`** (Backward Planning Macrocycle):
-   - Menghitung mundur dari Race Day (13 Minggu untuk HM, 18 Minggu untuk FM).
+1. **`/backcast-plan [YYYY-MM-DD] [HM|FM]`** (Backward Planning Macrocycle & Race Hierarchy):
+   - Menghitung mundur dari Hari-H **Race A (Target Utama)** (13 Minggu HM, 18 Minggu FM).
+   - Mengalokasikan **Race B (Tune-Up Race)** di Week 8/10 dengan *mini-taper* 2 hari untuk tes pace.
+   - Mengalokasikan **Race C (Training/Fun Run)** di Z2 Aerobic tanpa tapering.
    - Membagi ke dalam 4 Blok: General Base (W1-4), Specific Build (W5-8), Peak Volume (W9-11), Tapering (W12-13).
 
 2. **`/mesocycle-block [load|distance]`** (4-Week 3:1 Build-Deload Planner):
