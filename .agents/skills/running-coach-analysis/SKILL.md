@@ -145,9 +145,13 @@ Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
    - Parameter: `activity_id`.
    - Analisis performa per interval: watts, HR, pace, durasi per rep.
 
-5. **`get_activity_streams`**:
+5. **`get_activity_streams` & `analyze_cardiac_drift`**:
    - Parameter: `activity_id`, `keys: ["watts", "heartrate", "cadence", "velocity_smooth"]`.
-   - Gunakan data time-series ini untuk menghitung **Aerobic Decoupling** dan **Cardiac Drift**.
+   - Gunakan data time-series ini via MCP tool `analyze_cardiac_drift` untuk menghitung **Aerobic Decoupling** dan **Cardiac Drift** paruh 1 vs paruh 2.
+
+6. **`calculate_readiness_score` & `predict_race_time`**:
+   - Evaluasi kesiapan fisik harian via `calculate_readiness_score` (TSB, ACWR, Sleep, RHR Spike).
+   - Jalankan prediksi waktu race & jadwal tapering via `predict_race_time` & `calculate_taper_plan`.
 
 ---
 
