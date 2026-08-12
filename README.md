@@ -24,9 +24,13 @@ The server exposes 15+ rich MCP tools categorized by functionality:
 - **`get_athlete_profile`**: Retrieve athlete biometrics (FTP, LTHR, Max HR, weight, resting HR).
 - **`get_training_zones`**: Access power, heart rate, and pace training zone boundaries.
 
-### 🧮 3. Physiology & Running Calculators (Offline)
+### 🧮 3. Physiology & Endurance Intelligence (Offline)
 - **`calculate_vdot`**: Compute Jack Daniels VDOT & VO₂max estimate from race/tempo result.
 - **`calculate_pace_zones`**: Compute 5 running training pace zones (Easy, Marathon, Threshold, Interval, Repetition) in `MM:SS/km`.
+- **`predict_race_time`**: Predict race finish time and pace (5K, 10K, HM, FM, or custom distance) from VDOT with CTL fitness and TSB freshness adjustments.
+- **`calculate_taper_plan`**: Generate volume reduction schedule (2-3 weeks) for peak TSB freshness on race day.
+- **`analyze_cardiac_drift`**: Compute Efficiency Factor (EF) and Aerobic Decoupling percentage from telemetry streams.
+- **`calculate_readiness_score`**: Compute unified recovery & readiness score (0-100%, Green/Yellow/Red) combining TSB, ACWR, Sleep, HRV, and RHR.
 
 ### ⚖️ 4. Training Load & ACWR Analytics (Offline)
 - **`analyze_training_load`**: Compute **ACWR** (*Acute:Chronic Workload Ratio* = `ATL/CTL`), classify **TSB Readiness Zones** (*Transition, Fresh, Grey Zone, Optimal, High Risk*), and evaluate **Ramp Rate Risk**.
@@ -127,7 +131,7 @@ In your MCP settings JSON:
 pnpm test
 ```
 
-Includes 48+ unit tests covering utilities, client auto-retry on HTTP 429, LRU TTL caching, Jack Daniels VDOT math, ACWR load analytics, and workout DSL validation.
+Includes 59+ unit tests covering utilities, client auto-retry on HTTP 429, LRU TTL caching, Jack Daniels VDOT math, race prediction, cardiac drift analysis, readiness scoring, ACWR load analytics, and workout DSL validation.
 
 ---
 

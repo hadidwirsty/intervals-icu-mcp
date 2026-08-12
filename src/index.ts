@@ -18,6 +18,7 @@ import { registerCalculatorTools } from "./tools/calculator.js";
 import { registerCustomItemTools } from "./tools/customItems.js";
 import { registerEventTools } from "./tools/events.js";
 import { registerGearTools } from "./tools/gear.js";
+import { registerIntelligenceTools } from "./tools/intelligence.js";
 import { registerLoadTools } from "./tools/load.js";
 import { registerPowerCurveTools } from "./tools/powerCurves.js";
 import { registerWellnessTools } from "./tools/wellness.js";
@@ -36,6 +37,7 @@ registerGearTools(server);
 registerLoadTools(server);
 registerPowerCurveTools(server);
 registerCustomItemTools(server);
+registerIntelligenceTools(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();

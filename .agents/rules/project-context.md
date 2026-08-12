@@ -85,6 +85,7 @@ intervals-icu-mcp/
 | 7 | Structured Running Workout Builder to Intervals.icu Calendar (`create_running_workout`) | `docs/plans/2026-08-08-structured-workout-builder-7.md` | **Completed** |
 | 8 | Agent Skills & Workflows Integration for Structured Workout Builder (`/create-workout`, `create_running_workout`) | `docs/plans/2026-08-08-workout-builder-skills-workflows-8.md` | **Completed** |
 | 9 | Training Plan Intelligence & Distance Budgeting (`/backcast-plan`, `/mesocycle-block`, dual-mode budget) | `docs/plans/2026-08-10-training-plan-intelligence-9.md` | **Completed** |
+| 10 | Endurance Intelligence Suite (`predict_race_time`, `calculate_taper_plan`, `analyze_cardiac_drift`, `calculate_readiness_score`) | `docs/plans/2026-08-12-endurance-intelligence-suite-10.md` | **Completed** |
 
 ## Planned Directory Additions
 ```text
