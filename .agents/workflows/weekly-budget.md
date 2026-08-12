@@ -1,5 +1,5 @@
 ---
-description: Kalkulator budget latihan mingguan atlet Muhammad Hadid Wiransetyo (Dual-Mode: Load TSS & Distance Km). Menghitung total budget mingguan, batas maksimum Long Run (30-35%), Quality Run (15-20%), dan Easy Run (45-55%) menggunakan MCP tool calculate_weekly_budget.
+description: Kalkulator budget latihan mingguan atlet (Dual-Mode: Load TSS & Distance Km). Menghitung total budget mingguan, batas maksimum Long Run (30-35%), Quality Run (15-20%), dan Easy Run (45-55%) menggunakan MCP tool calculate_weekly_budget.
 ---
 
 # Workflow: `/weekly-budget`
@@ -50,7 +50,7 @@ Workflow ini digunakan untuk menghitung **Budget & Proporsi Latihan Mingguan (We
    - Dapatkan `totalWeeklyBudget` (atau `totalWeeklyBudgetKm`), `longRunMin`–`longRunMax`, `qualityIntervalMin`–`qualityIntervalMax`, `easyRunMin`–`easyRunMax`, dan `guidelines`.
 
 3. **`get_athlete_profile`**:
-   - Ambil `ftp` (CP 305W baseline) dan `lthr` untuk referensi intensitas sesi.
+   - Ambil `ftp` dan `lthr` untuk referensi intensitas sesi.
 
 ---
 
@@ -58,8 +58,8 @@ Workflow ini digunakan untuk menghitung **Budget & Proporsi Latihan Mingguan (We
 
 Terapkan aturan proporsi dari skill `.agents/skills/training-load-analysis/SKILL.md`:
 - Long Run Cap: 30–35% dari Total Budget.
-- Quality Interval Cap: 15–20% dari Total Budget (Workout Selasa & Kamis Coach Faris Salman).
-- Easy & Recovery Run Allocation: 45–55% dari Total Budget (Rabu, Jumat, Minggu).
+- Quality Interval Cap: 15–20% dari Total Budget.
+- Easy & Recovery Run Allocation: 45–55% dari Total Budget.
 
 ---
 
@@ -75,13 +75,13 @@ Hasilkan laporan evaluasi budget dengan format berikut:
 
 | Komponen Beban | Persentase | Budget (Min – Max) | Panduan Alokasi Sesi |
 |---|---|---|---|
-| **Total Weekly Budget** | **100%** | **[Total Budget] [TSS/km]** | Total akumulasi beban 6 sesi lari |
-| **Long Run Slot (Sabtu)** | 30 – 35% | [Long Run Min] – [Long Run Max] [TSS/km] | Sesi Long Run HMP Tempo / Fartlek |
-| **Quality Intervals (Sel/Kam)** | 15 – 20% | [Quality Min] – [Quality Max] [TSS/km] | Total gabungan Workout 1 & Workout 2 |
-| **Easy & Recovery (Rab/Jum/Ming)** | 45 – 55% | [Easy Min] – [Easy Max] [TSS/km] | EZ Aerobic 35-40m + Strides |
+| **Total Weekly Budget** | **100%** | **[Total Budget] [TSS/km]** | Total akumulasi beban sesi lari |
+| **Long Run Slot** | 30 – 35% | [Long Run Min] – [Long Run Max] [TSS/km] | Sesi Long Run HMP / Tempo / Fartlek |
+| **Quality Intervals** | 15 – 20% | [Quality Min] – [Quality Max] [TSS/km] | Total gabungan sesi interval/workout |
+| **Easy & Recovery** | 45 – 55% | [Easy Min] – [Easy Max] [TSS/km] | Sesi EZ Aerobic + Strides / Recovery |
 
-**Panduan Eksekusi Coach Faris Salman**:
+**Panduan Eksekusi**:
 - **Long Run Cap**: Maksimal [Long Run Max] [TSS/km] agar tidak menguras energi aerobik mingguan.
-- **Quality Interval Cap**: Maksimal [Quality Max] [TSS/km] gabungan untuk Selasa & Kamis.
-- **Easy Run Allocation**: Alokasikan [Easy Min]–[Easy Max] [TSS/km] untuk pemulihan kardiovaskular optimal.
+- **Quality Interval Cap**: Maksimal [Quality Max] [TSS/km] gabungan untuk sesi workout.
+- **Easy Run Allocation**: Alokasikan [Easy Min]–[Easy Max] [TSS/km] untuk pemulihan optimal.
 ```

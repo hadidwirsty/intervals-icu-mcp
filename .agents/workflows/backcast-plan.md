@@ -101,7 +101,7 @@ Susun `N` minggu tersebut ke dalam 4 blok latihan utama:
 - **🥈 Race B Opportunity**: Slot ideal untuk **Tune-Up Race 10K** di Minggu ke-8 (Mini-taper 2 hari, evaluasi *race pace*).
 - **Checkpoint**: `3/12 CP Test` di akhir Week 8 untuk re-kalkulasi CP & W'.
 
-#### Blok 3: Peak Volume & Race Power Prep (Week 9 – 11) | [Start Date] — [End Date]
+#### Blok 3: Peak Volume & Race Prep (Week 9 – 11) | [Start Date] — [End Date]
 - **Fokus**: Peak Loading & Race Pace Specificity.
 - **Volume Mingguan**: Peak 6h50m (52–58 km/wk).
 - **Long Run Slot**: Sabtu 140m → 160m (HMP Tempo / HMP Separation).

@@ -1,10 +1,10 @@
 ---
-description: Jadwalkan planned workout berstruktur di kalender Intervals.icu atlet Muhammad Hadid Wiransetyo menggunakan Teks DSL Intervals.icu via MCP tool create_running_workout.
+description: Jadwalkan planned workout berstruktur di kalender Intervals.icu atlet menggunakan Teks DSL Intervals.icu via MCP tool create_running_workout.
 ---
 
 # Workflow: `/create-workout`
 
-Workflow ini digunakan untuk membuat dan menjadwalkan **Planned Workout Berstruktur** secara otomatis di kalender Intervals.icu atlet Muhammad Hadid Wiransetyo menggunakan Teks DSL Intervals.icu via MCP tool `create_running_workout`.
+Workflow ini digunakan untuk membuat dan menjadwalkan **Planned Workout Berstruktur** secara otomatis di kalender Intervals.icu atlet menggunakan Teks DSL Intervals.icu via MCP tool `create_running_workout`.
 
 ---
 
@@ -63,7 +63,7 @@ Ekstrak parameter berikut dari input user:
 ### Step 2: Fetch Profil Atlet (Verifikasi Context)
 
 1. **`get_athlete_profile`**:
-   - Dapatkan CP (FTP) 305W baseline dan LTHR 188 bpm untuk memastikan penargetan persentase power (% power) atau pace (% pace) sesuai profil aktif Hadid Wiransetyo.
+   - Dapatkan FTP/CP dan LTHR atlet untuk konfirmasi konteks kalkulasi.
 
 ---
 
@@ -88,13 +88,13 @@ System akan otomatis mengirim request POST ke Intervals.icu API (`/athlete/{id}/
 - **Judul Sesi**: [Name]
 - **Tanggal & Waktu**: [YYYY-MM-DD] pukul [HH:MM]
 - **Tipe Olahraga**: Running (Run)
-- **Status Kalender**: Terhubung & Sinkron dengan Garmin Connect
+- **Status Kalender**: Terhubung & Sinkron dengan Garmin Connect / Perangkat GPS
 
 **Struktur Teks DSL**:
 ```text
 [DSL Description]
 ```
 
-**Catatan Coach Faris Salman**:
-Sesi ini telah terkirim ke kalender Intervals.icu Anda. Saat jam tangan Garmin Anda melakukan sync, sesi latihan berstruktur ini akan otomatis muncul pada perangkat Anda.
+**Catatan**:
+Sesi ini telah terkirim ke kalender Intervals.icu Anda. Saat perangkat GPS/Garmin Anda melakukan sync, sesi latihan berstruktur ini akan otomatis muncul pada perangkat Anda.
 ```

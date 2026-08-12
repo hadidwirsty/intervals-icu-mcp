@@ -1,5 +1,5 @@
 ---
-description: Otomasi analisis status beban latihan atlet Muhammad Hadid Wiransetyo. Membaca CTL, ATL, TSB, Ramp Rate, eFTP, dan deteksi otomatis Deload Week via MCP.
+description: Otomasi analisis status beban latihan atlet. Membaca CTL, ATL, TSB, Ramp Rate, eFTP, dan deteksi otomatis Deload Week via MCP.
 ---
 
 # Workflow: `/fitness-status`
@@ -58,7 +58,7 @@ Atau dengan tanggal spesifik:
 Sistem secara otomatis mengevaluasi kriteria **Deload Week Protocol**:
 1. **TSB Status**: Jika `tsb < -25` (High Risk Fatigue Accumulation).
 2. **ACWR Status**: Jika `acwr > 1.35` (Warning / Danger Zone).
-3. **Wellness Flag**: Jika RHR Pagi naik >5 bpm dari baseline (>52 bpm) ATAU Sleep Score drop 2 malam berturut-turut.
+3. **Wellness Flag**: Jika RHR Pagi naik >5 bpm dari baseline ATAU Sleep Score drop 2 malam berturut-turut.
 4. **Siklus 3:1 Mesocycle**: Jika minggu berjalan adalah minggu ke-4 dari blok mesosiklus 4 mingguan.
 
 Jika minimal **2 Kriteria Terpenuhi** → AKTIFKAN **Deload Week Warning**:
