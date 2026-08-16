@@ -127,6 +127,7 @@ Cooldown
 
 Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
 
+### A. Core Telemetry per Sesi Lari (Mandatory)
 1. **`get_activities`**:
    - Filter `startDate` dan `endDate` sesuai tanggal sesi yang disubmit atlet.
    - Dapatkan `id` aktivitas yang sesuai (`type == "Run"`).
@@ -149,13 +150,14 @@ Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
    - Parameter: `activity_id`, `keys: ["watts", "heartrate", "cadence", "velocity_smooth"]`.
    - Gunakan data time-series ini via MCP tool `analyze_cardiac_drift` untuk menghitung **Aerobic Decoupling** dan **Cardiac Drift** paruh 1 vs paruh 2.
 
+### B. On-Demand Tools (Opsional Sesuai Permintaan Atlet)
 6. **`calculate_readiness_score` & `predict_race_time`**:
    - Evaluasi kesiapan fisik harian via `calculate_readiness_score` (TSB, ACWR, Sleep, RHR Spike).
    - Jalankan prediksi waktu race & jadwal tapering via `predict_race_time` & `calculate_taper_plan`.
 
 ---
 
-## 6. Formula & Kalkulasi Fisiologis
+## 7. Formula & Kalkulasi Fisiologis
 
 - **Efficiency Factor (EF)**:
   $$\text{EF} = \frac{\text{Average Watts (atau Normalized Watts)}}{\text{Average Heart Rate}}$$
@@ -169,7 +171,7 @@ Untuk setiap analisis, ikuti langkah pengambilan data via MCP berikut:
 
 ---
 
-## 7. Format Respons Wajib Coaching Report
+## 8. Format Respons Wajib Coaching Report
 
 Format laporan evaluasi **WAJIB** mengikuti struktur 4 bagian berikut:
 

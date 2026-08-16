@@ -12,8 +12,11 @@ Workflow ini digunakan untuk menganalisis efisiensi aerobik (*Efficiency Factor*
 
 1. Panggil MCP Tool `get_activities` untuk menemukan ID aktivitas lari/sepeda terkini.
 2. Panggil MCP Tool `get_activity_streams` dengan parameter `keys: ["heartrate", "watts", "velocity_smooth"]`.
-3. Panggil MCP Tool **`analyze_cardiac_drift`**:
-   - Pass `heartrateStream` dan `powerOrSpeedStream` (watts atau velocity_smooth).
+3. **Penentuan Stream Beban (Power vs Speed)**:
+   - **Mode Power (Default)**: Jika stream `watts` tersedia dan memiliki data (>0), gunakan array `watts` sebagai `powerOrSpeedStream` (satuan EF: `Watt/bpm`).
+   - **Mode Pace / Speed (Fallback)**: Jika atlet lari tanpa sensor daya / power meter (`watts` kosong atau bernilai nol), gunakan array `velocity_smooth` sebagai `powerOrSpeedStream` (satuan EF: `(m/s)/bpm`).
+4. Panggil MCP Tool **`analyze_cardiac_drift`**:
+   - Argument: `{ heartrateStream, powerOrSpeedStream }`
    - Dapatkan: `efHalf1`, `efHalf2`, `decouplingPct`, `status`, dan `advice`.
 
 ---

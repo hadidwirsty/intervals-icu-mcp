@@ -10,17 +10,23 @@ Workflow ini digunakan untuk mengevaluasi skor kesiapan harian atlet sebelum mem
 
 ## 1. Langkah Pengambilan Data via MCP
 
-1. Panggil MCP Tool `analyze_training_load` untuk mendapatkan:
-   - `tsb` (Form / Kesiapan Akut)
-   - `acwr` (Acute:Chronic Workload Ratio)
+1. **`get_fitness_chart`**:
+   - `startDate`: 42 hari lalu.
+   - `endDate`: Hari ini (`YYYY-MM-DD`).
+   - `cols`: `ctl,atl,tsb,rampRate`
+   - Ambil nilai `ctl` (Fitness), `atl` (Fatigue), dan `tsb` (Form) terkini.
 
-2. Panggil MCP Tool `get_wellness_data` untuk tanggal hari ini untuk mendapatkan:
-   - `sleepScore`
-   - `restingHR`
+2. **`analyze_training_load`**:
+   - Input: `{ ctl, atl, tsb }` dari langkah 1.
+   - Dapatkan: `acwr` (Acute:Chronic Workload Ratio), `tsbZone`, dan evaluasi risiko beban.
 
-3. Panggil MCP Tool **`calculate_readiness_score`**:
+3. **`get_wellness_data`**:
+   - Parameter: `startDate` dan `endDate` pada hari ini.
+   - Ambil data harian: `sleepScore`, `restingHR`, dan `hrv`.
+
+4. **`calculate_readiness_score`**:
    - Pass: `{ tsb, acwr, sleepScore, restingHr }`
-   - Dapatkan: `readinessScore`, `status`, `tsbContribution`, `acwrContribution`, `wellnessContribution`, `recommendation`.
+   - Dapatkan: `readinessScore`, `status`, `tsbContribution`, `acwrContribution`, `wellnessContribution`, dan `recommendation`.
 
 ---
 

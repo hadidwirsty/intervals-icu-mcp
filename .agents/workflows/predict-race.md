@@ -17,18 +17,25 @@ Mintalah informasi berikut dari atlet (jika belum tersedia):
 
 ---
 
-## 2. Langkah Pengambilan Data via MCP
+## 2. Langkah Pengambilan & Kalkulasi Data via MCP
 
-1. Panggil MCP Tool `calculate_vdot` atau `get_fitness_chart` untuk mendapatkan data kebugaran terkini:
-   - `ctl` (Kebugaran Kronis 42 hari)
-   - `tsb` (Form / Kesiapan Akut)
+1. **Penentuan Nilai VDOT**:
+   - **Opsi A (Dari Riwayat Race / Time Trial)**: Panggil MCP Tool `calculate_vdot` dengan argumen `{ raceTime: "MM:SS" / "HH:MM:SS", distanceKm: X }` (misal 10K dalam 48:30 menghasilkan VDOT ~42.3).
+   - **Opsi B (Diberikan Langsung oleh Atlet)**: Gunakan angka VDOT yang diinput atlet (misal VDOT 50).
+   - **Opsi C (Fallback Profil)**: Panggil `get_athlete_profile` atau `get_fitness_chart` untuk melihat metrik `eftp` / `threshold_pace` sebagai estimasi.
 
-2. Panggil MCP Tool **`predict_race_time`**:
+2. **`get_fitness_chart`**:
+   - `startDate`: 42 hari lalu.
+   - `endDate`: Hari ini.
+   - `cols`: `ctl,atl,tsb`
+   - Ambil nilai `ctl` (Kebugaran Kronis 42 hari) dan `tsb` (Form / Kesiapan Akut).
+
+3. **`predict_race_time`**:
    - Argument: `{ vdot, targetDistanceKm, ctl, tsb }`
-   - Dapatkan: `predictedTimeFormatted`, `predictedPaceFormatted`, `ctlAdjustmentFactor`, `tsbAdjustmentFactor`.
+   - Dapatkan: `predictedTimeFormatted`, `predictedPaceFormatted`, `ctlAdjustmentFactor`, dan `tsbAdjustmentFactor`.
 
-3. Panggil MCP Tool **`calculate_taper_plan`**:
-   - Argument: `{ raceDate, currentCtl, currentTsb, taperWeeks: 2 }`
+4. **`calculate_taper_plan`**:
+   - Argument: `{ raceDate, currentCtl: ctl, currentTsb: tsb, taperWeeks: 2 }`
    - Dapatkan: `weeklySchedule` (Target volume %, target TSB, dan panduan taktis eksekusi).
 
 ---
