@@ -87,6 +87,7 @@ intervals-icu-mcp/
 | 9 | Training Plan Intelligence & Distance Budgeting (`/backcast-plan`, `/mesocycle-block`, dual-mode budget) | `docs/plans/2026-08-10-training-plan-intelligence-9.md` | **Completed** |
 | 10 | Endurance Intelligence Suite (`predict_race_time`, `calculate_taper_plan`, `analyze_cardiac_drift`, `calculate_readiness_score`) | `docs/plans/2026-08-12-endurance-intelligence-suite-10.md` | **Completed** |
 | 11 | Skills & Workflows Quality & Robustness Fixes (Section numbering, tool chain & fallback) | `docs/plans/2026-08-16-skills-workflows-quality-fixes-11.md` | **Completed** |
+| 12 | All-Star Open-Source README & User Guide Upgrade (Quickstart, Workflows Guide, Multi-Client JSON) | `docs/plans/2026-08-16-allstar-readme-user-guide-12.md` | **Completed** |
 
 ## Planned Directory Additions
 ```text
