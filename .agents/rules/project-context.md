@@ -1,5 +1,5 @@
 # Context Memory — intervals-icu-mcp
-_Last updated: 2026-08-08_
+_Last updated: 2026-08-16_
 
 ## Project Overview
 Proyek ini adalah sebuah server Model Context Protocol (MCP) untuk Intervals.icu API. Server ini memungkinkan AI agent untuk berinteraksi langsung dan mengambil data training atlet (activities, wellness, events, gear, power curves, dan custom items) dari Intervals.icu.
@@ -68,6 +68,16 @@ intervals-icu-mcp/
 - `src/config.ts` — Membaca dan menvalidasi nilai dari Environment Variables.
 - `.env.example` — Templat referensi untuk konfigurasi environment variabel yang diperlukan server.
 
+## Coaching Methodology (Agent Skills & Workflows)
+- **Framework**: Coach Faris Salman + Palladino Power Project (CTL Multiplier System).
+- **Beban Sesi**: Berbasis CTL Multiplier (Easy 70–90% CTL, Moderate 100–150%, Quality 125–175%, Long Run 150–300%), bukan proporsi % kaku dari total mingguan.
+- **Easy Run Cap**: Durasi ≤ 60 menit, TSS < 100% CTL. Kenaikan beban mingguan dialokasikan ke Quality Days.
+- **Ramp Rate Sweetspot**: +1 s.d. +3 TSS/minggu (bukan +5% default lama).
+- **Mesosiklus**: Blok 5 Minggu (W1 Baseline → W2-3 Build +3-8% → W4 Deload **-10% dari W1** → W5 New Baseline).
+- **Single Run Safeguard**: TSS sesi vs 30-Day Max TSS (< 105% aman, ≥ 115% High Risk).
+- **Race Priority**: A (Full Taper) → B (Partial Taper) → C (Training Run, No Taper).
+- **Race A Aktif**: Malioboro Run HM — 4 Oktober 2026 (Muhammad Hadid Wiransetyo).
+
 ## Known Decisions & Constraints
 - **Rate-limit Handling & Caching:** HTTP client kini menangani error 429 otomatis dengan retry exponential backoff (max 3x retry) dan header `Retry-After`. InMemoryCache (TTL-based) diterapkan pada gear (30m) dan power curves (60m).
 - Eksekusi murni berbasis read/write data dari Intervals tanpa adanya _database_ lokal (stateless).
@@ -88,6 +98,7 @@ intervals-icu-mcp/
 | 10 | Endurance Intelligence Suite (`predict_race_time`, `calculate_taper_plan`, `analyze_cardiac_drift`, `calculate_readiness_score`) | `docs/plans/2026-08-12-endurance-intelligence-suite-10.md` | **Completed** |
 | 11 | Skills & Workflows Quality & Robustness Fixes (Section numbering, tool chain & fallback) | `docs/plans/2026-08-16-skills-workflows-quality-fixes-11.md` | **Completed** |
 | 12 | All-Star Open-Source README & User Guide Upgrade (Quickstart, Workflows Guide, Multi-Client JSON) | `docs/plans/2026-08-16-allstar-readme-user-guide-12.md` | **Completed** |
+| 13 | Skill & Workflow Re-alignment — Coach Salman / Palladino Power Project Methodology | *(No plan file — direct update)* | **Completed** |
 
 ## Planned Directory Additions
 ```text
