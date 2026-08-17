@@ -57,7 +57,7 @@ Atau dengan tanggal spesifik:
 
 Sistem secara otomatis mengevaluasi kriteria **Deload Week Protocol** sesuai Blok 5 Minggu Coach Salman:
 
-1. **TSB Status**: Jika `tsb < -25` (High Risk Fatigue Accumulation).
+1. **TSB Status**: Jika `tsb < -30` (High Risk Fatigue Accumulation — sesuai definisi TSB Zone di `training-load-analysis/SKILL.md`).
 2. **ACWR Status**: Jika `acwr > 1.35` (Warning / Danger Zone).
 3. **Wellness Flag**: Jika RHR Pagi naik > 5 bpm dari baseline ATAU Sleep Score drop 2 malam berturut-turut.
 4. **Siklus Mesosiklus 5 Minggu**: Jika minggu berjalan adalah **minggu ke-4 dari blok 5 mingguan** (W4 = Deload terjadwal).

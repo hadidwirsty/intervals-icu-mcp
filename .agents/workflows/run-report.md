@@ -77,7 +77,7 @@ Terapkan pengetahuan dan aturan dari skill `.agents/skills/running-coach-analysi
 
 Hasilkan laporan evaluasi sesuai struktur 4 bagian berikut:
 
-1. **Ringkasan Eksekusi**: Evaluasi kepatuhan target watt dan durasi waktu.
+1. **Ringkasan Eksekusi**: Evaluasi kepatuhan target watt, durasi waktu, dan beban (TSS vs % CTL).
 2. **Analisis Detail Fisiologis**: Decoupling, Cardiac Drift, Kadens, Efisiensi, Breakdown Interval.
-3. **Key Findings**: Korelasi sensasi fisik RPE & catatan fisik dengan bukti data numerik.
-4. **Rekomendasi Berikutnya**: Target operasional konkret untuk sesi hari berikutnya (target watt, target HR ceiling, durasi menit, & opsi penjadwalan otomatis via `/create-workout`).
+3. **Key Findings**: Korelasi sensasi fisik RPE & catatan fisik dengan bukti data numerik, serta Single Run Safeguard check vs 30-day max TSS.
+4. **Rekomendasi Berikutnya & Protokol Pemulihan**: Target operasional konkret untuk sesi hari berikutnya (target watt, target HR ceiling, durasi menit, protokol Dynamic Warm-Up/Static Cool-Down, pengingat Strength Training jika hari Rabu/Jumat, instruksi Foam Rolling SMR malam hari, & opsi penjadwalan otomatis via `/create-workout`).

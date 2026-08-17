@@ -70,6 +70,9 @@ intervals-icu-mcp/
 
 ## Coaching Methodology (Agent Skills & Workflows)
 - **Framework**: Coach Faris Salman + Palladino Power Project (CTL Multiplier System).
+- **Struktur Mingguan (Hard-Easy Rhythm)**: Senin REST TOTAL, Selasa Easy + Strides, Rabu Quality 1 + ST 1, Kamis Aerobic Base, Jumat Quality 2 + ST 2, Sabtu Recovery Run, Minggu Long Run (150–200% CTL untuk HM).
+- **Strength Training Protocol**: Prinsip *"Keep Hard Days Hard, Keep Easy Days Easy"* (2x/minggu di hari Rabu & Jumat post-run/sore).
+- **Protokol Pemulihan**: Dynamic Warm-Up (5–8m pre-run), Static Cool-Down (5–10m post-run), Foam Rolling SMR (10–15m malam/pre-bed pada 5 area kunci).
 - **Beban Sesi**: Berbasis CTL Multiplier (Easy 70–90% CTL, Moderate 100–150%, Quality 125–175%, Long Run 150–300%), bukan proporsi % kaku dari total mingguan.
 - **Easy Run Cap**: Durasi ≤ 60 menit, TSS < 100% CTL. Kenaikan beban mingguan dialokasikan ke Quality Days.
 - **Ramp Rate Sweetspot**: +1 s.d. +3 TSS/minggu (bukan +5% default lama).
@@ -99,6 +102,7 @@ intervals-icu-mcp/
 | 11 | Skills & Workflows Quality & Robustness Fixes (Section numbering, tool chain & fallback) | `docs/plans/2026-08-16-skills-workflows-quality-fixes-11.md` | **Completed** |
 | 12 | All-Star Open-Source README & User Guide Upgrade (Quickstart, Workflows Guide, Multi-Client JSON) | `docs/plans/2026-08-16-allstar-readme-user-guide-12.md` | **Completed** |
 | 13 | Skill & Workflow Re-alignment — Coach Salman / Palladino Power Project Methodology | *(No plan file — direct update)* | **Completed** |
+| 14 | New Weekly Schedule (Mon Rest, Sun LR, Wed/Fri Quality+ST) & Recovery Protocols (Warm-Up, Cool-Down, SMR) | `docs/plans/2026-08-16-training-schedule-protocols-14.md` | **Completed** |
 
 ## Planned Directory Additions
 ```text

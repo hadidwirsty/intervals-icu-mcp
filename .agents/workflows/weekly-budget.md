@@ -20,10 +20,11 @@ Workflow ini digunakan untuk menghitung **Budget & Proporsi Latihan Mingguan (We
 /weekly-budget distance
 ```
 
-**Budget mingguan dengan target ramp rate kustom (misal +1% maintenance atau +3% build):**
+**Budget mingguan dengan target ramp rate kustom dalam TSS/minggu (misal: `1` maintenance, `2` normal build, `3` aggressive build):**
 ```text
 /weekly-budget 3
 ```
+> ⚠️ Input angka = **TSS/minggu** (bukan persen). Contoh: `3` berarti target kenaikan CTL **+3 TSS/minggu**.
 
 ---
 
@@ -67,8 +68,8 @@ Gantikan model proporsi kaku (% dari total mingguan) dengan **CTL Multiplier Sys
 | Tipe Sesi | Range % CTL | Target Beban per Sesi | Batasan Kritis |
 |---|---|---|---|
 | **Easy / Recovery Run** | `70–90% CTL` | `0.70×CTL – 0.90×CTL` | **Cap durasi ≤ 60 menit**, intensitas ≤ 80% CP/FTP |
-| **Moderate Aerobic Run** | `100–150% CTL` | `1.00×CTL – 1.50×CTL` | Mid-week, masih fully aerobic |
-| **Interval / Tempo Session** *(inc. W/U & C/D)* | `125–175% CTL` | `1.25×CTL – 1.75×CTL` | Sesi kualitas (Subthreshold/VO₂max) |
+| **Moderate Aerobic Run** | `100–130% CTL` | `1.00×CTL – 1.30×CTL` | Mid-week, masih fully aerobic |
+| **Interval / Tempo Session** *(inc. W/U & C/D)* | `125–175% CTL` | `1.25×CTL – 1.75×CTL` (maks 2.5× CTL sesi khusus) | Sesi kualitas (Subthreshold/VO₂max) |
 | **Long Run (HM Prep)** | `150–200% CTL` | `1.50×CTL – 2.00×CTL` | Sesuaikan fase periodisasi aktif |
 
 > [!TIP]
@@ -102,8 +103,8 @@ Hasilkan laporan evaluasi budget dengan format berikut:
 | Tipe Sesi | Target Beban | Estimasi Durasi | Batas & Catatan |
 |---|---|---|---|
 | **Easy / Recovery Run** | [0.7×CTL] – [0.9×CTL] load | ≤ 60 menit | ≤ 80% CP, cap 60 mnt KETAT |
-| **Moderate Aerobic Run** | [1.0×CTL] – [1.5×CTL] load | 60–80 menit | Steady aerobic, mid-week |
-| **Interval / Tempo Session** | [1.25×CTL] – [1.75×CTL] load | 50–80 menit | Inc. Warmup & Cooldown |
+| **Moderate Aerobic Run** | [1.0×CTL] – [1.3×CTL] load | 60–75 menit | Steady aerobic, mid-week |
+| **Interval / Tempo Session** | [1.25×CTL] – [1.75×CTL] load | 50–80 menit | Inc. Warmup & Cooldown (maks 2.5×) |
 | **Long Run (HM Prep)** | [1.5×CTL] – [2.0×CTL] load | 90–140 menit | Sesuai fase periodisasi |
 
 ---

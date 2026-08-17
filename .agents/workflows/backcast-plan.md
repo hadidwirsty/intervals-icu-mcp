@@ -91,20 +91,20 @@ Susun `N` minggu tersebut ke dalam 4 blok latihan utama:
 #### Blok 1: General Aerobic Base (Week 1 – 4) | [Start Date] — [End Date]
 - **Fokus**: Aerobic Engine Development & Continuous Volume.
 - **Volume Mingguan**: 4h55m → 5h30m (35–40 km/wk).
-- **Long Run Slot**: Sabtu 90m → 100m (Pure Aerobic 75–82% CP).
+- **Long Run Slot**: Minggu 90m → 100m (Pure Aerobic 75–82% CP).
 - **🥉 Race C Opportunity**: Bisa ambil Fun Run 5K/10K di Minggu ke-3 (Wajib lari santai Z2 Aerobic).
 
 #### Blok 2: Specific Build & Testing (Week 5 – 8) | [Start Date] — [End Date]
 - **Fokus**: Subthreshold Density & Specific Endurance.
 - **Volume Mingguan**: 5h30m → 6h15m (42–50 km/wk).
-- **Long Run Slot**: Sabtu 110m → 130m (MP Tempo / Fartlek).
+- **Long Run Slot**: Minggu 110m → 130m (MP Tempo / Fartlek).
 - **🥈 Race B Opportunity**: Slot ideal untuk **Tune-Up Race 10K** di Minggu ke-8 (Mini-taper 2 hari, evaluasi *race pace*).
 - **Checkpoint**: `3/12 CP Test` di akhir Week 8 untuk re-kalkulasi CP & W'.
 
 #### Blok 3: Peak Volume & Race Prep (Week 9 – 11) | [Start Date] — [End Date]
 - **Fokus**: Peak Loading & Race Pace Specificity.
 - **Volume Mingguan**: Peak 6h50m (52–58 km/wk).
-- **Long Run Slot**: Sabtu 140m → 160m (HMP Tempo / HMP Separation).
+- **Long Run Slot**: Minggu 140m → 160m (HMP Tempo / HMP Separation).
 - **Workout Slot**: Mixed Spektrum Intervals & `20' Test` (Week 11).
 
 #### Blok 4: Tapering & Race Execution (Week 12 – 13) | [Start Date] — [End Date]

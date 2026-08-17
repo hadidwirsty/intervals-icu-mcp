@@ -40,8 +40,8 @@ Hitung alokasi 5 minggu berdasarkan **CTL Baseline** atau **42-day Avg km**:
 | Minggu | Fase | Formula Load | Modifier |
 |---|---|---|---|
 | **W1 — Baseline** | Referensi Awal | `Budget = CTL × 7` (atau Avg km × 7) | `0%` |
-| **W2 — Build** | Progressive Build | `W1 Budget × 1.05` | `+5%` dari W1 |
-| **W3 — Build** | Progressive Build | `W2 Budget × 1.05` | `+5%` dari W2 (~`+10%` dari W1) |
+| **W2 — Build** | Progressive Build | `W1 Budget × 1.03 s.d. 1.08` | **`+3% – +8%`** dari W1 (default midpoint: +5%) |
+| **W3 — Build** | Progressive Build | `W2 Budget × 1.03 s.d. 1.08` | **`+3% – +8%`** dari W2 (default midpoint: +5%) |
 | **W4 — Deload** | *Unloading Week* | `W1 Budget × 0.90` | **`−10% dari W1 (Baseline)`** |
 | **W5 — New Baseline** | Referensi Baru | `W1 Budget × 1.03` | `+3%` dari W1 |
 
@@ -63,7 +63,7 @@ Untuk Setiap Minggu (W1–W5), distribusikan budget menggunakan **CTL Multiplier
 | **Easy / Recovery Run** | `70–90% CTL` | `0.7×CTL – 0.9×CTL` per sesi | Cap ≤ 60 menit, ≤ 80% CP |
 | **Moderate Aerobic Run** | `100–150% CTL` | `1.0×CTL – 1.5×CTL` per sesi | Mid-week aerobic |
 | **Interval / Tempo Session** *(inc. W/U & C/D)* | `125–175% CTL` | `1.25×CTL – 1.75×CTL` per sesi | Sesi kualitas |
-| **Long Run** | `150–200% CTL` *(HM)* | `1.5×CTL – 2.0×CTL` per sesi | Untuk Half Marathon prep |
+| **Long Run** | `150–300% CTL` | `1.5×CTL – 3.0×CTL` per sesi | HM: ~150–200% CTL, FM: ~300% CTL |
 
 > [!IMPORTANT]
 > **Single Run Safeguard**: Sebelum menetapkan target sesi Long Run, verifikasi bahwa TSS rencana ≤ 114% dari 30-Day Max TSS historis. Jika ≥ 115% → High Risk, kurangi durasi/intensitas.
@@ -82,8 +82,8 @@ Untuk Setiap Minggu (W1–W5), distribusikan budget menggunakan **CTL Multiplier
 | Minggu | Fase | Total Budget | Perubahan vs W1 | Catatan & Fokus |
 |---|---|---|---|---|
 | **W1** | Baseline | [W1 Budget] | `0%` (referensi) | Stabilisasi ritme latihan |
-| **W2** | Build | [W2 Budget] | `+5%` | Kenaikan durasi Quality/LR |
-| **W3** | Build | [W3 Budget] | `+10%` | Beban puncak blok, monitor fatigue |
+| **W2** | Build | [W2 Budget] | `+3% – +8%` (default: +5%) | Kenaikan durasi Quality/LR |
+| **W3** | Build | [W3 Budget] | `+3% – +8%` dari W2 (default: +5%) | Beban puncak blok, monitor fatigue |
 | **W4** | **Planned Deload** | **[W4 Budget]** | **`−10% dari W1`** | **Recovery & Supercompensation trigger** |
 | **W5** | New Baseline | [W5 Budget] | `+3%` | Titik awal blok berikutnya |
 

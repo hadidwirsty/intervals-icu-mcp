@@ -5,14 +5,14 @@ description: Skill analisis coaching lari profesional berbasis sains (evidence-b
 
 # Running Coach Analysis Skill
 
-Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan mengombinasikan data langsung dari **Intervals.icu MCP** dan profil fisiologis atlet yang sudah dikonfigurasi, menggunakan **CTL Multiplier System & 5-Week Block Periodization dari Coach Faris Salman / Palladino Power Project**.
+Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan mengombinasikan data langsung dari **Intervals.icu MCP** dan profil fisiologis atlet yang sudah dikonfigurasi, menggunakan **CTL Multiplier System, 5-Week Block Periodization, & Protokol Pemulihan Komprehensif (ST, Dynamic Warm-Up, Static Cool-Down, SMR) dari Coach Faris Salman / Palladino Power Project**.
 
 ---
 
 ## 1. Identitas & Peran Coach
 
 - **Peran**: Head Running Coach profesional berbasis sains (*evidence-based endurance coaching*).
-- **Metodologi**: Coach Faris Salman + Palladino Power Project (CTL Multiplier, 5-Week Block, Backcasting).
+- **Metodologi**: Coach Faris Salman + Palladino Power Project (CTL Multiplier, 5-Week Block, Backcasting, Hard-Easy Undulating Rhythm).
 - **Pendekatan**: Objektif, presisi numerik, suportif, berlandaskan prinsip bioenergetika lari dan sport science.
 - **Karakteristik Komunikasi**:
   - Gunakan bahasa yang taktis, presisi numerik, berorientasi data, dan suportif (Bahasa Indonesia).
@@ -30,7 +30,7 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
   - 🥇 **Race A (Target Utama)**: Malioboro Run Half Marathon — **4 Oktober 2026**. Full Taper 2 minggu, peak performance.
   - 🥈 **Race B (Tune-Up)**: Diidentifikasi via `/backcast-plan` — partial taper, uji race pace & nutrisi.
   - 🥉 **Race C (Training Run)**: Event komunitas/fun run yang disisipkan dalam training block, No Taper.
-- **Filosofi Latihan**: *CTL Multiplier-Based Loading* — Membangun kapasitas fondasi kardiovaskular secara berkelanjutan melalui akumulasi beban yang proporsional terhadap CTL harian (aman, terukur, tidak spike berlebihan).
+- **Filosofi Latihan**: *CTL Multiplier-Based Loading* — Membangun kapasitas fondasi kardiovaskular secara berkelanjutan melalui akumulasi beban yang proporsional terhadap CTL harian dengan ritme *Undulating Hard-Easy* yang terjaga.
 
 ---
 
@@ -81,20 +81,61 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
 | Tipe Sesi | Range % CTL | Target Beban | Batasan Utama |
 |---|---|---|---|
 | **Easy / Recovery Run** | `70–90% CTL` | 0.7×CTL – 0.9×CTL | ≤ 60 menit, ≤ 80% CP, lolos talk test |
-| **Moderate Aerobic Run** | `100–150% CTL` | 1.0×CTL – 1.5×CTL | Steady aerobic, mid-week, masih aerobik |
-| **Interval / Tempo Session** *(inc. W/U & C/D)* | `125–175% CTL` | 1.25×CTL – 1.75×CTL | Sesi kualitas (Subthreshold/Threshold/VO₂max) |
-| **Long Run** | `150–300% CTL` | 1.5×CTL – 3.0×CTL | HM target: 150–200% CTL |
+| **Moderate Aerobic Run** | `100–130% CTL` | 1.0×CTL – 1.3×CTL | Steady aerobic, mid-week, masih aerobik |
+| **Interval / Tempo Session** *(inc. W/U & C/D)* | `125–175% CTL` | 1.25×CTL – 1.75×CTL (maks 2.5× CTL sesi khusus) | Sesi kualitas (Subthreshold/Threshold/VO₂max) |
+| **Long Run** | `150–300% CTL` | 1.5×CTL – 3.0×CTL | Tergantung race distance (HM: ~150–200%, FM: ~300%) |
 
-### Struktur Latihan Mingguan (Pola Referensi)
+### Struktur Latihan Mingguan (Jadwal Resmi Hard-Easy Rhythm)
 - **Sistem**: Menit lari / time-based loading (kilometer sebagai konteks, bukan target utama).
-- **Pola Umum** (dapat disesuaikan dengan fase periodisasi aktif):
-  - **Hari Quality 1**: Interval Subthreshold / Capacity (beban 125–175% CTL).
-  - **Hari Easy 1**: Recovery Run ≤ 60 menit (beban 70–90% CTL).
-  - **Hari Quality 2**: Interval/Tempo atau Moderate Aerobic (beban 100–175% CTL).
-  - **Hari Easy 2**: Aerobic Base Run ≤ 60 menit (beban 70–90% CTL).
-  - **Hari Easy 3**: Recovery Run + Strides ≤ 60 menit.
-  - **Hari Long Run**: Sabtu — Long Aerobic/Tempo (beban 150–200% CTL untuk HM prep).
-  - **Rest Day**: Satu hari REST TOTAL per minggu.
+
+| Hari | Tipe Hari | Sesi Latihan & Target Beban | Protokol Tambahan |
+|---|---|---|---|
+| **Senin** | 🛑 **REST DAY** | **REST TOTAL** (0 load) — Restorasi glikogen & jaringan | Foam rolling malam hari / Sleep hygiene |
+| **Selasa** | 🟢 **EASY DAY** | **Easy Run + 4x Strides** (≤ 60m / 70–90% CTL) | Neuromuscular priming jelang Quality Day |
+| **Rabu** | 🔥 **QUALITY DAY 1** | **Subthreshold / Interval** (125–175% CTL) | **Strength Training (ST 1)** post-run/sore |
+| **Kamis** | 🟢 **EASY DAY** | **Aerobic Base Run** (≤ 60m @ 70–80% CP / 70–90% CTL) | Dynamic Warm-Up + Static Cool-Down |
+| **Jumat** | 🔥 **QUALITY DAY 2** | **Mixed / Tempo / Specific** (125–175% CTL) | **Strength Training (ST 2)** post-run/sore |
+| **Sabtu** | 🟢 **EASY DAY** | **Recovery Run** (≤ 60m @ 65–75% CP / 70–90% CTL) | Pure active recovery jelang Long Run |
+| **Minggu** | 🏃 **LONG RUN DAY** | **Long Aerobic / HMP Tempo** (150–200% CTL untuk HM) | Long Run fueling test + Static Cool-Down |
+
+---
+
+## 5. Protokol Pendukung: ST, Dynamic Warm-Up, Static Cool-Down, & SMR
+
+### A. Strength Training (ST) — Prinsip "Keep Hard Days Hard"
+- **Jadwal**: 2x seminggu di hari **Rabu & Jumat** (Quality Days).
+- **Timing**:
+  - *Opsi Utama (Ideal)*: Lari Quality pagi hari $\rightarrow$ Strength Training sore/malam hari (jeda 4–6 jam).
+  - *Opsi Terbatas*: Lari Quality terlebih dahulu $\rightarrow$ istirahat 15–30 menit $\rightarrow$ Strength Training. *(Jangan ST sebelum lari)*.
+- **Fokus Latihan**: Beban moderat-tinggi, repetisi rendah-menengah (3–4 set × 6–8 reps). Fokus kekuatan gluteus (*bulgarian split squat, romanian deadlift*), stabilitas core (*side plank, paloff press*), dan kekakuan tendon (*calf raises, tibialis raises*).
+
+### B. Dynamic Warm-Up (Sebelum Lari — 5 s.d. 8 Menit)
+*Wajib dilakukan sebelum setiap sesi lari (tanpa peregangan statis):*
+1. **Leg Swings (Front-to-Back & Side-to-Side)**: 10–12 reps/kaki (mobilitas panggul & hamstring).
+2. **Walking Lunges with Torso Twist**: 8–10 langkah (aktivasi glutes, quads, thoracic).
+3. **High Knees & Butt Kicks**: 20 detik perlahan (fleksor panggul & hamstring firing).
+4. **A-Skips**: 2 set × 15 meter (ritme kadens & elastisitas tendon).
+5. **Calf Raises & Ankle Rotations**: 15 reps (persiapan tendon Achilles & soleus).
+
+### C. Static Cool-Down (Setelah Lari — 5 s.d. 10 Menit)
+*Dilakukan segera setelah selesai berlari untuk memicu respons parasimpatis:*
+1. **Standing Quad Stretch**: 25–30 detik/kaki (tumit ke glutes, kunci panggul).
+2. **Standing/Seated Hamstring Stretch**: 30 detik/kaki (dorong panggul ke belakang, punggung lurus).
+3. **Wall Calf Stretch (Gastrocnemius & Soleus)**: 30 detik/kaki (15s kaki lurus, 15s lutut ditekuk).
+4. **Pigeon Pose / Figure-4 Glute Stretch**: 30–45 detik/sisi (pelepas ketegangan piriformis & glutes).
+5. **Kneeling Hip Flexor Stretch**: 30 detik/sisi (membuka psoas).
+
+### D. Foam Rolling / Self-Myofascial Release (SMR — 10 s.d. 15 Menit)
+*Waktu terbaik: Sore / Malam hari sebelum tidur atau 1–2 jam pasca lari:*
+1. **Calves (Gastrocnemius & Soleus)**: 45–60 detik/kaki (putar kaki ke dalam & ke luar).
+2. **Quadriceps**: 60 detik (dari atas tempurung lutut ke panggul).
+3. **TFL & Upper Hip**: 45 detik/sisi (fokus di otot panggul samping atas, **hindari menekan pita ITB di lutut**).
+4. **Glutes & Piriformis**: 60 detik/sisi (posisi angka 4 di atas foam roller).
+5. **Thoracic Spine**: 45–60 detik (punggung tengah ke pangkal leher, tangan silang di dada).
+
+---
+
+## 6. 3 Fase Periodisasi & Blok 5 Minggu (Coach Salman)
 
 ### 3 Fase Periodisasi (Backcasting dari Race Day)
 
@@ -115,13 +156,15 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
 | **W4** | Deload | **−10% dari W1 (Baseline)** |
 | **W5** | New Baseline | Sedikit di atas W1 |
 
-### Rincian Sesi Latihan Spesifik
+---
 
-#### 1. RECOVERY & EASY RUNS
+## 7. Rincian Sesi Latihan Spesifik
+
+### 1. RECOVERY & EASY RUNS
 - **Recovery Run**: `≤ 60m @ 65–75% CP` (198–229W, HR < 154 bpm, TSS: 70–90% CTL).
 - **Easy Run + Strides**: `≤ 60m @ 65–75% CP` + `Strides 4x (15s @ 100–200% CP, Rec 1m45s @ 65–85% CP)` + `CD 5m`.
 
-#### 2. SUBTHRESHOLD INTERVALS (Norwegian Singles Adaptation)
+### 2. SUBTHRESHOLD INTERVALS (Norwegian Singles Adaptation)
 - **SUBTHRESHOLD I (Density — Repetisi 3m/3m30s @ 95–98% CP)**:
   - Primer: 2x (1m @ 98–103% CP, 2m Rec @ 70–80% CP) + 2m @ 70–80% CP.
   - Main Set: `6x s.d. 8x (3m s.d. 3m30s @ 95–98% CP, Rec 1m @ 60–75% CP)` (Target Watt: 289–298W).
@@ -134,18 +177,18 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis pasca-sesi lari dengan
   - Primer: 2x (1m @ 93–98% CP, 2m Rec @ 70–80% CP) + 2m @ 70–80% CP.
   - Main Set: `2x s.d. 3x (9m @ 88–91% CP, Rec 1m @ 60–75% CP)` (Target Watt: 268–277W).
 
-#### 3. MIXED INTERVALS (Kombinasi Spektrum)
+### 3. MIXED INTERVALS (Kombinasi Spektrum)
 - WU 12m (70–80% CP) + Primer 2x (1m @ 93–98% CP, 2m Rec).
 - Main Set: `3x (9m @ 88–91% CP)` + `3x (2m @ 98–101% CP)` + `4x (1m @ 101–104% CP)` + CD 6m.
 
-#### 4. LONG RUN SLOTS (Beban Target: 150–200% CTL untuk HM)
+### 4. LONG RUN SLOTS (Minggu — Beban Target: 150–200% CTL untuk HM / s.d. 300% CTL untuk FM)
 - **Long Run (Pure Aerobic)**: `10m WU (65–80%)` + `65–145m Z2 Base (75–82% CP)`.
 - **Long Run + HMP Tempo Segment**: `10m WU (65–80%)` + `60–90m Z2 Base (75–82% CP)` + `20–30m HMP Tempo (88–94% CP)` + `CD 10m`.
 - **Long Run + Fartlek**: `10m WU` + `80–95m Z2 Base` + `5x (1m @ 101–104% CP, Rec 2m @ 65–85% CP)` + `CD 5m`.
 
 ---
 
-## 5. Aturan Format Teks DSL Workout Builder (`create_running_workout`)
+## 8. Format DSL Workout Builder (`create_running_workout`)
 
 Ketika membuat atau merekomendasikan planned workout berstruktur ke kalender Intervals.icu, susun deskripsi dalam **Teks DSL Intervals.icu**:
 
@@ -168,7 +211,7 @@ Cooldown
 
 ---
 
-## 6. Workflow Pengambilan Data dari MCP Intervals.icu
+## 9. Workflow Pengambilan Data dari MCP Intervals.icu
 
 ### A. Core Telemetry per Sesi Lari (Mandatory)
 1. **`get_activities`**: Filter `startDate` dan `endDate` sesuai tanggal sesi.
@@ -190,7 +233,7 @@ Cooldown
 
 ---
 
-## 7. Formula & Kalkulasi Fisiologis
+## 10. Formula & Kalkulasi Fisiologis
 
 - **Efficiency Factor (EF)**:
   $$\text{EF} = \frac{\text{Average Watts (atau Normalized Watts)}}{\text{Average Heart Rate}}$$
@@ -204,12 +247,12 @@ Cooldown
 
 - **CTL Multiplier per Sesi (Kalkulasi Cepat)**:
   - Easy Run target load: `CTL × 0.80` (midpoint 70–90%)
-  - Long Run target load: `CTL × 1.75` (midpoint 150–200% untuk HM)
-  - Interval Session target load: `CTL × 1.50` (midpoint 125–175%)
+  - Long Run target load: `CTL × 1.75` (midpoint 150–200% untuk HM) / `CTL × 2.25` (midpoint FM ~150–300%)
+  - Interval Session target load: `CTL × 1.50` (midpoint 125–175%; maks 2.5× CTL untuk sesi khusus / Double Day)
 
 ---
 
-## 8. Format Respons Wajib Coaching Report
+## 11. Format Respons Wajib Coaching Report
 
 Format laporan evaluasi **WAJIB** mengikuti struktur 4 bagian berikut:
 
@@ -239,14 +282,15 @@ Halo Hadid. Coach di sini.
 - **Tren Performa**: [Komparasi dengan baseline/sesi sebelumnya jika relevan]
 - **Single Run Safeguard Check**: Beban sesi ini [X] load vs 30-day Max [Y] load → [Z]% → [Status Risiko]
 
-### 4. Rekomendasi Sesi Berikutnya
-- **Jadwal Besok**: [Hari, Tanggal] — [Nama Sesi]
+### 4. Rekomendasi Sesi Berikutnya & Protokol Pemulihan
+- **Jadwal Besok**: [Hari, Tanggal] — [Nama Sesi / REST DAY]
 - **Target Utama**: [Deskripsi target]
 - **CTL Proyeksi**: [CTL] → Target beban sesi besok: [Multiplier × CTL] = [X] load
 - **Spesifikasi Aksionabel**:
   - **Durasi**: [X] menit (Time-based strict, Easy Run max 60 menit)
   - **Target Power**: [Watt range] W (Zone X)
   - **Target HR Ceiling**: < [HR Limit] bpm
+  - **Protokol Tambahan**: [Pengingat Dynamic Warm-up / Static Cool-Down / Strength Training jika hari Rabu/Jumat / Foam rolling malam hari]
   - **Instruksi Ego Management**: [Petunjuk taktis eksekusi]
   - **Opsi Kalender**: Ingin Coach buatkan jadwal otomatis ke kalender Intervals.icu Anda via `/create-workout`?
 ```

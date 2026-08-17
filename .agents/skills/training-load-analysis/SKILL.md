@@ -78,9 +78,9 @@ Skill ini digunakan untuk menganalisis kondisi beban latihan harian atlet berdas
 | Tipe Sesi | Range Beban (% CTL) | Nilai Tipikal (% CTL) | Batasan & Keterangan |
 |---|---|---|---|
 | **Easy Aerobic / Recovery Run** | `< 100%` CTL | **70% – 90% CTL** | Durasi wajib **≤ 60 menit**, intensitas ≤ 80% CP/FTP, lolos talk test |
-| **Moderate "Aerobic" Run** | `100% – 150%` CTL | **110% – 130% CTL** | Steady aerobic mid-week, durasi lebih panjang, tetap aerobik |
-| **Interval / Tempo Session** *(inc. W/U & C/D)* | `> 100%` CTL | **125% – 175% CTL** | Sesi kualitas (VO₂max, Threshold, Subthreshold) |
-| **Long Run (LR)** | `> 150%` CTL | **150% – 300% CTL** | Tergantung target race (HM: ~150–200%, FM: ~300%) |
+| **Moderate "Aerobic" Run** | `100% – 130%` CTL | **100% – 130% CTL** | Steady aerobic mid-week, durasi lebih panjang, tetap aerobik |
+| **Interval / Tempo Session** *(inc. W/U & C/D)* | `> 100%` CTL | **125% – 175% CTL** (maks 2.5× CTL sesi khusus) | Sesi kualitas (VO₂max, Threshold, Subthreshold) |
+| **Long Run (LR)** | `> 150%` CTL | **150% – 300% CTL** | HM: ~150–200%, FM: ~300% CTL |
 | **Double Day** *(Quality + Quality, kasus khusus)* | `> 200%` CTL | **210% – 230% CTL** | Hanya untuk pelari high-CTL; cth AM Interval + PM Tempo |
 
 ### Aturan Easy Run — Cap Wajib
