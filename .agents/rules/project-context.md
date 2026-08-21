@@ -1,56 +1,50 @@
-# Context Memory — intervals-icu-mcp
-_Last updated: 2026-08-17_
+# Project Context
 
-## Project Overview
-Server **Model Context Protocol (MCP)** untuk Intervals.icu API sekaligus sistem **AI Running Coach Intelligence**. Mengekspos 30+ tools ke AI assistant (Claude Desktop, Antigravity, Cursor, VS Code Cline/Roo-Code) untuk membaca telemetri aktivitas, mengevaluasi beban latihan (CTL/ATL/TSB/ACWR), menghitung VDOT & zona pace Jack Daniels, menganalisis cardiac drift & aerobic decoupling, memprediksi waktu race, menjadwalkan tapering, dan mempublikasikan sesi latihan terstruktur langsung ke kalender Intervals.icu.
+## Project Identity
+- **Name**: `intervals-icu-mcp`
+- **Description**: Model Context Protocol (MCP) server untuk [Intervals.icu](https://intervals.icu) REST API. Menyediakan tools untuk membaca data aktivitas, profil atlet, training zones, load analytics (CTL/ATL/TSB/ACWR), kalkulasi VDOT/pace zones, endurance intelligence (race prediction, tapering plan, cardiac drift, readiness score), dan membuat planned workouts ke kalender.
+- **Language**: TypeScript 5.0+ (ES2022, ESM-only `"type": "module"`)
+- **Runtime**: Node.js >= 18.0.0 (menggunakan native `fetch`)
+- **Package Manager**: `pnpm`
+- **Architecture**: MCP Server berbasis `@modelcontextprotocol/sdk` (stdio transport)
 
 ## Tech Stack
-| Category | Library / Tool | Version |
-|----------|---------------|---------|
-| Runtime | Node.js | >=18 |
-| Language | TypeScript | ^5.7.2 |
-| Module System | ES Modules (`"type": "module"`) | — |
-| Protocol SDK | @modelcontextprotocol/sdk | ^1.30.0 |
-| Validation / Schema | zod | ^4.4.3 |
-| Package Manager | pnpm | (via `pnpm-lock.yaml`) |
-| Build Tool | TypeScript Compiler (`tsc`) | ^5.7.2 |
-| Test Framework | Vitest | ^4.1.10 |
-| TypeScript Target | ES2022, NodeNext module resolution | — |
+| Layer | Technology | Version / Notes |
+|-------|------------|-----------------|
+| MCP Framework | `@modelcontextprotocol/sdk` | `^1.12.0` — `McpServer`, `ResourceTemplate`, stdio transport |
+| Validation | `zod` | `^3.24.0` — Validasi skema tool arguments |
+| Rate Limiting | `p-limit` | `^6.2.0` — Concurrency control (max 5 concurrent requests) |
+| Testing | `vitest` | `^4.1.10` — Unit test suite (59+ tests) |
+| Language | `typescript` | `^5.0.0` — Target ES2022, module NodeNext |
+| Build Tool | `tsc` | Output ke `dist/` |
 
-## Architecture
-Arsitektur **fungsional + domain-layered** tanpa framework HTTP. Entry point (`src/index.ts`) menginisialisasi MCP server via `stdio` transport dan mendaftarkan seluruh tool handler. Logika dipisah menjadi tiga lapisan:
-
-1. **`src/tools/`** — Handler MCP per-domain (activities, athlete, events, wellness, dll). Setiap file mengekspos satu fungsi `register*Tools(server)`.
-2. **`src/utils/`** — Pure functions & helper: kalkulasi fisiologis (VDOT, ACWR, tapering, cardiac drift, readiness), cache TTL in-memory, retry logic, DSL validation.
-3. **`src/client.ts`** — HTTP client terpusat ke Intervals.icu REST API (Basic Auth: `API_KEY:<key>`), auto-retry exponential backoff pada error 429 (max 3x), respek `Retry-After` header.
-
-Tidak ada database lokal — server bersifat **stateless**, caching hanya in-memory (volatile).
-
-## Directory Structure
+## Architecture & Directory Structure
 ```text
 intervals-icu-mcp/
-├── .agents/                  # Konfigurasi AI agent (Antigravity)
-│   ├── rules/                # Context Memory & rules untuk agent
-│   ├── skills/               # Skills coaching analysis & training load
-│   └── workflows/            # 11 slash-command workflows siap pakai
-├── dist/                     # Output build TypeScript (dihasilkan `tsc`)
-├── docs/
-│   └── plans/                # 15 implementation plan files (arsip historis)
-├── src/                      # Source TypeScript utama
-│   ├── tools/                # 10 domain handler files MCP tools
-│   │   ├── activities.ts     # get_activities, get_activity_*, add_activity_message
+├── .agents/                  # Agent memory, skills, dan workflows
+│   ├── rules/
+│   │   └── project-context.md # File ini — memory konteks project
+│   ├── skills/
+│   │   ├── clean-code-standards/    # Konvensi kode & formatting
+│   │   ├── technical-constitution/  # Aturan arsitektur & standar testing
+│   │   ├── running-coach-analysis/  # Knowledge base analisis lari & profil atlet
+│   │   └── training-load-analysis/  # Knowledge base interpretasi beban latihan & CTL multiplier
+│   └── workflows/            # 11 slash commands (/run-report, /fitness-status, dll)
+├── src/
+│   ├── tools/                # MCP Tool registration per domain (10 files)
+│   │   ├── activities.ts     # get_activities, get_activity_details, get_activity_intervals, get_activity_streams, get_activity_messages, add_activity_message
 │   │   ├── athlete.ts        # get_athlete_profile, get_training_zones
 │   │   ├── calculator.ts     # calculate_vdot, calculate_pace_zones
-│   │   ├── customItems.ts    # CRUD custom items (chart, field, zones, dll)
-│   │   ├── events.ts         # calendar, planned workouts, workout library, create_running_workout
-│   │   ├── gear.ts           # get_gear_list (cache 30m)
-│   │   ├── intelligence.ts   # Endurance Intelligence Suite (predict_race_time, calculate_taper_plan, analyze_cardiac_drift, calculate_readiness_score)
+│   │   ├── customItems.ts    # get_custom_items, get_custom_item_by_id, create_custom_item, update_custom_item, delete_custom_item
+│   │   ├── events.ts         # get_events, get_event_by_id, add_or_update_planned_workout, add_or_update_note, delete_event, get_workout_library, get_workout_by_id, create_running_workout
+│   │   ├── gear.ts           # get_gear_list (cached 30m)
+│   │   ├── intelligence.ts   # predict_race_time, calculate_taper_plan, analyze_cardiac_drift, calculate_readiness_score
 │   │   ├── load.ts           # analyze_training_load, calculate_weekly_budget
-│   │   ├── powerCurves.ts    # get_athlete_power_curves (cache 60m)
+│   │   ├── powerCurves.ts    # get_athlete_power_curves (cached 60m)
 │   │   └── wellness.ts       # get_wellness_data, get_fitness_chart
-│   ├── utils/                # 9 pure function / utility modules
-│   │   ├── cache.ts          # InMemoryCache class (TTL-based, zero-dep)
-│   │   ├── date.ts           # getDefaultDateRange() pure helper
+│   ├── utils/                # Pure utility functions (zero side-effect, highly tested)
+│   │   ├── cache.ts          # InMemoryCache (TTL-based, per athlete/type)
+│   │   ├── date.ts           # parseDateRange, formatDateISO
 │   │   ├── drift.ts          # analyzeCardiacDrift() — EF & Aerobic Decoupling
 │   │   ├── dsl.ts            # validateWorkoutDsl() — Intervals Text DSL validator
 │   │   ├── load.ts           # analyzeTrainingLoad, calculateWeeklyBudget, calculateDistanceBudget
@@ -129,14 +123,13 @@ Tidak ada integrasi third-party lain (tidak ada database, tidak ada auth provide
   - Kamis: Aerobic Base (Easy/Moderate)
   - Jumat: Quality 2 + Strength Training 2
   - Sabtu: Recovery Run
-  - Minggu: Long Run (150–200% CTL untuk HM)
+  - Minggu: Long Run (150–200% CTL untuk HM / 150–300% CTL untuk FM)
 - **Beban Sesi (CTL Multiplier)**: Easy 70–90%, Moderate 100–150%, Quality 125–175%, Long Run 150–300% CTL
 - **Ramp Rate**: +1 s.d. +3 TSS/minggu (sweetspot)
 - **Easy Run Cap**: ≤ 60 menit, TSS < 100% CTL
 - **Mesosiklus**: 5 Minggu — W1 Baseline → W2-3 Build (+3-8%) → W4 Deload (-10% dari W1) → W5 New Baseline
 - **Single Run Safeguard**: <105% 30-Day Max TSS = Aman, ≥115% = High Risk
 - **Race Priority**: A (Full Taper) → B (Partial Taper) → C (Training Run, No Taper)
-- **Race A Aktif**: **Malioboro Run HM — 4 Oktober 2026** (Muhammad Hadid Wiransetyo)
 - **Recovery Protocol**: Dynamic Warm-Up (5–8m pre-run), Static Cool-Down (5–10m post-run), Foam Rolling SMR (10–15m malam)
 
 ## Known Decisions & Constraints
