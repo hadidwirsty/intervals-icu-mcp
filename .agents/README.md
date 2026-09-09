@@ -1,17 +1,17 @@
 # Running Coach AI — Panduan Konfigurasi
 
-Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) untuk membangun Running Coach AI personal yang mengambil data langsung dari Intervals.icu via MCP.
+Folder `.agents/` berisi template **Antigravity Agent** (skills & rules) untuk membangun Running Coach AI personal yang mengambil data langsung dari Intervals.icu via MCP.
 
 ---
 
-## Skills yang Tersedia
+## Skills Fondasi (Knowledge & Methodology)
 
 ### 1. `running-coach-analysis`
-**Tujuan**: Analisis pasca-sesi lari — evaluasi eksekusi, fisiologis, dan rekomendasi sesi berikutnya (termasuk format Teks DSL Workout Builder).  
+**Tujuan**: Master skill coaching lari — evaluasi eksekusi, fisiologis, profil atlet, zona daya/HR, protokol pemulihan, dan rekomendasi sesi berikutnya (termasuk format Teks DSL Workout Builder).  
 **File**: [`skills/running-coach-analysis/SKILL.md`](skills/running-coach-analysis/SKILL.md)
 
 **Yang perlu dikonfigurasi:**
-- **Bagian 2 — Profil Atlet**: Nama, usia, perangkat, status kompetisi, filosofi latihan.
+- **Bagian 2 — Profil Atlet**: Nama, usia, perangkat, status kompetisi, filosofi latihan, dan matriks rotasi sepatu.
 - **Bagian 3 — Power Zones & HR Zones**: Sesuaikan rentang zona dengan CP dan LTHR Anda (parameter utama dibaca otomatis dari Intervals.icu).
 - **Bagian 4 — Blueprint Workout**: Semua tipe sesi latihan berikut target power, HR, dan durasi spesifik.
 - **Bagian 5 — Format Teks DSL**: Aturan penulisan `- 12m 70-80% power, 70-80% pace` untuk pembuat workout berstruktur.
@@ -19,16 +19,16 @@ Folder `.agents/` berisi template **Antigravity Agent** (skills & workflows) unt
 ---
 
 ### 2. `training-load-analysis`
-**Tujuan**: Interpretasi beban latihan harian — CTL, ATL, TSB, ACWR (Acute:Chronic Workload Ratio), Ramp Rate, eFTP, dan Weekly Load Budgeting.  
+**Tujuan**: Interpretasi beban latihan harian — CTL, ATL, TSB, ACWR (Acute:Chronic Workload Ratio), Ramp Rate, eFTP, dan Weekly Load Budgeting berbasis CTL Multiplier System (Palladino Power Project).  
 **File**: [`skills/training-load-analysis/SKILL.md`](skills/training-load-analysis/SKILL.md)
 
 **Yang perlu dikonfigurasi:**
-- **Bagian 2 — Weekly Load Budgeting Rules**: Proporsi batas maksimum Long Run (30-35%), Quality Intervals (15-20%), dan Easy Run (45-55%).
-- **Bagian 3 — Konteks Program Latihan**: Fase aktif, target CTL, loading model (rasio build:recovery), dan threshold Fatigue Flags / ACWR.
+- **Bagian 2 — CTL Multiplier System**: Alokasi beban per tipe sesi relatif terhadap CTL harian (Easy 70–90%, Moderate 100–150%, Quality 125–175%, Long Run 150–300%).
+- **Bagian 3 — Konteks Program Latihan**: Fase aktif, target CTL, loading model (Blok 5 Minggu), dan threshold Fatigue Flags / ACWR.
 
 ---
 
-## Workflows yang Tersedia
+## Skills Interaktif (Slash Commands)
 
 ### 1. `/run-report` — Laporan Pasca-Sesi Lari
 **Tujuan**: Generate coaching report setelah setiap sesi lari.
@@ -178,8 +178,8 @@ Atau untuk detail satu workout:
 
 ---
 
-### 8. `/mesocycle-block` — 4-Week Build:Deload Mesocycle Planner
-**Tujuan**: Merencanakan alokasi 4 minggu berturut-turut dengan rasio 3:1 (Build-Deload).
+### 8. `/mesocycle-block` — 5-Week Double Build Mesocycle Planner
+**Tujuan**: Merencanakan alokasi 1 blok mesosiklus (5 minggu) dengan model Double Build Coach Faris Salman (W1 Baseline → W2-3 Build +3–5% → W4 Deload -10% dari Baseline → W5 New Baseline) dan CTL Multiplier System.
 
 ```text
 /mesocycle-block load
@@ -190,8 +190,51 @@ atau berbasis jarak:
 ```
 
 **Yang dihasilkan:**
-- Matriks alokasi Week 1 (+5%), Week 2 (+5%), Week 3 (+5%), dan Week 4 Deload (-25%).
-- Breakdown alokasi Long Run (30-35%), Quality (15-20%), dan Easy (45-55%).
+- Matriks alokasi W1 Baseline (0%), W2 Build (+3–5%), W3 Build (+3–5%), W4 Deload (-10% dari W1), dan W5 New Baseline (+3%).
+- Distribusi alokasi beban per tipe sesi berbasis CTL Multiplier (Easy 70–90%, Moderate 100–150%, Quality 125–175%, Long Run 150–200% CTL).
+- Safeguard Sesi Tunggal (Single Run Safeguard vs 30-day max TSS).
+
+---
+
+### 9. `/readiness-check` — Daily Recovery & Readiness Score
+**Tujuan**: Evaluasi skor kesiapan harian komposit (0–100%) berbasis TSB, ACWR, Sleep Score, dan RHR Spike via MCP `calculate_readiness_score`.
+
+```text
+/readiness-check
+```
+
+**Yang dihasilkan:**
+- Unified Readiness Score (0–100) dan status kesiapan: 🟢 GREEN (≥80%), 🟡 YELLOW (50–79%), 🔴 RED (<50%).
+- Rincian kontribusi poin: Kesiapan Akut (TSB), Rasio Beban (ACWR), dan Kualitas Tidur & Pemulihan (Wellness).
+- Panduan eksekusi sesi hari ini yang aman dari overtraining.
+
+---
+
+### 10. `/predict-race` — Race Prediction & Tapering Plan
+**Tujuan**: Estimasi waktu finish lomba (5K, 10K, Half Marathon, Full Marathon) dan generator jadwal tapering 2–3 minggu berbasis VDOT, CTL, & TSB via MCP `predict_race_time` dan `calculate_taper_plan`.
+
+```text
+/predict-race
+```
+
+**Yang dihasilkan:**
+- Estimasi waktu finish dan target pace rata-rata (disesuaikan dengan CTL dan TSB terkini).
+- Jadwal tapering mingguan: pemotongan volume (-35%), target TSB fresh (+5 s.d. +15), dan panduan eksekusi.
+- Rekomendasi pacing strategy dan simulasi nutrisi/hidrasi race day.
+
+---
+
+### 11. `/cardiac-drift` — Aerobic Decoupling & Cardiac Drift Analysis
+**Tujuan**: Analisis penurunan efisiensi aerobik (*aerobic decoupling*) dan drift detak jantung dari stream telemetri aktivitas lari/sepeda via MCP `analyze_cardiac_drift`.
+
+```text
+/cardiac-drift
+```
+
+**Yang dihasilkan:**
+- Efficiency Factor (EF) paruh 1 vs paruh 2 (Watt/bpm atau Speed/bpm).
+- Nilai Decoupling (%) dan klasifikasi: `< 3%` (Sangat Solid), `3–5%` (Terkendali), `> 5%` (Cardiac Drift Signifikan).
+- Analisis korelasi fisiologis (hidrasi, suhu, akumulasi fatigue).
 
 ---
 
@@ -199,13 +242,13 @@ atau berbasis jarak:
 
 ### 1. Konfigurasi Skills
 
-Buka setiap file SKILL.md dan isi placeholder dengan data Anda (ikuti petunjuk `[!IMPORTANT]` di masing-masing file).
+Buka setiap file `SKILL.md` di folder `skills/` dan sesuaikan profil atau target Anda jika diperlukan.
 
 ### 2. Sambungkan ke Antigravity
 
-Pastikan Anda membuka percakapan Antigravity dengan **workspace** yang mengarah ke folder project ini. Dengan begitu:
-- Semua skills (`running-coach-analysis`, `training-load-analysis`) akan otomatis terbaca.
-- Slash-commands (`/run-report`, `/fitness-status`, `/weekly-budget`, `/create-workout`, `/calc-vdot`, `/check-workout`) akan tersedia di chat.
+Buka percakapan Antigravity dengan workspace di folder project ini. Seluruh **13 Skills** (2 fondasi + 11 slash commands interaktif) akan otomatis terdeteksi:
+- Fondasi: `running-coach-analysis`, `training-load-analysis`
+- Slash Commands: `/run-report`, `/fitness-status`, `/weekly-budget`, `/create-workout`, `/calc-vdot`, `/check-workout`, `/backcast-plan`, `/mesocycle-block`, `/readiness-check`, `/predict-race`, `/cardiac-drift`
 
 ### 3. Pastikan MCP Intervals.icu Aktif
 

@@ -154,23 +154,25 @@ In `cline_mcp_settings.json`:
 
 ---
 
-## 🤖 AI Workflows & Slash Commands Directory
+## 🤖 AI Skills & Slash Commands Directory
 
-This repository comes pre-loaded with **11 Production-Ready AI Workflows** in `.agents/workflows/` that you can trigger using slash commands:
+This repository comes pre-loaded with **11 Production-Ready Modern Skills** in `.agents/skills/` that you can trigger using slash commands (with first-class support for autonomous agent discovery):
 
-| Slash Command | File | Description & Usage |
+> 📖 **Comprehensive Usage Guide**: For an in-depth operational timeline of when and how to run each command across macrocycles, mesocycles, and daily routines, see [**`docs/WORKFLOWS-GUIDE.md`**](docs/WORKFLOWS-GUIDE.md).
+
+| Slash Command | Skill File | Description & Methodology |
 |---|---|---|
-| **`/run-report`** | [`run-report.md`](.agents/workflows/run-report.md) | Post-workout coaching report analyzing watts/HR adherence, interval breakdown, and cardiovascular drift. |
-| **`/readiness-check`** | [`readiness-check.md`](.agents/workflows/readiness-check.md) | Daily recovery & readiness score evaluation (0–100% Green/Yellow/Red) based on TSB, ACWR, Sleep, and RHR. |
-| **`/cardiac-drift`** | [`cardiac-drift.md`](.agents/workflows/cardiac-drift.md) | Telemetry stream analysis (HR vs Power/Speed) computing $H_1$ vs $H_2$ Efficiency Factor (EF) and Aerobic Decoupling %. |
-| **`/predict-race`** | [`predict-race.md`](.agents/workflows/predict-race.md) | Estimate 5K, 10K, HM, FM finish times & pace via VDOT with CTL/TSB adjustments + 2–3 week tapering volume schedule. |
-| **`/fitness-status`** | [`fitness-status.md`](.agents/workflows/fitness-status.md) | Complete training load analysis (CTL Fitness, ATL Fatigue, TSB Form, Ramp Rate Risk, and Deload detection). |
-| **`/weekly-budget`** | [`weekly-budget.md`](.agents/workflows/weekly-budget.md) | Compute weekly safe training budget (Long Run 30–35%, Quality 15–20%, Easy 45–55%) based on 42d rolling load/km. |
-| **`/mesocycle-block`** | [`mesocycle-block.md`](.agents/workflows/mesocycle-block.md) | 4-Week 3:1 Mesocycle planning (Build W1-3 (+5%) and Planned Deload W4 (-25%)). |
-| **`/backcast-plan`** | [`backcast-plan.md`](.agents/workflows/backcast-plan.md) | Backward planning macrocycle from Target Race Day A (13 Weeks HM, 18 Weeks FM). |
-| **`/calc-vdot`** | [`calc-vdot.md`](.agents/workflows/calc-vdot.md) | Offline Jack Daniels VDOT and 5 pace training zones calculator (Easy, Marathon, Threshold, Interval, Repetition). |
-| **`/check-workout`** | [`check-workout.md`](.agents/workflows/check-workout.md) | View upcoming scheduled workouts from your Intervals.icu calendar. |
-| **`/create-workout`** | [`create-workout.md`](.agents/workflows/create-workout.md) | Publish structured running/cycling workouts to your calendar using Intervals Text DSL. |
+| **`/run-report`** | [`SKILL.md`](.agents/skills/run-report/SKILL.md) | Post-workout coaching report analyzing watts/HR adherence, interval breakdown, EF, and cardiovascular drift. |
+| **`/readiness-check`** | [`SKILL.md`](.agents/skills/readiness-check/SKILL.md) | Daily recovery & readiness score evaluation (0–100% Green/Yellow/Red) based on TSB, ACWR, Sleep, and RHR spike. |
+| **`/cardiac-drift`** | [`SKILL.md`](.agents/skills/cardiac-drift/SKILL.md) | Telemetry stream analysis (HR vs Power/Speed) computing $H_1$ vs $H_2$ Efficiency Factor (EF) and Aerobic Decoupling %. |
+| **`/predict-race`** | [`SKILL.md`](.agents/skills/predict-race/SKILL.md) | Estimate 5K, 10K, HM, FM finish times & pace via VDOT with CTL/TSB adjustments + 2–3 week tapering volume schedule. |
+| **`/fitness-status`** | [`SKILL.md`](.agents/skills/fitness-status/SKILL.md) | Complete training load analysis (CTL Fitness, ATL Fatigue, TSB Form, Ramp Rate Risk, and Deload detection). |
+| **`/weekly-budget`** | [`SKILL.md`](.agents/skills/weekly-budget/SKILL.md) | Weekly budget & session allocation via **Palladino CTL Multiplier** (Easy 0.7–0.9x, Quality 1.25–1.75x, Long Run 1.5–2.0x CTL) with Single Run Safeguard. |
+| **`/mesocycle-block`** | [`SKILL.md`](.agents/skills/mesocycle-block/SKILL.md) | **5-Week Double Build Mesocycle** (Coach Salman: W1 Base, W2-3 Build (+3–5%), W4 Deload (-10% from W1), W5 New Base). |
+| **`/backcast-plan`** | [`SKILL.md`](.agents/skills/backcast-plan/SKILL.md) | Backward planning macrocycle from Target Race Day A (13 Weeks HM, 18 Weeks FM) with Race A/B/C hierarchy. |
+| **`/calc-vdot`** | [`SKILL.md`](.agents/skills/calc-vdot/SKILL.md) | Offline Jack Daniels VDOT and 5 pace training zones calculator (Easy, Marathon, Threshold, Interval, Repetition). |
+| **`/check-workout`** | [`SKILL.md`](.agents/skills/check-workout/SKILL.md) | View upcoming scheduled workouts from your Intervals.icu calendar with resolved targets. |
+| **`/create-workout`** | [`SKILL.md`](.agents/skills/create-workout/SKILL.md) | Publish structured running workouts to your calendar using Intervals Text DSL (auto-sync to Garmin/Coros). |
 
 ---
 
