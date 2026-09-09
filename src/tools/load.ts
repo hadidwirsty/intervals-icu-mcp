@@ -43,7 +43,7 @@ export function registerLoadTools(server: McpServer): void {
     {
       title: "Calculate Weekly Training Budget",
       description:
-        "Hitung budget latihan mingguan (Total Budget, Long Run Max, Quality/Interval Max, Easy Run Budget) berdasarkan 42d avg load/distance dan target ramp rate aman.",
+        "Hitung budget latihan mingguan (Total Budget, Long Run Max, Quality/Interval Max, Easy Run Budget) berdasarkan 42d avg load/distance dan target ramp rate aman sesuai Coach Faris Salman / Palladino.",
       inputSchema: {
         avgDailyLoad: z
           .number()
@@ -60,12 +60,35 @@ export function registerLoadTools(server: McpServer): void {
           .max(30)
           .optional()
           .describe("Persentase target kenaikan beban mingguan (default: 5%). Contoh: 5 untuk +5%."),
+        ninetyDayMaxLrKm: z
+          .number()
+          .positive()
+          .optional()
+          .describe("Khusus mode distance: Jarak Long Run terjauh dalam 90 hari terakhir (km) untuk batas Frandsen et al. 2025."),
+        workoutMultiplier: z
+          .number()
+          .min(1.0)
+          .max(2.5)
+          .optional()
+          .describe("Khusus mode distance: Pengali workout harian (default: 1.2 untuk mode aman 1.1–1.3x)."),
+        longRunRiskPct: z
+          .number()
+          .min(80)
+          .max(150)
+          .optional()
+          .describe("Khusus mode distance: Persentase risiko Frandsen (default: 104 untuk ~104% main aman)."),
       },
     },
-    async ({ avgDailyLoad, mode, targetRampPct }) => {
+    async ({ avgDailyLoad, mode, targetRampPct, ninetyDayMaxLrKm, workoutMultiplier, longRunRiskPct }) => {
       try {
         if (mode === "distance") {
-          const result = calculateDistanceBudget({ avgDailyKm: avgDailyLoad, targetRampPct });
+          const result = calculateDistanceBudget({
+            avgDailyKm: avgDailyLoad,
+            targetRampPct,
+            ninetyDayMaxLrKm,
+            workoutMultiplier,
+            longRunRiskPct,
+          });
           return jsonResult(result);
         }
         const result = calculateWeeklyBudget({ avgDailyLoad, targetRampPct });

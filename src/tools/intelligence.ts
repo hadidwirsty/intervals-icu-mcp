@@ -29,15 +29,19 @@ export function registerIntelligenceTools(server: McpServer): void {
   // 2. calculate_taper_plan
   server.tool(
     "calculate_taper_plan",
-    "Menghitung jadwal penurunan volume bertahap (tapering 2 atau 3 minggu) untuk memuncakkan TSB Freshness di hari Race A.",
+    "Menghitung jadwal penurunan volume bertahap (A-Taper 10-14 hari, B-Taper mini 4-6 hari, C-Taper workout swap) untuk memuncakkan TSB Freshness di hari Race.",
     {
       raceDate: z.string().describe("Tanggal race format YYYY-MM-DD."),
       currentCtl: z.number().describe("CTL atlet saat ini."),
       currentTsb: z.number().describe("TSB atlet saat ini."),
       taperWeeks: z.number().optional().describe("Durasi minggu tapering (2 atau 3 minggu). Default 2."),
+      racePriority: z
+        .enum(["A", "B", "C"])
+        .optional()
+        .describe("Prioritas Race: 'A' (Target Utama), 'B' (Tune-up), 'C' (Training Run). Default 'A'."),
     },
-    async ({ raceDate, currentCtl, currentTsb, taperWeeks }) => {
-      const result = calculateTaperPlan({ raceDate, currentCtl, currentTsb, taperWeeks });
+    async ({ raceDate, currentCtl, currentTsb, taperWeeks, racePriority }) => {
+      const result = calculateTaperPlan({ raceDate, currentCtl, currentTsb, taperWeeks, racePriority });
       return {
         content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
       };

@@ -48,11 +48,31 @@ describe("calculateWeeklyBudget", () => {
 describe("calculateDistanceBudget", () => {
   it("calculates weekly distance budget correctly for 6km avg daily mileage with 5% ramp", () => {
     const budget = calculateDistanceBudget({ avgDailyKm: 6, targetRampPct: 5 });
+    expect(budget.baseWeeklyKm).toBe(42);
     expect(budget.totalWeeklyBudgetKm).toBe(44.1);
-    expect(budget.longRunMaxKm).toBe(15.4);
-    expect(budget.qualityIntervalMaxKm).toBe(8.8);
-    expect(budget.easyRunMinKm).toBe(19.8);
+    expect(budget.palladinoLimitKm).toBe(18);
+    expect(budget.maxLongRunKm).toBe(18);
+    expect(budget.workoutBudgetKm).toBe(7.2);
+    expect(budget.easyRunBudgetKm).toBe(18.9);
     expect(budget.unit).toBe("km");
+  });
+
+  it("implements Coach Faris Salman exact thread example: 8km avg, +8% ramp, 20km 90d max LR", () => {
+    const budget = calculateDistanceBudget({
+      avgDailyKm: 8,
+      targetRampPct: 8,
+      ninetyDayMaxLrKm: 20,
+      workoutMultiplier: 1.2,
+      longRunRiskPct: 104,
+    });
+    expect(budget.baseWeeklyKm).toBe(56);
+    expect(budget.totalWeeklyBudgetKm).toBe(60.5);
+    expect(budget.palladinoLimitKm).toBe(24);
+    expect(budget.frandsenLimitKm).toBe(20.8);
+    expect(budget.maxLongRunKm).toBe(20.8); // min(24, 20.8)
+    expect(budget.workoutBudgetKm).toBe(9.6);
+    expect(budget.easyRunBudgetKm).toBe(30.1);
+    expect(budget.riskCategory).toContain("Main Aman");
   });
 
   it("throws RangeError for negative or zero daily distance", () => {
