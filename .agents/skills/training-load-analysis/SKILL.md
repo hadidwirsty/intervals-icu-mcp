@@ -112,8 +112,8 @@ Model mesosiklus yang digunakan adalah **Blok 5 Minggu (Double Build)**, bukan 3
 | Minggu | Fase | Load Modifier | Keterangan |
 |---|---|---|---|
 | **W1** | Baseline | `0%` | Titik referensi awal blok |
-| **W2** | Build | `+3% – +5%` dari W1 | Kenaikan volume progresif |
-| **W3** | Build | `+3% – +5%` dari W2 | Kenaikan volume progresif |
+| **W2** | Build 1 | **`+5%`** dari W1 | Kenaikan volume progresif zona aman (🟢) |
+| **W3** | Build 2 | **`+5%` / `+8%`** dari W1 | Kenaikan kondisional (🟢 +8% jika recovery optimal; 🟡 +5% jika fatigue) |
 | **W4** | Deload | **`−10% dari W1 (Baseline)`** | *Unloading week* terkontrol (bukan -25% dari peak!) |
 | **W5** | New Baseline | Sedikit di atas W1 | Menjadi titik referensi blok berikutnya |
 

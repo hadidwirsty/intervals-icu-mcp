@@ -114,22 +114,35 @@ Tidak ada integrasi third-party lain (tidak ada database, tidak ada auth provide
 - `tsconfig.json` — TS config: ES2022 target, NodeNext module, strict mode.
 - `vitest.config.ts` — Test runner config (include: `src/**/*.test.ts`).
 
-## Coaching Methodology (Agent Skills & Workflows)
+## Coaching Methodology (Agent Skills)
 - **Framework**: Coach Faris Salman + Palladino Power Project (CTL Multiplier System).
 - **Struktur Mingguan (Hard-Easy Rhythm)**:
   - Senin: REST TOTAL
-  - Selasa: Easy Run + Strides
+  - Selasa: Easy Run + Strides (Default 45m, cap 50m)
   - Rabu: Quality 1 (Subthreshold/VO2Max) + Strength Training 1
-  - Kamis: Aerobic Base (Easy/Moderate)
+  - Kamis: Aerobic Base (Default 45m, max 60m)
   - Jumat: Quality 2 + Strength Training 2
-  - Sabtu: Recovery Run
+  - Sabtu: Recovery Run (Default 45m, range 30–45m)
   - Minggu: Long Run (150–200% CTL untuk HM / 150–300% CTL untuk FM)
 - **Beban Sesi (CTL Multiplier)**: Easy 70–90%, Moderate 100–150%, Quality 125–175%, Long Run 150–300% CTL
 - **Ramp Rate**: +1 s.d. +3 TSS/minggu (sweetspot)
-- **Easy Run Cap**: ≤ 60 menit, TSS < 100% CTL
-- **Mesosiklus**: 5 Minggu — W1 Baseline → W2-3 Build (+3-8%) → W4 Deload (-10% dari W1) → W5 New Baseline
-- **Single Run Safeguard**: <105% 30-Day Max TSS = Aman, ≥115% = High Risk
-- **Race Priority**: A (Full Taper) → B (Partial Taper) → C (Training Run, No Taper)
+- **Easy Run Framework (Tiered Standard)**:
+  - *Default Acuan*: 45 menit (Tipikal rentang operasional 30–50 menit).
+  - *Hard Ceiling*: ≤ 60 menit KETAT, TSS < 100% CTL (intensitas ≤ 80% CP).
+  - *Aturan Beban*: Saat CTL naik, jangan perpanjang durasi Easy Run melebihi 60 menit — alokasikan kenaikan beban ke sesi Quality atau Long Run.
+- **Mesosiklus (Coach Faris Salman)**: W1 Baseline (0%) → W2 Build 1 (+5%) → W3 Build 2 (+5% / +8% conditional) → W4 Deload (-10% Baseline: LR -15%, Workout -50%/skip) → W5 Baseline Baru
+- **4 Red Flags Kelelahan (Trigger Deload/Maintenance jika ≥ 2 aktif)**: (1) RHR pagi naik > 5 bpm, (2) Kualitas tidur buruk 2 malam berturut-turut, (3) Motivasi lari drop drastis (CNS fatigue), (4) Easy pace terasa berat.
+- **Backcasting (Coach Faris Salman)**: Formula Universal `(Race Date - Taper 1-3 Wk) / 4 = Jumlah Blok`. Sisa minggu dialokasikan memperpanjang Base Aerobik.
+- **Dynamic Plan Revision On-the-Fly**: Wajib koreksi rencana jika (1) Sakit/cedera, (2) Baseline 42d riil turun, (3) Recovery signals buruk 2 pekan berturut-turut.
+- **Race Priority & Taper Patterns**:
+  - *Race A ~ A-Taper (Full Taper 10–14 hari)*: Volume 75% ➔ 50%, frekuensi lari mingguan TETAP, potong repetisi/durasi interval ~50%. Target finish RPE 9–10/10 (All-out).
+  - *Race B ~ B-Taper (Mini Taper 4–6 hari)*: Tune-up race, fitness check. Aturan Emas Subthreshold: jeda $\ge$ 4 hari sebelum race. Target finish RPE 8–9/10.
+  - *Race C ~ C-Taper (No Taper / Swap Workout)*: Volume 100%. Tukar 1 hard day jadi Easy Run. Target finish RPE 6–7/10. Doktrin Joe Friel: *Never let ego disrupt periodization*.
+- **Generic 4-Shoe Rotation Framework**:
+  - *Race Day*: Plated / Super Shoe (High Energy Return)
+  - *Speed / Intervals*: Lightweight Super Trainer
+  - *Daily Aerobic*: Bouncy & Durable Daily Mileage
+  - *Max Cushion / Recovery*: Ultra-plush Joint Protection
 - **Recovery Protocol**: Dynamic Warm-Up (5–8m pre-run), Static Cool-Down (5–10m post-run), Foam Rolling SMR (10–15m malam)
 
 ## Known Decisions & Constraints
@@ -139,7 +152,7 @@ Tidak ada integrasi third-party lain (tidak ada database, tidak ada auth provide
 - **No linter/formatter config**: Tidak ada `.eslintrc` atau `.prettierrc` — standar formatting bergantung pada TypeScript strict mode.
 - **ESM-only**: `"type": "module"` di `package.json`, semua import harus pakai `.js` extension.
 - **Node.js >=18**: Menggunakan native `fetch` (built-in sejak Node 18), tidak ada dependency `axios`/`node-fetch`.
-- **Test coverage**: 59+ unit tests via Vitest, termasuk VDOT math, race prediction, cardiac drift, readiness scoring, ACWR, DSL validation, LRU cache, dan API client retry.
+- **Test coverage**: 63+ unit tests via Vitest, termasuk VDOT math, race prediction, cardiac drift, readiness scoring, ACWR, DSL validation, LRU cache, dan API client retry.
 
 ## Planned Features (Implementation Plans — Semua Completed)
 | # | Feature | Status |
@@ -158,5 +171,6 @@ Tidak ada integrasi third-party lain (tidak ada database, tidak ada auth provide
 | 12 | All-Star Open-Source README & User Guide | **Completed** |
 | 13 | Skill & Workflow Re-alignment — Coach Salman / Palladino Methodology | **Completed** |
 | 14 | Weekly Schedule (Mon REST, Sun LR) & Recovery Protocols | **Completed** |
+| 15 | Public Migration & Zero-PII Sanitization | **Completed** |
 
-> Plan files tersimpan di `docs/plans/` (15 files, arsip historis).
+> Plan files tersimpan di `docs/plans/` (16 files, arsip historis).
