@@ -88,6 +88,10 @@ Skill ini digunakan untuk menganalisis kondisi beban latihan harian atlet berdas
 - **TSS cap**: Wajib `< 100% CTL` (biasanya 70–90% CTL).
 - **Ketika CTL naik dan butuh positive ramp**: Jangan tambah durasi Easy Run. Alokasikan kenaikan beban ke **Quality Days** (Interval, Tempo, Long Run).
 
+### Aturan Volume Sub-Threshold (Norwegian Singles)
+- **Pelari Volume Rendah/Menengah (40-70 km/minggu)**: Batasi repetisi interval kerja hanya **5–8 km per sesi**.
+- **Cap Volume Mingguan**: Total volume sub-threshold mingguan tidak boleh melampaui **20–25%** dari total volume mingguan.
+
 ---
 
 ## 3. Safeguard "Excessive Single Run" (Palladino / Frandsen et al. 2025)

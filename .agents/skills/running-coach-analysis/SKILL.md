@@ -247,6 +247,21 @@ Wajib koreksi rencana jika:
   - Primer: 2x (1m @ 93–98% CP, 2m Rec @ 70–80% CP) + 2m @ 70–80% CP.
   - Main Set: `2x s.d. 3x (9m @ 88–91% CP / Sub-Threshold 3: 89–92% CP, Rec 1m @ 60–75% CP)`.
 
+
+### 2.B. SUBTHRESHOLD INTERVALS (Norwegian Singles Adaptation)
+**Rujukan Tambahan Wajib**: `docs/references/sub-threshold.md`.
+Kaidah Inti: Laktat 2.0-3.0 mmol/L, HR < 88% HRmax, RPE 6-7/10, Rest 30-60 detik PASIF.
+
+- **Short Sub-Threshold (Turnover Neuromuskular / 400m-500m)**:
+  - Main Set: `20x s.d. 25x 400m` ATAU `15x s.d. 20x 500m` (Waktu kerja 60-90s @ 95–99% CP / 281-290W).
+  - Rest: `30-45 detik` (Berdiri / Pasif murni).
+- **Medium Sub-Threshold (Kapasitas Ambang / 1000m-1200m)**:
+  - Main Set: `8x s.d. 12x 1000m` ATAU `6x s.d. 8x 1200m` (Waktu kerja 3-4m @ 92–95% CP / 270-278W).
+  - Rest: `60 detik` (Berdiri / Pasif murni).
+- **Long Sub-Threshold (Stamina Aerobik / 2000m-4000m)**:
+  - Main Set: `4x s.d. 6x 2000m` ATAU `3x s.d. 4x 3000m` (Waktu kerja 6-10m @ 89–92% CP / 261-270W).
+  - Rest: `60-90 detik` (Berdiri / Pasif murni).
+
 ### 3. MIXED INTERVALS (Kombinasi Spektrum)
 - WU 12m (70–80% CP) + Primer 2x (1m @ 93–98% CP, 2m Rec).
 - Main Set: `3x (9m @ 88–91% CP)` + `3x (2m @ 98–101% CP)` + `4x (1m @ 101–104% CP)` + CD 6m.

@@ -71,6 +71,7 @@ Terapkan pengetahuan dan aturan dari skill `.agents/skills/running-coach-analysi
 - Gunakan profil fisiologis atlet (CP, W', LTHR, Max HR) yang diekstrak secara dinamis dari MCP.
 - Cocokkan realisasi latihan dengan **Blueprint Workout** yang dikonfigurasi.
 - Hitung Efficiency Factor (EF = Watts / HR).
+- **Khusus Sesi Sub-Threshold (Singles Method)**: Evaluasi secara ketat berdasarkan aturan "Never race your workouts" dan "If you lie down on the track, you failed" (rujuk `docs/references/sub-threshold.md`). Pastikan HR < 88% HRmax, interval rest ditaati (30-60 detik pasif), RPE pelari 6-7/10, serta cardiac drift < 5%. Beri teguran jika melanggar batas.
 
 ---
 

@@ -48,6 +48,43 @@ Cooldown
 - 6m 70-80% power, 70-80% pace
 ```
 
+
+
+**Contoh 3: Short Sub-Threshold (Norwegian Singles)**
+```text
+/create-workout
+- Judul: Short Sub-Threshold
+- Tanggal: 2026-08-11
+- Teks DSL:
+Warmup
+- 15m 65-75% HR
+
+Intervals 20x
+- 400m 84-88% HR
+- 30s 0-60% HR
+
+Cooldown
+- 10m 60-70% HR
+```
+
+**Contoh 4: Medium Sub-Threshold (Norwegian Singles)**
+```text
+/create-workout
+- Judul: Medium Sub-Threshold
+- Tanggal: 2026-08-13
+- Jam: 05:00
+- Teks DSL:
+Warmup
+- 15m 65-75% HR
+
+Intervals 8x
+- 1000m 85-88% HR
+- 60s 0-60% HR
+
+Cooldown
+- 10m 60-70% HR
+```
+
 ---
 
 ## Langkah Eksekusi Sistem
