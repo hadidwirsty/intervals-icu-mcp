@@ -106,10 +106,14 @@ export function registerEventTools(server: McpServer): void {
           .describe(
             "Struktur workout Intervals.icu, contoh: { description, steps: [{ power: { value: 80, units: '%ftp' }, duration: 900, warmup: true }, ...] }.",
           ),
+        description: z
+          .string()
+          .optional()
+          .describe("Teks deskripsi atau Teks DSL workout Intervals.icu."),
         apiKey: z.string().optional().describe("Override API key untuk request ini saja."),
       },
     },
-    async ({ name, workoutType, athleteId, eventId, startDate, movingTime, distance, workoutDoc, apiKey }) => {
+    async ({ name, workoutType, athleteId, eventId, startDate, movingTime, distance, workoutDoc, description, apiKey }) => {
       const { id, error } = resolveAthleteId(athleteId);
       if (error) return errorResult(error);
 
@@ -123,6 +127,7 @@ export function registerEventTools(server: McpServer): void {
       if (movingTime !== undefined) body.moving_time = movingTime;
       if (distance !== undefined) body.distance = distance;
       if (workoutDoc !== undefined) body.workout_doc = workoutDoc;
+      if (description !== undefined) body.description = description;
 
       const path = eventId ? `/athlete/${id}/events/${eventId}` : `/athlete/${id}/events`;
       const result = await intervalsRequest(path, {

@@ -172,5 +172,7 @@ Tidak ada integrasi third-party lain (tidak ada database, tidak ada auth provide
 | 13 | Skill & Workflow Re-alignment — Coach Salman / Palladino Methodology | **Completed** |
 | 14 | Weekly Schedule (Mon REST, Sun LR) & Recovery Protocols | **Completed** |
 | 15 | Public Migration & Zero-PII Sanitization | **Completed** |
+| 16 | Fix Audit Gaps in Skills (ACWR, Ego Rule, RHR Baseline, Thursday Schedule) | **Completed** |
+| 17 | Public Migration (Zero-PII) for Plan 16 Gaps | **Completed** |
 
-> Plan files tersimpan di `docs/plans/` (16 files, arsip historis).
+> Plan files tersimpan di `docs/plans/` (17 files, arsip historis).

@@ -65,7 +65,7 @@ Sistem secara otomatis mengevaluasi **4 Sinyal Red Flag Kesiapan Fisik (Coach Fa
 
 Ditambah sinyal beban objektif:
 5. **TSB Status**: Jika `tsb < -30` (High Risk Fatigue Accumulation).
-6. **ACWR Status**: Jika `acwr > 1.35` (Warning / Danger Zone).
+6. **ACWR Status**: Jika `acwr > 1.3` (Warning / Danger Zone).
 7. **Ramp Rate Flag**: Jika `rampRate > +5 TSS/minggu` (di luar sweetspot +1 s.d. +3).
 8. **Jadwal Siklus Mesosiklus**: Jika minggu berjalan adalah **W4 (Planned Deload)**.
 

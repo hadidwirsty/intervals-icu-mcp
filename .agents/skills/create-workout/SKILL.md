@@ -59,6 +59,12 @@ Ekstrak parameter berikut dari input user:
 - `startTime`: Waktu jam HH:MM (default: "06:00").
 - `description`: Teks DSL Workout Intervals.icu.
 
+> [!TIP]
+> **Panduan Jadwal Waktu Eksekusi (Master Timetable)**:
+> - **Default Pagi**: `startTime: "06:00"` (atau 05:30) berlaku umum untuk sesi latihan pagi hari.
+> - **Sesi Sore / Custom**: Sesuaikan `startTime` jika ada preferensi sesi sore (contoh: `"16:45"` atau `"17:00"`).
+> - **Hari Rest Total**: Tidak perlu menjadwalkan workout (0 load).
+
 ---
 
 ### Step 2: Fetch Profil Atlet (Verifikasi Context)
