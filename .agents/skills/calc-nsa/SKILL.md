@@ -37,24 +37,30 @@ Saat dipanggil, ikuti langkah-langkah berikut secara berurutan:
   - `criticalPowerWatts`: Critical Power (CP) atlet (misal `293`).
 - Tool ini secara otomatis dan deterministik menghitung target Pace (min/km) dan Power (Watt) untuk seluruh 6 durasi interval time-based resmi NSA (§2.2): 10K/CV, 15K, HM, dan 30K.
 
-### Step 3: Sajikan Matriks NSA (Time-Based Workouts)
-Berdasarkan hasil pemanggilan `calculate_nsa_matrix`, sajikan tabel terstruktur di bawah ini kepada pengguna:
+### Step 3: Sajikan Matriks NSA (Time-Based Workouts & LacTrace Benchmark)
+Berdasarkan hasil pemanggilan `calculate_nsa_matrix` dan profil VDOT atlet, sajikan ringkasan ambang fisiologis serta tabel terstruktur di bawah ini kepada pengguna:
 
 ```markdown
+### 🎯 Benchmark Ambang Fisiologis (Ekuivalen LacTrace / Jack Daniels)
+- **VDOT Target**: [VDOT] | **Critical Power (CP)**: [CP] W
+- **Threshold Pace (LT2)**: ~[Threshold Pace] /km (titik batas laktat 3.0–4.0 mmol/L)
+- **Easy Pace Ceiling (65% MAS)**: ~[Easy Pace Range] /km (< 70% HRmax / < 146–155 bpm)
+
 ### 📊 Matriks Norwegian Singles Calculator (Time-Based)
 
-**VDOT Target**: [VDOT] | **Critical Power (CP)**: [CP] W
+| Format Interval | Repetisi Baku | Pace Guide | Target Pace Presisi | Rentang Toleransi Lapangan (LacTrace Range) | Target Power Atlet (Watt) | Rest |
+|---|---|---|:---:|:---:|:---:|---|
+| **1 min** | 20–25x | 10k/CV pace | `[Pace 10k]` | [Pace 10k - 8s] – [Pace 10k + 4s] /km | **[Power 10k]** | 30s walk |
+| **3 min** | 8–12x | 15k pace | `[Pace 15k]` | [Pace 15k - 1s] – [Pace 15k + 9s] /km | **[Power 15k]** | 60s walk |
+| **5–6 min** | 5–8x | 15k pace | `[Pace 15k]` | [Pace 15k - 1s] – [Pace 15k + 9s] /km | **[Power 15k Long]** | 60s walk |
+| **6–8 min** | 4–6x | Half marathon pace | `[Pace HM]` | [Pace HM - 1s] – [Pace HM + 9s] /km | **[Power HM]** | 60s walk |
+| **10–12 min** | 3–4x | HM - 30k pace | `[Pace (HM+30k)/2]` | [Pace HM/30k - 1s] – [Pace HM/30k + 9s] /km | **[Power HM/30k]** | 60–120s walk |
+| **15 min** | 3x | 30k pace | `[Pace 30k]` | [Pace 30k - 1s] – [Pace 30k + 9s] /km | **[Power 30k]** | 90–120s walk |
 
-| Time | Repetitions | Pace Guide | Target Pace Atlet | Target Power Atlet | Rest |
-|---|---|---|---|---|---|
-| **1 min** | 25x | 10k/CV pace | `[Pace 10k]` | `[Power 10k]` | 30s |
-| **3 min** | 10-12x | 15k pace | `[Pace 15k]` | `[Power 15k]` | 60s |
-| **5-6 min** | 6-8x | 15k pace | `[Pace 15k]` | `[Power 15k]` | 60s |
-| **6-8 min** | 5-6x | Half marathon pace | `[Pace HM]` | `[Power HM]` | 60s |
-| **10-12 min** | 3-4x | HM - 30k pace | `[Pace (HM+30k)/2]` | `[Power (HM+30k)/2]` | 60-120s |
-| **15 min** | 3-4x | 30k pace | `[Pace 30k]` | `[Power 30k]` | 90-120s |
-
-> *Catatan Fisiologis*: Pace adalah proksi, Power adalah target turunan personal, dan Detak Jantung (HR) adalah batas mutlak. Jika HR menembus batas atas zona sub-threshold (Z2 Norwegia / Z2 Friel), kurangi target Pace/Power.
+> *Catatan Fisiologis & Dual-Control Protocol*:
+> 1. **Pace Presisi vs Rentang Lapangan**: Target Pace Presisi adalah acuan ideal, sedangkan *Rentang Toleransi (LacTrace Range)* adalah jendela aman saat menghadapi variasi kontur jalan, tikungan, atau hembusan angin.
+> 2. **Power (Watt) sebagai Navigasi Utama**: Target Power menjaga intensitas metabolik tetap konstan tanpa terpengaruh elevasi tanjakan/turunan.
+> 3. **Heart Rate (HR) Ceiling**: HR adalah batas mutlak (Z2 Norwegia / ceiling <168–172 bpm). Jika detak jantung melewati batas ambang ini, segera turunkan pace ke batas toleransi bawah atau kurangi power.
 ```
 
 ---
