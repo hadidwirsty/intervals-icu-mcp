@@ -90,11 +90,41 @@ export function analyzeTrainingLoad(input: LoadAnalysisInput): LoadAnalysisResul
 }
 
 export interface WeeklyBudgetInput {
-  avgDailyLoad: number;   // 42d avg daily load (CTL) atau avg daily distance (km)
-  targetRampPct?: number; // Target persentase kenaikan (default: 5%)
+  targetWeeklyHours?: number;   // Durasi lari mingguan dalam jam (misal 5.0 - 9.0 jam)
+  currentCtl?: number;          // Chronic Training Load atlet (opsional untuk estimasi)
+  qualitySessionsCount?: 2 | 3; // Jumlah sesi Sub-T per minggu (default 3, atau 2 untuk pemula §2.3)
+  avgDailyLoad?: number;        // Legacy: 42d avg daily load (CTL) atau km
+  targetRampPct?: number;       // Target persentase kenaikan beban (default: 5%)
 }
 
 export interface WeeklyBudgetResult {
+  // Norwegian Singles time-based structure
+  targetHours: number;
+  totalMinutes: number;
+  subThresholdBudget: {
+    percentage: number;         // 20 - 25% (default 22.5%)
+    totalMinutes: number;
+    sessionsCount: number;
+    minutesPerSession: number;
+  };
+  easyBudget: {
+    percentage: number;         // 75 - 80% (default 77.5%)
+    totalMinutes: number;
+    longRunMinutes: number;     // 75 - 90 menit (§4.6)
+    easyRunsMinutes: number;
+    easySessionsCount: number;  // 3 atau 4 hari
+    minutesPerEasySession: number;
+  };
+  guardrails: {
+    exceedsSafeWeeklyHeadroom: boolean;    // true jika >= 8.5 jam/minggu (§6.2)
+    easyDoublesRecommended: boolean;       // true jika >= 8.5 jam
+    sessionWorkDurationCapMinutes: number; // 40 - 50 menit kerja Sub-T per sesi (§6.2)
+    sessionWorkDistanceCapKm: number;      // 10 - 12 km kerja Sub-T per sesi (§6.2)
+    status: "SAFE" | "APPROACHING_LIMIT" | "EXCEEDED";
+    notes: string[];
+  };
+
+  // Legacy fields for backward compatibility
   baseWeeklyLoad: number;
   totalWeeklyBudget: number;
   rampPct: number;
@@ -105,6 +135,8 @@ export interface WeeklyBudgetResult {
   easyRunMin: number;        // ~45%
   easyRunMax: number;        // ~55%
   guidelines: {
+    weekly: string;
+    subThreshold?: string;
     longRun: string;
     qualityInterval: string;
     easyRun: string;
@@ -231,17 +263,83 @@ export function calculateDistanceBudget(input: DistanceBudgetInput): DistanceBud
 }
 
 export function calculateWeeklyBudget(input: WeeklyBudgetInput): WeeklyBudgetResult {
-  const { avgDailyLoad, targetRampPct = 5 } = input;
-  if (avgDailyLoad <= 0) {
+  const {
+    targetWeeklyHours,
+    currentCtl,
+    qualitySessionsCount = 3,
+    avgDailyLoad,
+    targetRampPct = 5,
+  } = input;
+
+  if (targetWeeklyHours !== undefined) {
+    if (targetWeeklyHours <= 0 || targetWeeklyHours > 20) {
+      throw new RangeError("targetWeeklyHours harus bilangan positif dalam rentang realistis (<= 20 jam).");
+    }
+  }
+
+  if (avgDailyLoad !== undefined && avgDailyLoad <= 0) {
     throw new RangeError("avgDailyLoad harus bilangan positif > 0.");
   }
+
   if (targetRampPct < -50 || targetRampPct > 30) {
     throw new RangeError("targetRampPct di luar jangkauan wajar (-50% s/d +30%).");
   }
 
-  const baseWeeklyLoad = avgDailyLoad * 7;
-  const totalWeeklyBudget = Math.round(baseWeeklyLoad * (1 + targetRampPct / 100) * 10) / 10;
+  // Tentukan target durasi mingguan (jam)
+  let resolvedHours = targetWeeklyHours;
+  if (resolvedHours === undefined) {
+    if (currentCtl && currentCtl > 0) {
+      resolvedHours = Math.round(Math.min(9.0, Math.max(5.0, (currentCtl * 7) / 50)) * 10) / 10;
+    } else if (avgDailyLoad && avgDailyLoad > 0) {
+      resolvedHours = 6.0;
+    } else {
+      resolvedHours = 6.0;
+    }
+  }
 
+  const targetHours = resolvedHours;
+  const totalMinutes = Math.round(targetHours * 60);
+
+  // Sub-Threshold budget: 20 - 25% (default 22.5%)
+  const subTPct = 22.5;
+  const subTTotalMinutes = Math.round((totalMinutes * (subTPct / 100)) * 10) / 10;
+  const sessionsCount = qualitySessionsCount === 2 ? 2 : 3;
+  const minutesPerSession = Math.round((subTTotalMinutes / sessionsCount) * 10) / 10;
+
+  // Easy budget: 75 - 80% (default 77.5%)
+  const easyPct = 77.5;
+  const easyTotalMinutes = Math.round((totalMinutes - subTTotalMinutes) * 10) / 10;
+  const longRunMinutes = targetHours >= 7.0 ? 90 : 75;
+  const easyRunsMinutes = Math.round((easyTotalMinutes - longRunMinutes) * 10) / 10;
+  const easySessionsCount = 4;
+  const minutesPerEasySession = Math.round((easyRunsMinutes / easySessionsCount) * 10) / 10;
+
+  // Guardrails §6.2
+  const exceedsSafeWeeklyHeadroom = targetHours >= 8.5;
+  const easyDoublesRecommended = targetHours >= 8.5;
+  let status: "SAFE" | "APPROACHING_LIMIT" | "EXCEEDED" = "SAFE";
+  if (targetHours > 10.0) {
+    status = "EXCEEDED";
+  } else if (targetHours >= 8.5) {
+    status = "APPROACHING_LIMIT";
+  }
+
+  const guardrailNotes: string[] = [
+    "Alokasi durasi resmi Norwegian Singles: 20–25% Sub-Threshold dan 75–80% Easy aerobic.",
+    "Batas durasi kerja Sub-T per sesi maksimal 40–50 menit atau 10–12 km (§6.2).",
+    "Long run murni aerobik 75–90 menit tanpa tempo-in-LR (§4.6, §5.1).",
+  ];
+
+  if (easyDoublesRecommended) {
+    guardrailNotes.unshift(
+      "Volume mingguan mendekati/melebihi batas aman 8–9 jam/minggu (§6.2). Disarankan membagi lari mudah menjadi easy double (2 sesi/hari) untuk membatasi durasi sesi tunggal dan meminimalkan beban muskuloskeletal."
+    );
+  }
+
+  // Legacy load fields
+  const baseDaily = avgDailyLoad ?? (currentCtl ?? 45);
+  const baseWeeklyLoad = Math.round(baseDaily * 7 * 10) / 10;
+  const totalWeeklyBudget = Math.round(baseWeeklyLoad * (1 + targetRampPct / 100) * 10) / 10;
   const longRunMin = Math.round(totalWeeklyBudget * 0.30 * 10) / 10;
   const longRunMax = Math.round(totalWeeklyBudget * 0.35 * 10) / 10;
   const qualityIntervalMin = Math.round(totalWeeklyBudget * 0.15 * 10) / 10;
@@ -250,7 +348,31 @@ export function calculateWeeklyBudget(input: WeeklyBudgetInput): WeeklyBudgetRes
   const easyRunMax = Math.round(totalWeeklyBudget * 0.55 * 10) / 10;
 
   return {
-    baseWeeklyLoad: Math.round(baseWeeklyLoad * 10) / 10,
+    targetHours,
+    totalMinutes,
+    subThresholdBudget: {
+      percentage: subTPct,
+      totalMinutes: subTTotalMinutes,
+      sessionsCount,
+      minutesPerSession,
+    },
+    easyBudget: {
+      percentage: easyPct,
+      totalMinutes: easyTotalMinutes,
+      longRunMinutes,
+      easyRunsMinutes,
+      easySessionsCount,
+      minutesPerEasySession,
+    },
+    guardrails: {
+      exceedsSafeWeeklyHeadroom,
+      easyDoublesRecommended,
+      sessionWorkDurationCapMinutes: 45,
+      sessionWorkDistanceCapKm: 12,
+      status,
+      notes: guardrailNotes,
+    },
+    baseWeeklyLoad,
     totalWeeklyBudget,
     rampPct: targetRampPct,
     longRunMin,
@@ -260,9 +382,11 @@ export function calculateWeeklyBudget(input: WeeklyBudgetInput): WeeklyBudgetRes
     easyRunMin,
     easyRunMax,
     guidelines: {
-      longRun: `Maksimal 30–35% dari total budget minggu ini (${longRunMin}–${longRunMax}).`,
-      qualityInterval: `Maksimal 15–20% dari total budget minggu ini (${qualityIntervalMin}–${qualityIntervalMax}).`,
-      easyRun: `Alokasikan 45–55% dari total budget untuk lari easy/recovery (${easyRunMin}–${easyRunMax}).`,
+      weekly: `Target durasi: ${targetHours} jam (${totalMinutes} menit). Sub-T: ${subTTotalMinutes}m (${subTPct}%), Easy: ${easyTotalMinutes}m (${easyPct}%). Status: ${status}.`,
+      subThreshold: `${sessionsCount}x sesi Sub-T @ ~${minutesPerSession} menit kerja/sesi (plafon 40–50m / 10–12km kerja per sesi §6.2).`,
+      longRun: `Long run aerobik: ${longRunMinutes} menit (plafon 75–90 menit §4.6, tanpa tempo-in-LR §5.1).`,
+      qualityInterval: `Maksimal 15–20% dari total budget minggu ini (${qualityIntervalMin}–${qualityIntervalMax} TSS).`,
+      easyRun: `Alokasikan ${easyTotalMinutes} menit untuk lari santai: 1x Long Run (${longRunMinutes}m) + ${easySessionsCount}x Easy Run (@ ~${minutesPerEasySession}m/sesi).`,
     },
   };
 }

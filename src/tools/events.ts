@@ -7,6 +7,7 @@ import { z } from "zod";
 import { intervalsRequest, resolveAthleteId } from "../client.js";
 import { errorResult, toToolResult } from "../types.js";
 import { validateWorkoutDsl } from "../utils/dsl.js";
+import { generateWeeklyPlan } from "../utils/plan.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
@@ -58,7 +59,7 @@ export function registerEventTools(server: McpServer): void {
       const { id, error } = resolveAthleteId(athleteId);
       if (error) return errorResult(error);
 
-      const result = await intervalsRequest(`/athlete/${id}/event/${eventId}`, { apiKey });
+      const result = await intervalsRequest(`/athlete/${id}/events/${eventId}`, { apiKey });
       return toToolResult(result);
     },
   );
@@ -91,13 +92,21 @@ export function registerEventTools(server: McpServer): void {
     {
       title: "Add or Update Planned Workout",
       description:
-        "Buat atau update planned workout (event kalender kategori WORKOUT) di Intervals.icu. Kirim event_id untuk update, kosongkan untuk membuat baru. workoutDoc opsional untuk mendefinisikan struktur steps (warmup/interval/cooldown, target power/hr/pace, dll — ikuti format workout builder Intervals.icu).",
+        "Buat atau update planned workout (event kalender kategori WORKOUT, RACE_A, dll) di Intervals.icu. Kirim event_id untuk update, kosongkan untuk membuat baru. workoutDoc opsional untuk mendefinisikan struktur steps (warmup/interval/cooldown, target power/hr/pace, dll — ikuti format workout builder Intervals.icu).",
       inputSchema: {
         name: z.string().describe("Nama workout."),
         workoutType: z.string().describe("Tipe workout, contoh: Ride, Run, Swim, Walk, Row."),
+        category: z
+          .string()
+          .optional()
+          .describe("Kategori event (WORKOUT, RACE_A, RACE_B, RACE_C, NOTE). Default 'WORKOUT'."),
         athleteId: z.string().optional().describe("Athlete ID Intervals.icu. Default dari INTERVALS_ATHLETE_ID."),
         eventId: z.string().optional().describe("Event ID untuk update. Kosongkan untuk membuat event baru."),
         startDate: z.string().optional().describe("Tanggal workout, format YYYY-MM-DD. Default hari ini."),
+        startTime: z
+          .string()
+          .optional()
+          .describe("Waktu pelaksanaan, format HH:MM (contoh: '04:45'). Default '00:00'."),
         movingTime: z.number().int().positive().optional().describe("Perkiraan moving time dalam detik."),
         distance: z.number().positive().optional().describe("Perkiraan jarak dalam meter."),
         workoutDoc: z
@@ -113,16 +122,30 @@ export function registerEventTools(server: McpServer): void {
         apiKey: z.string().optional().describe("Override API key untuk request ini saja."),
       },
     },
-    async ({ name, workoutType, athleteId, eventId, startDate, movingTime, distance, workoutDoc, description, apiKey }) => {
+    async ({
+      name,
+      workoutType,
+      category,
+      athleteId,
+      eventId,
+      startDate,
+      startTime,
+      movingTime,
+      distance,
+      workoutDoc,
+      description,
+      apiKey,
+    }) => {
       const { id, error } = resolveAthleteId(athleteId);
       if (error) return errorResult(error);
 
       const date = startDate ?? new Date().toISOString().slice(0, 10);
+      const timeStr = startTime ?? "00:00";
       const body: Record<string, unknown> = {
-        category: "WORKOUT",
+        category: category ?? "WORKOUT",
         name,
         type: workoutType,
-        start_date_local: `${date}T00:00:00`,
+        start_date_local: `${date}T${timeStr}:00`,
       };
       if (movingTime !== undefined) body.moving_time = movingTime;
       if (distance !== undefined) body.distance = distance;
@@ -316,6 +339,88 @@ export function registerEventTools(server: McpServer): void {
           apiKey,
         });
         return toToolResult(result);
+      } catch (err) {
+        return errorResult(err instanceof Error ? err.message : String(err));
+      }
+    },
+  );
+
+  server.registerTool(
+    "generate_weekly_plan",
+    {
+      title: "Generate Norwegian Singles Weekly Plan",
+      description:
+        "Hasilkan rencana latihan 1 pekan penuh (Senin s.d. Minggu) berbasis Norwegian Singles Training Method. Menghasilkan susunan 7 sesi berstruktur (pola E-Q-E-Q-E-Q-LR) lengkap dengan tanggal, jam, durasi, dan Teks DSL resmi Intervals.icu yang siap ditinjau dan diterbitkan ke kalender.",
+      inputSchema: {
+        startDateMonday: z
+          .string()
+          .describe("Tanggal hari Senin untuk minggu yang direncanakan, format YYYY-MM-DD. Contoh: '2026-09-21'."),
+        targetHours: z
+          .number()
+          .min(3.0)
+          .max(12.0)
+          .optional()
+          .default(6.0)
+          .describe("Target durasi latihan dalam jam (default: 6.0, koridor 5.0–9.0 jam)."),
+        qualitySessionsCount: z
+          .union([z.literal(2), z.literal(3)])
+          .optional()
+          .default(3)
+          .describe("Jumlah sesi kualitas Sub-T per minggu: 3 (standar) atau 2 (pemula/deload §2.3)."),
+        q1Preset: z
+          .enum(["short_3m", "micro_1m", "dist_1000m"])
+          .optional()
+          .describe("Variasi menu Sub-T untuk Quality 1 (Selasa). Default 'short_3m' (10x3m)."),
+        q2Preset: z
+          .enum(["medium_6m", "long_10m", "dist_2000m", "dist_3000m"])
+          .optional()
+          .describe("Variasi menu Sub-T untuk Quality 2 (Jumat). Default 'medium_6m' (5x6m)."),
+        fastingDays: z
+          .array(z.enum(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]))
+          .optional()
+          .describe("Daftar hari puasa sunnah untuk penyesuaian jam lari sore 16:45 (default: ['Monday', 'Thursday'])."),
+        defaultMorningTime: z
+          .string()
+          .optional()
+          .describe("Jam pelaksanaan lari pagi (format HH:MM, default '05:30')."),
+        fastingAfternoonTime: z
+          .string()
+          .optional()
+          .describe("Jam pelaksanaan lari ngabuburit sore (format HH:MM, default '16:45')."),
+        longRunMinutes: z
+          .number()
+          .min(60)
+          .max(180)
+          .optional()
+          .describe("Durasi Long Run hari Minggu dalam menit (default: 75m, atau 90m jika targetHours >= 7.0)."),
+      },
+    },
+    async ({
+      startDateMonday,
+      targetHours,
+      qualitySessionsCount,
+      q1Preset,
+      q2Preset,
+      fastingDays,
+      defaultMorningTime,
+      fastingAfternoonTime,
+      longRunMinutes,
+    }) => {
+      try {
+        const plan = generateWeeklyPlan({
+          startDateMonday,
+          targetHours,
+          qualitySessionsCount,
+          qualityPresets: {
+            q1: q1Preset,
+            q2: q2Preset,
+          },
+          fastingDays,
+          defaultMorningTime,
+          fastingAfternoonTime,
+          longRunMinutes,
+        });
+        return toToolResult(plan);
       } catch (err) {
         return errorResult(err instanceof Error ? err.message : String(err));
       }

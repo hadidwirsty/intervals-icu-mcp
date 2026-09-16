@@ -23,3 +23,13 @@ describe("parseRaceTime", () => {
     expect(() => parseRaceTime("")).toThrow();
   });
 });
+
+describe("registerCalculatorTools", () => {
+  it("registers calculator tools on McpServer successfully", async () => {
+    const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    const { registerCalculatorTools } = await import("./calculator.js");
+
+    const server = new McpServer({ name: "test-server", version: "1.0.0" });
+    expect(() => registerCalculatorTools(server)).not.toThrow();
+  });
+});

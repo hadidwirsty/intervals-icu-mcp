@@ -43,17 +43,33 @@ export function registerLoadTools(server: McpServer): void {
     {
       title: "Calculate Weekly Training Budget",
       description:
-        "Hitung budget latihan mingguan (Total Budget, Long Run Max, Quality/Interval Max, Easy Run Budget) berdasarkan 42d avg load/distance dan target ramp rate aman sesuai Coach Faris Salman / Palladino.",
+        "Hitung budget alokasi durasi latihan mingguan resmi Norwegian Singles Method (5–9 jam/minggu, 20–25% Sub-Threshold, 75–80% Easy, Long Run 75–90m, dan guardrail §6.2) atau mode kalkulasi alternatif.",
       inputSchema: {
+        targetHours: z
+          .number()
+          .min(3.0)
+          .max(15.0)
+          .optional()
+          .describe("Target durasi latihan lari mingguan dalam jam (rentang 5.0–9.0 jam sesuai Norwegian Singles Method). Contoh: 6.0."),
+        currentCtl: z
+          .number()
+          .positive()
+          .optional()
+          .describe("Chronic Training Load (CTL) 42 hari terakhir untuk estimasi beban mingguan jika targetHours tidak diisi."),
+        qualitySessionsCount: z
+          .union([z.literal(2), z.literal(3)])
+          .optional()
+          .describe("Jumlah sesi kualitas Sub-T per minggu: 3 (standar NSA) atau 2 (pemula/volume rendah §2.3). Default: 3."),
         avgDailyLoad: z
           .number()
           .positive()
-          .describe("Rata-rata load (TSS) atau jarak (km) harian 42 hari terakhir (CTL)."),
-        mode: z
-          .enum(["load", "distance"])
           .optional()
-          .default("load")
-          .describe("Mode budget: 'load' (default, TSS) atau 'distance' (km)."),
+          .describe("Legacy: Rata-rata load (TSS) atau jarak (km) harian 42 hari terakhir (CTL)."),
+        mode: z
+          .enum(["duration", "load", "distance"])
+          .optional()
+          .default("duration")
+          .describe("Mode budget: 'duration' (default resmi NSA, jam/menit), 'load' (TSS), atau 'distance' (km)."),
         targetRampPct: z
           .number()
           .min(-50)
@@ -79,11 +95,21 @@ export function registerLoadTools(server: McpServer): void {
           .describe("Khusus mode distance: Persentase risiko Frandsen (default: 104 untuk ~104% main aman)."),
       },
     },
-    async ({ avgDailyLoad, mode, targetRampPct, ninetyDayMaxLrKm, workoutMultiplier, longRunRiskPct }) => {
+    async ({
+      targetHours,
+      currentCtl,
+      qualitySessionsCount,
+      avgDailyLoad,
+      mode,
+      targetRampPct,
+      ninetyDayMaxLrKm,
+      workoutMultiplier,
+      longRunRiskPct,
+    }) => {
       try {
         if (mode === "distance") {
           const result = calculateDistanceBudget({
-            avgDailyKm: avgDailyLoad,
+            avgDailyKm: avgDailyLoad ?? 6,
             targetRampPct,
             ninetyDayMaxLrKm,
             workoutMultiplier,
@@ -91,7 +117,13 @@ export function registerLoadTools(server: McpServer): void {
           });
           return jsonResult(result);
         }
-        const result = calculateWeeklyBudget({ avgDailyLoad, targetRampPct });
+        const result = calculateWeeklyBudget({
+          targetWeeklyHours: targetHours,
+          currentCtl,
+          qualitySessionsCount,
+          avgDailyLoad,
+          targetRampPct,
+        });
         return jsonResult(result);
       } catch (err) {
         return errorResult(err instanceof Error ? err.message : String(err));

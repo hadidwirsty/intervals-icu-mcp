@@ -50,12 +50,24 @@ Skill ini digunakan untuk mengevaluasi skor kesiapan harian atlet sebelum memula
   * If `YELLOW (50-79%)`: Kondisi sedang. Batasi intensitas ke Zona 2 Aerobic / Easy Run.
   * If `RED (<50%)`: Kelelahan / stress tinggi. Disarankan deload, easy walk, atau istirahat total.
 
-#### 3. 🚨 Evaluasi 4 Red Flags Kelelahan (Coach Faris Salman)
-Verifikasi apakah ada $\ge 2$ hal dari kriteria berikut muncul:
-1. [ ] **RHR Pagi naik > 5 bpm** dari baseline (Aktual: [RHR] bpm vs Baseline: 46 bpm).
-2. [ ] **Kualitas tidur buruk 2 malam berturut-turut** (Sleep score rendah).
+#### 3. 🚨 Evaluasi Sinyal Red Flag Kelelahan (Monitoring Tambahan)
+> TSB, ACWR, dan RHR baseline berfungsi sebagai indikator objektif pelengkap anjuran kualitatif NSA ("listen to your body").
+
+Verifikasi apakah ada kriteria berikut muncul:
+1. [ ] **RHR Pagi naik > 5 bpm** dari baseline normal.
+2. [ ] **Kualitas tidur buruk 2 malam berturut-turut** (Sleep score rendah / durasi < 6 jam).
 3. [ ] **Motivasi lari drop drastis** (kelelahan sistem saraf pusat / CNS fatigue).
 4. [ ] **Easy pace terasa berat** pada sesi terakhir meski intensitas dijaga.
+5. [ ] **Nyeri / Kekakuan Sendi atau Otot (Musculoskeletal Check)**: Terdeteksi rasa nyeri atau kekakuan abnormal pada otot/sendi.
 
-> ⚠️ **Aturan Emas**: Jika $\ge 2$ sinyal Red Flag aktif, jangan paksakan jadwal Quality! Turunkan sesi hari ini ke **Easy Recovery** atau **Rest Total**, dan pertimbangkan aktivasi **Deload / Maintenance Week**.
+> ⚠️ **Panduan Tindakan**:
+> - Jika $\ge 2$ sinyal dari Flag 1–4 aktif: Turunkan sesi ke **Easy Recovery** atau **Rest Total**, dan pertimbangkan aktivasi **Deload Adaptif**.
+> - **🚨 ATURAN KHUSUS FLAG 5 (PROTOKOL CEDERA & CROSS-TRAINING — Sumber: NSA §4.9)**:
+>   * Jika terdeteksi nyeri atau peradangan sendi/otot, tunda sesi lari berbenturan keras.
+>   * **Opsi 1 (Restorasi Penuh)**: Ubah ke Rest Total / Easy Walk dan peregangan mobilitas ringan.
+>   * **Opsi 2 (Cross-Training Menjaga Volume — Sumber: NSA §4.9)**: *"Cross-Training: Can be used to supplement volume or substitute sessions during injury recovery, mimicking the E-Q-E-Q-E-Q-LR structure using modalities like cycling, elliptical, or arc trainer, focusing on similar durations and sub-threshold efforts."* Atlet diizinkan mengganti sesi lari dengan **Cross-Training (sepeda statis, elliptical, atau arc trainer)** pada intensitas dan durasi yang setara guna menjaga kebugaran aerobik tanpa beban impak mekanis pada sendi.
+
+#### 4. 🌙 Konteks Hari Latihan & Pemulihan Khusus (Opsional)
+- **Kondisi Puasa / Fasting**: Jika atlet berpuasa pada hari tertentu, sesi latihan dibatasi strictly **Easy Recovery Run santai sore hari (40–45m, HR ≤ 70%)**. Dilarang melakukan sesi kualitas dalam kondisi kekurangan cairan atau glikogen.
+- **Sesi Pasca-Puasa**: Verifikasi hidrasi dan asupan karbohidrat yang cukup sebelum memulai sesi Quality berikutnya.
 ```

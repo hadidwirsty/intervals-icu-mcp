@@ -12,6 +12,6 @@ dist/
 # Logs
 *.log
 
-# Internal Agent & Planning Artifacts
-docs/plans/
+# MacOS Files
+.DS_Store
 

@@ -37,3 +37,13 @@ describe("create_running_workout payload formatting", () => {
     expect(start_date_local).toBe("2026-08-04T06:00:00");
   });
 });
+
+describe("registerEventTools generate_weekly_plan", () => {
+  it("registers generate_weekly_plan tool on McpServer successfully", async () => {
+    const { McpServer } = await import("@modelcontextprotocol/sdk/server/mcp.js");
+    const { registerEventTools } = await import("./events.js");
+
+    const server = new McpServer({ name: "test-events-server", version: "1.0.0" });
+    expect(() => registerEventTools(server)).not.toThrow();
+  });
+});

@@ -1,6 +1,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+
 import { analyzeCardiacDrift } from "../utils/drift.js";
+import { calculateRaceFuelingPlan } from "../utils/fueling.js";
 import { calculateTaperPlan, predictRaceTime } from "../utils/race.js";
 import { calculateReadinessScore } from "../utils/readiness.js";
 
@@ -75,6 +77,27 @@ export function registerIntelligenceTools(server: McpServer): void {
     },
     async (input) => {
       const result = calculateReadinessScore(input);
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // 5. calculate_race_fueling
+  server.tool(
+    "calculate_race_fueling",
+    "Menghitung strategi nutrisi perlombaan berbasis energi gel (30g karbohidrat), estimasi laju keringat & hidrasi untuk iklim tropis hangat/lembab, serta strategi pacing KM-by-KM untuk Half Marathon.",
+    {
+      raceDistanceKm: z.number().optional().describe("Jarak lomba dalam kilometer (default: 21.0975 untuk Half Marathon)."),
+      predictedTimeMinutes: z.number().optional().describe("Estimasi waktu tempuh lomba dalam menit (misal 138 untuk 2h18m)."),
+      athleteWeightKg: z.number().optional().describe("Berat badan atlet dalam kg (default: 81 kg)."),
+      temperatureCelsius: z.number().optional().describe("Estimasi suhu rata-rata saat lomba dalam derajat Celsius (default: 26°C)."),
+      relativeHumidityPct: z.number().optional().describe("Estimasi kelembapan relatif saat lomba dalam persen (default: 80%)."),
+      criticalPowerWatts: z.number().optional().describe("Critical Power (CP) atlet dalam Watt (default: 293 W)."),
+      vdot: z.number().optional().describe("Skor VDOT atlet (default: 32)."),
+    },
+    async (input) => {
+      const result = calculateRaceFuelingPlan(input);
       return {
         content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
       };

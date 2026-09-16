@@ -6,6 +6,7 @@
 import { z } from "zod";
 
 import { errorResult } from "../types.js";
+import { calculateNsaMatrix } from "../utils/nsa.js";
 import { calculatePaceZones, calculateVdot } from "../utils/vdot.js";
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -146,6 +147,34 @@ export function registerCalculatorTools(server: McpServer): void {
             repetition: "Sprint pendek 200–400m dengan recovery sangat panjang.",
           },
         });
+      } catch (err) {
+        return errorResult(err instanceof Error ? err.message : String(err));
+      }
+    },
+  );
+
+  server.registerTool(
+    "calculate_nsa_matrix",
+    {
+      title: "Calculate Norwegian Singles Interval Matrix",
+      description:
+        "Hitung matriks interval Norwegian Singles (Time-Based) resmi (§2.2): memproyeksikan target Pace (min/km) dan Power (Watt) secara deterministik untuk 6 durasi interval (1m, 3m, 5-6m, 6-8m, 10-12m, 15m) berdasarkan skor VDOT dan Critical Power atlet.",
+      inputSchema: {
+        vdot: z
+          .number()
+          .min(30)
+          .max(85)
+          .describe("Skor VDOT atlet (30–85). Dihitung dari calculate_vdot atau riwayat race/tempo."),
+        criticalPowerWatts: z
+          .number()
+          .positive()
+          .describe("Critical Power (CP) atlet dalam satuan Watt (contoh: 293)."),
+      },
+    },
+    async ({ vdot, criticalPowerWatts }) => {
+      try {
+        const matrix = calculateNsaMatrix({ vdot, criticalPowerWatts });
+        return jsonResult(matrix);
       } catch (err) {
         return errorResult(err instanceof Error ? err.message : String(err));
       }

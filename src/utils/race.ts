@@ -2,6 +2,8 @@
  * Kalkulator Prediksi Race Time & Tapering Plan Generator.
  */
 
+import { calculateVdot } from "./vdot.js";
+
 export interface RacePredictionInput {
   vdot: number;
   targetDistanceKm: number;
@@ -35,6 +37,25 @@ function paceToFormatted(secPerKm: number): string {
   return `${m}:${s.toString().padStart(2, "0")}/km`;
 }
 
+/**
+ * Mencari waktu race (detik) untuk jarak dan target VDOT tertentu
+ * menggunakan binary search berbasis formula non-linear Jack Daniels.
+ */
+export function solveRaceTimeFromVdot(distanceMeters: number, targetVdot: number): number {
+  let low = distanceMeters / 12.0; // 12 m/s
+  let high = distanceMeters / 1.0; // 1 m/s
+  for (let i = 0; i < 30; i++) {
+    const mid = (low + high) / 2.0;
+    const v = calculateVdot(distanceMeters, mid);
+    if (v < targetVdot) {
+      high = mid;
+    } else {
+      low = mid;
+    }
+  }
+  return (low + high) / 2.0;
+}
+
 export function predictRaceTime(input: RacePredictionInput): RacePredictionOutput {
   const { vdot, targetDistanceKm, ctl = 50, tsb = 0 } = input;
   if (vdot <= 0 || targetDistanceKm <= 0) {
@@ -44,8 +65,8 @@ export function predictRaceTime(input: RacePredictionInput): RacePredictionOutpu
   const ctlFactor = Math.max(0.95, Math.min(1.05, 1 - (ctl - 50) / 500));
   const tsbFactor = Math.max(0.96, Math.min(1.04, 1 - tsb / 500));
 
-  const base5kSec = (29.5 - 0.19 * vdot) * 60;
-  const baseSec = base5kSec * Math.pow(targetDistanceKm / 5, 1.06);
+  const distanceMeters = targetDistanceKm * 1000;
+  const baseSec = solveRaceTimeFromVdot(distanceMeters, vdot);
 
   const adjustedSec = Math.round(baseSec * ctlFactor * tsbFactor);
   const secPerKm = adjustedSec / targetDistanceKm;
