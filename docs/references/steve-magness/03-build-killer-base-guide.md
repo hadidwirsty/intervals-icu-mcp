@@ -47,9 +47,9 @@ Pilar ini menjaga agar pelari tidak menjadi lambat atau kaku selama fase fondasi
 
 ---
 
-## 3. Matriks Konfirmasi terhadap Skills Kita
+## 3. Matriks Konfirmasi Metodologi Ekosistem MCP
 
-| Konsep Steve Magness | Implementasi di Sistem Kita | Skill Terkait |
+| Konsep Steve Magness | Implementasi pada Ekosistem MCP | Skill Terkait |
 |---|---|---|
 | Multifaceted Base (Aerobic + Speed) | Alokasi mingguan 75/25: 75% lari aerobik santai + 25% Sub-T + Strides | `weekly-budget`, `plan-week` |
 | Neuromuscular Maintenance via Strides | Rutinitas Strides 4x 15s (180–195 spm, 110–130% CP) di hari Rabu/Sabtu | `plan-week`, `create-workout` |

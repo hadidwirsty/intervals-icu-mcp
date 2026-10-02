@@ -84,7 +84,7 @@ Kekuatan pelari disempurnakan dengan kemampuan memanfaatkan elastisitas tendon (
 1. **Pogo Jumps / Ankle Pops**:
    - 2 set x 15–20 pantulan cepat di tempat menggunakan pergelangan kaki (lutut relatif kaku, kontak tanah seminimal mungkin, seperti memantul di trampolin).
 2. **Strides (Neuromuscular Reset)**:
-   - Dilakukan 4–6x 15–20 detik akselerasi halus hingga mencapai kecepatan ~10K/5K pace (Power 110–130% CP / 320–380 W, Cadence 180–195 spm).
+   - Dilakukan 4–6x 15–20 detik akselerasi halus hingga mencapai kecepatan ~10K/5K pace (Power 110–130% CP, Cadence 180–195 spm).
    - Istirahat: 45–60 detik jalan santai (*passive walk*).
    - Menjaga rekrutmen serat otot tipe IIa dan postur tegak (*stay tall*) pasca-volume lari lambat.
 
@@ -93,7 +93,7 @@ Kekuatan pelari disempurnakan dengan kemampuan memanfaatkan elastisitas tendon (
 ## 5. Protokol Spesifik: Fase In-Season & Taper (Jelang Target Race)
 
 > [!CAUTION]
-> **Protokol Menjelang Race Day (H-18 s.d. H-1)**:
+> **Protokol Menjelang Race Day (Fase Taper 2–3 Pekan)**:
 > 1. **Cut Volume, Maintain Pattern**:
 >    - Pangkas volume set Modul 2 (Lower Body) hingga 50% (cukup 1–2 set ringan).
 >    - **DILARANG** mencoba variasi latihan baru, menambah beban dumbell, atau melakukan repetisi hingga gagal (*training to failure*).

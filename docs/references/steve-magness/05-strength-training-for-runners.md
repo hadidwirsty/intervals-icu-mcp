@@ -63,7 +63,7 @@ Prinsip terpenting dalam menyatukan lari dan gym:
 * **Kapan Waktu Terbaik Latihan Kekuatan?**
   * Lakukan latihan kekuatan di **HARI KERAS / QUALITY DAYS** (misalnya sore hari setelah sesi lari interval di pagi hari).
   * **DILARANG** melakukan angkat beban berat di hari lari santai (*Easy/Recovery Run*).
-  * *Rasional*: Jika Anda angkat beban di hari santai, fungsi pemulihan hari itu hancur. Tubuh terjebak dalam **"Medium Fatigue Trap"** (kelelahan konstan sepanjang minggu).
+  * *Rasional*: Jika atlet mengangkat beban di hari santai, fungsi pemulihan hari itu hancur. Tubuh terjebak dalam **"Medium Fatigue Trap"** (kelelahan konstan sepanjang minggu).
   * Menumpuk beban di hari yang sama menjamin hari esoknya benar-benar menjadi hari pemulihan penuh (*true recovery day*).
 * **Prinsip Minimum Effective Dose (MED)**:
   * Pelari cukup berlatih **20 hingga 30 menit, 2 kali seminggu** untuk memetik semua manfaatnya tanpa mengorbankan performa lari.
@@ -72,9 +72,9 @@ Prinsip terpenting dalam menyatukan lari dan gym:
 
 ---
 
-## 5. Matriks Konfirmasi terhadap Skills Kita
+## 5. Matriks Konfirmasi Metodologi Ekosistem MCP
 
-| Konsep Steve Magness | Implementasi di Sistem Kita | Skill Terkait |
+| Konsep Steve Magness | Implementasi pada Ekosistem MCP | Skill Terkait |
 |---|---|---|
 | Hard Days Hard, Easy Days Easy | ST dijadwalkan Selasa Sore & Jumat Sore (setelah sesi Sub-T pagi) | `plan-week`, `running-coach-analysis` |
 | "Stay Tall When Tired" & Core | Protokol McGill Big 3 (Bird-Dog, Side Bridge, Curl-Up) untuk stabilisasi lumbar | `running-coach-analysis`, `norwegian-singles-guardrails` |

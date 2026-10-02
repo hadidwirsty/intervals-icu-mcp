@@ -54,9 +54,9 @@ Steve Magness membagi progresi latihan ambang batas menjadi 5 metode logis:
 
 ---
 
-## 3. Matriks Konfirmasi terhadap Skills Kita
+## 3. Matriks Konfirmasi Metodologi Ekosistem MCP
 
-| Konsep Steve Magness | Implementasi di Sistem Kita | Skill Terkait |
+| Konsep Steve Magness | Implementasi pada Ekosistem MCP | Skill Terkait |
 |---|---|---|
 | Split Threshold Sessions | Struktur interval 10x 3m (Short Sub-T) & 5x 6m (Medium Sub-T) dengan rest jalan | `calc-nsa`, `create-workout` |
 | Pencegahan Asidosis ($H^+$ Accumulation) | Batas mutlak detak jantung Ceiling HR < 168–172 bpm (87–91% LTHR) | `running-coach-analysis`, `run-report` |

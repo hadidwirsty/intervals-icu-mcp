@@ -54,5 +54,5 @@ flowchart TD
 
 ## 🎯 Manfaat Langsung untuk Atlet
 
-1. **Kepastian Sains (Zero Guesswork)**: Setiap kali menjalankan sesi latihan (apakah itu 5x 6m di hari Jumat, lari santai 45m di hari Kamis, atau McGill Big 3 di sore hari), Anda tahu persis mekanisme molekuler dan fisiologis di baliknya.
+1. **Kepastian Sains (Zero Guesswork)**: Setiap kali menjalankan sesi latihan (apakah itu 5x 6m, lari santai 45m, atau McGill Big 3), atlet dan pelatih memahami dengan presisi mekanisme molekuler dan fisiologis di baliknya.
 2. **Kepatuhan Terhadap Batas Fisiologis**: Peringatan Steve tentang bahaya lari terlalu kencang di sesi threshold atau terlalu lama di sesi long run menjadi pelindung utama atlet dari cedera menjelang **Target Race (Half Marathon / 10K)**.
