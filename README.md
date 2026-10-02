@@ -156,7 +156,7 @@ In `cline_mcp_settings.json`:
 
 ## 🤖 AI Skills & Slash Commands Directory
 
-This repository comes pre-loaded with **14 Production-Ready Modern Skills** in `.agents/skills/` (12 interactive slash commands + 2 master foundation knowledge skills) that you can trigger using slash commands (with first-class support for autonomous agent discovery):
+This repository comes pre-loaded with **15 Production-Ready Modern Skills** in `.agents/skills/` (13 interactive slash commands + 2 master foundation knowledge skills) that you can trigger using slash commands (with first-class support for autonomous agent discovery):
 
 > 📖 **Comprehensive Usage Guide**: For an in-depth operational timeline of when and how to run each command across macrocycles, mesocycles, and daily routines, see [**`docs/WORKFLOWS-GUIDE.md`**](docs/WORKFLOWS-GUIDE.md).
 
@@ -174,6 +174,7 @@ This repository comes pre-loaded with **14 Production-Ready Modern Skills** in `
 | **`/calc-vdot`** | [`SKILL.md`](.agents/skills/calc-vdot/SKILL.md) | Offline Jack Daniels VDOT and sub-threshold pace training zones calculator from race / time-trial results. |
 | **`/check-workout`** | [`SKILL.md`](.agents/skills/check-workout/SKILL.md) | View upcoming scheduled workouts from your Intervals.icu calendar with resolved targets. |
 | **`/create-workout`** | [`SKILL.md`](.agents/skills/create-workout/SKILL.md) | Publish structured running workouts to your calendar using Intervals Text DSL (auto-sync to Garmin/Coros) enforcing quality session duration guardrails (§6.2). |
+| **`/strength-guide`** | [`SKILL.md`](.agents/skills/strength-guide/SKILL.md) | Functional strength training guide (20-25m) based on Steve Magness framework (Movement Prep, Heavy Neural, Power, Plyos) and McGill Big 3 spinal stability. |
 
 ---
 

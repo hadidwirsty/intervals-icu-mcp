@@ -41,21 +41,39 @@ atau
 
 ---
 
-## 2. Pola Distribusi Standar (E-Q-E-Q-E-Q-LR)
+## 2. Pola Distribusi Standar (E-Q-E-Q-E-Q-LR) & Sifat Adaptif
 
-Untuk volume mingguan 6 jam (360 menit), jadwal standar tersusun sebagai berikut:
+> [!IMPORTANT]
+> **Blueprint Adaptif, Bukan Patokan Kaku**:
+> Tabel di bawah adalah pola distribusi dasar (*baseline blueprint*). Jadwal latihan bersifat **dinamis dan berprogresi**:
+> - **Progresi Durasi/Repetisi & Kaidah Copeland 2026**: Sesi Sub-Threshold berprogresi dari repetisi pendek ke repetisi lebih panjang (misal: 10x 3m $\rightarrow$ 8x 3.5m $\rightarrow$ 7x 4m $\rightarrow$ 6x 5m $\rightarrow$ 5x 6m) dengan menjaga total waktu kerja efektif di kisaran **~30 menit per sesi** (total ~60 menit Sub-T per pekan). Menurut Copeland ("The Plans" §2.4), setiap penambahan 1 repetisi 3 menit Sub-T wajib dipasangkan dengan penambahan **~12 menit Easy Run santai** agar rasio tetap seimbang, dan beban ditahan stabil minimal **1 bulan** sebelum dinaikkan kembali.
+> - **Formula Long Run Copeland (§4.6)**: Durasi Long Run santai dipatok sekitar **~1.7 kali durasi Easy Run harian biasa** (misal Easy 45m $\rightarrow$ LR 75–80 menit; pada volume tinggi 95–105m).
+> - **Fase Tapering (Jelang Race)**: Pada fase Taper (seperti fase 1–2 pekan menjelang Target Race), volume kerja Sub-T dipotong 30–50% (misal menjadi 6x 3m atau 4x 4m) guna memaksimalkan restorasi glikogen dan kesegaran neuromuskular, sementara intensitas pace/power tetap dipertahankan.
+> - **Integrasi Kekuatan ("Hard Days Hard, Easy Days Easy")**: Mengadopsi prinsip Steve Magness, sesi kekuatan (*core & spinal stability* / McGill Big 3) dijadwalkan pada hari yang sama dengan lari Quality (Selasa & Jumat sore), memastikan hari Rabu, Kamis, dan Sabtu tetap murni pemulihan aerobik tanpa stres neuromuskular atau kompresi tulang belakang.
 
-| Hari | Jam | Kategori | Sesi Latihan | Durasi Total | Kerja Sub-T | Target Intensitas |
+### Struktur Mingguan Berjenjang Resmi (norwegiansingles.run 2026)
+Panduan resmi terbaru menyusun opsi cetak biru mingguan berbasis hari & jam:
+- **3 Hari / Minggu (90 Menit total)**: 1 Quality (Intro 4x 3m = 12m Sub-T) + 2 Easy Runs.
+- **4 Hari / Minggu (180 Menit / 3 Jam)**: 2 Quality (Card A Shorter 6x 3m & Card B Shorter 3x 6m = 36m Sub-T / 20%) + 2 Easy Runs.
+- **6 Hari / Minggu (250 Menit / ~4.2 Jam)**: 3 Quality + 3 Easy Runs + 1 Hari Istirahat Total (Jadwal 6 hari latihan dengan Senin Rest Day / Puasa).
+- **Full Routine (300 Menit / 5 Jam)**: 3 Quality (Card A, B, C = 72m Sub-T / 24%) + 4 Easy Runs (pola 7 hari tanpa istirahat penuh).
+- **Larger Week (420 Menit / 7 Jam)**: 3 Quality versi Larger (90m Sub-T / 21.4%) + Easy Runs lebih panjang.
+
+Untuk volume mingguan ~6 jam (~360 menit aktivitas), struktur jadwal standar tersusun sebagai berikut:
+
+| Hari | Jam | Kategori | Sesi Latihan | Durasi Total | Kerja Sub-T / Fokus | Target Intensitas |
 |---|---|---|---|---|---|---|
 | **Senin** | — | **REST** | Rest Day (Puasa Sunnah & Pemulihan Glikogen) | 0 m | 0 m | Restorasi total |
-| **Selasa** | 05:30 | **Quality 1** | Short Sub-T 10x 3m (r:60s walk) | 55 m | 30 m | 94–96% CP / 84–88% HR |
-| **Rabu** | 05:30 | **Easy** | Easy Aerobic Run | 45 m | 0 m | 60–70% HR (≤155 bpm) |
-| **Kamis** | 16:45 | **Easy** | Easy Recovery Run (Ngabuburit Puasa) | 45 m | 0 m | 60–70% HR (Pace santai) |
-| **Jumat** | 05:30 | **Quality 2** | Medium Sub-T 5x 6m (r:60s walk) | 55 m | 30 m | 92–95% CP / 85–88% HR |
-| **Sabtu** | 05:30 | **Easy** | Shakeout Recovery + Strides (5x 15s) | 35 m | 0 m | 60–68% HR + Strides Z6 |
-| **Minggu** | 05:30 | **Long Run** | Pure Aerobic Long Run | 75 m | 0 m | 60–70% HR (< 70% Max HR) |
+| **Selasa** | 05:30 | **Quality 1** | Short Sub-T 10x 3m (r:60s walk) *(Card A)* | 55 m | 30 m Sub-T | 94–96% CP / 84–88% HR |
+| | 16:30 | **Strength** | Strength: McGill Big 3 & Hip Armor (`/strength-guide`) | 25 m | Otot Inti & Lumbar | Beban tubuh / stabilitas isometrik |
+| **Rabu** | 05:30 | **Easy** | Easy Aerobic Run + Strides 4x 15s | 45 m | 0 m (Murni Recovery) | 60–70% HR (≤155 bpm) |
+| **Kamis** | 16:45 | **Easy** | Easy Recovery Run (Ngabuburit Puasa) | 45 m | 0 m (Murni Recovery) | 60–70% HR (Pace santai) |
+| **Jumat** | 05:30 | **Quality 2** | Medium Sub-T 5x 6m (r:60s walk) *(Card B)* | 55 m | 30 m Sub-T | 92–95% CP / 85–88% HR |
+| | 16:30 | **Strength** | Strength: McGill Big 3 & Hip Armor (`/strength-guide`) | 25 m | Otot Inti & Lumbar | Beban tubuh / stabilitas isometrik |
+| **Sabtu** | 05:30 | **Easy** | Shakeout Recovery + Strides (4x 15s) | 35 m | 0 m (Murni Recovery) | 60–68% HR + Strides Z6 |
+| **Minggu** | 05:30 | **Long Run** | Pure Aerobic Long Run (Diminishing Returns ≤90m) | 75 m | 0 m (Aerobic Base) | 60–70% HR (< 70% Max HR) |
 
-> **Evaluasi Alokasi NSA**: Total Waktu Lari = 310 menit (~5.16 jam) | Total Kerja Sub-T = 60 menit (**19.35%**, patuh koridor 20–25% NSA) | Easy Run = 250 menit (**80.65%**, patuh koridor 75–80% NSA) | Long Run = 75 menit (patuh plafon 75–90m §4.6).
+> **Evaluasi Alokasi NSA**: Total Waktu Lari = 310 menit (~5.16 jam) | Total Waktu Kekuatan = 50 menit | Total Kerja Sub-T = 60 menit (**19.35%**, patuh koridor 20–25% NSA) | Easy Run = 250 menit (**80.65%**, patuh koridor 75–80% NSA) | Long Run = 75 menit (patuh plafon 75–90m §4.6 & hukum Magness).
 
 ---
 

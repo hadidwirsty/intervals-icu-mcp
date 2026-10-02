@@ -14,24 +14,38 @@ Skill ini digunakan untuk menghitung **Alokasi Durasi Latihan Mingguan (Weekly T
 1. **Volume Berbasis Waktu (Hours/Week)**:
    - Pelari rekreasional beroperasi di koridor **5 hingga 9 jam per minggu**.
    - *"Distance proposes, physiology and duration dispose"* — adaptasi aerobik dikendalikan oleh durasi waktu di zona bioenergetika, bukan jarak kilometer.
-2. **Aturan 20–25% Sub-Threshold**:
-   - Total durasi akumulasi sesi kerja *Sub-Threshold* dibatasi ketat pada **20–25% dari total durasi waktu lari mingguan**.
+2. **Aturan 20–25% Sub-Threshold & Evolusi Proporsi [Copeland 2026]**:
+   - Total durasi akumulasi sesi kerja *Sub-Threshold* dibatasi ketat sekitar **20–25% dari total durasi waktu lari mingguan**.
+   - Seiring volume total bertambah tinggi, porsi ini secara alami bergeser ke arah **20–22%** (dilarang memanjangkan durasi workout semata-mata demi mengejar 25%).
    - Beban ini didistribusikan ke dalam 2 hingga 3 sesi kualitas per minggu.
-3. **Aturan 75–80% Easy & Recovery**:
+3. **Aturan 75–80% Easy & Recovery [Formula Long Run Copeland 1.7x]**:
    - 75–80% dari total waktu wajib berupa lari santai berintensitas rendah (< 70% Max HR atau < 65% MAS).
-   - Long Run santai dibatasi **75–90 menit** (cukup untuk target 5k hingga Half Marathon).
+   - Long Run santai dihitung berdasarkan panduan awal Copeland: **~1.7 kali durasi Easy Run biasa** (contoh: Easy 45 menit $\rightarrow$ Long Run ~75–80 menit; pada volume tinggi mencapai 95–105 menit). Durasi 75–90 menit sudah optimal untuk target 5k hingga Half Marathon.
    - Sisa durasi dibagi merata ke 3–4 sesi Easy Run (masing-masing 40–50 menit, cap 60 menit ketat).
 
 ---
 
-## 2. Aturan Progresi Beban Latihan [Sumber: NSA §2.3, §2.4]
+## 2. Aturan Progresi Beban Latihan [Sumber: NSA §2.3, §2.4 Copeland 2026]
 
-> *"Beginners: If new to structured intensity, start with 2 quality sessions per week instead of 3. Focus first on building consistent weekly volume you can sustain, then gradually increase the duration/reps of the quality sessions or add the third session."*  
-> *"Increase the duration or number of sub-threshold reps slowly. Increase overall weekly running time (mostly via easy runs) proportionally to maintain the ~75/25 easy/quality split. Regularly update target paces/HR zones based on recent (within 4-8 weeks) races or time trials. Monitor Training Load and listen to your body."*
+> *"Start from recent training... Consolidate before increasing: at least a month at a manageable level, then a small intermediate increase held for another two or three weeks... Add time gradually: adding one 3-minute repetition across the whole week could be paired with about 12 extra easy minutes, distributed across existing runs... Shortening recovery or jogging faster is NOT a progression target."*
 
-1. **Pemula & Volume Rendah**: Jika atlet baru memulai intensitas terstruktur atau berada di volume rendah (< 5 jam/minggu), mulai dengan **2 sesi kualitas Sub-T per minggu** (misal: Selasa & Jumat). Fokus utama adalah membangun konsistensi volume mingguan yang stabil dan dapat dipertahankan sebelum menaikkan durasi/repetisi atau menambah sesi kualitas ke-3.
-2. **Progresi Bertahap & Rasio 75/25**: Naikkan durasi atau jumlah repetisi Sub-T secara perlahan. Peningkatan volume total mingguan harus diimbangi terutama lewat penambahan waktu pada *easy runs* secara proporsional agar rasio durasi ~75% Easy / 25% Sub-T tetap terjaga.
-3. **Validasi Beban Lintas-Sistem**: Sebelum memutuskan menaikkan target durasi mingguan, lakukan *cross-check* ke metrik beban di `training-load-analysis` (pastikan ACWR di rentang aman 0.8–1.3 dan Ramp Rate +1 s.d. +3 TSS/minggu).
+### 5 Pilar Progresi Copeland ("The Plans" §2.4):
+1. **Start from recent training**: Berangkat dari beban volume yang stabil dan sudah dapat ditoleransi tubuh saat ini.
+2. **Consolidate before increasing**: Tahan beban pada level yang bisa dikelola minimal **1 bulan**, lalu kenaikan kecil berikutnya ditahan **2–3 minggu**. Kesiapan fisik jauh lebih penting daripada sekadar menyelesaikan blok kalender kaku.
+3. **Add time gradually (+1 rep 3m $\leftrightarrow$ +12m Easy)**: Setiap menambah 1 repetisi 3 menit Sub-T (+3m kerja kualitas) dalam sepekan, wajib dipasangkan dengan menambah **~12 menit Easy Run santai** yang dibagi ke sesi lari santai yang sudah ada.
+4. **Let the proportions evolve (20–22%)**: Pada volume yang lebih tinggi, porsi Sub-T secara alami berada di kisaran 20–22%. Jika volume mendekati ~8 jam pada lari tunggal (*singles*), pertimbangkan *easy doubles* bila realistis.
+5. **Earn faster paces through fitness**: Uji kembali ambang menggunakan race atau time trial (tiap 4–8 minggu). Perbarui target hanya bila performa meningkat, bukan otomatis naik tiap minggu.
+
+> 🛑 **Kaidah Tegas Rest Interval**: Memperpendek jeda istirahat atau berlari jogging lebih cepat antar repetisi **BUKAN target progresi**. Jeda istirahat bertujuan membuang laktat dan merestorasi sistem neuromuskular.
+
+### 🔄 Aturan Baku Progresi: "Change One Thing at a Time" (norwegiansingles.run 2026)
+| Keinginan Atlet | Tindakan yang Diizinkan | Yang Tetap Wajib Sama |
+|:---|:---|:---|
+| **Ingin lari sedikit lebih banyak** | Tambahkan beberapa menit lari santai pada satu sesi yang sudah ada, lalu evaluasi pemulihan. | Jumlah sesi kualitas, repetisi, dan pace/daya. |
+| **Ingin kerja kualitas lebih banyak** | Ganti sebagian menit lari santai dengan kerja terkontrol (+1 rep 3m $\leftrightarrow$ +12m easy), lalu ulang dan evaluasi. | Total rasio mingguan seimbang, sesi kualitas lain, dan pace/daya. |
+| **Ingin menambah sesi kualitas baru** | Ganti satu sesi lari santai hanya jika rutinitas saat ini sudah konsisten tertangani $\ge 1$ bulan. | Total waktu lari mingguan dan sesi kualitas lainnya. |
+| **Ingin memperbarui target pace/daya** | Uji coba laju baru dari hasil race representatif (4–8 minggu terakhir). | Jumlah repetisi dan total waktu mingguan. |
+| **Pulih dari pekan yang berat** | Perpendek sesi kualitas, ubah jadi lari santai, atau istirahat total. | Bebas, tidak ada kewajiban menaikkan apa pun. |
 
 ---
 

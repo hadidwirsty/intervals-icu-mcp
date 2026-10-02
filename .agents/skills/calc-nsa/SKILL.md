@@ -57,10 +57,27 @@ Berdasarkan hasil pemanggilan `calculate_nsa_matrix` dan profil VDOT atlet, saji
 | **10–12 min** | 3–4x | HM - 30k pace | `[Pace (HM+30k)/2]` | [Pace HM/30k - 1s] – [Pace HM/30k + 9s] /km | **[Power HM/30k]** | 60–120s walk |
 | **15 min** | 3x | 30k pace | `[Pace 30k]` | [Pace 30k - 1s] – [Pace 30k + 9s] /km | **[Power 30k]** | 90–120s walk |
 
-> *Catatan Fisiologis & Dual-Control Protocol*:
-> 1. **Pace Presisi vs Rentang Lapangan**: Target Pace Presisi adalah acuan ideal, sedangkan *Rentang Toleransi (LacTrace Range)* adalah jendela aman saat menghadapi variasi kontur jalan, tikungan, atau hembusan angin.
-> 2. **Power (Watt) sebagai Navigasi Utama**: Target Power menjaga intensitas metabolik tetap konstan tanpa terpengaruh elevasi tanjakan/turunan.
-> 3. **Heart Rate (HR) Ceiling**: HR adalah batas mutlak (Z2 Norwegia / ceiling <168–172 bpm). Jika detak jantung melewati batas ambang ini, segera turunkan pace ke batas toleransi bawah atau kurangi power.
+### 🗂️ Pemetaan ke Session Cards Resmi Terbaru (norwegiansingles.run / Copeland 2026)
+Buku resmi Copeland (*"The Method"*) menyederhanakan durasi kualitas ke dalam 3 pilar utama (~3m, ~6m, ~10m) yang dipetakan ke 4 Kartu Sesi praktis:
+- **Intro Card (30m total)**: 10m Warmup + **4x 3m** (r: 1m jog) + 5m Cooldown (12m kualitas).
+- **Session Card A (Short Reps — ~3 Menit / 12–15K Pace)**:
+  * *Shorter (40m total)*: 10m Warmup + **6x 3m** (r: 1m jog) + 7m Cooldown (18m kualitas).
+  * *Standard (50m total)*: 10m Warmup + **8x 3m** (r: 1m jog) + 9m Cooldown (24m kualitas).
+  * *Larger (60m total)*: 12m Warmup + **10x 3m** (r: 1m jog) + 9m Cooldown (30m kualitas).
+- **Session Card B (Medium Reps — ~6 Menit / 20K–HM Pace)**:
+  * *Shorter (40m total)*: 10m Warmup + **3x 6m** (r: 1m jog) + 10m Cooldown (18m kualitas).
+  * *Standard (50m total)*: 12m Warmup + **4x 6m** (r: 1m jog) + 11m Cooldown (24m kualitas).
+  * *Larger (60m total)*: 12m Warmup + **5x 6m** (r: 1m jog) + 14m Cooldown (30m kualitas).
+- **Session Card C (Long Reps — ~10 Menit / 25–30K Pace)**:
+  * *Shorter (40m total)*: 10m Warmup + **2x 9m** (r: 1m jog) + 11m Cooldown (18m kualitas).
+  * *Standard (50m total)*: 12m Warmup + **2x 12m** (r: 1m jog) + 13m Cooldown (24m kualitas).
+  * *Larger (60m total)*: 12m Warmup + **3x 10m** (r: 2m jog) + 14m Cooldown (30m kualitas).
+
+> *Catatan Fisiologis & Kaidah Copeland 2026*:
+> 1. **Pilar vs Micro Repetitions**: Repetisi 1 menit di 10k pace bukan menu baku default buku Copeland (tetap berguna sebagai variasi sesekali). 3 pilar baku adalah ~3m, ~6m, dan ~10m.
+> 2. **Kaidah Jeda Istirahat**: Memperpendek jeda istirahat atau jogging lebih cepat **BUKAN target progresi**. Istirahat bertujuan membuang metabolit laktat.
+> 3. **Critical Power sebagai Estimasi Model**: CP adalah estimasi model dan tidak identik dengan LT2 atau pembacaan laktat langsung. Target Watt di atas harus divalidasi dengan sensasi fisik (*comfortably hard* RPE 5–6/10) dan keterulangan (*repeatability*).
+> 4. **Heart Rate (HR) Ceiling**: HR adalah batas pengaman (<168–172 bpm). Jika cuaca panas/lembap mendongkrak HR melampaui ambang batas, turunkan pace/power atau prioritaskan RPE terkontrol.
 ```
 
 ---

@@ -50,8 +50,11 @@ Skill ini digunakan untuk mengevaluasi skor kesiapan harian atlet sebelum memula
   * If `YELLOW (50-79%)`: Kondisi sedang. Batasi intensitas ke Zona 2 Aerobic / Easy Run.
   * If `RED (<50%)`: Kelelahan / stress tinggi. Disarankan deload, easy walk, atau istirahat total.
 
-#### 3. 🚨 Evaluasi Sinyal Red Flag Kelelahan (Monitoring Tambahan)
+#### 3. 🚨 Evaluasi Sinyal Red Flag Kelelahan (Monitoring Tambahan — diperkuat norwegiansingles.run 2026)
 > TSB, ACWR, dan RHR baseline berfungsi sebagai indikator objektif pelengkap anjuran kualitatif NSA ("listen to your body").
+> **Prinsip Emas Resmi norwegiansingles.run 2026 (Bab 6: Adjust your week)**:  
+> *"A good dashboard disagrees with how you feel: Always prioritize your body's signals over watch metrics."*  
+> Jika skor readiness atau metrik jam tangan menunjukkan status GREEN (Prima), namun sensasi subjektif tubuh merasa berat, lelah, atau kaku, **selalu prioritaskan sinyal fisik tubuh** daripada angka dashboard!
 
 Verifikasi apakah ada kriteria berikut muncul:
 1. [ ] **RHR Pagi naik > 5 bpm** dari baseline normal.

@@ -14,7 +14,7 @@ Server **Model Context Protocol (MCP)** resmi untuk Intervals.icu API sekaligus 
 | Validation | `zod` | `^4.4.3` | Schema validation pada semua tool boundary |
 | Package Manager | `pnpm` | — | Dikelola via `pnpm-lock.yaml` |
 | Build Tool | TypeScript Compiler (`tsc`) | `^5.7.2` | Output ke direktori `dist/` |
-| Test Framework | Vitest | `^4.1.10` | 63 unit tests across 15 test files (100% pass) |
+| Test Framework | Vitest | `^4.1.10` | 89 unit tests across 19 test files (100% pass) |
 
 ## Architecture & Design Patterns
 Arsitektur **fungsional + domain-layered** tanpa framework HTTP server tambahan. Entry point (`src/index.ts`) menginisialisasi MCP server via `stdio` transport dan mendaftarkan 10 domain tool modules.
@@ -45,21 +45,24 @@ Arsitektur **fungsional + domain-layered** tanpa framework HTTP server tambahan.
 ```text
 intervals-icu-mcp/
 ├── .agents/                      # Konfigurasi AI Agent (Antigravity & Subagents)
-│   ├── README.md                 # Panduan arsitektur & direktori 12 skills NSA
+│   ├── README.md                 # Panduan arsitektur & direktori 15 skills NSA & Strength
 │   ├── rules/                    # Context memory & persistent rules
 │   │   ├── norwegian-singles-guardrails.md # Invariant guardrails metodologi NSA & batas fisiologis
 │   │   └── project-context.md    # Single source of truth context file (file ini)
-│   └── skills/                   # 12 specialized agent skills (Pure Norwegian Singles)
+│   └── skills/                   # 15 specialized agent skills (Pure Norwegian Singles & Strength)
 │       ├── calc-nsa/             # /calc-nsa (matriks interval Time-Based 1m s.d. 15m)
 │       ├── calc-vdot/            # /calc-vdot (VDOT & penetapan ambang sub-T)
 │       ├── cardiac-drift/        # /cardiac-drift (aerobic decoupling & EF telemetry)
 │       ├── check-workout/        # /check-workout (inspeksi kalender & planned sessions)
 │       ├── create-workout/       # /create-workout (publikasi DSL workout ke kalender)
 │       ├── fitness-status/       # /fitness-status (evaluasi CTL/ATL/TSB & Green Zone)
+│       ├── plan-week/            # /plan-week (jadwal mingguan deterministik E-Q-E-Q-E-Q-LR)
 │       ├── predict-race/         # /predict-race (proyeksi race time & A-Taper 10-14 hari)
+│       ├── race-strategy/        # /race-strategy (strategi race day, fueling & pacing)
 │       ├── readiness-check/      # /readiness-check (evaluasi pemulihan 0-100% Green/Yellow/Red)
 │       ├── run-report/           # /run-report (laporan audit kepatuhan intensitas LT2)
 │       ├── running-coach-analysis/# Master coaching knowledge & exercise physiology NSA
+│       ├── strength-guide/       # /strength-guide (kekuatan fungsional pelari & stabilitas spinal)
 │       ├── training-load-analysis/# Scientific sustainable load & 75/25 duration split
 │       └── weekly-budget/        # /weekly-budget (alokasi durasi mingguan 5-9 jam)
 ├── dist/                         # Hasil kompilasi tsc (CJS/ESM build)
@@ -143,7 +146,7 @@ intervals-icu-mcp/
 | `pnpm run build` | Build | Kompilasi TypeScript via `tsc` ke direktori `dist/` |
 | `pnpm run dev` | Dev (Watch) | Menjalankan `tsc --watch` untuk auto-compile saat file berubah |
 | `pnpm run start` | Start | Menjalankan MCP server melalui Node.js (`dist/index.js`) |
-| `pnpm test` | Test Suite | Menjalankan Vitest (63 test cases di 15 test files) |
+| `pnpm test` | Test Suite | Menjalankan Vitest (89 test cases di 19 test files) |
 | `pnpm run inspector`| Debug MCP | Menjalankan `@modelcontextprotocol/inspector` untuk inspeksi UI tools |
 
 ## Environment Variables
@@ -168,9 +171,10 @@ intervals-icu-mcp/
 - **Prinsip Utama NSA**:
   1. **Fokus Sub-Threshold**: Seluruh latihan kualitas berfokus tepat di bawah ambang laktat kedua (LT2 / 85–95% CP / 2.0–3.0 mmol/L).
   2. **Kontrol Intensitas Ketat**: *"Erring slightly slower is safer than going too fast"*.
-  3. **Aturan Durasi 75/25**: 20–25% durasi kerja Sub-T per minggu, 75–80% Easy Run (< 70% Max HR).
-  4. **Istirahat Pasif Singkat**: Rest 30–60 detik antar repetisi berupa berjalan santai atau berdiri, bukan jogging.
-  5. **Konsistensi Sepanjang Tahun**: Pola mingguan `E-Q-E-Q-E-Q-LR` yang konstan tanpa siklus blok periodisasi yang rumit.
+  3. **Aturan Durasi 75/25 & Evolusi 20–22% [Copeland 2026]**: ~20–25% durasi kerja Sub-T per minggu (bergeser alami ke 20–22% di volume tinggi), 75–80% Easy & Long Run (< 70% Max HR, rasio Long Run ~1.7× Easy harian biasa).
+  4. **Jeda Istirahat Interval [NSA §2.2, Copeland 2026]**: Rest 30–60 detik antar repetisi berupa berdiri, jalan santai, atau slow jog. Kaidah tegas: *"Shortening recovery or jogging faster is NOT a progression target"*.
+  5. **Konsolidasi Beban ("Change One Thing at a Time")**: Tahan beban stabil minimal 1 bulan sebelum menambah volume. Setiap +1 rep 3m Sub-T wajib dipasangkan dengan +12 menit Easy Run santai.
+  6. **Konsistensi Sepanjang Tahun**: Pola mingguan `E-Q-E-Q-E-Q-LR` yang konstan tanpa siklus blok periodisasi yang rumit.
 
 #### Profil Fisiologis Atlet (Konfigurasi Dinamis & Template)
 Seluruh parameter fisiologis utama atlet diekstrak secara dinamis dari akun Intervals.icu via MCP:

@@ -65,7 +65,7 @@ Terapkan aturan evaluasi dari `.agents/skills/running-coach-analysis/SKILL.md`:
   1. **Disiplin Batas Atas Power**: Avg Watts per repetisi berada di koridor 85–95% CP. Tidak boleh melompat ke zona VO₂max (> 104% CP).
   2. **Ceiling HR Terjaga**: HR tidak menembus batas ambang laktat (< LTHR atau < 90–92% Max HR).
   3. **Cardiac Drift Rendah (< 5%)**: Aerobic Decoupling paruh 1 vs paruh 2 terkendali di bawah 5%.
-  4. **Rest Interval**: Jeda istirahat antar repetisi berupa berjalan santai, berdiri, atau jogging pelan (30–60 detik per NSA §2.2). Nilai berdasarkan apakah jeda cukup pasif untuk memulihkan laktat.
+  4. **Rest Interval [Copeland 2026]**: Jeda istirahat antar repetisi berupa berjalan santai, berdiri, atau jogging pelan (30–60 detik per NSA §2.2). **Kaidah Copeland**: *"Shortening recovery or jogging faster is NOT a progression target."* Jangan turunkan skor kepatuhan hanya karena rest dilakukan dengan jogging pelan; nilai berdasarkan apakah jeda cukup pasif untuk memulihkan metabolit laktat dan menjaga kesiapan repetisi berikutnya.
 - **Catatan Cuaca Panas/Lembap Ekstrem [Sumber: NSA §4.2]**: Jika `catatan_fisik` menyebutkan kondisi cuaca sangat panas atau kelembapan ekstrem (suhu $>30^\circ\text{C}$ / RH $>85\%$), prioritaskan **RPE atlet (target 5–6/10 "comfortably hard")** dibanding angka HR mentah. Jangan otomatis menandai kegagalan semata-mata karena lonjakan HR akibat stres termal jika intensitas usaha internal tetap terjaga di bawah LT2.
 - **Skor**: 🟢 Hijau = 4/4 Kepatuhan Penuh | 🟡 Kuning = 2–3/4 | 🔴 Merah = < 2/4 (melanggar batas sub-threshold / overcooked).
 

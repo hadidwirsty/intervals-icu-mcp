@@ -51,6 +51,7 @@ Cooldown
 > - Rest antar repetisi (`0-50% power, <60% HR`): Tetap **Dual Power + HR**, disarankan **BERDIRI atau BERJALAN SANTAI** (*Passive Walk Recovery* per NSA §2.2).
 > - Strides: `110-130% power, 180-195 cadence` *(HR secondary dihilangkan karena durasi 15s mengalami HR lag)*.
 > - Seluruh kerja kualitas (Main Set) beroperasi di koridor **Sub-Threshold (LT2, 85–95% CP, laktat 2.0–3.0 mmol/L)** dengan **Power Primary + HR Secondary**.
+> - **Standarisasi Session Cards (norwegiansingles.run 2026)**: Seluruh template di bawah ini terpetakan ke dalam 4 format kartu sesi resmi: Intro Card (4x 3m), Session Card A (3m), Session Card B (6m), dan Session Card C (9–12m).
 > - **Guardrail Durasi & Jarak Sesi Kualitas [Sumber: NSA §6.2]**: Sesi Sub-T TIDAK boleh melebihi **40–50 menit akumulasi waktu kerja** atau **10–12 km akumulasi jarak kerja** per sesi, berlaku mutlak di semua level volume. Seluruh template bawaan di bawah terverifikasi patuh (total akumulasi kerja berkisar 20–36 menit atau 6–10 km).
 
 ---

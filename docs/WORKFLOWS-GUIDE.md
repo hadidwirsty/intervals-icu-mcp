@@ -1,7 +1,7 @@
 # 📖 Panduan Penggunaan AI Skills & Workflows (Slash Commands Guide)
 _Intervals.icu MCP Server & Norwegian Singles Running Coach_
 
-Dokumen ini memuat panduan komprehensif mengenai **kapan dan bagaimana** menggunakan ke-12 AI Skills (Slash Commands) yang tersedia di dalam ekosistem `intervals-icu-mcp` berbasis **Norwegian Singles Training Method** (`docs/references/norwegian-singles/`).
+Dokumen ini memuat panduan komprehensif mengenai **kapan dan bagaimana** menggunakan ke-13 AI Skills (Slash Commands) yang tersedia di dalam ekosistem `intervals-icu-mcp` berbasis **Norwegian Singles Training Method** (`docs/references/norwegian-singles/`).
 
 ---
 
@@ -27,6 +27,7 @@ graph TD
         W9["Setelah Selesai Lari: /run-report<br/>Laporan coaching kepatuhan LT2 & rest pasif"]
         W10["Pasca-Long Run: /cardiac-drift<br/>Cek Aerobic Decoupling EF H1 vs H2 (< 5%)"]
         W11["Kapan Saja: /create-workout<br/>Kirim jadwal sesi NSA ke kalender Intervals.icu"]
+        W14["Kapan Saja: /strength-guide<br/>Sesi latihan kekuatan fungsional 20-25m (Steve Magness & McGill Big 3)"]
     end
 
     subgraph D["4. MENJELANG & SAAT RACE DAY (Tapering & Execution)"]
@@ -41,7 +42,7 @@ graph TD
 
 ---
 
-## 📋 Direktori 12 Slash Commands & Waktu Penggunaan
+## 📋 Direktori 13 Slash Commands & Waktu Penggunaan
 
 | No | Slash Command | Berkas Skill | Timeline Penggunaan | Tujuan Utama | Kebutuhan Input Pengguna |
 |:--:|---|---|---|---|---|
@@ -57,6 +58,7 @@ graph TD
 | **10**| **`/calc-vdot`** | [`SKILL.md`](../.agents/skills/calc-vdot/SKILL.md) | **Setelah Tes Lari / Time-Trial** | Menghitung skor VDOT & memetakan pace Sub-T (10k, 15k, HM, 30k) untuk kalibrasi berkala 4–8 minggu (§4.3). | Jarak tempuh tes (km) dan waktu tempuh (MM:SS). |
 | **11**| **`/predict-race`** | [`SKILL.md`](../.agents/skills/predict-race/SKILL.md) | **10–14 Hari Menjelang Lomba** | Prediksi waktu finish, jadwal A-Tapering, dan reassurance jarak 5K–HM sebagai sweet spot NSA (§5.1). | Jarak race, VDOT, tanggal race. |
 | **12**| **`/race-strategy`** | [`SKILL.md`](../.agents/skills/race-strategy/SKILL.md) | **Race Week & Pagi Race Day** | Eksekusi race day lengkap: pacing split berbasis Critical Power (% CP), timing intake energy gel EJ Sport (30g carb), dan batas hidrasi tropis. | Target jarak/race, estimasi waktu/pace. |
+| **13**| **`/strength-guide`** | [`SKILL.md`](../.agents/skills/strength-guide/SKILL.md) | **2x Seminggu (Hari Q: Selasa & Jumat Sore)** | Panduan sesi latihan kekuatan fungsional (20–25m) berbasis Steve Magness dan McGill Big 3 untuk pelari. | Opsional: fokus area/fase (misal `taper`, `mcgill`). |
 
 ---
 
@@ -112,6 +114,11 @@ Alur yang dijalankan dari hari ke hari:
 - **`/create-workout`**:
   - Menjadwalkan sesi lari terstruktur menggunakan Teks DSL resmi NSA yang otomatis tersinkronisasi ke jam tangan, dengan validasi batas kerja Sub-T maks 40–50 menit per sesi (§6.2).
 
+#### 🏋️ D. Sesi Kekuatan & Stabilitas Tulang Belakang (Selasa & Jumat Sore)
+- **`/strength-guide`**:
+  - Dijalankan 2x sepekan pada sore hari (16:30 WIB) setelah sesi lari Sub-T pagi dengan jeda minimal 4–6 jam (mematuhi prinsip Steve Magness *"Hard Days Hard, Easy Days Easy"*).
+  - Berdurasi ringkas 20–25 menit memadukan The McGill Big 3 (proteksi stabilitas tulang belakang via piramida 6-4-2 tahan 7s), penguatan panggul/tendon pelari, dan *neuromuscular strides*.
+
 ---
 
 ### 4️⃣ Situasi: Menjelang Hari Perlombaan & Race Day
@@ -139,4 +146,5 @@ Digunakan saat fase puncak persiapan lomba hingga pagi hari race:
 ⏱️ Update Benchmark            ➔  /calc-vdot  lalu  /calc-nsa
 🏆 10-14 Hari Dekat Lomba      ➔  /predict-race
 ⚡ Taktis & Fueling Race Day   ➔  /race-strategy
+🏋️ Sesi Latihan Kekuatan       ➔  /strength-guide
 ```

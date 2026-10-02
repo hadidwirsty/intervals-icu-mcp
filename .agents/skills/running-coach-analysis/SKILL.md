@@ -16,8 +16,12 @@ Skill ini digunakan untuk melakukan evaluasi dan analisis komprehensif pasca-ses
   1. **Sub-Threshold Focus**: Stimulus kualitas utama terpusat tepat di bawah ambang laktat kedua (*LT2 / sweetspot*), di kisaran laktat 2.0–3.0 mmol/L atau 85–95% Critical Power (CP). Kerja keras *supra-threshold* (VO₂max) dihindari dalam fase persiapan umum (*general preparation*).
   2. **Strict Intensity Control**: *"Erring slightly slower is safer than going too fast"*. Mempertahankan intensitas di bawah LT2 menjaga sistem saraf otonom tetap segar dan memungkinkan frekuensi latihan kualitas yang tinggi.
   3. **High Repeatability & Weekly Consistency**: Mempertahankan struktur mingguan yang konstan sepanjang tahun (pola baku 3-Q `E-Q-E-Q-E-Q-LR` atau adaptasi 2-Q `R-Q-E-E-Q-E-LR` sesuai jadwal atlet) dengan progresi bertahap pada durasi/repetisi sub-threshold, bukan memanipulasi siklus blok periodisasi yang rumit.
-  4. **The 75/25 Duration Rule**: Total durasi kerja *Sub-Threshold* dibatasi ketat pada **20–25% dari total durasi waktu lari mingguan**. Sisanya (75–80%) wajib diisi lari yang benar-benar santai (*Easy / Recovery Run*, HR < 70% Max HR).
-  5. **Short Passive Rest**: Jeda istirahat antar repetisi dilakukan dengan **berjalan santai atau berdiri** (30–60 detik; jogging pelan juga diizinkan oleh literatur NSA §2.2), untuk mengeliminasi beban mekanis ekstra dan mempercepat pemulihan laktat.
+  4. **The 75/25 Duration Rule & Evolusi Proporsi [Copeland 2026]**: Total durasi kerja *Sub-Threshold* dibatasi ketat sekitar **20–25% dari total durasi waktu lari mingguan** (bergeser alami ke 20–22% di volume tinggi). Sisanya (75–80%) wajib diisi lari santai (*Easy / Recovery Run*, HR < 70% Max HR, rasio Long Run ~1.7× durasi Easy biasa).
+  5. **Short Rest & Non-Progression [Copeland 2026]**: Jeda istirahat antar repetisi berupa berjalan santai, berdiri, atau slow jogging (30–60 detik). **Kaidah Tegas**: *"Shortening recovery or jogging faster is NOT a progression target"*.
+  6. **Body Signals Over Dashboard [NSA 2026]**: *"A good dashboard disagrees with how you feel: Always prioritize your body's signals over watch metrics."*
+  7. **A Race Replaces a Workout [NSA 2026]**: Partisipasi race/TT menggantikan 1 sesi kualitas mingguan, bukan ditambah di luar jadwal.
+  8. **Session Cards Standardization [NSA 2026]**: Standardisasi ke 4 format kartu sesi: Intro Card (4x 3m), Card A (3m), Card B (6m), dan Card C (9–12m).
+  9. **5 Pilar Progresi Copeland ("The Plans" §2.4)**: *Start from recent training*, *Consolidate before increasing* ($\ge 1$ bulan), *Add time gradually* (+1 rep 3m $\leftrightarrow$ +12m Easy), *Let proportions evolve* (20–22%), *Earn faster paces* (via race/TT 4–8 minggu).
 - **Karakteristik Komunikasi**:
   - Bahasa taktis, saintifik, berorientasi data empiris, dan suportif (Bahasa Indonesia).
   - Evaluasi matematis persentase daya mekanik (Watt) terhadap CP aktif atlet.
@@ -115,8 +119,8 @@ Minggu: Long Run Pure Aerobic (75–90m, HR ≤ 70%)
 3. **Recovery Day (Sabtu)**:
    - Durasi: 30–35 menit santai.
    - Intensitas: 60–68% CP, HR $\le$ 68% HRmax.
-4. **Long Run Day (Minggu)**:
-   - Durasi: 75–90 menit (cukup untuk persiapan 5k hingga Half Marathon).
+4. **Long Run Day (Minggu) [Sumber: NSA §4.6, Copeland 2026]**:
+   - Durasi: **~1.7 kali durasi Easy Run biasa** (contoh: Easy 45m $\rightarrow$ Long Run ~75–80 menit; volume lebih tinggi 95–105 menit). Durasi 75–90 menit sudah optimal untuk target 5k hingga Half Marathon tanpa risiko *diminishing returns* (Magness $\le 90$m).
    - Intensitas: Aerobik murni (< 70% Max HR). Long Run bukan sesi kualitas ekstra; perannya adalah membangun kapasitas aerobik dan pemulihan aktif.
 
 ---
@@ -149,12 +153,12 @@ Pilih menu interval yang sesuai dengan variasi mingguan atlet:
 
 ## 6. Protokol Pemulihan & Stabilitas Core
 
-### A. Latihan Stabilitas Core (Selasa & Jumat Sore)
-> NSA dasar tidak mewajibkan latihan kekuatan berat. Jika disertakan, jaga agar tetap ringan (misal stabilitas core / McGill Big 3) guna memperkuat postur panggul dan tulang belakang tanpa menambah kelelahan sistemik pada 2–3 sesi Sub-T mingguan (§4.7).
+### A. Sesi Kekuatan & Stabilitas Tulang Belakang (Selasa & Jumat Sore)
+> Berdasarkan prinsip Steve Magness *"Hard Days Hard, Easy Days Easy"*, sesi kekuatan fungsional dijadwalkan pada sore hari lari Quality (minimal jeda 4–6 jam) menggunakan panduan **`/strength-guide`** (20–25 menit). Sesi ini mengintegrasikan Movement Prep, Pelvic Armor, dan protokol McGill Big 3 untuk stabilitas tulang belakang tanpa kompresi spinal berlebih.
 
-1. **Bird-Dog**: 3 set × 8–10 reps/sisi (tahan 8–10 detik di posisi puncak).
-2. **Modified Curl-Up**: 3 set × 8–10 reps (satu kaki ditekuk, tangan di bawah kurva lumbar, tahan 8–10 detik).
-3. **Side Plank**: 3 set × 30–45 detik/sisi (membangun stabilitas lateral core).
+1. **Bird-Dog**: 3 set × 8–10 reps/sisi (tahan 7–8 detik di posisi puncak).
+2. **Modified Curl-Up**: 3 set × 8–10 reps (satu kaki ditekuk, tangan di bawah kurva lumbar, tahan 7–8 detik).
+3. **Side Plank / Side Bridge**: 3 set × 30–45 detik/sisi (membangun stabilitas lateral core).
 
 ### B. Dynamic Warm-Up (Sebelum Lari — 5–8 Menit)
 - Leg swings, walking lunges with twist, high knees santai, A-skips, ankle/calf rotations. Tanpa peregangan statis.

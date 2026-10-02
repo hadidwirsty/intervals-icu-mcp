@@ -53,14 +53,18 @@ Dalam Norwegian Singles, pembagian beban **tidak menggunakan formula persentase 
 
 1. **Total Waktu Lari Mingguan**:
    - Rentang umum pelari rekreasional: **5 hingga 9 jam per minggu**.
-2. **Porsi Sub-Threshold (20–25% Total Waktu)**:
-   - Total durasi akumulasi sesi kerja Sub-Threshold (tidak termasuk pemanasan/pendinginan) dibatasi ketat pada **20–25% dari total waktu lari mingguan**.
-   - Contoh: Pada volume 6 jam (360 menit) per minggu, durasi kerja Sub-T adalah **72–90 menit per minggu**, yang didistribusikan ke dalam 2 hingga 3 sesi kualitas (misal: 3 sesi × 25–30 menit kerja Sub-T).
+2. **Porsi Sub-Threshold (20–25% Total Waktu, Evolusi 20–22%) [Copeland 2026]**:
+   - Total durasi akumulasi sesi kerja Sub-Threshold (tidak termasuk pemanasan/pendinginan) dibatasi ketat sekitar **20–25% dari total waktu lari mingguan**.
+   - Pada volume yang lebih tinggi, porsi ini secara alami bergeser ke **20–22%** (dilarang memanjangkan repetisi hanya demi mengejar 25%).
+   - Contoh: Pada volume 6 jam (360 menit) per minggu, durasi kerja Sub-T adalah **72–90 menit per minggu**, yang didistribusikan ke dalam 2 hingga 3 sesi kualitas (misal: 3 sesi × 24–30 menit kerja Sub-T).
 3. **Porsi Easy & Recovery (75–80% Total Waktu)**:
    - Sisa waktu (75–80%) wajib diisi lari yang benar-benar lambat dan memulihkan:
      - Easy Aerobic Run: 40–50 menit (cap 60 menit ketat).
-     - Long Run: 75–90 menit (cukup untuk target 5k hingga Half Marathon).
+     - Long Run: **~1.7 kali durasi Easy Run biasa** (75–90 menit untuk volume saat ini, cukup untuk target 5k hingga Half Marathon).
      - Seluruh lari easy wajib berada di intensitas `< 70% Max HR` atau `< 65% MAS`.
+4. **Prinsip Konsolidasi Beban ("Consolidate Before Increasing" §2.4)**:
+   - Pertahankan beban latihan stabil pada level yang bisa dikelola minimal **1 bulan** sebelum memutuskan menaikkan volume/repetisi. Kenaikan kecil berikutnya ditahan 2–3 minggu.
+   - Setiap penambahan 1 repetisi 3 menit Sub-T (+3m kerja) wajib diimbangi penambahan **~12 menit Easy Run santai**.
 
 ---
 

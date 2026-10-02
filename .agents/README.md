@@ -33,7 +33,7 @@ Folder `.agents/` berisi konfigurasi **Antigravity Agent** (skills & rules) untu
 
 ---
 
-## Skills Interaktif (12 Slash Commands)
+## Skills Interaktif (13 Slash Commands)
 
 ### 1. `/plan-week` — Norwegian Singles Weekly Planner
 **Tujuan**: Merancang dan menerbitkan jadwal latihan 1 pekan penuh berstruktur (`E-Q-E-Q-E-Q-LR`) secara deterministik berbasis aturan durasi 75/25 NSA, lengkap dengan pratinjau tabel dan penerbitan satu-klik ke kalender Intervals.icu via `generate_weekly_plan` dan `create_running_workout`.
@@ -143,8 +143,18 @@ atau dengan target durasi kustom:
 
 ---
 
+### 13. `/strength-guide` — Functional Strength & Spinal Stability for Runners
+**Tujuan**: Panduan sesi latihan kekuatan fungsional 20–25 menit pelari berbasis kerangka kerja Steve Magness (Movement Prep, Heavy Neural, Power, Plyos) dan protokol stabilitas tulang belakang via **McGill Big 3**. Dijalankan pada hari Quality (Selasa & Jumat sore) mematuhi prinsip *"Hard Days Hard, Easy Days Easy"*.
+```text
+/strength-guide
+/strength-guide taper
+/strength-guide mcgill
+```
+
+---
+
 ## Cara Menggunakannya
 
-1. Buka percakapan Antigravity di folder project ini. Seluruh **14 Skills** akan otomatis terdeteksi.
+1. Buka percakapan Antigravity di folder project ini. Seluruh **15 Skills** (13 Slash Commands + 2 Master Knowledge Skills) akan otomatis terdeteksi.
 2. Pastikan konfigurasi MCP server `intervals-icu` telah aktif di Antigravity.
 3. Gunakan slash command yang sesuai dengan rutinitas harian dan mingguan latihan Anda.

@@ -19,6 +19,9 @@ Skill ini digunakan untuk memproyeksikan estimasi waktu finish race, target pace
   * Fungsi 3: Melatih toleransi mental terhadap usaha balap (*"remembering how to hurt"*).
 - **Reminder Kalibrasi >8 Minggu**: Jika tanggal kalibrasi VDOT atau threshold pace terakhir sudah melewati **8 minggu**, sistem wajib menyarankan sesi Time Trial baru via `/calc-vdot` sebelum menetapkan target race berikutnya.
 - **Fenomena "Racing Rust"**: Wajar bila race/TT pertama setelah blok panjang latihan Sub-T terasa agak kaku/lamban (*racing rust*). Ini adalah fase adaptasi saraf terhadap intensitas supra-LT2, **bukan kemunduran performa**.
+- **Aturan Baku Pekan Lomba [Sumber: NSA 2026 Bab 5] — *"A Race Replaces a Workout"***:
+  * Perlombaan atau time trial keras **menggantikan 1 sesi kualitas mingguan**, bukan ditambahkan di luar jadwal.
+  * Pada *Race Week*: Sesi kualitas awal pekan dipangkas durasinya (Card A Shorter 6x 3m), sesi kualitas kedua diganti lari santai (bukan Card B/C), hari sebelum race adalah istirahat total (*Rest Day*), dan hari perlombaan menggantikan porsi kualitas tersebut.
 
 ---
 
@@ -26,7 +29,7 @@ Skill ini digunakan untuk memproyeksikan estimasi waktu finish race, target pace
 
 - **5K s.d. Half Marathon adalah "Sweet Spot" NSA**: Dokumentasi resmi (§5.1) menegaskan bahwa rentang jarak 5K hingga Half Marathon adalah area di mana metode Norwegian Singles bekerja paling efektif bagi pelari rekreasional/hobby jogger.
 - **Tidak Memerlukan Adaptasi Maraton**: Target Half Marathon **TIDAK memerlukan** adaptasi berat ala maraton (§5.4) seperti memperpanjang Long Run hingga 2–3 jam atau menyisipkan blok tempo/Sub-T di dalam Long Run.
-- **Cukup Long Run Aerobik 75–90 Menit**: Pendekatan baku—Long Run 75–90 menit pada intensitas *pure easy* (< 70% HRmax) tanpa tempo rehearsal—sudah terbukti memadai dan optimal untuk target Half Marathon.
+- **Cukup Long Run Aerobik 75–90 Menit**: Pendekatan baku saat ini—Long Run 75–90 menit pada intensitas *pure easy* (< 70% HRmax) tanpa tempo rehearsal—sudah terbukti memadai dan optimal untuk target Half Marathon.
 
 ---
 
