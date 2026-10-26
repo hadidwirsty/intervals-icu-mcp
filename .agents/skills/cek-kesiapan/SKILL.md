@@ -31,15 +31,18 @@ Saat perintah `/cek-kesiapan` dijalankan, lakukan pemanggilan data secara terstr
    - Dapatkan rasio **ACWR** ($\text{ATL} / \text{CTL}$), status zona TSB, dan evaluasi keamanan Ramp Rate Steve Palladino ($+1\text{ s/d }+3\text{ TSS/minggu}$).
 
 ### Langkah C: Hitung Skor Kesiapan Komposit Terpadu (Dual-Engine Readiness)
-Panggil MCP tool `calculate_readiness_score` dengan parameter:
+Panggil MCP tool `calculate_readiness_score` dengan parameter terpadu:
 - `tsb`: nilai TSB hari ini.
 - `acwr`: rasio ATL / CTL.
-- `sleepScore`: skor tidur dari Garmin / Intervals.icu (skala 0–100).
-- `rhrSpike`: selisih RHR hari ini dikurangi baseline RHR stabil atlet (ekstrak via `get_wellness_data` atau `get_athlete_profile`).
+- `sleepScore`: skor kualitas tidur dari Garmin / Intervals.icu (skala 0–100).
+- `bodyBattery`: level Garmin Body Battery bangun tidur / terkini (0–100).
+- `hrvStatus`: status resmi HRV semalam (`BALANCED`, `UNBALANCED`, atau `LOW`).
+- `restingHr`: Resting HR sensor Garmin hari ini.
+- `baselineRestingHr`: baseline RHR stabil atlet.
 
-*Koreksi Triangulasi Body Battery*:
-- Jika Body Battery bangun tidur $\ge 75$ dan HRV Garmin `BALANCED` $\rightarrow$ perkuat status **HIJAU (Prima)**.
-- Jika Body Battery $< 50$ atau HRV Garmin `UNBALANCED` / `LOW` $\rightarrow$ turunkan status minimal satu tingkat ke **KUNING (Waspada)** atau **MERAH (Pemulihan)** terlepas dari angka TSB matematis.
+*Integrasi Native Dual-Engine*:
+- Engine otomatis menghitung rata-rata terbobot antara TSB, ACWR, Sleep Score, dan Body Battery, serta memotong skor jika HRV `UNBALANCED` / `LOW` atau terjadi lonjakan RHR > 5 bpm.
+- Jika Body Battery $< 30$, sistem otomatis mencegah status **HIJAU** untuk mencegah cedera atau kelelahan fisiologis berlebih.
 
 ---
 
@@ -47,10 +50,10 @@ Panggil MCP tool `calculate_readiness_score` dengan parameter:
 
 Evaluasi secara ketat apakah terdapat **$\ge 2$ sinyal bahaya** dari daftar berikut:
 1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas baseline stabil atlet.
-2. 🚨 **Kualitas tidur buruk 2 malam berturut-turut** (Sleep Score $< 70\%$ atau durasi $< 6\text{ jam}$).
+2. 🚨 **Kualitas tidur buruk 2 malam berturut-turut** (Sleep Score $< 70\%$ atau durasi $< 6\text{ jam}$). *(Gunakan `garmin_get_sleep_summaries_range` jika butuh konfirmasi tren 7 hari)*.
 3. 🚨 **Motivasi latihan anjlok drastis / kelesuan mental** (tanda kelelahan sistem saraf pusat / CNS).
 4. 🚨 **Easy pace terasa berat pada usaha napas normal** (dilaporkan atlet pada catatan lari kemarin).
-5. 🚨 **Garmin Biometric Red Flag**: Body Battery bangun tidur $< 40$, atau pengisian semalam (*charged*) $< 30\text{ poin}$, atau status HRV Garmin `UNBALANCED`/`LOW` selama 2 malam berturut-turut.
+5. 🚨 **Garmin Biometric Red Flag**: Body Battery bangun tidur $< 40$, atau pengisian semalam (*charged*) $< 30\text{ poin}$, atau status HRV Garmin `UNBALANCED`/`LOW` selama 2 malam berturut-turut. *(Gunakan `garmin_get_stress_range` atau `garmin_get_hrv_range` untuk verifikasi stres fisiologis kronis)*.
 
 > [!CAUTION]
 > **Tindakan Otomatis Jika $\ge 2$ Red Flags Aktif**:

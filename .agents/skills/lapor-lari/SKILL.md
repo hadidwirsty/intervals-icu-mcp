@@ -28,6 +28,10 @@ Saat perintah `/lapor-lari` dijalankan:
      - `< 3.5%`: **Sangat Stabil (Mesin Aerobik Matang)**.
      - `3.5% – 5.0%`: **Optimal / Lolos Standar Emas**.
      - `> 5.0%`: **Terjadi Drift Signifikan** (dehidrasi, glikogen menipis, atau melampaui ambang AeT).
+5. **Analisis Lanjutan Dual-Engine (`garmin-connect` MCP)**:
+   - **Sub-Integer VO2 Max (FIT message 140)**: Panggil `garmin_get_activity_streams` untuk aktivitas terkait guna mengekstrak nilai estimasi VO2 Max presisi tinggi dengan 2 desimal (misal `39.42 ml/kg/min`) untuk memantau adaptasi kebugaran mikro.
+   - **Komparasi Head-to-Head (`garmin_compare_activities`)**: Jika sesi ini merupakan pengulangan dari sesi sebelumnya (misal Sub-Threshold mingguan atau rute lari rutin), panggil tool ini untuk membandingkan delta pace, delta detak jantung, delta kadens, dan perubahan *Efficiency Factor* ($EF = \text{Speed}/\text{HR}$).
+   - **Audit Rekor Terbaik (`garmin_get_personal_records`)**: Periksa apakah sesi hari ini mencatatkan Best Effort baru (1K, 5K, 10K, HM, FM, atau Longest Run).
 
 ---
 
@@ -73,8 +77,9 @@ Sajikan hasil analisis pasca-lari dalam Bahasa Indonesia dengan format berikut:
 | **Rerata Daya (Watts)** | [XXX W] ([XX.X]% CP) | [Target Watts] | [🟢 Presisi / 🟡 Terlalu Tinggi] |
 | **Daya Tertimbang (NP)** | [XXX W] | — | Indeks variabilitas daya |
 | **Rerata Detak Jantung** | [XXX bpm] | [Plafon HR] | [Aman di Bawah Ambang / Drift] |
-| **Max Detak Jantung** | [XXX bpm] | < 188 bpm (AnT) | [0 detik di zona anaerobik] |
+| **Max Detak Jantung** | [XXX bpm] | < AnT | [0 detik di zona anaerobik] |
 | **Beban Sesi (TSS/Load)** | [XX Load] | [Plafon TSS] | [Sesuai Kategori Palladino] |
+| **VO2 Max Sub-Integer** | **[XX.XX] ml/kg/min** | FIT Msg 140 | [Presisi desimal Garmin Connect] |
 
 ---
 
@@ -87,17 +92,27 @@ Sajikan hasil analisis pasca-lari dalam Bahasa Indonesia dengan format berikut:
 
 ---
 
-### 3. Evaluasi Khusus Repetisi (Jika Sesi Kualitas / Sub-Threshold)
+### 3. Komparasi Head-to-Head & Rekor (Garmin Connect)
+*(Opsional: Jika dibandingkan dengan sesi sebelumnya via `garmin_compare_activities`)*
+- **Sesi Pembanding**: [Nama & Tanggal Sesi Sebelumnya]
+- **Delta Rerata Pace**: [+/-X detik/km]
+- **Delta Rerata HR**: [+/-X bpm] (Efisiensi kardiovaskular: [Meningkat/Menurun])
+- **Delta Efficiency Factor**: [+/-X.XXX] Speed/HR
+- **Status Rekor Baru (Best Efforts)**: [🏆 Terdeteksi PR Baru: [Jarak] [Waktu] / ➖ Bebas Rekor Baru]
+
+---
+
+### 4. Evaluasi Khusus Repetisi (Jika Sesi Kualitas / Sub-Threshold)
 | Repetisi | Durasi Kerja | Rerata Daya | Rerata HR | Pace | Evaluasi Copeland |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Rep 1** | [X mnt] | [XXX W] | [XXX bpm] | [X:XX /km] | [Presisi di 251–280 W] |
-| **Rep 2** | [X mnt] | [XXX W] | [XXX bpm] | [X:XX /km] | [Presisi di 251–280 W] |
+| **Rep 1** | [X mnt] | [XXX W] | [XXX bpm] | [X:XX /km] | [Presisi di Koridor % CP] |
+| **Rep 2** | [X mnt] | [XXX W] | [XXX bpm] | [X:XX /km] | [Presisi di Koridor % CP] |
 | ... | ... | ... | ... | ... | ... |
 *Kepatuhan Jeda Istirahat*: [Rata-rata rest XX detik — patuh target Copeland (Card A: 30–60s, Card B: 60–90s, Card C: 90–120s jalan santai)].
 
 ---
 
-### 4. Umpan Balik Pelatih & Arahan Pemulihan
+### 5. Umpan Balik Pelatih & Arahan Pemulihan
 - **Penilaian Kualitas**: [Sangat Baik / Terkontrol / Perlu Penyesuaian]
 - **Status Beban Akut**: Menambah ATL sebesar +[XX] poin.
 - **Rekomendasi Pemulihan**:

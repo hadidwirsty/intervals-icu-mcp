@@ -9,6 +9,8 @@ export interface ReadinessInput {
   hrv?: number;
   restingHr?: number;
   baselineRestingHr?: number;
+  bodyBattery?: number;
+  hrvStatus?: "BALANCED" | "UNBALANCED" | "LOW" | string;
 }
 
 export interface ReadinessOutput {
@@ -21,7 +23,15 @@ export interface ReadinessOutput {
 }
 
 export function calculateReadinessScore(input: ReadinessInput): ReadinessOutput {
-  const { tsb, acwr, sleepScore = 75, restingHr, baselineRestingHr } = input;
+  const {
+    tsb,
+    acwr,
+    sleepScore,
+    restingHr,
+    baselineRestingHr,
+    bodyBattery,
+    hrvStatus,
+  } = input;
 
   // 1. TSB Score (40% weight)
   let tsbScore = 50;
@@ -38,13 +48,40 @@ export function calculateReadinessScore(input: ReadinessInput): ReadinessOutput 
   else if (acwr < 0.8) acwrScore = 70;
   else acwrScore = 20;
 
-  // 3. Wellness & RHR Score (30% weight)
-  let wellnessScore = sleepScore;
-  if (restingHr && baselineRestingHr && restingHr - baselineRestingHr > 5) {
-    wellnessScore = Math.max(0, wellnessScore - 30);
+  // 3. Wellness & Biometrics Score (30% weight)
+  // Menyatukan Sleep Score dan Garmin Body Battery jika tersedia
+  let baseWellness = 75;
+  if (bodyBattery !== undefined && sleepScore !== undefined) {
+    baseWellness = bodyBattery * 0.5 + sleepScore * 0.5;
+  } else if (bodyBattery !== undefined) {
+    baseWellness = bodyBattery;
+  } else if (sleepScore !== undefined) {
+    baseWellness = sleepScore;
   }
 
-  const finalScore = Math.round(tsbScore * 0.4 + acwrScore * 0.3 + wellnessScore * 0.3);
+  // Penalti status HRV semalam (Garmin Firstbeat)
+  if (hrvStatus) {
+    const normalizedHrv = hrvStatus.toUpperCase();
+    if (normalizedHrv === "LOW") {
+      baseWellness -= 25;
+    } else if (normalizedHrv === "UNBALANCED") {
+      baseWellness -= 15;
+    }
+  }
+
+  // Penalti lonjakan resting HR (> 5 bpm dari baseline)
+  if (restingHr && baselineRestingHr && restingHr - baselineRestingHr > 5) {
+    baseWellness -= 30;
+  }
+
+  const wellnessScore = Math.max(0, Math.min(100, Math.round(baseWellness)));
+
+  let finalScore = Math.round(tsbScore * 0.4 + acwrScore * 0.3 + wellnessScore * 0.3);
+
+  // Safety floor: Jika Body Battery sangat kritis, cegah rekomendasi GREEN
+  if (bodyBattery !== undefined && bodyBattery < 30 && finalScore >= 80) {
+    finalScore = 74; // Turunkan ke status YELLOW
+  }
 
   let status: "GREEN" | "YELLOW" | "RED" = "YELLOW";
   let recommendation = "";

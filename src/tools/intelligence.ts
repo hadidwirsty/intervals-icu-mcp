@@ -71,7 +71,7 @@ export function registerIntelligenceTools(server: McpServer): void {
   // 4. calculate_readiness_score
   server.tool(
     "calculate_readiness_score",
-    "Memetakan TSB, ACWR, Sleep Score, HRV, dan RHR Spike ke dalam Skor Kesiapan Terpadu 0-100% (GREEN, YELLOW, RED).",
+    "Memetakan TSB, ACWR, Sleep Score, Garmin Body Battery, HRV Status, dan RHR Spike ke dalam Skor Kesiapan Terpadu 0-100% (GREEN, YELLOW, RED).",
     {
       tsb: z.number().describe("Nilai TSB/Form atlet terkini."),
       acwr: z.number().describe("Nilai Acute:Chronic Workload Ratio terkini."),
@@ -79,6 +79,8 @@ export function registerIntelligenceTools(server: McpServer): void {
       hrv: z.number().optional().describe("Nilai HRV rMSSD."),
       restingHr: z.number().optional().describe("Denyut jantung istirahat harian terkini."),
       baselineRestingHr: z.number().optional().describe("Baseline RHR normal atlet."),
+      bodyBattery: z.number().min(0).max(100).optional().describe("Level Garmin Body Battery saat bangun / terkini (0-100)."),
+      hrvStatus: z.enum(["BALANCED", "UNBALANCED", "LOW"]).optional().describe("Status resmi overnight HRV dari Garmin Connect."),
     },
     async (input) => {
       const result = calculateReadinessScore(input);
