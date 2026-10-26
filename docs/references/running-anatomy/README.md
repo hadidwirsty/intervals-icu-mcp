@@ -38,6 +38,6 @@ graph TD
 ---
 
 ## 🔗 Hubungan dengan Sistem Kepelatihan
-- **Skill Terkait**: [`.agents/skills/strength-guide/SKILL.md`](../../.agents/skills/strength-guide/SKILL.md)
+- **Skill Terkait**: [`.agents/skills/panduan-kekuatan/SKILL.md`](../../.agents/skills/panduan-kekuatan/SKILL.md)
 - **Guardrails**: [`.agents/rules/norwegian-singles-guardrails.md`](../../.agents/rules/norwegian-singles-guardrails.md)
-- **Konteks Fisiologis Atlet**: Beban tubuh 81 kg, perlindungan tulang belakang *flat lumbar* (McGill Big 3), dan target Semarang 10K.
+- **Konteks Fisiologis**: Proteksi muskuloskeletal rantai kinetik tungkai bawah dan stabilitas tulang belakang (McGill Big 3).

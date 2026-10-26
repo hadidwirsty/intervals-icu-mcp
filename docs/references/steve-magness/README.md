@@ -38,8 +38,8 @@ flowchart TD
         S2["Interval 10x 3m & 5x 6m dengan Rest Jalan"]
         S3["Strides 4x 15s (Rabu & Sabtu)"]
         S4["Long Run Minggu (Cap 75-90m, HR ≤ 70%)"]
-        S5["McGill Big 3 di Selasa & Jumat Sore"]
-        S6["Perlindungan Flat Lumbar & Panggul (81 kg)"]
+        S5["McGill Big 3 di Sore Hari Pasca Kualitas"]
+        S6["Perlindungan Rantai Kinetik & Stabilitas Tulang Belakang"]
     end
 
     M1 <--> S1
@@ -54,5 +54,5 @@ flowchart TD
 
 ## 🎯 Manfaat Langsung untuk Pengembangan Atlet
 
-1. **Kepastian Sains (Zero Guesswork)**: Setiap kali menjalankan sesi latihan (apakah itu 5x 6m di hari Jumat, lari santai 45m di hari Kamis, atau McGill Big 3 di sore hari), Anda tahu persis mekanisme molekuler dan fisiologis di baliknya.
-2. **Kepatuhan Terhadap Batas Fisiologis**: Peringatan Steve tentang bahaya lari terlalu kencang di sesi threshold atau terlalu lama di sesi long run menjadi pelindung utama Anda dari cedera menjelang **Malioboro Run Half Marathon (4 Oktober 2026)**.
+1. **Kepastian Sains (Zero Guesswork)**: Setiap kali menjalankan sesi latihan (apakah itu repetisi Sub-T Copeland, lari santai harian, atau McGill Big 3), Anda tahu persis mekanisme molekuler dan fisiologis di baliknya.
+2. **Kepatuhan Terhadap Batas Fisiologis**: Peringatan Steve tentang bahaya lari terlalu kencang di sesi threshold atau terlalu lama di sesi long run menjadi pelindung utama atlet dari sindrom kelelahan kronis dan cedera muskuloskeletal menjelang hari perlombaan.

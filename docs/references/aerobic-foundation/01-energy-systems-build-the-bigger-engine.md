@@ -74,15 +74,15 @@ Banyak pelari keliru menganggap bahwa nomor 5K dan 10K adalah perlombaan cepat y
 | **1.500 m / 1 Mile** | 3:30 – 5:30 | **77%** | 23% | Sistem aerobik sudah mulai mendominasi $3/4$ energi |
 | **5.000 meter (5K)** | 13:00 – 30:00 | **90%** | 10% | Dominasi mutlak kapasitas kardiorespirasi & $\text{VO}_2\max$ |
 | **10.000 meter (10K - Elit)** | 26:30 – 32:00 | **97%** | **3%** | Standar atlet profesional kecepatan tinggi |
-| **10.000 meter (10K - Rekreasional)** | **50:00 – 70:00** | **98.5% – 99%** | **1% – 1.5%** | **Pondasi balapan Semarang 10K (Durasi 55–65 menit): 98.5% aerobik!** |
+| **10.000 meter (10K - Rekreasional)** | **50:00 – 70:00** | **98.5% – 99%** | **1% – 1.5%** | **Pondasi balapan 10K rekreasional (Durasi 50–70 menit): 98.5% aerobik!** |
 | **Half Marathon (21.1K)**| 1:00 – 2:30 | **99%** | 1% | Keterbatasan ditentukan oleh efisiensi glikogen dan ambang laktat |
 | **Marathon (42.2K)** | 2:02 – 5:00 | **99.5%** | 0.5% | Murni mesin pembakaran lemak dan integritas mitokondria |
 
 > [!IMPORTANT]
-> **Fakta Krusial untuk Pelari 10K Rekreasional (Semarang 10K)**:
-> Angka 97% aerobik di infografis adalah patokan untuk atlet elit yang berlari sub-30 menit. Bagi pelari rekreasional yang menempuh 10K dalam 55 hingga 65 menit (seperti benchmark Bandoeng 10K Anda 1:04:56), durasi kontraksi otot berlangsung dua kali lebih lama. Secara bioenergetika, **kontribusi sistem aerobik Anda justru meningkat menjadi 98.5% hingga 99%**! 
+> **Fakta Krusial untuk Pelari 10K Rekreasional**:
+> Angka 97% aerobik di infografis adalah patokan untuk atlet elit yang berlari sub-30 menit. Bagi pelari rekreasional yang menempuh 10K dalam 50 hingga 70 menit, durasi kontraksi otot berlangsung dua kali lebih lama. Secara bioenergetika, **kontribusi sistem aerobik justru meningkat menjadi 98.5% hingga 99%**! 
 > 
-> Ketergantungan Anda pada mesin aerobik bersifat mutlak. Menyia-nyiakan waktu latihan dengan sprint anaerobik all-out hanya melatih kontribusi yang kurang dari 1.5% dari total durasi lomba Anda.
+> Ketergantungan atlet pada mesin aerobik bersifat mutlak. Menyia-nyiakan waktu latihan dengan sprint anaerobik all-out hanya melatih kontribusi yang kurang dari 1.5% dari total durasi lomba.
 
 ---
 
@@ -146,6 +146,6 @@ pie title Distribusi Latihan Aerobik Kelas Dunia (Seiler 80/20)
 
 ## 7. Rangkuman Aksi untuk Atlet
 
-1. **Pahami Prioritas Balapan**: Semarang 10K adalah perlombaan dengan tuntutan **97% energi aerobik**. Jangan terjebak obsesi latihan sprint anaerobik yang hanya menyumbang 3%.
+1. **Pahami Prioritas Balapan**: Lomba lari jalan raya 10K/HM/Maraton adalah perlombaan dengan tuntutan **>97% energi aerobik**. Jangan terjebak obsesi latihan sprint anaerobik yang hanya menyumbang fraksi kecil energi.
 2. **Kembangkan 70% Serat Lambat**: Lakukan mayoritas kilometer mingguan pada zona Easy yang benar-benar santai ($\le \text{HR}_{\max} - 50\text{ bpm}$) agar serat Tipe I beradaptasi optimal.
 3. **Bangun Pabrik Mitokondria Terlebih Dahulu**: Kapasitas mesin yang besar (*Bigger Engine*) adalah prasyarat mutlak sebelum Anda bisa memacu mobil balap Anda pada kecepatan tinggi secara konsisten.

@@ -54,4 +54,4 @@ Pilar ini menjaga agar pelari tidak menjadi lambat atau kaku selama fase fondasi
 | Multifaceted Base (Aerobic + Speed) | Alokasi mingguan 75/25: 75% lari aerobik santai + 25% Sub-T + Strides | `weekly-budget`, `plan-week` |
 | Neuromuscular Maintenance via Strides | Rutinitas Strides 4x 15s (180–195 spm, 110–130% CP) di hari Rabu/Sabtu | `plan-week`, `create-workout` |
 | Spinal & Core Stability (Movement Prep) | Protokol wajib McGill Big 3 (Bird-Dog, Side Bridge, Curl-Up) 2x seminggu | `running-coach-analysis`, `norwegian-singles-guardrails` |
-| Perlindungan Struktur Atlet Bobot 81 kg | Pembatasan pace santai (7:15–8:35 /km) agar tidak memicu kompresi lumbar | `running-coach-analysis`, `project-context` |
+| Perlindungan Struktur Muskuloskeletal | Pembatasan pace santai (Z1/Z2) agar tidak memicu kelelahan biomekanis | `jadwal-minggu`, `project-context` |

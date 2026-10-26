@@ -46,7 +46,7 @@ Panggil MCP tool `calculate_readiness_score` dengan parameter:
 ## 2. Aturan Pengawalan: 5 Red Flags Kelelahan Terpadu
 
 Evaluasi secara ketat apakah terdapat **$\ge 2$ sinyal bahaya** dari daftar berikut:
-1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas baseline (RHR hari ini $\ge 52\text{ bpm}$).
+1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas baseline stabil atlet.
 2. 🚨 **Kualitas tidur buruk 2 malam berturut-turut** (Sleep Score $< 70\%$ atau durasi $< 6\text{ jam}$).
 3. 🚨 **Motivasi latihan anjlok drastis / kelesuan mental** (tanda kelelahan sistem saraf pusat / CNS).
 4. 🚨 **Easy pace terasa berat pada usaha napas normal** (dilaporkan atlet pada catatan lari kemarin).
@@ -54,15 +54,15 @@ Evaluasi secara ketat apakah terdapat **$\ge 2$ sinyal bahaya** dari daftar beri
 
 > [!CAUTION]
 > **Tindakan Otomatis Jika $\ge 2$ Red Flags Aktif**:
-> Seluruh rencana sesi kualitas (*Sub-Threshold / Strides*) hari ini **WAJIB DIBATALKAN**. Atlet diarahkan beralih ke **Deload Adaptif** (istirahat total atau *Easy Recovery Run* sangat ringan 30 menit pada RPE 2 / $\le 65\%$ CP / $\le 192\text{ W}$).
+> Seluruh rencana sesi kualitas (*Sub-Threshold / Strides*) hari ini **WAJIB DIBATALKAN**. Atlet diarahkan beralih ke **Deload Adaptif** (istirahat total atau *Easy Recovery Run* sangat ringan 30 menit pada RPE 2 / $\le 65\%$ CP).
 
 ---
 
-## 3. Protokol Khusus Perlindungan Tulang Belakang (*Flat Lumbar Guard*)
+## 3. Protokol Khusus Perlindungan Tulang Belakang & Punggung Bawah (*Spinal Protection Protocol*)
 
 Jika atlet melaporkan rasa tegang (*tightness*) atau pegal pada punggung bawah (*Lower Back Pain / LBP*):
-- Aktifkan **Flag 6 LBP Guard**.
-- Larang lari dengan impak tinggi. Alihkan volume ke *Cross-Training* non-impak (sepeda statis pada $\le 75\%$ FTP Sepeda 251 W = $\le 188\text{ W}$ atau renang gaya dada).
+- Aktifkan **Flag Proteksi Punggung Bawah**.
+- Larang lari dengan impak tinggi. Alihkan volume ke *Cross-Training* non-impak (sepeda statis pada $\le 70–75\%$ FTP Sepeda atau renang gaya dada).
 - Anjurkan protokol stabilisasi tulang belakang **McGill Big 3** (Modified Curl-Up, Side Plank, Bird Dog) dengan penahanan statis 8–10 detik.
 
 ---
@@ -91,7 +91,7 @@ Sajikan hasil analisis secara rapi dalam Bahasa Indonesia dengan format berikut:
 | **Body Battery™** | **[XX] / 100** | [Tinggi/Sedang/Rendah] | Charged: +[XX] | Drained: -[XX] |
 | **Status HRV Semalam** | **[BALANCED / UNBALANCED]** | [XX] ms (Base: [XX–XX]) | [Keseimbangan sistem saraf otonom] |
 | **Tingkat Stres Harian** | **[XX] / 100** | [Rendah / Sedang / Tinggi] | Rata-rata beban stres fisiologis Garmin |
-| **Resting HR Sensor** | **[XX] bpm** | Baseline: 46 bpm | Deviasi: [+/-X] bpm dari baseline stabil |
+| **Resting HR Sensor** | **[XX] bpm** | Baseline: [XX] bpm | Deviasi: [+/-X] bpm dari baseline stabil |
 | **Aktivitas Kemarin** | **[XX.XXX] langkah** | [XXX] kkal aktif | Beban gerak non-lari |
 
 ---
@@ -120,5 +120,5 @@ Sajikan hasil analisis secara rapi dalam Bahasa Indonesia dengan format berikut:
 ### 5. Panduan Aksi Hari Ini
 - **Menu Terjadwal**: [Sesi hari ini di kalender Intervals.icu]
 - **Keputusan Pelatih**: [Lanjutkan sesuai rencana / Modifikasi beban / Ganti ke Easy Run]
-- **Saran Sepatu**: [Novablast 5 (Easy) / Nimbus 25 (Recovery/Proteksi) / Azura (Sub-T) / Pyopp (Barefoot)]
+- **Saran Sepatu**: [Daily Cushion (Easy) / Max Cushion (Recovery/Proteksi) / Fast Trainer (Sub-T) / Natural Trainer (Mobilitas)]
 ```

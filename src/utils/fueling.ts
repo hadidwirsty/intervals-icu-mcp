@@ -1,9 +1,9 @@
 /**
  * Pure Engine: Race Day & Fueling Execution Planner.
  *
- * Mengoptimalkan strategi nutrisi perlombaan (Malioboro Run Half Marathon / jarak jalan raya)
- * dengan spesifikasi nutrisi resmi EJ Sport Energy Gel (30g karbohidrat per sachet:
- * 12g Maltodextrin + 18g Dextrose), hidrasi iklim tropis Yogyakarta (suhu 24–28°C, RH 75–85%),
+ * Mengoptimalkan strategi nutrisi perlombaan (Half Marathon / 10K / jarak jalan raya)
+ * dengan spesifikasi nutrisi gel energi terstandarisasi (30g karbohidrat per sachet:
+ * rasio maltodekstrin & dekstrosa/fruktosa), hidrasi iklim tropis Indonesia (suhu 24–28°C, RH 75–85%),
  * serta segmentasi pacing KM-by-KM berbasis Critical Power dan VDOT atlet.
  */
 
@@ -28,11 +28,11 @@ export interface RaceFuelingInput {
   raceName?: string;
   raceDistanceKm?: number;        // Default: 21.0975 km (Half Marathon)
   predictedTimeMinutes?: number;  // Default: 138 menit (~2 jam 18 menit)
-  athleteWeightKg?: number;       // Default: 81 kg
+  athleteWeightKg?: number;       // Default: 70 kg
   temperatureCelsius?: number;    // Default: 26 °C
   relativeHumidityPct?: number;   // Default: 80 %
-  criticalPowerWatts?: number;    // Default: 295 W
-  vdot?: number;                  // Default: 31.0
+  criticalPowerWatts?: number;    // Default: 250 W
+  vdot?: number;                  // Default: 40.0
   gelSpec?: EnergyGelSpec;        // Default: EJ_SPORT_GEL
 }
 
@@ -92,9 +92,9 @@ export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuel
     (raceDistanceKm <= 7
       ? "5K Race"
       : raceDistanceKm <= 14
-        ? "Semarang 10K"
+        ? "10K Race"
         : raceDistanceKm <= 25
-          ? "Malioboro Run Half Marathon"
+          ? "Half Marathon"
           : "Full Marathon");
 
   const predictedTimeMinutes =
@@ -108,10 +108,10 @@ export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuel
           : 270);
 
   const {
-    athleteWeightKg = 81,
+    athleteWeightKg = 70,
     temperatureCelsius = 26,
     relativeHumidityPct = 80,
-    criticalPowerWatts = 295,
+    criticalPowerWatts = 250,
     gelSpec = EJ_SPORT_GEL,
   } = input;
 
@@ -192,7 +192,7 @@ export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuel
       },
     ];
   } else if (raceDistanceKm <= 14) {
-    // 10K Race (misal Semarang 10K, ~50–65 menit)
+    // 10K Road Race (~50–65 menit)
     gelCount = 2;
     fuelingSchedule = [
       {
@@ -294,7 +294,7 @@ export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuel
         fluidMl: 100,
         sodiumMg: 100,
         tacticalNote:
-          "Booster dorongan akhir untuk 4 kilometer penutup menuju garis finish Malioboro.",
+          "Booster dorongan akhir untuk 4 kilometer penutup menuju garis finish.",
       },
     ];
     pacingStrategy = [
@@ -308,7 +308,7 @@ export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuel
         },
         powerPercentageRange: { min: 87, max: 90 },
         focus:
-          "Jangan terbawa euforia kerumunan di Malioboro/Titik Nol. Biarkan denyut jantung (HR) beradaptasi secara bertahap tanpa lonjakan asam laktat prematur.",
+          "Jangan terbawa euforia kerumunan start. Biarkan denyut jantung (HR) beradaptasi secara bertahap tanpa lonjakan asam laktat prematur.",
       },
       {
         segment: "KM 4 - 17",

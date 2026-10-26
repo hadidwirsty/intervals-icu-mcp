@@ -1,11 +1,11 @@
 ---
 name: panduan-kekuatan
-description: Panduan sesi latihan kekuatan fungsional pelari (22–25 menit) — protokol perlindungan tulang belakang flat lumbar (McGill Big 3), penguatan rantai kinetik (Soleus, Quads, Hamstring, Hip Flexor), dan micro-dosing pra-lari harian.
+description: Panduan sesi latihan kekuatan fungsional pelari (22–25 menit) — protokol stabilitas tulang belakang (McGill Big 3), penguatan rantai kinetik (Soleus, Quads, Hamstring, Hip Flexor), dan micro-dosing pra-lari harian.
 ---
 
 # /panduan-kekuatan — Panduan Latihan Kekuatan & Perlindungan Struktur
 
-Skill ini memandu pelaksanaan **latihan kekuatan fungsional pelari (*Running-Specific Strength Training*)**. Menggabungkan sains adaptasi neuromuskular Steve Magness, protokol perlindungan tulang belakang *flat lumbar (reduced lordosis)* Dr. Stuart McGill (**McGill Big 3**), serta pemetaan 8 kelompok otot utama dari *Running Anatomy*.
+Skill ini memandu pelaksanaan **latihan kekuatan fungsional pelari (*Running-Specific Strength Training*)**. Menggabungkan sains adaptasi neuromuskular Steve Magness, protokol stabilitas tulang belakang Dr. Stuart McGill (**McGill Big 3**), serta pemetaan 8 kelompok otot utama dari *Running Anatomy*.
 
 ---
 

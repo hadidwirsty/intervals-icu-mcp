@@ -40,7 +40,7 @@ graph LR
 * **Latihan Terpilih**: 
   * *Controlled Air Squat (Tempo 3-1-1)*: Menekankan kontrol eksentrik 3 detik tanpa membiarkan pinggang melengkung (*butt wink*).
   * *Reverse Lunges*: Melangkah mundur untuk mengurangi gaya geser (*shear force*) pada tempurung lutut.
-* **Korelasi Atlet (81 kg)**: Mengingat beban tubuh 81 kg menghasilkan gaya benturan hingga 200–240 kg per langkah, quadriceps yang kuat berfungsi sebagai peredam kejut alami agar sendi lutut tidak aus.
+* **Korelasi Atlet**: Mengingat beban tubuh saat lari menghasilkan gaya benturan hingga 2.5–3x berat badan per langkah, quadriceps yang kuat berfungsi sebagai peredam kejut alami agar sendi lutut tidak aus.
 
 ---
 
@@ -50,7 +50,7 @@ graph LR
 * **Latihan Terpilih**:
   * *Single-Leg Romanian Deadlift (SL-RDL)*: Melatih kontrol panggul tunggal (*hip hinge*) dan kekuatan eksentrik hamstring.
   * *Nordic Hamstring Curl*: Standar emas pencegahan cedera hamstring di dunia olahraga elit.
-* **Korelasi Atlet**: Menjaga rasio kekuatan Hamstring:Quadriceps (H:Q ratio) minimal 0.60–0.70 untuk mencegah hamstring tertarik saat membuka langkah cepat (*finish kick* Semarang 10K).
+* **Korelasi Atlet**: Menjaga rasio kekuatan Hamstring:Quadriceps (H:Q ratio) minimal 0.60–0.70 untuk mencegah hamstring tertarik saat membuka langkah cepat (*finish kick* menjelang garis finish).
 
 ---
 
@@ -85,7 +85,7 @@ graph LR
 * **Latihan Terpilih**:
   * *Standing High-Knee Isometric Hold*: Menahan lutut di atas 90° selama 8–10 detik untuk membangun kekuatan isometrik psoas tanpa membungkukkan badan.
   * *Half-Kneeling Hip Flexor Stretch with Glute Squeeze*: Membuka ketegangan psoas dengan memutar panggul ke posisi posterior tilt lembut.
-* **Korelasi Atlet (Flat Lumbar)**: Otot psoas yang kaku dan pendek akibat duduk lama akan menarik tulang belakang lumbal ke depan (*anterior shear*). Peregangan dan penguatan isometrik adalah kunci bebas nyeri pinggang.
+* **Korelasi Atlet (Kesehatan Tulang Belakang)**: Otot psoas yang kaku dan pendek akibat duduk lama akan menarik tulang belakang lumbal ke depan (*anterior shear*). Peregangan dan penguatan isometrik adalah kunci bebas nyeri pinggang.
 
 ---
 
@@ -118,7 +118,7 @@ graph LR
   * *McGill Side Plank*: Mengunci otot samping panggul dan pinggang.
   * *Bird-Dog*: Menyilangkan tangan dan kaki berlawanan, melatih erector spinae dan multifidus dengan beban kompresi tulang belakang minimal (<3000 N).
   * *Dead Bug*: Menjaga punggung bawah menempel rata di lantai (*anti-extension*).
-* **Korelasi Atlet (Flat Lumbar)**: Dilarang keras melakukan gerakan *sit-up*, *crunches*, atau *Russian twist* dengan beban berat karena gerakan fleksi-rotasi berulang dapat memicu kerusakan diskus lumbal atlet.
+* **Korelasi Atlet (Anti-Kompresi Spinal)**: Hindari gerakan *sit-up*, *crunches*, atau *Russian twist* dengan beban berat karena gerakan fleksi-rotasi berulang dapat memicu kompresi berlebih pada diskus lumbal. Prioritaskan latihan anti-gerak/isometrik (McGill Big 3).
 
 ---
 
@@ -151,11 +151,11 @@ graph TD
 
 ---
 
-## 4. Rangkuman Aplikasi Taktis Menuju Semarang 10K (13 Des 2026)
+## 4. Rangkuman Aplikasi Taktis Perlombaan Jalan Raya
 
-* **Target Lomba**: Semarang 10K (Sub-60 Plan A, rute datar pesisir).
+* **Target Lomba**: Perlombaan 10K / Half Marathon jalan raya.
 * **Kebutuhan Otot**:
-  * Lomba 10K membutuhkan **efisiensi langkah dan kadens stabil (≥175 rpm)** selama ~55–60 menit.
-  * Otot **Tibialis Anterior** dan **Soleus** yang terlatih mencegah kelelahan kaki bawah (*foot fatigue*) di KM 7–10.
+  * Lomba jalan raya membutuhkan **efisiensi langkah dan kadens stabil (≥175 rpm)** sepanjang durasi balapan.
+  * Otot **Tibialis Anterior** dan **Soleus** yang terlatih mencegah kelelahan kaki bawah (*foot fatigue*) di kilometer akhir.
   * Otot **Gluteus Medius** dan **Adductors** yang seimbang menjaga langkah tetap lurus dan simetris, menghemat energi hingga 2%–3% (*improved running economy*).
-  * Otot **Core/Erector Spinae** memastikan tubuh tidak membungkuk saat menyentuh garis finish di Kota Lama Semarang.
+  * Otot **Core/Erector Spinae** memastikan tubuh tidak membungkuk saat menyentuh garis finish.

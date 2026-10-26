@@ -23,7 +23,7 @@ Ketiga materi ini membentuk satu rantai logika yang saling mengunci:
 
 ```mermaid
 flowchart TD
-    M1["1. PAHAMI TUNTUTAN BIOLOGIS (Modul 01)<br/>Semarang 10K (target 55-65m) menuntut 98.5% energi aerobik.<br/>Mesin aerobik yang besar adalah penentu performa mutlak."]
+    M1["1. PAHAMI TUNTUTAN BIOLOGIS (Modul 01)<br/>Balapan 10K rekreasional (durasi 50–70m) menuntut 98.5% energi aerobik.<br/>Mesin aerobik yang besar adalah penentu performa mutlak."]
     
     M2["2. BANGUN MESIN TANPA CEDERA (Modul 02)<br/>Gunakan prinsip 'Volume First, Speed Later' berbasis durasi waktu.<br/>Lindungi tendon di Risk Window via Blok 3+1, ACWR 0.8-1.3, dan Sub-T terkontrol."]
     
@@ -36,14 +36,14 @@ flowchart TD
 
 ## 3. Matriks Aplikasi Praktis untuk Target 10K & Half Marathon
 
-| Parameter Fisiologis Atlet | Nilai Aktual Terukur | Pedoman Penerapan Berbasis Modul |
+| Parameter Fisiologis Atlet | Formula / Kaidah | Pedoman Penerapan Berbasis Modul |
 |---|:---:|---|
 | **Kebutuhan Energi Lomba (10K)** | **98.5% Aerobik** | 98.5% fokus latihan harus diarahkan pada ekspansi kapasitas aerobik (Modul 01). |
-| **Denyut Jantung Maksimum ($\text{HR}_{\max}$)** | **207 bpm** | Patokan plafon mutlak lari santai (Easy Hadd): $\le 207 - 50 = \mathbf{157\text{ bpm}}$ (Modul 02). |
-| **Ambang Anaerobik ($\text{AnT}$ / LTHR)** | **188 bpm** | Plafon atap (*Ceiling*) ambang laktat 2 (Modul 03). |
-| **Target Minimal $\text{AeT}$ (10% Rule)** | $\ge \mathbf{169\text{ bpm}}$ | $\text{Gap} = (188 - \text{AeT}) / 188 \le 10\% \implies \text{AeT} \ge 188 - 18.8 \approx \mathbf{169.2\text{ bpm}}$. |
+| **Denyut Jantung Maksimum ($\text{HR}_{\max}$)** | **Baseline Terukur** | Patokan plafon mutlak lari santai (Easy Hadd): $\le \text{HR}_{\max} - 50\text{ bpm}$ (Modul 02). |
+| **Ambang Anaerobik ($\text{AnT}$ / LTHR)** | **Ambang Laktat 2** | Plafon atap (*Ceiling*) ambang laktat 2 (Modul 03). |
+| **Target Minimal $\text{AeT}$ (10% Rule)** | $\frac{\text{AnT} - \text{AeT}}{\text{AnT}} \le 10\%$ | Target celah aerobik ideal $\le 10\%$ dari AnT untuk performa endurance optimal. |
 | **Derajat Toleransi Spektrum ADS** | **Level 1–2 Target** | Celah $\le 10\%$ = Beban penuh; Celah $10.1\text{--}13\%$ = Batasi Sub-T pada repetisi pendek Card A (3m) dan perbanyak Easy run. |
-| **Berat Badan Aktual** | **81 kg** | Beban impak mekanis wajib dilindungi via volume berbasis durasi waktu, frekuensi 5–6 hari, dan penguatan tendon Magness/JRF (Modul 02). |
+| **Manajemen Beban Impak** | **Durasi & Frekuensi** | Beban impak mekanis wajib dilindungi via volume berbasis durasi waktu, frekuensi teratur, dan penguatan tendon & rantai kinetik (Modul 02). |
 
 ---
 

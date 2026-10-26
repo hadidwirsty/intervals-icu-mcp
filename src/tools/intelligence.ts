@@ -91,11 +91,11 @@ export function registerIntelligenceTools(server: McpServer): void {
   // 5. calculate_race_fueling
   server.tool(
     "calculate_race_fueling",
-    "Menghitung strategi nutrisi perlombaan adaptif multi-jarak berbasis EJ Sport Energy Gel (30g carbs: 12g Maltodextrin + 18g Dextrose), estimasi laju keringat & hidrasi untuk iklim tropis Indonesia (suhu 24–32°C, RH 70–85%), serta strategi pacing KM-by-KM untuk target lomba jalan raya (Semarang 10K, Half Marathon, Full Marathon).",
+    "Menghitung strategi nutrisi perlombaan adaptif multi-jarak berbasis gel energi (30g carbs: rasio maltodekstrin & dextrose/fruktosa ramah lambung), estimasi laju keringat & hidrasi untuk iklim tropis Indonesia (suhu 24–32°C, RH 70–85%), serta strategi pacing KM-by-KM untuk target lomba jalan raya (10K, Half Marathon, Full Marathon).",
     {
       raceDistanceKm: z.number().optional().describe("Jarak lomba dalam kilometer (default: 10 untuk 10K, atau 21.0975 untuk Half Marathon)."),
       predictedTimeMinutes: z.number().optional().describe("Estimasi waktu tempuh lomba dalam menit (misal 138 untuk 2h18m)."),
-      athleteWeightKg: z.number().optional().describe("Berat badan atlet dalam kg (default: 81 kg)."),
+      athleteWeightKg: z.number().optional().describe("Berat badan atlet dalam kg (default: 70 kg)."),
       temperatureCelsius: z.number().optional().describe("Estimasi suhu rata-rata saat lomba dalam derajat Celsius (default: 26°C)."),
       relativeHumidityPct: z.number().optional().describe("Estimasi kelembapan relatif saat lomba dalam persen (default: 80%)."),
       criticalPowerWatts: z.number().optional().describe("Critical Power (CP) atlet dalam Watt (default: 295 W)."),

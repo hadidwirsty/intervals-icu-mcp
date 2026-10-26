@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { calculateRaceFuelingPlan, EJ_SPORT_GEL } from "./fueling.js";
 
 describe("calculateRaceFuelingPlan", () => {
-  it("calculates comprehensive Malioboro Run Half Marathon fueling plan using EJ Sport for calibrated athlete (81kg, CP 295W, VDOT 31)", () => {
+  it("calculates comprehensive Half Marathon fueling plan using standard dual-source gel for calibrated athlete (CP 295W, VDOT 31)", () => {
     const plan = calculateRaceFuelingPlan({
       raceDistanceKm: 21.0975,
       predictedTimeMinutes: 138, // ~2 jam 18 menit
@@ -25,7 +25,7 @@ describe("calculateRaceFuelingPlan", () => {
     expect(plan.hourlyCarbsTargetGrams).toBeGreaterThanOrEqual(45);
     expect(plan.hourlyCarbsTargetGrams).toBeLessThanOrEqual(55);
 
-    // Sweat rate and hydration for 81kg in 26°C tropical climate
+    // Sweat rate and hydration for 70-80kg in 26°C tropical climate
     expect(plan.estimatedSweatRateMlPerHour).toBeGreaterThanOrEqual(800);
     expect(plan.estimatedSweatRateMlPerHour).toBeLessThanOrEqual(1050);
     expect(plan.targetFluidIntakeMlPerHour).toBeGreaterThanOrEqual(500);
@@ -96,7 +96,7 @@ describe("calculateRaceFuelingPlan", () => {
     expect(() => calculateRaceFuelingPlan({ athleteWeightKg: -10 })).toThrow();
   });
 
-  it("calculates dedicated Semarang 10K fueling & pacing plan (2 gels, 60g carbs, 3 pacing segments)", () => {
+  it("calculates dedicated 10K road race fueling & pacing plan (2 gels, 60g carbs, 3 pacing segments)", () => {
     const plan = calculateRaceFuelingPlan({
       raceDistanceKm: 10,
       predictedTimeMinutes: 59,
@@ -104,7 +104,7 @@ describe("calculateRaceFuelingPlan", () => {
       criticalPowerWatts: 295,
     });
 
-    expect(plan.raceName).toBe("Semarang 10K");
+    expect(plan.raceName).toBe("10K Race");
     expect(plan.raceDistanceKm).toBe(10);
     expect(plan.predictedTimeMinutes).toBe(59);
     expect(plan.gelCount).toBe(2);

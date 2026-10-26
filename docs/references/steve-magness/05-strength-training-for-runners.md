@@ -76,7 +76,7 @@ Prinsip terpenting dalam menyatukan lari dan gym:
 
 | Konsep Steve Magness | Implementasi Sistem Kepelatihan | Skill Terkait |
 |---|---|---|
-| Hard Days Hard, Easy Days Easy | ST dijadwalkan Selasa Sore & Jumat Sore (setelah sesi Sub-T pagi) | `plan-week`, `running-coach-analysis` |
-| "Stay Tall When Tired" & Core | Protokol McGill Big 3 (Bird-Dog, Side Bridge, Curl-Up) untuk stabilisasi lumbar | `running-coach-analysis`, `norwegian-singles-guardrails` |
-| Proteksi Atlet Bobot 81 kg / Flat Lumbar | Pencegahan hip drop dan kompresi tulang belakang di km 15–21 Half Marathon | `project-context`, `norwegian-singles-guardrails` |
-| Taper Phase Strength Management | Menjaga latihan kekuatan tetap ringan (0/10 nyeri panggul) di sisa 18 hari lomba | `running-coach-analysis`, `readiness-check` |
+| Hard Days Hard, Easy Days Easy | ST dijadwalkan sesi sore setelah sesi kualitas Sub-T pagi | `jadwal-minggu`, `panduan-kekuatan` |
+| "Stay Tall When Tired" & Core | Protokol McGill Big 3 (Bird-Dog, Side Bridge, Curl-Up) untuk stabilisasi lumbar | `panduan-kekuatan`, `cek-kesiapan` |
+| Proteksi Muskuloskeletal Tulang Belakang | Pencegahan hip drop dan kompresi tulang belakang di fase akhir lari jarak jauh | `panduan-kekuatan` |
+| Taper Phase Strength Management | Menjaga latihan kekuatan tetap ringan (hanya aktivasi & mobilitas) menjelang race | `panduan-kekuatan`, `strategi-lomba` |
