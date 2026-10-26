@@ -63,7 +63,7 @@ Prinsip terpenting dalam menyatukan lari dan gym:
 * **Kapan Waktu Terbaik Latihan Kekuatan?**
   * Lakukan latihan kekuatan di **HARI KERAS / QUALITY DAYS** (misalnya sore hari setelah sesi lari interval di pagi hari).
   * **DILARANG** melakukan angkat beban berat di hari lari santai (*Easy/Recovery Run*).
-  * *Rasional*: Jika atlet mengangkat beban di hari santai, fungsi pemulihan hari itu hancur. Tubuh terjebak dalam **"Medium Fatigue Trap"** (kelelahan konstan sepanjang minggu).
+  * *Rasional*: Jika Anda mengangkat beban di hari santai, fungsi pemulihan hari itu hancur. Tubuh terjebak dalam **"Medium Fatigue Trap"** (kelelahan konstan sepanjang minggu).
   * Menumpuk beban di hari yang sama menjamin hari esoknya benar-benar menjadi hari pemulihan penuh (*true recovery day*).
 * **Prinsip Minimum Effective Dose (MED)**:
   * Pelari cukup berlatih **20 hingga 30 menit, 2 kali seminggu** untuk memetik semua manfaatnya tanpa mengorbankan performa lari.
@@ -72,11 +72,11 @@ Prinsip terpenting dalam menyatukan lari dan gym:
 
 ---
 
-## 5. Matriks Konfirmasi Metodologi Ekosistem MCP
+## 5. Matriks Konfirmasi Metodologi Sistem Kepelatihan
 
-| Konsep Steve Magness | Implementasi pada Ekosistem MCP | Skill Terkait |
+| Konsep Steve Magness | Implementasi Sistem Kepelatihan | Skill Terkait |
 |---|---|---|
 | Hard Days Hard, Easy Days Easy | ST dijadwalkan Selasa Sore & Jumat Sore (setelah sesi Sub-T pagi) | `plan-week`, `running-coach-analysis` |
 | "Stay Tall When Tired" & Core | Protokol McGill Big 3 (Bird-Dog, Side Bridge, Curl-Up) untuk stabilisasi lumbar | `running-coach-analysis`, `norwegian-singles-guardrails` |
-| Musculoskeletal Guardrail | Pencegahan hip drop dan kompresi tulang belakang pada fase akhir Target Race | `project-context`, `norwegian-singles-guardrails` |
-| Taper Phase Strength Management | Menjaga latihan kekuatan tetap ringan (0/10 keluhan biomekanik) menjelang perlombaan | `running-coach-analysis`, `readiness-check` |
+| Proteksi Atlet Bobot 81 kg / Flat Lumbar | Pencegahan hip drop dan kompresi tulang belakang di km 15–21 Half Marathon | `project-context`, `norwegian-singles-guardrails` |
+| Taper Phase Strength Management | Menjaga latihan kekuatan tetap ringan (0/10 nyeri panggul) di sisa 18 hari lomba | `running-coach-analysis`, `readiness-check` |

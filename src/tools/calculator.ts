@@ -168,7 +168,7 @@ export function registerCalculatorTools(server: McpServer): void {
         criticalPowerWatts: z
           .number()
           .positive()
-          .describe("Critical Power (CP) atlet dalam satuan Watt (contoh: 293)."),
+          .describe("Critical Power (CP) atlet dalam satuan Watt (contoh: 295)."),
       },
     },
     async ({ vdot, criticalPowerWatts }) => {

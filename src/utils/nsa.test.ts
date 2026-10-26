@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { calculateNsaMatrix } from "./nsa.js";
 
 describe("calculateNsaMatrix", () => {
-  it("generates all 6 Norwegian Singles time-based interval formats (§2.2) (VDOT 32, CP 293W)", () => {
+  it("generates all 6 Norwegian Singles time-based interval formats (§2.2) for baseline profile (VDOT 32, CP 293W)", () => {
     const result = calculateNsaMatrix({ vdot: 32, criticalPowerWatts: 293 });
 
     expect(result.vdot).toBe(32);
@@ -71,6 +71,26 @@ describe("calculateNsaMatrix", () => {
 
     // Physiological notes present
     expect(result.physiologicalNotes.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("calculates accurate target power for calibrated athlete profile (VDOT 31, CP 295W)", () => {
+    const result = calculateNsaMatrix({ vdot: 31, criticalPowerWatts: 295 });
+
+    expect(result.vdot).toBe(31);
+    expect(result.criticalPowerWatts).toBe(295);
+
+    // 3 min (Card A)
+    const rep3m = result.intervals[1]!;
+    expect(rep3m.targetPowerWatts).toEqual({ min: 277, max: 283 });
+    expect(rep3m.rest).toBe("60s walk");
+
+    // 5-6 min (Card B)
+    const rep5m = result.intervals[2]!;
+    expect(rep5m.targetPowerWatts).toEqual({ min: 271, max: 280 });
+
+    // 10-12 min (Card C)
+    const rep10m = result.intervals[4]!;
+    expect(rep10m.targetPowerWatts).toEqual({ min: 263, max: 271 });
   });
 
   it("throws RangeError for invalid VDOT (< 30 or > 85)", () => {

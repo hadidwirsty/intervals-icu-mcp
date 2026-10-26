@@ -1,9 +1,9 @@
 /**
  * Pure Engine: Race Day & Fueling Execution Planner.
  *
- * Mengoptimalkan strategi nutrisi perlombaan (Half Marathon / jarak jalan raya)
+ * Mengoptimalkan strategi nutrisi perlombaan (Malioboro Run Half Marathon / jarak jalan raya)
  * dengan spesifikasi nutrisi resmi EJ Sport Energy Gel (30g karbohidrat per sachet:
- * 12g Maltodextrin + 18g Dextrose), hidrasi iklim tropis hangat/lembab (suhu 24–28°C, RH 75–85%),
+ * 12g Maltodextrin + 18g Dextrose), hidrasi iklim tropis Yogyakarta (suhu 24–28°C, RH 75–85%),
  * serta segmentasi pacing KM-by-KM berbasis Critical Power dan VDOT atlet.
  */
 
@@ -31,8 +31,8 @@ export interface RaceFuelingInput {
   athleteWeightKg?: number;       // Default: 81 kg
   temperatureCelsius?: number;    // Default: 26 °C
   relativeHumidityPct?: number;   // Default: 80 %
-  criticalPowerWatts?: number;    // Default: 293 W
-  vdot?: number;                  // Default: 32
+  criticalPowerWatts?: number;    // Default: 295 W
+  vdot?: number;                  // Default: 31.0
   gelSpec?: EnergyGelSpec;        // Default: EJ_SPORT_GEL
 }
 
@@ -86,14 +86,32 @@ function formatMinutesToTime(minutes: number): string {
 }
 
 export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuelingPlanResult {
+  const raceDistanceKm = input.raceDistanceKm ?? 21.0975;
+  const raceName =
+    input.raceName ??
+    (raceDistanceKm <= 7
+      ? "5K Race"
+      : raceDistanceKm <= 14
+        ? "Semarang 10K"
+        : raceDistanceKm <= 25
+          ? "Malioboro Run Half Marathon"
+          : "Full Marathon");
+
+  const predictedTimeMinutes =
+    input.predictedTimeMinutes ??
+    (raceDistanceKm <= 7
+      ? 31
+      : raceDistanceKm <= 14
+        ? 64
+        : raceDistanceKm <= 25
+          ? 138
+          : 270);
+
   const {
-    raceName = "Target Race (Half Marathon)",
-    raceDistanceKm = 21.0975,
-    predictedTimeMinutes = 138,
     athleteWeightKg = 81,
     temperatureCelsius = 26,
     relativeHumidityPct = 80,
-    criticalPowerWatts = 293,
+    criticalPowerWatts = 295,
     gelSpec = EJ_SPORT_GEL,
   } = input;
 
@@ -119,97 +137,304 @@ export function calculateRaceFuelingPlan(input: RaceFuelingInput = {}): RaceFuel
   const targetSodiumMgPerHour = 400; // 350 - 500 mg / jam
 
   // 2. Rencana Nutrisi Karbohidrat Gel (EJ Sport: 30g per sachet)
-  // Untuk Half Marathon durasi 2h s.d. 2h30m: 4 sachet total (1 pre-race + 3 intra-race)
-  const gelCount = 4;
-  const totalCarbsPlannedGrams = gelCount * gelSpec.carbsGrams; // 120g
+  const cp = criticalPowerWatts;
+  let gelCount: number;
+  let fuelingSchedule: FuelingMilestone[];
+  let pacingStrategy: PacingSegment[];
+
+  if (raceDistanceKm <= 7) {
+    // 5K Race (~20–35 menit)
+    gelCount = 1;
+    fuelingSchedule = [
+      {
+        timing: "T-15m",
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 50,
+        tacticalNote:
+          "Konsumsi 15 menit sebelum start untuk mengisi glukosa darah awal. Intra-race tidak memerlukan asupan gel tambahan.",
+      },
+    ];
+    pacingStrategy = [
+      {
+        segment: "KM 1",
+        title: "Controlled Acceleration",
+        paceRangeFormatted: "5:30–5:40 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.90),
+          max: Math.round(cp * 0.93),
+        },
+        powerPercentageRange: { min: 90, max: 93 },
+        focus: "Hindari sprint prematur di kerumunan start. Bangun ritme kadens tinggi secara bertahap.",
+      },
+      {
+        segment: "KM 2 - 4",
+        title: "Threshold Cadence Cruise",
+        paceRangeFormatted: "5:20–5:30 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.94),
+          max: Math.round(cp * 0.97),
+        },
+        powerPercentageRange: { min: 94, max: 97 },
+        focus: "Zona kerja utama. Pertahankan kadens stabil ≥ 175 rpm dengan kontrol postur tegak.",
+      },
+      {
+        segment: "KM 5",
+        title: "All-Out Finish Kick",
+        paceRangeFormatted: "5:05–5:15 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.98),
+          max: Math.round(cp * 1.02),
+        },
+        powerPercentageRange: { min: 98, max: 102 },
+        focus: "Keluarkan seluruh kapasitas anaerobik cadangan menuju garis finish.",
+      },
+    ];
+  } else if (raceDistanceKm <= 14) {
+    // 10K Race (misal Semarang 10K, ~50–65 menit)
+    gelCount = 2;
+    fuelingSchedule = [
+      {
+        timing: "T-15m",
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 50,
+        tacticalNote:
+          "Konsumsi 15 menit sebelum gun start di garis start. Memastikan glukosa darah awal siap tanpa risiko lonjakan insulin prematur.",
+      },
+      {
+        timing: "KM 5 (~28–30m)",
+        distanceKm: 5,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 120–150ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 130,
+        sodiumMg: 100,
+        tacticalNote:
+          "Water Station pertengahan rute (KM 5). Booster glukosa cepat untuk mengamankan ritme Sub-60 di paruh kedua rute datar pesisir.",
+      },
+    ];
+    pacingStrategy = [
+      {
+        segment: "KM 1 - 2",
+        title: "Calm Adrenaline Guard",
+        paceRangeFormatted: "6:05–6:10 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.88), // ~258 W
+          max: Math.round(cp * 0.91), // ~267 W
+        },
+        powerPercentageRange: { min: 88, max: 91 },
+        focus:
+          "Tahan nafsu di awal. Jangan terbawa arus cepat pelari lain. Biarkan denyut jantung beradaptasi secara bertahap.",
+      },
+      {
+        segment: "KM 3 - 8",
+        title: "Sub-60 Target Rhythm",
+        paceRangeFormatted: "5:55–5:59 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.92), // ~270 W
+          max: Math.round(cp * 0.95), // ~278 W
+        },
+        powerPercentageRange: { min: 92, max: 95 },
+        focus:
+          "Irama kerja target Sub-60 (Plan A). Jaga kadens stabil ≥ 175 rpm untuk melindungi kurva lumbar. Ambil air di WS KM 5.",
+      },
+      {
+        segment: "KM 9 - 10",
+        title: "Negative Split Finish Kick",
+        paceRangeFormatted: "5:45–5:52 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.95), // ~278 W
+          max: Math.round(cp * 0.98), // ~287 W
+        },
+        powerPercentageRange: { min: 95, max: 98 },
+        focus:
+          "Buka langkah progresif, manfaatkan elastisitas plate nylon Saucony Speed 5 hingga garis finish Kota Lama!",
+      },
+    ];
+  } else if (raceDistanceKm <= 25) {
+    // Half Marathon (~21.0975 km, ~2h s.d. 2h30m)
+    gelCount = 4;
+    fuelingSchedule = [
+      {
+        timing: "T-15m",
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 50,
+        tacticalNote:
+          "Konsumsi 15 menit sebelum gun start di garis start. Memastikan ketersediaan glukosa darah awal tanpa memicu insulin shock prematur.",
+      },
+      {
+        timing: "KM 6 (~38m)",
+        distanceKm: 6,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 120–150ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 130,
+        sodiumMg: 100,
+        tacticalNote:
+          "Ambil air di Water Station KM 6–7. Telan gel bersama air mineral untuk mempercepat pengosongan lambung (gastric emptying).",
+      },
+      {
+        timing: "KM 12 (~78m)",
+        distanceKm: 12,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 120–150ml air / isotonik`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 140,
+        sodiumMg: 150,
+        tacticalNote:
+          "Titik krusial pertengahan rute: Mencegah penurunan glikogen otot sebelum memasuki KM 14–17. Minum isotonik jika tersedia.",
+      },
+      {
+        timing: "KM 17 (~108m)",
+        distanceKm: 17,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 100ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 100,
+        sodiumMg: 100,
+        tacticalNote:
+          "Booster dorongan akhir untuk 4 kilometer penutup menuju garis finish Malioboro.",
+      },
+    ];
+    pacingStrategy = [
+      {
+        segment: "KM 1 - 3",
+        title: "Calm Adrenaline Guard",
+        paceRangeFormatted: "6:40–6:55 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.87), // ~255 W
+          max: Math.round(cp * 0.90), // ~264 W
+        },
+        powerPercentageRange: { min: 87, max: 90 },
+        focus:
+          "Jangan terbawa euforia kerumunan di Malioboro/Titik Nol. Biarkan denyut jantung (HR) beradaptasi secara bertahap tanpa lonjakan asam laktat prematur.",
+      },
+      {
+        segment: "KM 4 - 17",
+        title: "Sub-Threshold Cruise Control",
+        paceRangeFormatted: "6:25–6:38 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.92), // ~270 W
+          max: Math.round(cp * 0.94), // ~275 W
+        },
+        powerPercentageRange: { min: 92, max: 94 },
+        focus:
+          "Zona target utama Sub-Threshold. Pertahankan kadens stabil >= 175 rpm untuk melindungi kurva lumbar (flat back LBP guard). Ambil hidrasi di setiap water station.",
+      },
+      {
+        segment: "KM 18 - 21.1",
+        title: "Empty the Tank Finish",
+        paceRangeFormatted: "6:15–6:25 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.94), // ~275 W
+          max: Math.round(cp * 0.97), // ~284 W
+        },
+        powerPercentageRange: { min: 94, max: 97 },
+        focus:
+          "Maksimalkan sisa glikogen dan dorongan energy return sepatu Saucony Endorphin Speed 5. Buka langkah secara bertahap hingga garis finish.",
+      },
+    ];
+  } else {
+    // Marathon (> 25 km, misal 42.195 km)
+    gelCount = 6;
+    fuelingSchedule = [
+      {
+        timing: "T-15m",
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air mineral`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 50,
+        tacticalNote: "Glukosa awal di start line.",
+      },
+      {
+        timing: "KM 7 (~45m)",
+        distanceKm: 7,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 100,
+        tacticalNote: "Asupan intra-race pertama sebelum deplesi glikogen.",
+      },
+      {
+        timing: "KM 14 (~90m)",
+        distanceKm: 14,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml isotonik`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 150,
+        tacticalNote: "Pertahankan level karbohidrat stabil.",
+      },
+      {
+        timing: "KM 21 (~135m)",
+        distanceKm: 21,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml isotonik`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 150,
+        tacticalNote: "Setengah jarak tempuh, kunci cadangan glikogen.",
+      },
+      {
+        timing: "KM 28 (~180m)",
+        distanceKm: 28,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 150,
+        sodiumMg: 120,
+        tacticalNote: "Cegah fenomena 'Hitting the Wall' di KM 30+.",
+      },
+      {
+        timing: "KM 35 (~225m)",
+        distanceKm: 35,
+        action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 120ml air`,
+        carbsGrams: gelSpec.carbsGrams,
+        fluidMl: 120,
+        sodiumMg: 100,
+        tacticalNote: "Dorongan energi terakhir untuk 7 km penutup.",
+      },
+    ];
+    pacingStrategy = [
+      {
+        segment: "KM 1 - 5",
+        title: "Conservative Aerobic Settle",
+        paceRangeFormatted: "6:45–7:00 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.83),
+          max: Math.round(cp * 0.86),
+        },
+        powerPercentageRange: { min: 83, max: 86 },
+        focus: "Hemat glikogen semaksimal mungkin, biarkan pembakaran lemak bekerja dominan.",
+      },
+      {
+        segment: "KM 6 - 32",
+        title: "Marathon Rhythm Cruise",
+        paceRangeFormatted: "6:30–6:45 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.86),
+          max: Math.round(cp * 0.89),
+        },
+        powerPercentageRange: { min: 86, max: 89 },
+        focus: "Irama kerja maraton stabil. Disiplin hidrasi dan gel di setiap interval waktu.",
+      },
+      {
+        segment: "KM 33 - 42.2",
+        title: "Resilience & Form Retention",
+        paceRangeFormatted: "6:25–6:40 /km",
+        powerWattsRange: {
+          min: Math.round(cp * 0.88),
+          max: Math.round(cp * 0.92),
+        },
+        powerPercentageRange: { min: 88, max: 92 },
+        focus: "Pertahankan postur dan kadens tinggi saat kelelahan neuromuskular memuncak.",
+      },
+    ];
+  }
+
+  const totalCarbsPlannedGrams = gelCount * gelSpec.carbsGrams;
   const raceHours = predictedTimeMinutes / 60;
   const hourlyCarbsTargetGrams = Math.round((totalCarbsPlannedGrams / raceHours) * 10) / 10;
 
-  // Milestones Nutrisi
-  const fuelingSchedule: FuelingMilestone[] = [
-    {
-      timing: "T-15m",
-      action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 150ml air mineral`,
-      carbsGrams: gelSpec.carbsGrams,
-      fluidMl: 150,
-      sodiumMg: 50,
-      tacticalNote:
-        "Konsumsi 15 menit sebelum gun start di garis start. Memastikan ketersediaan glukosa darah awal tanpa memicu insulin shock prematur.",
-    },
-    {
-      timing: "KM 6 (~38m)",
-      distanceKm: 6,
-      action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 120–150ml air mineral`,
-      carbsGrams: gelSpec.carbsGrams,
-      fluidMl: 130,
-      sodiumMg: 100,
-      tacticalNote:
-        "Ambil air di Water Station KM 6–7. Telan gel bersama air mineral untuk mempercepat pengosongan lambung (gastric emptying).",
-    },
-    {
-      timing: "KM 12 (~78m)",
-      distanceKm: 12,
-      action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 120–150ml air / isotonik`,
-      carbsGrams: gelSpec.carbsGrams,
-      fluidMl: 140,
-      sodiumMg: 150,
-      tacticalNote:
-        "Titik krusial pertengahan rute: Mencegah penurunan glikogen otot sebelum memasuki KM 14–17. Minum isotonik jika tersedia.",
-    },
-    {
-      timing: "KM 17 (~108m)",
-      distanceKm: 17,
-      action: `1 Sachet ${gelSpec.name} (${gelSpec.carbsGrams}g karbohidrat) + 100ml air mineral`,
-      carbsGrams: gelSpec.carbsGrams,
-      fluidMl: 100,
-      sodiumMg: 100,
-      tacticalNote:
-        "Booster dorongan akhir untuk 4 kilometer penutup menuju garis finish.",
-    },
-  ];
-
-  // 3. Segmentasi Pacing Taktis KM-by-KM (CP 293 W)
-  const cp = criticalPowerWatts;
-  const pacingStrategy: PacingSegment[] = [
-    {
-      segment: "KM 1 - 3",
-      title: "Calm Adrenaline Guard",
-      paceRangeFormatted: "6:40–6:55 /km",
-      powerWattsRange: {
-        min: Math.round(cp * 0.87), // ~255 W
-        max: Math.round(cp * 0.90), // ~264 W
-      },
-      powerPercentageRange: { min: 87, max: 90 },
-      focus:
-        "Jangan terbawa euforia kerumunan di kilometer awal. Biarkan denyut jantung (HR) beradaptasi secara bertahap tanpa lonjakan asam laktat prematur.",
-    },
-    {
-      segment: "KM 4 - 17",
-      title: "Sub-Threshold Cruise Control",
-      paceRangeFormatted: "6:25–6:38 /km",
-      powerWattsRange: {
-        min: Math.round(cp * 0.92), // ~270 W
-        max: Math.round(cp * 0.94), // ~275 W
-      },
-      powerPercentageRange: { min: 92, max: 94 },
-      focus:
-        "Zona target utama Sub-Threshold. Pertahankan kadens stabil >= 175 rpm untuk efisiensi mekanis dan peredaman impak sendi. Ambil hidrasi di setiap water station.",
-    },
-    {
-      segment: "KM 18 - 21.1",
-      title: "Empty the Tank Finish",
-      paceRangeFormatted: "6:15–6:25 /km",
-      powerWattsRange: {
-        min: Math.round(cp * 0.94), // ~275 W
-        max: Math.round(cp * 0.97), // ~284 W
-      },
-      powerPercentageRange: { min: 94, max: 97 },
-      focus:
-        "Maksimalkan sisa glikogen dan dorongan energy return sepatu balap. Buka langkah secara bertahap hingga garis finish.",
-    },
-  ];
-
-  // 4. Evaluasi Konteks Iklim Tropis
+  // 4. Evaluasi Konteks Iklim Tropis Yogyakarta
   let heatRisk: "LOW" | "MODERATE" | "HIGH" = "HIGH";
   if (temperatureCelsius < 22 && relativeHumidityPct < 70) {
     heatRisk = "LOW";

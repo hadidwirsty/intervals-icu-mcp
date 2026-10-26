@@ -1,6 +1,6 @@
 # Garmin VO₂ Maks & Endurance Running Reference
 
-Dokumen ini berisi dokumentasi resmi Garmin terkait **VO₂ Maks**, tabel standar persentil pria dari *The Cooper Institute®*, analisis algoritma *Firstbeat Analytics*, serta interpretasi kepelatihan berbasis **Norwegian Singles Training Method** dan fisiologi olahraga untuk profil atlet ketahanan.
+Dokumen ini berisi dokumentasi resmi Garmin terkait **VO₂ Maks**, tabel standar persentil pria dari *The Cooper Institute®*, analisis algoritma *Firstbeat Analytics*, serta interpretasi kepelatihan berbasis **Norwegian Singles Training Method** dan fisiologi olahraga untuk profil pelari rekreasional & kompetitif.
 
 ---
 
@@ -49,9 +49,9 @@ $$\text{VO}_2\text{ Est} = f\left(\frac{\text{Kecepatan Langkah}}{\%HR_{\max}}\r
 
 ### Faktor Koreksi Lapangan (Penyebab Deflasi Angka di Iklim Tropis):
 1. **Stres Termal & Dehidrasi (*Thermal Cardiac Drift*)**:
-   - Berlari pada suhu $26–31^\circ\text{C}$ dengan kelembapan relatif $75–85\%$ (iklim tropis hangat dan lembap) memicu vasodilatasi pembuluh darah kulit untuk pembuangan panas.
+   - Berlari pada suhu $26–31^\circ\text{C}$ dengan kelembapan relatif $75–85\%$ (seperti di Sleman dan Semarang) memicu vasodilatasi pembuluh darah kulit untuk pembuangan panas.
    - Hal ini menaikkan denyut jantung sebesar **12–24 bpm** lebih tinggi untuk laju lari yang sama (*cardiac drift*). Algoritma jam tangan membaca lonjakan HR ini sebagai "efisiensi oksigen yang rendah", sehingga angka estimasi VO₂ maks tertekan turun secara artifisial.
-2. **Variabel Pembagi Berat Badan**:
+2. **Variabel Pembagi Berat Badan (Bobot 81 kg)**:
    - Karena satuan yang digunakan adalah per kilogram berat tubuh ($/kg$), setiap kilogram massa tubuh non-esensial menurunkan angka relatif ini secara matematis, meskipun kapasitas absolut paru-paru dan jantung pelari sangat besar.
 3. **Ketiadaan Sesi *All-Out* VO₂max**:
    - Metode lari *Sub-Threshold* sengaja menghindari lari sprint Zona 5/6 yang melelahkan. Algoritma Garmin jarang mendapatkan sampel data saat atlet berada di kapasitas puncak, sehingga model mengasumsikan kurva estimasi yang lebih konservatif.
@@ -87,18 +87,18 @@ Menunjukkan berapa persen dari VO₂ Maks yang mampu dipertahankan atlet di amba
 ### 3. Efisiensi Gerak (*Running Economy*)
 Banyaknya oksigen ($ml\text{ O}_2/kg/km$) yang dibutuhkan untuk bergerak pada kecepatan tertentu. Faktor yang meningkatkan efisiensi gerak meliputi:
 - Kadens langkah tinggi ($\ge 175$ spm) untuk mengurangi gaya pengereman (*braking force*).
-- Sepatu lari berpelat (*carbon/nylon plate* / *speed trainer*).
+- Sepatu lari berpelat (*carbon/nylon plate* seperti *Saucony Endorphin Speed 5*).
 - Kekuatan otot inti dan stabilisator panggul (*McGill Big 3*).
 
 ---
 
-## 5. Contoh Rujukan Kasus Lapangan Terkalibrasi
+## 5. Rujukan Data Terkalibrasi Atlet (Studi Kasus)
 
-- **Estimasi Garmin Terbaca**: **39 ml/kg/menit** (Kategori persentil terpengaruh cuaca tropis panas-lembap).
+- **Estimasi Garmin Terbaca**: **39 ml/kg/menit** (Kategori persentil < 41,7 akibat pengaruh panas 31°C dan bobot 81 kg).
 - **VDOT Terkalibrasi (Jack Daniels Running Formula)**: **31,1 – 32,0**
-  - *Benchmark*: Uji performa 10K (~1:04:56), split 5K (~29:48), 12' CP Test (2,08 km @ 315 W).
+  - *Benchmark*: Bandoeng 10K (1:04:56), split 5K (29:48), 12' CP Test (2,08 km @ 315 W).
 - **Critical Power (CP / FTP Lari)**: **293 Watt** (eFTP: 299 W)
-- **Target Race (Half Marathon)**: Pace **6:28 – 6:35 /km** @ Daya **268 – 275 W** (Proyeksi Waktu: **02:17:51**).
+- **Target Race Malioboro Run HM (4 Okt 2026)**: Pace **6:28 – 6:35 /km** @ Daya **268 – 275 W** (Proyeksi Waktu: **02:17:51**).
 
 ### Rekomendasi Kepelatihan:
 1. Perlakukan angka VO₂ Maks Garmin sebagai **indikator tren jangka panjang**, bukan vonis mutlak performa hari lomba.

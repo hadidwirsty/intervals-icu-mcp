@@ -1,7 +1,7 @@
 # 📖 Panduan Penggunaan AI Skills & Workflows (Slash Commands Guide)
-_Intervals.icu MCP Server & Norwegian Singles Running Coach_
+_Intervals.icu MCP Server & Running Coach Intelligence (Dual-Engine Ecosystem)_
 
-Dokumen ini memuat panduan komprehensif mengenai **kapan dan bagaimana** menggunakan ke-13 AI Skills (Slash Commands) yang tersedia di dalam ekosistem `intervals-icu-mcp` berbasis **Norwegian Singles Training Method** (`docs/references/norwegian-singles/`).
+Dokumen ini memuat panduan komprehensif mengenai **kapan dan bagaimana** menggunakan ke-6 Unified AI Skills (Slash Commands) yang tersedia di dalam ekosistem `intervals-icu-mcp` yang mengintegrasikan telemetri **Intervals.icu** dan **Garmin Connect** dengan sains fisiologi daya tahan (*Norwegian Singles Method*, *John Hadd*, *Faris Salman*, *Steve Magness*, dan *Dr. Stuart McGill*).
 
 ---
 
@@ -9,30 +9,22 @@ Dokumen ini memuat panduan komprehensif mengenai **kapan dan bagaimana** menggun
 
 ```mermaid
 graph TD
-    subgraph A["1. BENCHMARK & SETTING AMBANG (Awal Program / Tiap 4-8 Pekan)"]
-        W1["/calc-vdot<br/>Hitung skor VDOT & zona pace dari hasil time-trial 5K/10K"]
-        W2["/calc-nsa<br/>Hasilkan matriks repetisi waktu NSA (1m s.d. 15m)"]
+    subgraph A["1. BENCHMARK & KALIBRASI (Tiap 4–8 Pekan / Pasca Time-Trial)"]
+        W1["/kalibrasi-atlet<br/>Hitung VDOT, Matriks Interval Copeland, Zona Hadd, Diagnosa ADS & Audit Garmin Z2"]
     end
 
-    subgraph B["2. SETIAP HARI MINGGU (Sunday Routine)"]
-        W3["/fitness-status<br/>Audit kebugaran CTL/TSB, ACWR & Green Zone check"]
-        W4["/weekly-budget<br/>Alokasi durasi mingguan 5-9 jam (Aturan 20-25% Sub-T)"]
-        W5["/plan-week<br/>Rancang jadwal 1 pekan penuh (E-Q-E-Q-E-Q-LR) & publish ke kalender"]
-        W6["/check-workout 7<br/>Verifikasi kalender 7 hari ke depan (Pastikan Senin REST)"]
+    subgraph B["2. EVALUASI MINGGUAN (Setiap Hari Minggu)"]
+        W2["/jadwal-minggu<br/>Budget Jarak 42-Hari Faris/Palladino, Pola Blok 3-1, & Publish Sesi Kalender via DSL"]
     end
 
     subgraph C["3. RUTINITAS HARIAN (Setiap Hari Latihan)"]
-        W7["Pagi: /readiness-check<br/>Cek skor kesiapan fisik (Green/Yellow/Red)"]
-        W8["Sebelum Sesi: /check-workout<br/>Lihat target watt/durasi hari ini"]
-        W9["Setelah Selesai Lari: /run-report<br/>Laporan coaching kepatuhan LT2 & rest pasif"]
-        W10["Pasca-Long Run: /cardiac-drift<br/>Cek Aerobic Decoupling EF H1 vs H2 (< 5%)"]
-        W11["Kapan Saja: /create-workout<br/>Kirim jadwal sesi NSA ke kalender Intervals.icu"]
-        W14["Kapan Saja: /strength-guide<br/>Sesi latihan kekuatan fungsional 20-25m (Steve Magness & McGill Big 3)"]
+        W3["Pagi Hari: /cek-kesiapan<br/>Dual-Engine Recovery (Body Battery, HRV Status, CTL/ATL/TSB) & 5 Red Flags"]
+        W4["Sore Hari / Pra-Lari: /panduan-kekuatan<br/>Aktivasi Micro-Dosing (3–5m) atau Sesi Kekuatan Penuh (22–25m McGill Big 3)"]
+        W5["Setelah Selesai Lari: /lapor-lari<br/>Analisis Kepatuhan Daya (% CP), Jeda Pasif Copeland, Cardiac Drift & EF"]
     end
 
-    subgraph D["4. MENJELANG & SAAT RACE DAY (Tapering & Execution)"]
-        W12["/predict-race<br/>Prediksi waktu finish & jadwal A-Taper NSA (-35% lalu -50%)"]
-        W13["/race-strategy<br/>Strategi fueling EJ Sport (30g carb), hidrasi tropis & pacing split CP"]
+    subgraph D["4. PERSIAPAN & HARI PERLOMBAAN (Race Period)"]
+        W6["/strategi-lomba<br/>Hierarki A/B/C Race Faris Salman, A-Taper 10–14 Hari, Pacing Split CP & Protokol Fueling"]
     end
 
     A --> B
@@ -42,109 +34,64 @@ graph TD
 
 ---
 
-## 📋 Direktori 13 Slash Commands & Waktu Penggunaan
+## 📋 Matriks Ringkas 6 Perintah Cepat
 
-| No | Slash Command | Berkas Skill | Timeline Penggunaan | Tujuan Utama | Kebutuhan Input Pengguna |
-|:--:|---|---|---|---|---|
-| **1** | **`/plan-week`** | [`SKILL.md`](../.agents/skills/plan-week/SKILL.md) | **Setiap Hari Minggu Malam** | Merancang jadwal 1 pekan penuh (`E-Q-E-Q-E-Q-LR`) berbasis rasio 75/25 NSA, pratinjau tabel, dan penerbitan satu-klik ke kalender. | Opsional: target jam kustom (misal `/plan-week 6h`) atau tanggal Senin. |
-| **2** | **`/readiness-check`** | [`SKILL.md`](../.agents/skills/readiness-check/SKILL.md) | **Setiap Pagi Hari** (04:30–05:30 WIB) | Evaluasi kesiapan fisik (Green/Yellow/Red) sebelum latihan, plus protokol cross-training Flag 5 Musculoskeletal Guardrail (§4.9). | Tidak ada (otomatis baca TSB, ACWR, Sleep, RHR). |
-| **3** | **`/check-workout`** | [`SKILL.md`](../.agents/skills/check-workout/SKILL.md) | **Sebelum Mulai Sesi Lari** | Melihat detail target intensitas, durasi, dan watt sesi hari ini. | Opsional: rentang hari (contoh: `/check-workout 7`). |
-| **4** | **`/run-report`** | [`SKILL.md`](../.agents/skills/run-report/SKILL.md) | **15–30 Menit Pasca-Lari** | Evaluasi eksekusi lari (kepatuhan LT2, watt, rest pasif, HR drift, dan fallback RPE cuaca ekstrem §4.2). | Tanggal sesi, nama sesi, skor RPE (1-10), catatan fisik. |
-| **5** | **`/cardiac-drift`** | [`SKILL.md`](../.agents/skills/cardiac-drift/SKILL.md) | **Pasca-Long Run Selesai** | Memeriksa penurunan efisiensi jantung (*Aerobic Decoupling* $H_1$ vs $H_2$). | Opsional: Activity ID (default: lari terakhir). |
-| **6** | **`/fitness-status`** | [`SKILL.md`](../.agents/skills/fitness-status/SKILL.md) | **Setiap Hari Minggu Malam** | Evaluasi CTL (Sustainable Fitness), TSB, ACWR, Green Zone check, dan reminder kalibrasi >8 minggu (§2.4). | Opsional: tanggal target (default: hari ini). |
-| **7** | **`/weekly-budget`** | [`SKILL.md`](../.agents/skills/weekly-budget/SKILL.md) | **Setiap Hari Minggu Malam** | Menghitung budget durasi mingguan (5–9 jam) split 75/25 waktu, aturan progresi (§2.4), dan dua guardrail §6.2. | Opsional: target jam kustom (misal `/weekly-budget 6h`). |
-| **8** | **`/create-workout`** | [`SKILL.md`](../.agents/skills/create-workout/SKILL.md) | **Kapan Saja Dibutuhkan** | Menerbitkan planned workout NSA terstruktur ke kalender Intervals.icu (validasi cap kerja Sub-T 40–50m §6.2). | Tanggal, nama sesi, deskripsi format Teks DSL. |
-| **9** | **`/calc-nsa`** | [`SKILL.md`](../.agents/skills/calc-nsa/SKILL.md) | **Setelah Time Trial / Awal Musim** | Menghasilkan matriks interval berbasis durasi (1m s.d. 15m) resmi NSA via MCP `calculate_nsa_matrix`. | Opsional: nilai VDOT kustom (misal `/calc-nsa vdot=32`). |
-| **10**| **`/calc-vdot`** | [`SKILL.md`](../.agents/skills/calc-vdot/SKILL.md) | **Setelah Tes Lari / Time-Trial** | Menghitung skor VDOT & memetakan pace Sub-T (10k, 15k, HM, 30k) untuk kalibrasi berkala 4–8 minggu (§4.3). | Jarak tempuh tes (km) dan waktu tempuh (MM:SS). |
-| **11**| **`/predict-race`** | [`SKILL.md`](../.agents/skills/predict-race/SKILL.md) | **10–14 Hari Menjelang Lomba** | Prediksi waktu finish, jadwal A-Tapering, dan reassurance jarak 5K–HM sebagai sweet spot NSA (§5.1). | Jarak race, VDOT, tanggal race. |
-| **12**| **`/race-strategy`** | [`SKILL.md`](../.agents/skills/race-strategy/SKILL.md) | **Race Week & Pagi Race Day** | Eksekusi race day lengkap: pacing split berbasis Critical Power (% CP), timing intake energy gel EJ Sport (30g carb), dan batas hidrasi tropis. | Target jarak/race, estimasi waktu/pace. |
-| **13**| **`/strength-guide`** | [`SKILL.md`](../.agents/skills/strength-guide/SKILL.md) | **2x Seminggu (Hari Q: Selasa & Jumat Sore)** | Panduan sesi latihan kekuatan fungsional (20–25m) berbasis Steve Magness dan McGill Big 3 untuk pelari. | Opsional: fokus area/fase (misal `taper`, `mcgill`). |
+| Perintah | Frekuensi | Masukan Pengguna (Contoh) | Sumber Data & Engine | Output Utama |
+|---|---|---|---|---|
+| [`/cek-kesiapan`](../.agents/skills/cek-kesiapan/SKILL.md) | **Setiap Pagi** | `/cek-kesiapan` *(otomatis)* | Garmin (Body Battery, HRV) + Intervals.icu (TSB, ACWR, Sleep) | Status Kesiapan (0–100% HIJAU/KUNING/MERAH), Rekomendasi Hari Ini, Deteksi 5 Red Flags |
+| [`/lapor-lari`](../.agents/skills/lapor-lari/SKILL.md) | **Pasca Lari** | `/lapor-lari` atau `/lapor-lari i12345` | Intervals.icu (Streams, Details, Intervals, Gear) | Telemetri Daya (% CP), Kepatuhan LT2 Copeland, Aerobic Decoupling EF (< 5%), Jeda Pasif |
+| [`/jadwal-minggu`](../.agents/skills/jadwal-minggu/SKILL.md) | **Hari Minggu** | `/jadwal-minggu` atau `/jadwal-minggu 2026-11-02` | Intervals.icu (History 42 hari, Planned Events, Athlete Profile) | Rolling Budget 42 Hari Faris/Palladino, Distribusi Norwegian Singles, Penerbitan DSL Kalender |
+| [`/kalibrasi-atlet`](../.agents/skills/kalibrasi-atlet/SKILL.md) | **Tiap 4–8 Pekan** | `/kalibrasi-atlet 5k 24:30` | Intervals.icu (VDOT, Zones) + Garmin Connect (Audit Z2/LTHR) | Angka VDOT Terkini, Matriks Copeland (Fast/Med/Long), Zona Hadd, Diagnosa Spektrum ADS |
+| [`/panduan-kekuatan`](../.agents/skills/panduan-kekuatan/SKILL.md) | **2x Seminggu / Tiap Hari** | `/panduan-kekuatan` | Magness Neural Adaptation + McGill Big 3 + Running Anatomy | Checklist Sesi Penuh (22–25m) atau Aktivasi Micro-Dosing (3–5m) tanpa risiko kompresi spinal |
+| [`/strategi-lomba`](../.agents/skills/strategi-lomba/SKILL.md) | **1–4 Pekan Pra-Race** | `/strategi-lomba 10k 2026-11-15 A-Race` | Intervals.icu (Race Predictor, Taper Plan, Fueling Calculator) | Strategi Prioritas A/B/C Race, Protokol Tapering, Matriks Pacing Berbasis Daya (% CP), Jadwal Fueling Gel |
 
 ---
 
-## 🔍 Panduan Detail Situasi Penggunaan
+## 🛠️ Detail Alur Kerja 6 Skills
 
-### 1️⃣ Situasi: Penetapan Benchmark Ambang (Awal Musim / Tiap 4–8 Pekan)
-Digunakan saat Anda melakukan time trial (misal 5K parkrun atau 10K TT):
-- **`/calc-vdot`**: Menghitung skor VDOT terkini dan memetakan estimasi pace 10k, 15k, HM, dan 30k. Mengingatkan atlet bahwa race/TT tiap 4–8 minggu adalah anjuran resmi NSA (§2.4, §4.3) untuk kalibrasi aktual dan stimulasi neuromuskular.
-- **`/calc-nsa`**: Mengonversi hasil benchmark menjadi tabel matriks kerja interval durasi resmi NSA (1m, 3m, 5-6m, 8m, 10m, 15m) berikut target Watt dan rest jalan.
+### 1. `/cek-kesiapan` (Daily Readiness & Dual-Engine Health)
+- **Kapan Digunakan**: Setiap pagi hari sebelum memulai aktivitas fisik atau sebelum menentukan apakah sesi lari hari ini dapat dieksekusi sesuai rencana.
+- **Cara Kerja**:
+  1. Mengambil skor *Body Battery* dan status *HRV* semalam dari `garmin-connect` MCP.
+  2. Mengambil metrik kelelahan kronis (*TSB*, *ACWR*, *Sleep Duration*, *Resting HR*) dari `intervals-icu` MCP.
+  3. Menguji 5 Red Flags kelelahan (RHR naik $>5$ bpm, tidur buruk 2 malam, kehilangan motivasi/CNS fatigue, HRV status rendah, Body Battery pagi $<50$).
+  4. Menghasilkan skor komposit pemulihan (0–100%) dan memberikan lampu hijau, kuning, atau merah bagi sesi latihan hari ini.
 
----
+### 2. `/lapor-lari` (Post-Workout Evaluation & Telemetry Audit)
+- **Kapan Digunakan**: Segera setelah menyelesaikan aktivitas lari dan data telah tersinkronisasi ke Intervals.icu.
+- **Cara Kerja**:
+  1. Mengambil detail aktivitas, split lap/interval, dan telemetri detik-per-detik (*watts*, *heart rate*, *cadence*, *velocity*).
+  2. Mengaudit kepatuhan ambang batas *Sub-Threshold* Copeland (% CP) dan memastikan jeda istirahat dilakukan secara pasif (jalan santai/berdiri).
+  3. Menghitung stabilitas kardiovaskular melalui *Aerobic Decoupling* / *Cardiac Drift* ($< 5\%$ target ideal).
+  4. Memberikan umpan balik langsung ke aktivitas kalender Intervals.icu via `add_activity_message`.
 
-### 2️⃣ Situasi: Evaluasi Mingguan (Setiap Hari Minggu Sore/Malam)
-Digunakan untuk menutup evaluasi minggu berjalan dan menyiapkan alokasi minggu berikutnya:
-1. **`/fitness-status`**:
-   - Melihat tren CTL, ATL, TSB, dan Ramp Rate aktual mingguan.
-   - Memeriksa apakah atlet berada di dalam *Green Zone* atau memerlukan *adaptive deload*.
-   - Memeriksa usia kalibrasi VDOT (apakah sudah $> 8$ minggu).
-2. **`/weekly-budget`**:
-   - Menghitung total durasi latihan yang aman (5–9 jam/minggu).
-   - Memastikan durasi kerja Sub-Threshold tepat di koridor **20–25% total durasi**, dan porsi Easy Run $\ge 75\%$.
-   - Menerapkan aturan progresi perlahan (§2.3, §2.4) dan mengecek **Dua Guardrail Terpisah (§6.2)**: jika volume $>8$–9 jam disarankan *easy doubles*, dan waktu kerja Sub-T dibatasi maks 40–50 menit per sesi di semua level volume.
-3. **`/plan-week`**:
-   - Merancang jadwal 1 pekan penuh (`E-Q-E-Q-E-Q-LR`) secara otomatis dari durasi target mingguan.
-   - Menampilkan tabel pratinjau lengkap dengan jam lari (pagi 05:30 & sore ngabuburit 16:45).
-   - Menerbitkan batch ke-6 sesi workout ke kalender Intervals.icu secara satu-klik setelah disetujui atlet.
-4. **`/check-workout 7`**:
-   - Memverifikasi kalender 7 hari ke depan sudah terisi lengkap dan hari Senin terjadwal **REST TOTAL**.
+### 3. `/jadwal-minggu` (Weekly Periodization & DSL Publishing)
+- **Kapan Digunakan**: Setiap hari Minggu sore/malam untuk menyusun agenda sepekan ke depan.
+- **Cara Kerja**:
+  1. Menghitung rata-rata beban latihan lari 42 hari terakhir (*Rolling 42-Day Budget*) menggunakan algoritma Faris Salman & Steve Palladino untuk mencegah lonjakan volume akut.
+  2. Menerapkan pola blok periodisasi 3-1 (*3 Build Weeks, 1 Deload Week*).
+  3. Membagi porsi latihan mingguan ke dalam prinsip Norwegian Singles: 75–80% lari aerobik santai (*Easy*) dan 20–25% ambang sub-maksimal (*Sub-Threshold*).
+  4. Menerbitkan rencana latihan langsung ke kalender Intervals.icu menggunakan Teks DSL terstandarisasi.
 
----
+### 4. `/kalibrasi-atlet` (Periodic Fitness Benchmark & Aerobic Audit)
+- **Kapan Digunakan**: Setiap 4–8 minggu sekali pasca atlet menyelesaikan tes lapangan (misal *Hadd 2400m test*, *5K/10K Time Trial*, atau perlombaan resmi).
+- **Cara Kerja**:
+  1. Menghitung VDOT Jack Daniels terbaru via `calculate_vdot` dan memperbarui zona kecepatan lari.
+  2. Menghasilkan matriks interval Copeland (*Fast*, *Medium*, *Long*) disetel 5–25 detik lebih lambat dari Threshold VDOT.
+  3. Mendiagnosis integritas fondasi aerobik atlet melalui *Uphill Athlete 10% Rule* dan *Horwill's Rule* via `diagnose_aerobic_base` untuk mendeteksi *Aerobic Deficiency Syndrome (ADS)*.
+  4. Menghitung zona absolut John Hadd via `calculate_hadd_zones` dan mengaudit keselarasan zona detak jantung Garmin Connect.
 
-### 3️⃣ Situasi: Rutinitas Harian Lari (Daily Cycle)
-Alur yang dijalankan dari hari ke hari:
+### 5. `/panduan-kekuatan` (Strength Training & Kinetic Chain Protection)
+- **Kapan Digunakan**: Sesi sore pada hari latihan kualitas (*Hard Days Hard*) atau pagi hari pra-lari (*Daily Micro-Dosing*).
+- **Cara Kerja**:
+  1. Menyediakan protokol perlindungan tulang belakang bebas beban kompresi/fleksi berulang (*McGill Big 3*: Modified Curl-Up, Side Plank, Bird-Dog).
+  2. Melatih rantai kinetik penopang impak lari (*Soleus*, *Hamstring eccentric*, *Quadriceps*, *Gluteus Medius*).
+  3. Mengingatkan prinsip rekrutmen saraf Steve Magness (*"Stay Tall When Tired"*).
 
-#### 🌅 A. Pagi Hari (Bangun Tidur / Sebelum Sesi)
-- **`/readiness-check`**:
-  - Dijalankan saat bangun tidur (04:30 – 05:00 WIB).
-  - Mengevaluasi apakah tubuh siap menerima beban (GREEN) atau harus dibatasi ke Easy santai / Deload (YELLOW/RED).
-  - **Flag 5 (Musculoskeletal Guardrail) [Sumber: NSA §4.9]**: Jika terdapat kekakuan/nyeri muskuloskeletal ringan tapi ingin menjaga volume aerobik, atlet diizinkan mengganti sesi lari dengan *cross-training* (sepeda statis/elliptical) pada intensitas dan durasi setara tanpa benturan sendi/spinal berlebih.
-- **`/check-workout`**:
-  - Membaca target sesi hari ini: durasi menit, target watt (% CP), dan batas atas denyut jantung (*HR ceiling*).
-
-#### 🏁 B. Pasca-Lari (Setelah Data Terunggah ke Intervals.icu)
-- **`/run-report`**:
-  - Dijalankan 15–30 menit setelah lari selesai.
-  - Memverifikasi kepatuhan terhadap batas atas intensitas LT2 (85–95% CP) dan istirahat pasif.
-  - **Fallback Cuaca Ekstrem [Sumber: NSA §4.2]**: Jika cuaca sangat panas/lembap ekstrem, sistem memprioritaskan RPE yang dilaporkan atlet dibanding angka HR mentah yang terdistorsi oleh stres termal.
-- **`/cardiac-drift`**:
-  - Dijalankan khusus setelah sesi Long Run (> 60 menit).
-  - Memastikan *Aerobic Decoupling* $< 5.0\%$ sebagai bukti efisiensi kardiovaskular.
-
-#### 🗓️ C. Kapan Saja
-- **`/create-workout`**:
-  - Menjadwalkan sesi lari terstruktur menggunakan Teks DSL resmi NSA yang otomatis tersinkronisasi ke jam tangan, dengan validasi batas kerja Sub-T maks 40–50 menit per sesi (§6.2).
-
-#### 🏋️ D. Sesi Kekuatan & Stabilitas Tulang Belakang (Selasa & Jumat Sore)
-- **`/strength-guide`**:
-  - Dijalankan 2x sepekan pada sore hari (16:30 WIB) setelah sesi lari Sub-T pagi dengan jeda minimal 4–6 jam (mematuhi prinsip Steve Magness *"Hard Days Hard, Easy Days Easy"*).
-  - Berdurasi ringkas 20–25 menit memadukan The McGill Big 3 (proteksi stabilitas tulang belakang via piramida 6-4-2 tahan 7s), penguatan panggul/tendon pelari, dan *neuromuscular strides*.
-
----
-
-### 4️⃣ Situasi: Menjelang Hari Perlombaan & Race Day
-Digunakan saat fase puncak persiapan lomba hingga pagi hari race:
-- **`/predict-race`** (10–14 Hari Pra-Lomba):
-  - Menghitung prediksi waktu finish realistis berbasis VDOT dan kebugaran CTL.
-  - Menghasilkan jadwal *A-Taper* NSA (Minggu Taper 1: volume 75%, Race Week: volume 50% dengan frekuensi tetap).
-  - **Reassurance Target HM [Sumber: NSA §5.1]**: Menegaskan bahwa jarak 5K–HM adalah *sweet spot* utama NSA, sehingga atlet cukup menjalankan Long Run santai 75–90 menit tanpa perlu simulasi tempo-in-LR maraton.
-- **`/race-strategy`** (Race Week & Pagi Hari Lomba):
-  - Menghitung strategi split pacing Critical Power (% CP) 3 segmen (Controlled Start KM 1–3, Steady Cruise KM 4–17, Controlled Push KM 18–21.1).
-  - Menghitung jadwal intake energy gel resmi atlet: **EJ Sport Energy Gel (30g karbohidrat)** (T-15m, KM 6, KM 12, KM 17) dengan total 120g carbs.
-  - Mengkalkulasi estimasi keringat iklim tropis Yogyakarta (26°C, RH 80%) dan menetapkan batas asupan cairan lambung aman (*gastric emptying limit*) 500–700 ml/jam guna menghindari *sloshing* & hiponatremia.
-
----
-
-## ⚡ Quick Cheat Sheet (Hafalan Cepat)
-
-```text
-🌅 Pagi Hari (Bangun Tidur)   ➔  /readiness-check
-👟 Sebelum Berangkat Lari     ➔  /check-workout
-🏁 Setelah Selesai Lari        ➔  /run-report
-📈 Pasca-Long Run              ➔  /cardiac-drift
-📅 Minggu Sore / Malam         ➔  /fitness-status  lalu  /weekly-budget
-🗓️ Menjadwalkan Sesi Baru      ➔  /create-workout
-⏱️ Update Benchmark            ➔  /calc-vdot  lalu  /calc-nsa
-🏆 10-14 Hari Dekat Lomba      ➔  /predict-race
-⚡ Taktis & Fueling Race Day   ➔  /race-strategy
-🏋️ Sesi Latihan Kekuatan       ➔  /strength-guide
-```
+### 6. `/strategi-lomba` (Race Strategy, Tapering & Fueling)
+- **Kapan Digunakan**: 1 hingga 4 pekan menjelang ajang perlombaan hingga pagi hari lomba.
+- **Cara Kerja**:
+  1. Mengklasifikasikan lomba ke dalam hierarki Coach Faris Salman (*A-Race All-out*, *B-Race Tune-Up*, *C-Race Gladi Resik*).
+  2. Menghitung proyeksi waktu finish via `predict_race_time` dengan penyesuaian iklim tropis/panas.
+  3. Merancang jadwal *A/B/C Taper Plan* via `calculate_taper_plan` (penurunan volume bertahap tanpa memangkas frekuensi).
+  4. Memetakan strategi daya (*pacing pita daya % CP*) dan jadwal nutrisi gel karbohidrat/hidrasi via `calculate_race_fueling`.

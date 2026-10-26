@@ -56,11 +56,11 @@ Steve mengingatkan: **"Kuasai durasi santai terlebih dahulu sampai nyaman, baru 
 
 ---
 
-## 4. Matriks Konfirmasi Metodologi Ekosistem MCP
+## 4. Matriks Konfirmasi Metodologi Sistem Kepelatihan
 
-| Konsep Steve Magness | Implementasi pada Ekosistem MCP | Skill Terkait |
+| Konsep Steve Magness | Implementasi Sistem Kepelatihan | Skill Terkait |
 |---|---|---|
 | Sweet spot Half Marathon (75–90 menit) | Penjadwalan Long Run hari Minggu dibatasi ketat pada 75–90 menit (maks 100m) | `plan-week`, `running-coach-analysis` |
 | Pure Aerobic vs Workout Long Run | Long Run Minggu dijaga murni Easy (HR ≤ 70% / < 146 bpm) karena 2 hari Sub-T sudah berat | `plan-week`, `training-load-analysis` |
-| Pencegahan Diminishing Returns | Membatasi beban latihan mingguan agar TSB tetap di zona hijau/seimbang | `training-load-analysis`, `fitness-status` |
-| Musculoskeletal Guardrail | Mencegah kompresi tulang belakang dan cedera struktural akibat durasi ekstrem berlebih | `running-coach-analysis`, `norwegian-singles-guardrails` |
+| Pencegahan Diminishing Returns | Membatasi beban latihan mingguan agar TSB tetap di zona hijau/seimbang | `training-load-analysis` |
+| Proteksi Biomekanik Atlet 81 kg | Mencegah kompresi tulang belakang akibat lari durasi ekstrem berlebih | `running-coach-analysis`, `norwegian-singles-guardrails` |

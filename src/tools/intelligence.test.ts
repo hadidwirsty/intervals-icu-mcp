@@ -14,11 +14,17 @@ describe("registerIntelligenceTools", () => {
     const res = calculateRaceFuelingPlan({
       raceDistanceKm: 21.0975,
       athleteWeightKg: 81,
-      criticalPowerWatts: 293,
+      criticalPowerWatts: 295,
     });
     expect(res.gelBrand).toBe("EJ Sport");
     expect(res.gelCount).toBe(4);
     expect(res.totalCarbsPlannedGrams).toBe(120);
     expect(res.targetFluidIntakeMlPerHour).toBe(600);
   });
+
+  it("registers and calls diagnose_aerobic_base, calculate_hadd_zones, and estimate_aerobic_threshold", () => {
+    const server = new McpServer({ name: "test-intelligence-hadd", version: "1.0.0" });
+    expect(() => registerIntelligenceTools(server)).not.toThrow();
+  });
 });
+

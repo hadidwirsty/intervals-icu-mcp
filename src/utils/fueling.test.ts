@@ -3,15 +3,15 @@ import { describe, expect, it } from "vitest";
 import { calculateRaceFuelingPlan, EJ_SPORT_GEL } from "./fueling.js";
 
 describe("calculateRaceFuelingPlan", () => {
-  it("calculates comprehensive Half Marathon fueling plan using EJ Sport (81kg, CP 293W, VDOT 32)", () => {
+  it("calculates comprehensive Malioboro Run Half Marathon fueling plan using EJ Sport for calibrated athlete (81kg, CP 295W, VDOT 31)", () => {
     const plan = calculateRaceFuelingPlan({
       raceDistanceKm: 21.0975,
       predictedTimeMinutes: 138, // ~2 jam 18 menit
       athleteWeightKg: 81,
       temperatureCelsius: 26,
       relativeHumidityPct: 80,
-      criticalPowerWatts: 293,
-      vdot: 32,
+      criticalPowerWatts: 295,
+      vdot: 31,
     });
 
     expect(plan.raceDistanceKm).toBe(21.0975);
@@ -57,7 +57,7 @@ describe("calculateRaceFuelingPlan", () => {
     expect(m3.distanceKm).toBe(17);
     expect(m3.carbsGrams).toBe(30);
 
-    // 3 Tactical Pacing Segments (CP 293W)
+    // 3 Tactical Pacing Segments (CP 295W)
     expect(plan.pacingStrategy).toHaveLength(3);
 
     const s1 = plan.pacingStrategy[0]!;
@@ -94,5 +94,50 @@ describe("calculateRaceFuelingPlan", () => {
   it("throws Error for non-positive distance or weight", () => {
     expect(() => calculateRaceFuelingPlan({ raceDistanceKm: 0 })).toThrow();
     expect(() => calculateRaceFuelingPlan({ athleteWeightKg: -10 })).toThrow();
+  });
+
+  it("calculates dedicated Semarang 10K fueling & pacing plan (2 gels, 60g carbs, 3 pacing segments)", () => {
+    const plan = calculateRaceFuelingPlan({
+      raceDistanceKm: 10,
+      predictedTimeMinutes: 59,
+      athleteWeightKg: 81,
+      criticalPowerWatts: 295,
+    });
+
+    expect(plan.raceName).toBe("Semarang 10K");
+    expect(plan.raceDistanceKm).toBe(10);
+    expect(plan.predictedTimeMinutes).toBe(59);
+    expect(plan.gelCount).toBe(2);
+    expect(plan.totalCarbsPlannedGrams).toBe(60); // 2 x 30g
+    expect(plan.fuelingSchedule).toHaveLength(2);
+
+    expect(plan.fuelingSchedule[0]!.timing).toBe("T-15m");
+    expect(plan.fuelingSchedule[0]!.carbsGrams).toBe(30);
+
+    expect(plan.fuelingSchedule[1]!.timing).toContain("KM 5");
+    expect(plan.fuelingSchedule[1]!.carbsGrams).toBe(30);
+
+    // 3 segments for 10K
+    expect(plan.pacingStrategy).toHaveLength(3);
+    expect(plan.pacingStrategy[0]!.segment).toBe("KM 1 - 2");
+    expect(plan.pacingStrategy[0]!.title).toContain("Calm Adrenaline Guard");
+
+    expect(plan.pacingStrategy[1]!.segment).toBe("KM 3 - 8");
+    expect(plan.pacingStrategy[1]!.title).toContain("Sub-60 Target Rhythm");
+
+    expect(plan.pacingStrategy[2]!.segment).toBe("KM 9 - 10");
+    expect(plan.pacingStrategy[2]!.title).toContain("Negative Split Finish Kick");
+  });
+
+  it("calculates 5K race fueling with single pre-race gel", () => {
+    const plan = calculateRaceFuelingPlan({
+      raceDistanceKm: 5,
+    });
+
+    expect(plan.raceName).toBe("5K Race");
+    expect(plan.gelCount).toBe(1);
+    expect(plan.totalCarbsPlannedGrams).toBe(30);
+    expect(plan.fuelingSchedule).toHaveLength(1);
+    expect(plan.pacingStrategy).toHaveLength(3);
   });
 });

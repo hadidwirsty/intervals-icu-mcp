@@ -45,9 +45,9 @@ Metode *Double Threshold* yang dipopulerkan oleh Marius Bakken dan keluarga Inge
 
 ---
 
-## 3. Matriks Konfirmasi Metodologi Ekosistem MCP
+## 3. Matriks Konfirmasi Metodologi Sistem Kepelatihan
 
-| Konsep Steve Magness | Implementasi pada Ekosistem MCP | Skill Terkait |
+| Konsep Steve Magness | Implementasi Sistem Kepelatihan | Skill Terkait |
 |---|---|---|
 | 2–3x Sub-Threshold per minggu | Pola latihan 2-Q mingguan (Selasa: Short Sub-T, Jumat: Medium Sub-T) | `plan-week`, `running-coach-analysis` |
 | Kontrol laktat ketat di bawah LT2 | Plafon detak jantung Ceiling HR < 168–172 bpm & target power 85–96% CP | `running-coach-analysis`, `calc-nsa` |

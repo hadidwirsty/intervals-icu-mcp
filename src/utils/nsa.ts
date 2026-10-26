@@ -9,7 +9,7 @@
  * 5. 10–12 min (3–4x) @ HM - 30k pace (~89–92% CP), rest 60–120s walk.
  * 6. 15 min (3–4x) @ 30k pace (~85–88% CP), rest 90–120s walk.
  *
- * Pemetaan %CP adalah estimasi berbasis Critical Power atlet
+ * Pemetaan %CP adalah turunan berbasis Critical Power atlet terkalibrasi
  * (sumber resmi norwegiansingles.run hanya memberi pace guide relatif, bukan %CP).
  */
 
