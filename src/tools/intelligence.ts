@@ -9,7 +9,7 @@ import {
   estimateAerobicThresholdProxy,
 } from "../utils/hadd.js";
 import { calculateTaperPlan, predictRaceTime } from "../utils/race.js";
-import { calculateReadinessScore } from "../utils/readiness.js";
+import { calculateReadinessScore, calculateRhrBaseline } from "../utils/readiness.js";
 
 /**
  * Register MCP Tools for Endurance Intelligence Suite.
@@ -78,12 +78,49 @@ export function registerIntelligenceTools(server: McpServer): void {
       sleepScore: z.number().optional().describe("Skor kualitas tidur 0-100."),
       hrv: z.number().optional().describe("Nilai HRV rMSSD."),
       restingHr: z.number().optional().describe("Denyut jantung istirahat harian terkini."),
-      baselineRestingHr: z.number().optional().describe("Baseline RHR normal atlet."),
+      baselineRestingHr: z.number().optional().describe("Baseline RHR normal atlet (legacy scalar)."),
+      rhrBaseline: z
+        .object({
+          low: z.number().describe("Batas bawah rentang normal RHR."),
+          high: z.number().describe("Batas atas rentang normal RHR."),
+          avg7d: z.number().optional().describe("Rata-rata RHR 7 hari terakhir."),
+          avg28d: z.number().optional().describe("Rata-rata RHR 4 minggu (28 hari) terakhir."),
+          avg1y: z.number().optional().describe("Rata-rata RHR 1 tahun terakhir."),
+        })
+        .optional()
+        .describe("Rentang baseline dinamis RHR (seperti range Overnight HRV Garmin)."),
       bodyBattery: z.number().min(0).max(100).optional().describe("Level Garmin Body Battery saat bangun / terkini (0-100)."),
       hrvStatus: z.enum(["BALANCED", "UNBALANCED", "LOW"]).optional().describe("Status resmi overnight HRV dari Garmin Connect."),
     },
     async (input) => {
       const result = calculateReadinessScore(input);
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    }
+  );
+
+  // calculate_rhr_baseline
+  server.tool(
+    "calculate_rhr_baseline",
+    "Menghitung rentang baseline dinamis RHR normal (low, high, rata-rata 7 hari, 4 minggu, 1 tahun) dan status (BALANCED, ELEVATED, SPIKE_RED_FLAG, SUPPRESSED) dari riwayat resting HR seperti Overnight HRV Garmin.",
+    {
+      rhrHistory: z
+        .array(z.union([z.number(), z.object({ restingHR: z.number().nullable().optional() })]))
+        .describe("Array riwayat nilai RHR (angka murni atau objek harian dari get_wellness_data)."),
+      currentRhr: z
+        .number()
+        .optional()
+        .describe("Nilai Resting Heart Rate hari ini untuk dievaluasi statusnya terhadap baseline range."),
+    },
+    async ({ rhrHistory, currentRhr }) => {
+      const result = calculateRhrBaseline(rhrHistory, currentRhr);
+      if (!result) {
+        return {
+          isError: true,
+          content: [{ type: "text", text: "Data riwayat RHR tidak valid atau kosong." }],
+        };
+      }
       return {
         content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
       };

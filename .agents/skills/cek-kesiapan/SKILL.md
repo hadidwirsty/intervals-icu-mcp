@@ -18,8 +18,10 @@ Saat perintah `/cek-kesiapan` dijalankan, lakukan pemanggilan data secara terstr
    - **Body Battery™**: Level saat bangun/terkini (*latest*), pengisian semalam (*charged*), pengurasan (*drained*), tertinggi (*highest*), dan terendah (*lowest*).
    - **Native HRV Status**: Status resmi Garmin (`BALANCED`, `UNBALANCED`, `LOW`), rerata semalam (*nightlyAverage*), rerata mingguan (*weeklyAverage*), serta garis dasar (*baseline low–high*).
    - **Daily Stress**: Rata-rata tingkat stres harian (*dailyAverage*) dan puncak stres (*maxStressLevel*).
-   - **Aktivitas Fisik**: Total langkah kemarin (*steps*), kalori aktif, dan Resting HR sensorik.
-2. *(Opsional jika butuh detail tidur mendalam)*: Panggil `garmin_get_sleep_details` untuk melihat proporsi tidur nyenyak (*deep sleep*), REM, dan kualitas restorasi gelombang lambat.
+   - **Aktivitas Fisik**: Total langkah kemarin (*steps*), kalori aktif, dan Resting HR sensorik hari ini.
+2. Panggil MCP tool `garmin_get_daily_heart_rate_intraday` untuk tanggal hari ini:
+   - Ambil nilai `restingHeartRate` hari ini dan `lastSevenDaysAvgRestingHeartRate` (rata-rata 7 hari yang dihitung langsung oleh Garmin).
+3. *(Opsional jika butuh detail tidur mendalam)*: Panggil `garmin_get_sleep_details` untuk melihat proporsi tidur nyenyak (*deep sleep*), REM, dan kualitas restorasi gelombang lambat.
 
 ### Langkah B: Ambil Data Kebugaran & Beban Latihan (Intervals.icu MCP)
 1. Panggil `get_fitness_chart` untuk membaca posisi kebugaran:
@@ -29,6 +31,10 @@ Saat perintah `/cek-kesiapan` dijalankan, lakukan pemanggilan data secara terstr
    - **CTL Ramp Rate**: Kenaikan kebugaran mingguan.
 2. Panggil `analyze_training_load`:
    - Dapatkan rasio **ACWR** ($\text{ATL} / \text{CTL}$), status zona TSB, dan evaluasi keamanan Ramp Rate Steve Palladino ($+1\text{ s/d }+3\text{ TSS/minggu}$).
+3. Panggil `get_wellness_data` (rentang 28 hari terakhir, atau 365 hari untuk audit tahunan) dan proses dengan MCP tool `calculate_rhr_baseline`:
+   - **Baseline Range Dinamis RHR**: Mirip mekanisme *Overnight HRV Baseline* Garmin, hitung rentang normal `[low, high]` bpm berbasis rata-rata bergerak 28 hari (4 minggu) $\pm$ deviasi standar normal.
+   - Ekstrak rata-rata 7 Hari (`avg7d`), 4 Minggu (`avg28d`), dan 1 Tahun (`avg1y`).
+   - Tentukan status RHR hari ini: `BALANCED` (dalam rentang normal), `ELEVATED` (sedikit di atas batas atas), `SPIKE_RED_FLAG` (melonjak $> 5\text{ bpm}$ di atas rata-rata baseline), atau `SUPPRESSED` (anjlok tidak wajar).
 
 ### Langkah C: Hitung Skor Kesiapan Komposit Terpadu (Dual-Engine Readiness)
 Panggil MCP tool `calculate_readiness_score` dengan parameter terpadu:
@@ -38,18 +44,18 @@ Panggil MCP tool `calculate_readiness_score` dengan parameter terpadu:
 - `bodyBattery`: level Garmin Body Battery bangun tidur / terkini (0–100).
 - `hrvStatus`: status resmi HRV semalam (`BALANCED`, `UNBALANCED`, atau `LOW`).
 - `restingHr`: Resting HR sensor Garmin hari ini.
-- `baselineRestingHr`: baseline RHR stabil atlet.
+- `rhrBaseline`: objek rentang baseline dinamis RHR `{ low, high, avg7d, avg28d, avg1y }`. *(Jangan lagi gunakan angka statis hardcoded!)*
 
 *Integrasi Native Dual-Engine*:
-- Engine otomatis menghitung rata-rata terbobot antara TSB, ACWR, Sleep Score, dan Body Battery, serta memotong skor jika HRV `UNBALANCED` / `LOW` atau terjadi lonjakan RHR > 5 bpm.
-- Jika Body Battery $< 30$, sistem otomatis mencegah status **HIJAU** untuk mencegah cedera atau kelelahan fisiologis berlebih.
+- Engine otomatis menghitung rata-rata terbobot antara TSB, ACWR, Sleep Score, dan Body Battery, serta mengevaluasi penalti HRV (`UNBALANCED` / `LOW`) dan RHR terhadap baseline range dinamis.
+- Jika terdeteksi lonjakan RHR parah (`SPIKE_RED_FLAG` / $> 5\text{ bpm}$ di atas rata-rata baseline) atau Body Battery $< 30$, sistem secara otomatis mencegah rekomendasi status **HIJAU** untuk melindungi keselamatan fisiologis atlet.
 
 ---
 
 ## 2. Aturan Pengawalan: 5 Red Flags Kelelahan Terpadu
 
 Evaluasi secara ketat apakah terdapat **$\ge 2$ sinyal bahaya** dari daftar berikut:
-1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas baseline stabil atlet.
+1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas rata-rata baseline dinamis (7-hari / 4-minggu) atau status RHR menunjukkan `SPIKE_RED_FLAG`.
 2. 🚨 **Kualitas tidur buruk 2 malam berturut-turut** (Sleep Score $< 70\%$ atau durasi $< 6\text{ jam}$). *(Gunakan `garmin_get_sleep_summaries_range` jika butuh konfirmasi tren 7 hari)*.
 3. 🚨 **Motivasi latihan anjlok drastis / kelesuan mental** (tanda kelelahan sistem saraf pusat / CNS).
 4. 🚨 **Easy pace terasa berat pada usaha napas normal** (dilaporkan atlet pada catatan lari kemarin).
@@ -77,7 +83,7 @@ Sajikan hasil analisis secara rapi dalam Bahasa Indonesia dengan format berikut:
 ```markdown
 # 🩺 Laporan Kesiapan & Dasbor Kebugaran Atlet (Dual-Engine)
 **Hari/Tanggal**: [Nama Hari, DD Bulan YYYY] | **Pukul**: [Waktu WIB]
-**Atlet**: [Nama Atlet] (CP [XXX] W | RHR Baseline [XX] bpm)
+**Atlet**: [Nama Atlet] (CP [XXX] W | RHR Baseline Range: [Low–High] bpm [4w Avg: XX bpm])
 
 ---
 
@@ -94,7 +100,7 @@ Sajikan hasil analisis secara rapi dalam Bahasa Indonesia dengan format berikut:
 | **Body Battery™** | **[XX] / 100** | [Tinggi/Sedang/Rendah] | Charged: +[XX] | Drained: -[XX] |
 | **Status HRV Semalam** | **[BALANCED / UNBALANCED]** | [XX] ms (Base: [XX–XX]) | [Keseimbangan sistem saraf otonom] |
 | **Tingkat Stres Harian** | **[XX] / 100** | [Rendah / Sedang / Tinggi] | Rata-rata beban stres fisiologis Garmin |
-| **Resting HR Sensor** | **[XX] bpm** | Baseline: [XX] bpm | Deviasi: [+/-X] bpm dari baseline stabil |
+| **Resting HR Sensor** | **[XX] bpm** | Base: [XX–XX] bpm (7d: [X], 4w: [Y], 1y: [Z]) | Status: [BALANCED / ELEVATED / RED FLAG] |
 | **Aktivitas Kemarin** | **[XX.XXX] langkah** | [XXX] kkal aktif | Beban gerak non-lari |
 
 ---
@@ -111,7 +117,7 @@ Sajikan hasil analisis secara rapi dalam Bahasa Indonesia dengan format berikut:
 ---
 
 ### 4. Audit 5 Red Flags Kelelahan Terpadu
-- [ ] Lonjakan RHR > 5 bpm ([Aktif/Aman])
+- [ ] Lonjakan RHR > 5 bpm dari baseline dinamis ([Aktif/Aman])
 - [ ] Kualitas tidur buruk 2 malam berturut-turut ([Aktif/Aman])
 - [ ] Kelelahan SSP / Mood drop ([Aktif/Aman])
 - [ ] Sensasi Easy pace berat ([Aktif/Aman])
