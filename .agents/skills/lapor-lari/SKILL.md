@@ -14,24 +14,26 @@ Skill ini digunakan **15–30 menit setelah atlet menyelesaikan sesi lari** untu
 Saat perintah `/lapor-lari` dijalankan:
 
 1. **Ambil Data Aktivitas Terakhir**:
-   - Panggil `get_activities` untuk tanggal hari ini atau rentang 2 hari terakhir.
-   - Ambil aktivitas lari (`type == "Run"`) yang paling baru dieksekusi.
+   - Panggil `get_activities` untuk tanggal hari ini atau rentang 2 hari terakhir dari Intervals.icu.
+   - Panggil `garmin_search_activities` dengan `activityType: "running"` dan `limit: 1` untuk mendapatkan `activityId` aktivitas lari riil di Garmin Connect.
 2. **Ambil Detail Telemetri & Beban Sesi**:
    - Panggil `get_activity_details` dengan `activityId` yang didapat.
    - Ekstrak: durasi bergerak (*moving time*), jarak aktual (km), rerata kecepatan/pace, daya rata-rata (*icu_average_watts*), daya tertimbang (*icu_weighted_avg_watts*), rerata HR, Max HR, kadensi langkah, TSS/Load (*icu_training_load*), dan gear/sepatu yang dipakai.
 3. **Analisis Dekomposisi Repetisi (Jika Sesi Kualitas / Sub-T)**:
    - Panggil `get_activity_intervals` untuk melihat rincian tiap repetisi kerja dan jeda istirahat (*rest jog*).
-   - Verifikasi apakah repetisi kerja berada dalam koridor daya **85–95% CP (251–280 W)** dan apakah jeda istirahat jalan santai dipatuhi: **Card A (3–4m): 30–60s**, **Card B (5–7m): 60–90s**, **Card C (10–12m): 90–120s**.
-4. **Analisis Efisiensi Aerobik & Cardiac Drift**:
-   - Panggil MCP tool `analyze_cardiac_drift` dengan `activityId`.
-   - Periksa persentase *Aerobic Decoupling* ($H_1$ vs $H_2$):
+   - Verifikasi apakah repetisi kerja berada dalam koridor daya **85–95% CP** dan apakah jeda istirahat jalan santai dipatuhi: **Card A (3–4m): 30–60s**, **Card B (5–7m): 60–90s**, **Card C (10–12m): 90–120s**.
+4. **Analisis Efisiensi Aerobik & Cardiac Drift (Dual-Engine Decoupling Cross-Validation)**:
+   - Panggil MCP tool `analyze_cardiac_drift` dari Intervals.icu dengan `activityId`.
+   - Panggil `garmin_get_activity_details` dari Garmin Connect MCP dengan parameter `includeDecoupling: true`. Garmin MCP v0.2.0 secara native menghitung *stream-based Aerobic Decoupling* ($Pw:HR$ atau $Pace:HR$), mengevaluasi tingkat keandalan (*reliability assessment*), dan secara cerdas membersihkan jeda/pause rekaman (*recording gaps*).
+   - Lakukan validasi silang antara kedua engine:
      - `< 3.5%`: **Sangat Stabil (Mesin Aerobik Matang)**.
      - `3.5% – 5.0%`: **Optimal / Lolos Standar Emas**.
      - `> 5.0%`: **Terjadi Drift Signifikan** (dehidrasi, glikogen menipis, atau melampaui ambang AeT).
-5. **Analisis Lanjutan Dual-Engine (`garmin-connect` MCP)**:
+5. **Analisis Lanjutan & Pemulihan Dual-Engine (`garmin-connect` MCP v0.2.0)**:
    - **Sub-Integer VO2 Max (FIT message 140)**: Panggil `garmin_get_activity_streams` untuk aktivitas terkait guna mengekstrak nilai estimasi VO2 Max presisi tinggi dengan 2 desimal (misal `39.42 ml/kg/min`) untuk memantau adaptasi kebugaran mikro.
    - **Komparasi Head-to-Head (`garmin_compare_activities`)**: Jika sesi ini merupakan pengulangan dari sesi sebelumnya (misal Sub-Threshold mingguan atau rute lari rutin), panggil tool ini untuk membandingkan delta pace, delta detak jantung, delta kadens, dan perubahan *Efficiency Factor* ($EF = \text{Speed}/\text{HR}$).
-   - **Audit Rekor Terbaik (`garmin_get_personal_records`)**: Periksa apakah sesi hari ini mencatatkan Best Effort baru (1K, 5K, 10K, HM, FM, atau Longest Run).
+   - **Audit Rekor Terbaik (`garmin_get_personal_records`)**: Manfaatkan paginasi v0.2.0 (`limit: 50`, `start: 0`, dan periksa flag `truncated`) untuk memeriksa apakah sesi hari ini memecahkan Best Effort baru (1K, 1 Mile, 5K, 10K, HM, FM, atau Longest Run).
+   - **Audit Rehidrasi Pasca-Lari (`garmin_get_hydration_range`)**: Panggil data hidrasi hari ini untuk memeriksa asupan cairan aktual vs target harian pasca-latihan guna mencegah defisit cairan berkepanjangan.
 
 ---
 
@@ -83,11 +85,10 @@ Sajikan hasil analisis pasca-lari dalam Bahasa Indonesia dengan format berikut:
 
 ---
 
-### 2. Analisis Efisiensi Aerobik & Cardiac Drift
-- **Aerobic Decoupling ($H_1$ vs $H_2$)**: **[+/-X.XX]%**
-- **Efisiensi Paruh Pertama ($EF_1$)**: [X.XXX] Watt/BPM
-- **Efisiensi Paruh Kedua ($EF_2$)**: [X.XXX] Watt/BPM
-- **Status Mesin Aerobik**: [🟢 Lolos Standar Emas (< 5%) / 🟡 Drift Ringan / 🔴 Drift Berat]
+### 2. Analisis Efisiensi Aerobik & Cardiac Drift (Dual-Engine Cross-Validation)
+- **Aerobic Decoupling (Intervals.icu)**: **[+/-X.XX]%** ($EF_1$: [X.XXX] vs $EF_2$: [X.XXX])
+- **Aerobic Decoupling (Garmin Native Stream)**: **[+/-X.XX]%** (Keandalan: [HIGH / MEDIUM / LOW] | Jeda Rekaman Ditangani)
+- **Status Mesin Aerobik**: [🟢 Lolos Standar Emas (< 5%) / 🟡 Drift Ringan (5–7%) / 🔴 Drift Berat (> 7%)]
 - **Komentar Biologis**: [Analisis apakah mesin stabil atau mengalami dehidrasi/glikogen menipis].
 
 ---
@@ -117,6 +118,6 @@ Sajikan hasil analisis pasca-lari dalam Bahasa Indonesia dengan format berikut:
 - **Status Beban Akut**: Menambah ATL sebesar +[XX] poin.
 - **Rekomendasi Pemulihan**:
   - Nutrisi: Segera konsumsi karbohidrat + protein dalam 30–45 menit.
-  - Rehidrasi: Gantikan cairan tubuh (~500–750 ml air + elektrolit).
+  - Rehidrasi Garmin: Asupan hari ini [XXX] ml / Target [XXX] ml ([XX]%) — Gantikan cairan tubuh (~500–750 ml air + elektrolit).
   - Agenda Besok: [Hari Istirahat / Easy Run Santai / Sesi Kekuatan McGill Big 3].
 ```

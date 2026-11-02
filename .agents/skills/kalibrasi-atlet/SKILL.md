@@ -14,7 +14,7 @@ Skill ini digunakan **secara berkala (setiap 4–8 minggu) setelah atlet menyele
 Saat perintah `/kalibrasi-atlet` dijalankan (dengan input hasil tes, misal: `/kalibrasi-atlet 5k 24:30` atau membaca data dari profil/lomba):
 
 ### 1. Deteksi Rekor Baru & Hitung VDOT Jack Daniels (Dual-Engine):
-- Panggil MCP tool `garmin_get_personal_records` dari `garmin-connect` MCP untuk mengidentifikasi apakah terdapat Best Efforts (rekor waktu 1K, 5K, 10K, Half Marathon) terbaru yang tercatat di perangkat jam tangan atlet.
+- Panggil MCP tool `garmin_get_personal_records` dari `garmin-connect` MCP (manfaatkan paginasi v0.2.0: `limit: 50` dan periksa flag `truncated` untuk memastikan seluruh kategori 1K, 1 Mile, 5K, 10K, Half Marathon, Full Marathon terambil lengkap) guna mengidentifikasi Best Efforts terbaru yang tercatat di jam tangan atlet.
 - Panggil MCP tool `calculate_vdot` dengan jarak tes (meter) dan durasi (detik) dari Best Effort atau hasil time-trial terkini.
 - Dapatkan skor VDOT terkini (atau ekstrak dari profil/riwayat aktivitas atlet).
 - Panggil `calculate_pace_zones` untuk menghasilkan rentang kecepatan resmi (*Easy, Marathon, Threshold, Interval, Repetition*).

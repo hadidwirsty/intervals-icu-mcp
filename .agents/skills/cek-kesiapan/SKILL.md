@@ -13,7 +13,7 @@ Skill ini bertindak sebagai **pemeriksaan denyut harian (*Daily Health & Readine
 
 Saat perintah `/cek-kesiapan` dijalankan, lakukan pemanggilan data secara terstruktur dari kedua penyedia data:
 
-### Langkah A: Ambil Biometrik Pemulihan Asli (Garmin Connect MCP)
+### Langkah A: Ambil Biometrik Pemulihan Asli (Garmin Connect MCP v0.2.0)
 1. Panggil MCP tool `garmin_get_daily_wellness_snapshot` untuk tanggal hari ini (`today`) atau tanggal kalender terbaru:
    - **Body Battery™**: Level saat bangun/terkini (*latest*), pengisian semalam (*charged*), pengurasan (*drained*), tertinggi (*highest*), dan terendah (*lowest*).
    - **Native HRV Status**: Status resmi Garmin (`BALANCED`, `UNBALANCED`, `LOW`), rerata semalam (*nightlyAverage*), rerata mingguan (*weeklyAverage*), serta garis dasar (*baseline low–high*).
@@ -21,7 +21,12 @@ Saat perintah `/cek-kesiapan` dijalankan, lakukan pemanggilan data secara terstr
    - **Aktivitas Fisik**: Total langkah kemarin (*steps*), kalori aktif, dan Resting HR sensorik hari ini.
 2. Panggil MCP tool `garmin_get_daily_heart_rate_intraday` untuk tanggal hari ini:
    - Ambil nilai `restingHeartRate` hari ini dan `lastSevenDaysAvgRestingHeartRate` (rata-rata 7 hari yang dihitung langsung oleh Garmin).
-3. *(Opsional jika butuh detail tidur mendalam)*: Panggil `garmin_get_sleep_details` untuk melihat proporsi tidur nyenyak (*deep sleep*), REM, dan kualitas restorasi gelombang lambat.
+3. Panggil MCP tool `garmin_get_steps_range` (7 hari terakhir):
+   - Deteksi volume langkah non-lari mingguan dan kepatuhan target langkah untuk mengidentifikasi kelelahan muskuloskeletal perifer (*heavy legs / non-training fatigue*).
+4. Panggil MCP tool `garmin_get_hydration_range` (3 hari terakhir):
+   - Periksa kepatuhan asupan cairan vs target hidrasi harian. Dehidrasi laten ($< 60\%$ target hidrasi) merupakan pemicu fisiologis utama lonjakan RHR dan penurunan drastis HRV semalam.
+5. *(Opsional jika butuh konfirmasi stres / tidur mendalam)*:
+   - Panggil `garmin_get_sleep_summaries_range` atau `garmin_get_daily_summaries_range` untuk verifikasi kualitas restorasi tidur dan tren stres fisiologis multi-hari.
 
 ### Langkah B: Ambil Data Kebugaran & Beban Latihan (Intervals.icu MCP)
 1. Panggil `get_fitness_chart` untuk membaca posisi kebugaran:
@@ -55,11 +60,11 @@ Panggil MCP tool `calculate_readiness_score` dengan parameter terpadu:
 ## 2. Aturan Pengawalan: 5 Red Flags Kelelahan Terpadu
 
 Evaluasi secara ketat apakah terdapat **$\ge 2$ sinyal bahaya** dari daftar berikut:
-1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas rata-rata baseline dinamis (7-hari / 4-minggu) atau status RHR menunjukkan `SPIKE_RED_FLAG`.
+1. 🚨 **RHR Pagi melonjak $> 5\text{ bpm}$** di atas rata-rata baseline dinamis (7-hari / 4-minggu) atau status RHR menunjukkan `SPIKE_RED_FLAG`. *(Silang dengan `garmin_get_hydration_range`: verifikasi apakah lonjakan dipicu oleh defisit hidrasi akut)*.
 2. 🚨 **Kualitas tidur buruk 2 malam berturut-turut** (Sleep Score $< 70\%$ atau durasi $< 6\text{ jam}$). *(Gunakan `garmin_get_sleep_summaries_range` jika butuh konfirmasi tren 7 hari)*.
 3. 🚨 **Motivasi latihan anjlok drastis / kelesuan mental** (tanda kelelahan sistem saraf pusat / CNS).
 4. 🚨 **Easy pace terasa berat pada usaha napas normal** (dilaporkan atlet pada catatan lari kemarin).
-5. 🚨 **Garmin Biometric Red Flag**: Body Battery bangun tidur $< 40$, atau pengisian semalam (*charged*) $< 30\text{ poin}$, atau status HRV Garmin `UNBALANCED`/`LOW` selama 2 malam berturut-turut. *(Gunakan `garmin_get_stress_range` atau `garmin_get_hrv_range` untuk verifikasi stres fisiologis kronis)*.
+5. 🚨 **Garmin Biometric Red Flag**: Body Battery bangun tidur $< 40$, atau pengisian semalam (*charged*) $< 30\text{ poin}$, atau status HRV Garmin `UNBALANCED`/`LOW` selama 2 malam berturut-turut, atau defisit hidrasi kronis ($< 50\%$ target 2 hari beruntun). *(Gunakan `garmin_get_stress_range`, `garmin_get_hrv_range`, atau `garmin_get_hydration_range` untuk verifikasi)*.
 
 > [!CAUTION]
 > **Tindakan Otomatis Jika $\ge 2$ Red Flags Aktif**:
@@ -101,6 +106,8 @@ Sajikan hasil analisis secara rapi dalam Bahasa Indonesia dengan format berikut:
 | **Status HRV Semalam** | **[BALANCED / UNBALANCED]** | [XX] ms (Base: [XX–XX]) | [Keseimbangan sistem saraf otonom] |
 | **Tingkat Stres Harian** | **[XX] / 100** | [Rendah / Sedang / Tinggi] | Rata-rata beban stres fisiologis Garmin |
 | **Resting HR Sensor** | **[XX] bpm** | Base: [XX–XX] bpm (7d: [X], 4w: [Y], 1y: [Z]) | Status: [BALANCED / ELEVATED / RED FLAG] |
+| **Status Hidrasi (3-Hari)**| **[XXX] ml** ([XX]% target) | Target: [XXX] ml | Keseimbangan cairan & pemulihan otonom |
+| **Beban Langkah 7-Hari** | **[XX.XXX] langkah/hr** | Target: [XX.XXX] ([XX]%) | Beban muskuloskeletal non-lari |
 | **Aktivitas Kemarin** | **[XX.XXX] langkah** | [XXX] kkal aktif | Beban gerak non-lari |
 
 ---

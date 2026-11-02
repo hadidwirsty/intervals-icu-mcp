@@ -23,6 +23,8 @@ Saat perintah `/jadwal-minggu` dijalankan:
    - **Plafon Long Run**: Ambil nilai terkecil $\min(3 \times \text{rata-rata 42 hari},\, 1.04 \times \text{LR terjauh 90 hari})$ untuk mencegah *excessive single run*.
    - **Plafon Sesi Workout Harian**: $1.1 - 1.3 \times \text{rata-rata 42 hari}$ (mencakup warmup, repetisi, rest, dan cooldown).
    - **Sisa Budget**: Dialokasikan untuk *Easy Runs* harian dan *Strides* (1–5% durasi).
+4. **Audit Beban Non-Lari Garmin (`garmin_get_steps_range` & `garmin_get_daily_summaries_range`)**:
+   - Panggil data langkah dan ringkasan harian 7–14 hari terakhir untuk mengevaluasi apakah beban gerak non-lari atlet stabil. Jika rata-rata langkah non-lari sedang tinggi ($> 12.000$ langkah/hari), ambil batas bawah plafon mingguan (+3% bukan +8%) demi mencegah *overuse injury*.
 
 ### Tahap 2: Tentukan Posisi Minggu dalam Siklus 3-1
 Tentukan apakah minggu ini berada pada:
