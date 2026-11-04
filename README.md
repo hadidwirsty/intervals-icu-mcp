@@ -4,7 +4,7 @@
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
 [![Model Context Protocol](https://img.shields.io/badge/MCP-Protocol-purple.svg)](https://modelcontextprotocol.io/)
-[![Tests](https://img.shields.io/badge/Tests-114%20Passed-success.svg)](https://vitest.dev/)
+[![Tests](https://img.shields.io/badge/Tests-120%20Passed-success.svg)](https://vitest.dev/)
 
 An official-grade **Model Context Protocol (MCP) Server** and **AI Running Coach Intelligence System** for [Intervals.icu](https://intervals.icu), built with dual-engine synergy for [Garmin Connect](https://github.com/hadidwirsty/garmin-connect-mcp).
 
@@ -23,7 +23,7 @@ Empower your AI assistants (**Claude Desktop**, **Antigravity**, **Cursor**, **V
   - [VS Code (Cline / Roo-Code)](#4-vs-code-cline--roo-code)
 - [🤖 Unified AI Skills & Slash Commands Directory](#-unified-ai-skills--slash-commands-directory)
 - [💬 Example Chat Prompts](#-example-chat-prompts)
-- [🛠️ Full MCP Tools Reference (39 Tools)](#️-full-mcp-tools-reference-39-tools)
+- [🛠️ Full MCP Tools Reference (40 Tools)](#️-full-mcp-tools-reference-40-tools)
 - [🧪 Development & Testing](#-development--testing)
 - [📄 License](#-license)
 
@@ -31,7 +31,7 @@ Empower your AI assistants (**Claude Desktop**, **Antigravity**, **Cursor**, **V
 
 ## ✨ Key Capabilities
 
-- **🏃 Telemetry & Telemetry Stream Ingestion**: Extract watts, heart rate, cadence, velocity, and interval splits from completed sessions.
+- **🏃 Activity Telemetry & Sensor Stream Ingestion**: Extract watts, heart rate, cadence, velocity, and interval splits from completed sessions.
 - **⚡ Aerobic Decoupling & Cardiac Drift Engine**: Compute Efficiency Factor (EF) $H_1$ vs $H_2$ to detect cardiovascular drift (>5%) or dehydration.
 - **🩹 Dual-Engine Recovery & Readiness Scoring**: 0–100% composite score combining TSB, ACWR, Sleep Score, HRV Status, and RHR Spike into Green/Yellow/Red action signals.
 - **🔬 John Hadd Physiology & ADS Diagnosis**: 4-tier Aerobic Deficiency Syndrome (ADS) classifier using Uphill Athlete 10% Rule & Horwill's Rule, plus absolute HR training floors ($\le \text{HR}_{\max} - 50\text{ bpm}$).
@@ -56,6 +56,8 @@ cd intervals-icu-mcp
 pnpm install
 pnpm run build
 ```
+
+> **Note on Submodules (Optional)**: The documentation submodule (`docs/references/norwegian-singles`) references upstream open-source literature. The server builds and runs completely independently without submodules. To clone literature references for offline reading, run `git submodule update --init --recursive`.
 
 ---
 
@@ -191,9 +193,9 @@ Here are examples of how you can chat with your AI Running Coach:
 
 ---
 
-## 🛠️ Full MCP Tools Reference (39 Tools)
+## 🛠️ Full MCP Tools Reference (40 Tools)
 
-The server exposes **39 specialized tools** across 10 functional domains:
+The server exposes **40 specialized tools** across 10 functional domains:
 
 ### 🏃 1. Activities & Streams (6 tools)
 - `get_activities`: Fetch activities within a date range (`oldest`, `newest`, `type`).
@@ -212,11 +214,12 @@ The server exposes **39 specialized tools** across 10 functional domains:
 - `calculate_pace_zones`: Compute 5 pace training zones (Easy, Marathon, Threshold, Interval, Repetition).
 - `calculate_nsa_matrix`: Generate Norwegian Singles Copeland interval matrix (Fast, Medium, Long) with target paces and power.
 
-### 🔬 4. Physiology & Endurance Intelligence (10 tools)
+### 🔬 4. Physiology & Endurance Intelligence (9 tools)
 - `predict_race_time`: Predict race finish time and pace (5K, 10K, HM, FM, or custom distance) from VDOT with CTL/TSB adjustments.
 - `calculate_taper_plan`: Generate structured tapering schedule (A/B/C Taper) for peak freshness.
 - `analyze_cardiac_drift`: Compute Efficiency Factor (EF) and Aerobic Decoupling % from raw telemetry streams.
 - `calculate_readiness_score`: Compute composite recovery score (0–100%, Green/Yellow/Red) combining TSB, ACWR, Sleep, HRV, and RHR.
+- `calculate_rhr_baseline`: Compute dynamic resting heart rate (RHR) baseline range and rolling averages from historical readings.
 - `calculate_race_fueling`: Compute carbohydrate intake targets (g/h), gel schedules, and hydration limits.
 - `diagnose_aerobic_base`: Diagnose Aerobic Deficiency Syndrome (ADS) via Uphill Athlete 10% Rule & Horwill's Rule.
 - `calculate_hadd_zones`: Calculate John Hadd absolute HR training zones and Sub-T baseline.
@@ -226,7 +229,7 @@ The server exposes **39 specialized tools** across 10 functional domains:
 - `analyze_training_load`: Compute ACWR (`ATL/CTL`), classify TSB readiness zones, and evaluate ramp rate injury risk.
 - `calculate_weekly_budget`: Calculate safe weekly training distance and duration allocation based on 42-day rolling history.
 
-### 📅 6. Calendar & Structured Events (8 tools)
+### 📅 6. Calendar & Structured Events (9 tools)
 - `get_events`: Retrieve calendar items (planned workouts, notes, races) in a date range.
 - `get_event_by_id`: Get detailed event data by ID.
 - `delete_event`: Remove calendar events by ID.
@@ -235,6 +238,7 @@ The server exposes **39 specialized tools** across 10 functional domains:
 - `get_workout_library`: Search workout template library.
 - `get_workout_by_id`: Get workout template details.
 - `create_running_workout`: Validate and publish structured running workouts to Intervals.icu calendar using Text DSL.
+- `generate_weekly_plan`: Generate structured multi-day weekly training plans based on volume targets and periodization block.
 
 ### ⚙️ 7. Custom Items (5 tools)
 - `get_custom_items`: List custom charts, fields, or interval fields.
@@ -260,7 +264,7 @@ The server exposes **39 specialized tools** across 10 functional domains:
 Run the full unit test suite:
 
 ```bash
-# Run Vitest unit tests (114 tests)
+# Run Vitest unit tests (120 tests)
 pnpm test
 
 # Build TypeScript
@@ -270,10 +274,10 @@ pnpm run build
 pnpm exec vitest
 ```
 
-Includes **114 unit tests across 22 test files** covering API client auto-retry on HTTP 429, LRU TTL caching, Jack Daniels VDOT math, Copeland interval matrix, John Hadd physiology & ADS diagnostic engine, race prediction, cardiac drift analysis, recovery scoring, race fueling, and workout DSL validation.
+Includes **120 unit tests across 20 test files** covering API client auto-retry on HTTP 429, LRU TTL caching, Jack Daniels VDOT math, Copeland interval matrix, John Hadd physiology & ADS diagnostic engine, race prediction, cardiac drift analysis, recovery scoring, race fueling, and workout DSL validation.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) © Muhammad Hadid Wiransetyo.
+This project is licensed under the [MIT License](LICENSE) © intervals-icu-mcp contributors.

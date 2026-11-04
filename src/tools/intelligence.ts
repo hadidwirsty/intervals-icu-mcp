@@ -137,8 +137,8 @@ export function registerIntelligenceTools(server: McpServer): void {
       athleteWeightKg: z.number().optional().describe("Berat badan atlet dalam kg (default: 70 kg)."),
       temperatureCelsius: z.number().optional().describe("Estimasi suhu rata-rata saat lomba dalam derajat Celsius (default: 26°C)."),
       relativeHumidityPct: z.number().optional().describe("Estimasi kelembapan relatif saat lomba dalam persen (default: 80%)."),
-      criticalPowerWatts: z.number().optional().describe("Critical Power (CP) atlet dalam Watt (default: 295 W)."),
-      vdot: z.number().optional().describe("Skor VDOT atlet (default: 31.0)."),
+      criticalPowerWatts: z.number().optional().describe("Critical Power (CP) atlet dalam Watt (default: 250 W)."),
+      vdot: z.number().optional().describe("Skor VDOT atlet (default: 40.0)."),
     },
     async (input) => {
       const result = calculateRaceFuelingPlan(input);
@@ -160,8 +160,8 @@ export function registerIntelligenceTools(server: McpServer): void {
       longerTimeSeconds: z.number().positive().describe("Waktu tempuh lomba kedua dalam total detik, misal 2500 untuk 41:40."),
       longerRaceName: z.string().optional().describe("Nama/label lomba kedua (misal '10K Race')."),
       targetRaceDistanceKm: z.number().positive().optional().describe("Jarak lomba target yang ingin diproyeksikan (misal 21.0975 untuk Half Marathon)."),
-      aerobicThresholdHr: z.number().min(100).max(220).optional().describe("Denyut jantung ambang aerobik atlet (AeT / LT1) dalam bpm untuk evaluasi Uphill Athlete 10% Rule. Contoh: 169."),
-      anaerobicThresholdHr: z.number().min(120).max(220).optional().describe("Denyut jantung ambang anaerobik atlet (AnT / LT2 / LTHR) dalam bpm untuk evaluasi Uphill Athlete 10% Rule. Contoh: 188."),
+      aerobicThresholdHr: z.number().min(100).max(220).optional().describe("Denyut jantung ambang aerobik atlet (AeT / LT1) dalam bpm untuk evaluasi Uphill Athlete 10% Rule. Contoh: 145."),
+      anaerobicThresholdHr: z.number().min(120).max(220).optional().describe("Denyut jantung ambang anaerobik atlet (AnT / LT2 / LTHR) dalam bpm untuk evaluasi Uphill Athlete 10% Rule. Contoh: 170."),
     },
     async ({
       shorterDistanceKm,
@@ -216,9 +216,9 @@ export function registerIntelligenceTools(server: McpServer): void {
     "estimate_aerobic_threshold",
     "Memperkirakan rentang denyut jantung Ambang Aerobik (AeT / LT1) atlet tanpa uji jarum laktat di laboratorium, memadukan formula Hadd (HRmax - 50 bpm), rentang 72-76% HRmax, dan target minimal 90% LTHR untuk memenuhi Uphill Athlete 10% Rule.",
     {
-      hrMax: z.number().min(140).max(230).describe("Denyut jantung maksimum aktual terukur atlet (bpm). Contoh: 207."),
-      lthr: z.number().min(120).max(220).optional().describe("Ambang laktat / denyut anaerobik (AnT / LTHR) jika tersedia. Contoh: 188."),
-      restingHr: z.number().optional().describe("Denyut jantung istirahat (RHR). Contoh: 46."),
+      hrMax: z.number().min(140).max(230).describe("Denyut jantung maksimum aktual terukur atlet (bpm). Contoh: 190."),
+      lthr: z.number().min(120).max(220).optional().describe("Ambang laktat / denyut anaerobik (AnT / LTHR) jika tersedia. Contoh: 168."),
+      restingHr: z.number().optional().describe("Denyut jantung istirahat (RHR). Contoh: 55."),
     },
     async ({ hrMax, lthr, restingHr }) => {
       const result = estimateAerobicThresholdProxy({ hrMax, lthr, restingHr });

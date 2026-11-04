@@ -2,7 +2,7 @@
 _Last updated: 2026-10-26_
 
 ## Project Overview
-Server **Model Context Protocol (MCP)** resmi untuk Intervals.icu API sekaligus sistem **AI Running Coach Intelligence** berbasis **Dual-Engine Ecosystem** (Intervals.icu + Garmin Connect). Server ini mengekspos **39 MCP tools** ke AI client (Claude Desktop, Antigravity, Cursor, VS Code Cline/Roo-Code) untuk membaca telemetri aktivitas real-time, mengevaluasi beban latihan kronis dan berkelanjutan (CTL/ATL/TSB/ACWR/Ramp Rate), menghitung matriks Norwegian Singles (NSA) Copeland, mendiagnosis defisiensi aerobik (ADS) via Hadd & Horwill, memetakan zona detak jantung absolut Hadd, memprediksi waktu race & tapering 10–14 hari, menghitung kebutuhan fueling gel energi, serta mempublikasikan sesi latihan terstruktur langsung ke kalender Intervals.icu via Teks DSL.
+Server **Model Context Protocol (MCP)** resmi untuk Intervals.icu API sekaligus sistem **AI Running Coach Intelligence** berbasis **Dual-Engine Ecosystem** (Intervals.icu + Garmin Connect). Server ini mengekspos **40 MCP tools** ke AI client (Claude Desktop, Antigravity, Cursor, VS Code Cline/Roo-Code) untuk membaca telemetri aktivitas real-time, mengevaluasi beban latihan kronis dan berkelanjutan (CTL/ATL/TSB/ACWR/Ramp Rate), menghitung matriks Norwegian Singles (NSA) Copeland, mendiagnosis defisiensi aerobik (ADS) via Hadd & Horwill, memetakan zona detak jantung absolut Hadd, memprediksi waktu race & tapering 10–14 hari, menghitung kebutuhan fueling gel energi, serta mempublikasikan sesi latihan terstruktur langsung ke kalender Intervals.icu via Teks DSL.
 
 ## Tech Stack
 | Category | Library / Tool | Version | Notes |
@@ -66,7 +66,7 @@ intervals-icu-mcp/
 │       ├── running-anatomy/      # 8 kelompok otot utama lari & biomekanika kinetik
 │       └── steve-magness/        # NSA deep dive, LT2 lactate threshold, base building, long run & strength
 ├── src/                          # TypeScript source code
-│   ├── tools/                    # 10 domain tool handler modules (39 tools total)
+│   ├── tools/                    # 10 domain tool handler modules (40 tools total)
 │   │   ├── activities.ts         # 6 tools: get_activities, get_activity_*, add_activity_message
 │   │   ├── athlete.ts            # 2 tools: get_athlete_profile, get_training_zones
 │   │   ├── calculator.ts         # 3 tools: calculate_vdot, calculate_pace_zones, calculate_nsa_matrix
@@ -102,7 +102,7 @@ intervals-icu-mcp/
 └── vitest.config.ts              # Konfigurasi Vitest runner
 ```
 
-## Complete MCP Tools Directory (39 Tools)
+## Complete MCP Tools Directory (40 Tools)
 | Domain | Tool Name | Description |
 |---|---|---|
 | **Activities** | `get_activities` | Ambil daftar aktivitas latihan dalam rentang tanggal |
@@ -124,6 +124,7 @@ intervals-icu-mcp/
 | | `get_workout_library` | Ambil pustaka template workout tersimpan |
 | | `get_workout_by_id` | Ambil detail template workout dari library |
 | | `create_running_workout` | Buat & jadwalkan structured running workout via Teks DSL |
+| | `generate_weekly_plan` | Hasilkan draf rencana latihan sepekan terstruktur berbasis target volume |
 | **Custom Items** | `get_custom_items` | Daftar custom chart, field, atau interval field |
 | | `get_custom_item_by_id` | Ambil custom item spesifik |
 | | `create_custom_item` | Buat custom item baru |
@@ -134,6 +135,7 @@ intervals-icu-mcp/
 | | `calculate_taper_plan` | Pola tapering 10-14 hari (A-Taper NSA volume -35% lalu -50%) |
 | | `analyze_cardiac_drift` | Hitung Aerobic Decoupling (EF paruh 1 vs paruh 2) dari stream data |
 | | `calculate_readiness_score`| Skor kesiapan komposit 0-100% (TSB, ACWR, Sleep, RHR Spike) |
+| | `calculate_rhr_baseline` | Hitung rentang baseline resting heart rate dinamis dan rerata historis |
 | | `calculate_race_fueling` | Hitung kebutuhan gram karbohidrat, jadwal gel, & hidrasi |
 | | `diagnose_aerobic_base` | Diagnosa defisiensi aerobik (ADS) via Uphill Athlete 10% & Horwill |
 | | `calculate_hadd_zones` | Hitung zona detak jantung absolut John Hadd & ambang sub-T |
