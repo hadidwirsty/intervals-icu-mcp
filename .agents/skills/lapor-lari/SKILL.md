@@ -33,6 +33,7 @@ Saat perintah `/lapor-lari` dijalankan:
    - **Sub-Integer VO2 Max (FIT message 140)**: Panggil `garmin_get_activity_streams` untuk aktivitas terkait guna mengekstrak nilai estimasi VO2 Max presisi tinggi dengan 2 desimal (misal `39.42 ml/kg/min`) untuk memantau adaptasi kebugaran mikro.
    - **Komparasi Head-to-Head (`garmin_compare_activities`)**: Jika sesi ini merupakan pengulangan dari sesi sebelumnya (misal Sub-Threshold mingguan atau rute lari rutin), panggil tool ini untuk membandingkan delta pace, delta detak jantung, delta kadens, dan perubahan *Efficiency Factor* ($EF = \text{Speed}/\text{HR}$).
    - **Audit Rekor Terbaik (`garmin_get_personal_records`)**: Manfaatkan paginasi v0.2.0 (`limit: 50`, `start: 0`, dan periksa flag `truncated`) untuk memeriksa apakah sesi hari ini memecahkan Best Effort baru (1K, 1 Mile, 5K, 10K, HM, FM, atau Longest Run).
+   - **Bedah Jendela Waktu Khusus (`garmin_analyze_activity_window`)**: Jika sesi lari melibatkan blok repetisi Sub-Threshold panjang (misal Card C 10–12 menit) atau ingin mengevaluasi *pacing execution* segmen tertentu (misal segmen 5K kedua dalam 10K / Long Run), panggil tool ini dengan `startOffsetSeconds` dan `durationSeconds`. Dapatkan distribusi waktu zona HR terbobot (profil `RUNNING`), unrecorded pause seconds, serta segmentasi internal (3 sub-segmen) untuk mendeteksi *pace fading* atau lonjakan drift HR di dalam blok kerja.
    - **Audit Rehidrasi Pasca-Lari (`garmin_get_hydration_range`)**: Panggil data hidrasi hari ini untuk memeriksa asupan cairan aktual vs target harian pasca-latihan guna mencegah defisit cairan berkepanjangan.
 
 ---
@@ -110,6 +111,12 @@ Sajikan hasil analisis pasca-lari dalam Bahasa Indonesia dengan format berikut:
 | **Rep 2** | [X mnt] | [XXX W] | [XXX bpm] | [X:XX /km] | [Presisi di Koridor % CP] |
 | ... | ... | ... | ... | ... | ... |
 *Kepatuhan Jeda Istirahat*: [Rata-rata rest XX detik — patuh target Copeland (Card A: 30–60s, Card B: 60–90s, Card C: 90–120s jalan santai)].
+
+*(Opsional: Bedah Jendela Waktu Kerja via `garmin_analyze_activity_window`)*:
+- **Jendela Analisis**: Menit ke-[XX] s.d. [XX] (Durasi: [X] mnt)
+- **Metrik Jendela**: Jarak [X.XX] km | Pace [X:XX /km] | HR [XXX] bpm (Max: [XXX]) | Kadens [XXX] SPM
+- **Distribusi Zona HR (Profil `RUNNING`)**: Z1: [X]s, Z2: [X]s, Z3: [X]s, Z4: [X]s, Z5: [X]s (Unrecorded: [X]s)
+- **Tren Sub-Segmen**: Segmen 1 [X:XX /km] → Segmen 2 [X:XX /km] → Segmen 3 [X:XX /km] ([Pacing Stabil / Fading / Negative Split])
 
 ---
 
